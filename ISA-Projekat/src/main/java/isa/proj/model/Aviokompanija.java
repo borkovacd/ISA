@@ -7,8 +7,16 @@ public class Aviokompanija {
 	private String nazivAK;
 	private String adresaAK;
 	private String opisAK;
-	private String ocenaAK;
+	private ArrayList<Integer> oceneAK;
+	private Double  prosecnaOcenaAK ;
 	
-	private ArrayList<String> letovi;
+	private ArrayList<Let> letovi;
+	private ArrayList<Destinacija> destinacije ;
+	private ArrayList<Aviokarta> aviokarte ;
+	private ArrayList<SedisteAvion> sedistaAviona ;
+	private CenovnikAviokompanija cenovnikAviokompanija ;
+	private Prtljag prtljag ;
+	
+	private Prihod prihodAK ;
 
 }
