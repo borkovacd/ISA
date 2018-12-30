@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Korisnik {
 	
 	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idKorisnika;
 	private String korisnickoIme;
 	private String lozinka;
