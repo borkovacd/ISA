@@ -5,19 +5,14 @@ import java.util.HashMap;
 
 public class Hotel {
 	
-	private String nazivH;
-	private String adresaH;
-	private String opisH;
-	private String ocenaH;
-	private CenovnikHotel cenovnikHotel ;
-	
-	private HashMap<String, Soba> sobe ;
+	private String nazivHotela;
+	private String adresaHotela; //+ dodatno prikaz lokacije koriscenjem Google mapa
+	private String opisHotela;
+	private CenovnikHotela cenovnikHotela;
+	private HashMap<String, Soba> sobe;
+	private Double  prosecnaOcenaHotela;
 	private ArrayList<Integer> oceneHotela;
-	private Double  prosecnaOcenaHotela  ;
-	
-	private ArrayList<Integer> oceneSoba;
-	private Double  prosecnaOcenaSoba  ;
-	
+	private ArrayList<Double> prosecneOceneSoba;
 	private Prihod prihodHotela ;
 
 }
