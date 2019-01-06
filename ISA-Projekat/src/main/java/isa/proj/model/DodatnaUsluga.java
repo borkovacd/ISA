@@ -1,31 +1,48 @@
 package isa.proj.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 //Dodatna usluga koju hotel nudi
+@Entity
 public class DodatnaUsluga {
 	
-	private Integer idDodatneUsluge;
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Column(name = "naziv_du")
 	private String nazivDodatneUsluge;
+	
+	@Column(name = "cena_du")
 	private Double cenaDodatneUsluge;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Hotel hotel;
 	
 	public DodatnaUsluga() {
 		
 	}
 	
-	public DodatnaUsluga(Integer idDodatneUsluge, String nazivDodatneUsluge, Double cenaDodatneUsluge, Hotel hotel) {
+	public DodatnaUsluga(Long id, String nazivDodatneUsluge, Double cenaDodatneUsluge, Hotel hotel) {
 		super();
-		this.idDodatneUsluge = idDodatneUsluge;
+		this.id = id;
 		this.nazivDodatneUsluge = nazivDodatneUsluge;
 		this.cenaDodatneUsluge = cenaDodatneUsluge;
 		this.hotel = hotel;
 	}
 
-	public Integer getIdDodatneUsluge() {
-		return idDodatneUsluge;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdDodatneUsluge(Integer idDodatneUsluge) {
-		this.idDodatneUsluge = idDodatneUsluge;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNazivDodatneUsluge() {

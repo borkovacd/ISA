@@ -3,6 +3,7 @@ package isa.proj.model;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,9 +17,15 @@ public class Soba {
 	@GeneratedValue
 	private Long id;
 	
+	@Column(name="oznaka_sobe")
 	private String oznakaSobe;
+	
+	@Column(name="rezervisana_soba")
 	private Boolean rezervisana;
+	
+	@Column(name="cena_nocenja")
 	private Double cenaNocenja;
+	
 	private ArrayList<Integer> oceneSobe;
 	private Double prosecnaOcenaSobe;
 	
@@ -29,14 +36,23 @@ public class Soba {
 		
 	}
 	
-	/*public Soba(String oznakaSobe, Boolean rezervisana, Double cenaNocenja, ArrayList<Integer> oceneSobe,
+	public Soba(Long id, String oznakaSobe, Boolean rezervisana, Double cenaNocenja, ArrayList<Integer> oceneSobe,
 			Double prosecnaOcenaSobe, Hotel hotel) {
 		super();
+		this.id = id;
 		this.oznakaSobe = oznakaSobe;
 		this.rezervisana = rezervisana;
 		this.cenaNocenja = cenaNocenja;
 		this.oceneSobe = oceneSobe;
 		this.prosecnaOcenaSobe = prosecnaOcenaSobe;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getOznakaSobe() {
@@ -89,7 +105,7 @@ public class Soba {
 	
 	
 	
-	*/
+	
 	
 	
 
