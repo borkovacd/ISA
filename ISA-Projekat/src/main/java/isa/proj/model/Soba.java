@@ -1,9 +1,11 @@
 package isa.proj.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,9 @@ public class Soba {
 	@Column(name="cena_nocenja")
 	private Double cenaNocenja;
 	
-	private ArrayList<Integer> oceneSobe;
+	@ElementCollection
+	private List<Integer> oceneSobe;
+	
 	private Double prosecnaOcenaSobe;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -36,7 +40,7 @@ public class Soba {
 		
 	}
 	
-	public Soba(Long id, String oznakaSobe, Boolean rezervisana, Double cenaNocenja, ArrayList<Integer> oceneSobe,
+	public Soba(Long id, String oznakaSobe, Boolean rezervisana, Double cenaNocenja, List<Integer> oceneSobe,
 			Double prosecnaOcenaSobe, Hotel hotel) {
 		super();
 		this.id = id;
@@ -79,11 +83,11 @@ public class Soba {
 		this.cenaNocenja = cenaNocenja;
 	}
 
-	public ArrayList<Integer> getOceneSobe() {
+	public List<Integer> getOceneSobe() {
 		return oceneSobe;
 	}
 
-	public void setOceneSobe(ArrayList<Integer> oceneSobe) {
+	public void setOceneSobe(List<Integer> oceneSobe) {
 		this.oceneSobe = oceneSobe;
 	}
 

@@ -5,10 +5,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -51,8 +53,11 @@ public class Hotel {
 	@Column(name = "prosecna_ocena")
 	private Double  prosecnaOcenaHotela;
 	
-	private ArrayList<Integer> oceneHotela;
-	private ArrayList<Double> prosecneOceneSoba;
+	@ElementCollection
+	private List<Integer> oceneHotela;
+	
+	@ElementCollection
+	private List<Double> prosecneOceneSoba;
 	
 	@OneToOne
 	private PrihodHotela prihodHotela ;
@@ -63,7 +68,7 @@ public class Hotel {
 
 	public Hotel(Integer id, String nazivHotela, String adresaHotela, String opisHotela, CenovnikHotela cenovnikHotela,
 			Set<DodatnaUsluga> dodatneUsluge, Set<Soba> sobe, Double prosecnaOcenaHotela,
-			ArrayList<Integer> oceneHotela, ArrayList<Double> prosecneOceneSoba, PrihodHotela prihodHotela) {
+			List<Integer> oceneHotela, List<Double> prosecneOceneSoba, PrihodHotela prihodHotela) {
 		super();
 		this.id = id;
 		this.nazivHotela = nazivHotela;
@@ -142,19 +147,19 @@ public class Hotel {
 		this.prosecnaOcenaHotela = prosecnaOcenaHotela;
 	}
 
-	public ArrayList<Integer> getOceneHotela() {
+	public List<Integer> getOceneHotela() {
 		return oceneHotela;
 	}
 
-	public void setOceneHotela(ArrayList<Integer> oceneHotela) {
+	public void setOceneHotela(List<Integer> oceneHotela) {
 		this.oceneHotela = oceneHotela;
 	}
 
-	public ArrayList<Double> getProsecneOceneSoba() {
+	public List<Double> getProsecneOceneSoba() {
 		return prosecneOceneSoba;
 	}
 
-	public void setProsecneOceneSoba(ArrayList<Double> prosecneOceneSoba) {
+	public void setProsecneOceneSoba(List<Double> prosecneOceneSoba) {
 		this.prosecneOceneSoba = prosecneOceneSoba;
 	}
 
