@@ -32,6 +32,7 @@ public class HotelService {
 	public void addHotel(Hotel hotel) {
 		hotelRepository.save(hotel);
 	}
+	
 
 	public void updateHotel(Integer id, Hotel hotel) {
 		hotelRepository.save(hotel);

@@ -1,4 +1,4 @@
-insert into korisnik(id_korisnika,korisnicko_ime,lozinka,ime,prezime,email,telefon,uloga) 
+/*insert into korisnik(id_korisnika,korisnicko_ime,lozinka,ime,prezime,email,telefon,uloga) 
 	values (1,'admin','admin','Maša','Đurković','masha@gmail.com','0614442345','admin');
 insert into hotel(id, naziv_hotela, adresa_hotela, opis_hotela, prosecna_ocena, cenovnik_hotela_hotel_id, prihod_hotela_hotel_id)
-	values (1, 'Borkovac', 'Orlovićeva BB, Ruma', 'Hotel u blizini poznatog jezera', '5.00', null, null);
+	values (13, 'Borkovac', 'Orlovićeva BB, Ruma', 'Hotel u blizini poznatog jezera', '5.00', null, null);*/

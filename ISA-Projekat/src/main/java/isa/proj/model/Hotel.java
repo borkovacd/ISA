@@ -29,13 +29,13 @@ import javax.validation.constraints.NotNull;
 public class Hotel {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name = "naziv_hotela", nullable = false)
+	@Column(name = "naziv_hotela")
 	private String nazivHotela;
 	
-	@Column(name = "adresa_hotela", nullable = false)
+	@Column(name = "adresa_hotela")
 	private String adresaHotela; //+ dodatno prikaz lokacije koriscenjem Google mapa
 
 	@Column(name = "opis_hotela")
