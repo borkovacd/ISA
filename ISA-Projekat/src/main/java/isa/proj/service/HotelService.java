@@ -34,11 +34,12 @@ public class HotelService {
 	}
 	
 
-	public void updateHotel(Integer id, Hotel hotel) {
+	public void updateHotel(Hotel hotel) {
 		hotelRepository.save(hotel);
 	}
 
-	public void deleteHotel(Integer id, Hotel hotel) {
+	public void deleteHotel(Integer id) {
 		hotelRepository.deleteById(id);
 	}
+	
 }

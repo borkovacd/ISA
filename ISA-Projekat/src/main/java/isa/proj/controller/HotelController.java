@@ -62,10 +62,38 @@ public class HotelController {
 		return hotelService.getHotel(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/hotels/{id}")
-	public void updateHotel(@RequestBody Hotel hotel, @PathVariable Integer id) {  
-		hotelService.updateHotel(id,hotel);
+	@RequestMapping(method=RequestMethod.PUT, value="/izmeniHotel",produces="application/json", consumes="application/json")
+	public @ResponseBody ResponseEntity<Hotel> updateHotel(@RequestBody Hotel hotel, HttpServletRequest request) {  
+		/*List<Hotel> hoteli = hotelService.getAllHotels();
+		Hotel h = hotelService.getHotel(hotel.getId());
+		if(((HotelService) hoteli).checkBeforeChange(hotel, hotel.getId())) {
+			Integer oldId = h.getId();
+			h.change(hotel);
+			rd.change(oldId, re);
+			DataDAO dd = (DataDAO) ctx.getAttribute("dataDAO");
+			dd.saveData();*/
+		hotelService.updateHotel(hotel);
+		return new ResponseEntity<>(HttpStatus.OK);
+		/*}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
+		
+		
 	}
+	
+	/*public Response changeRestaurant(@Context HttpServletRequest request, Restoran r) {
+		RestoraniDAO rd = (RestoraniDAO) ctx.getAttribute("restoraniDAO");
+		Restoran re = rd.getRestaurantByUUID(r.getIbr());
+		if(rd.checkBeforeChange(r, r.stringId())) {
+			String oldId = re.getId();
+			re.change(r);
+			rd.change(oldId, re);
+			DataDAO dd = (DataDAO) ctx.getAttribute("dataDAO");
+			dd.saveData();
+			return Response.status(200).build();
+		}
+		return Response.status(400).build();
+	}*/
+	
 	
 	@RequestMapping(method=RequestMethod.POST, value="/hotels")
 	public void addTopic(@RequestBody Hotel hotel) {  //hey string pick this instance from request body
@@ -74,8 +102,8 @@ public class HotelController {
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/obrisiHotel/{id}", produces="application/json", consumes = "application/json")
-	public void deleteHotel(@RequestBody Hotel hotel, @PathVariable Integer id) {  //names like deleteHotel here don't matter
-		hotelService.deleteHotel(id,hotel);
+	public void deleteHotel(@PathVariable Integer id) {  //names like deleteHotel here don't matter
+		hotelService.deleteHotel(id);
 		
 	}
 	

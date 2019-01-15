@@ -70,7 +70,7 @@ $(document).ready(function() {
 					'<td align="center" style="font-size:18px;" >Ne postoje dostupni hoteli</td>'+
 					'</tr>';
         	} else {
-        		html += '<tr><td>' + hoteli[i].nazivHotela + '</td><td>' + hoteli[i].adresaHotela + '</td><td>' + hoteli[i].opisHotela + '</td><td><button style="background-color: #19b9e7;" class="btn btn-link-2" id="'+hoteli[i].id+'">Izmeni</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Obrisi</td></tr>';
+        		html += '<tr><td>' + hoteli[i].nazivHotela + '</td><td>' + hoteli[i].adresaHotela + '</td><td>' + hoteli[i].opisHotela + '</td><td>' + '</td><td><button style="background-color: #19b9e7;" class="btn btn-link-2" id="'+hoteli[i].id+'">Izmeni</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Obrisi</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Registruj admina</td></tr>';
         	}
         $('#tabelaHoteli tr:first').after(html);  
         }
@@ -160,6 +160,60 @@ $(document).ready(function() {
                 }  
             });
         }
+    });
+    
+    //klik na dugme za izmenu postojeceg hotela
+    $("#izmeniHotelButton").click(function(event) {
+		/* Act on the event */
+    	event.preventDefault();
+		var naziv = $("#nazivHotelaPH");
+		var adresa = $('#adresaHotelaPH');
+		var opis = $('#opisHotelaPH');
+		var id = $('#idHotelaPH');
+		
+		if(!naziv.val().trim() || !adresa.val().trim() || !opis.val().trim()){
+
+				if(!naziv.val().trim()){
+					nazivHotelaPH.addClass('bg-danger');
+				}
+				if(!adresa.val().trim()){
+					adresaHotelaPH.addClass('bg-danger');
+				}
+				if(!opis.val().trim()){
+					opisHotelaPH.addClass('bg-danger');
+				}
+		} else {
+			
+			var restoran = new Object();
+			var hotel = new Object();
+			hotel.nazivHotela = naziv.val();
+			hotel.adresaHotela = adresa.val();
+			hotel.opisHotela = opis.val();
+			hotel.id = id.val();
+			
+			
+			$.ajax({
+				url:'http://localhost:5050/izmeniHotel',
+				type: 'PUT',
+                data: JSON.stringify(hotel),
+                contentType: 'application/json',
+                success: function(data){
+                    
+                    $.get({
+                    	url:'http://localhost:5050/hoteli',
+                        contentType: 'application/json',
+                        success: function(data) {
+                        if(data){
+                            upisHotela(data);
+                            ocistiIzmenaHotela();
+                        }
+                      },
+                   });
+                },
+                error: function(data) {
+                	$('#greskaIzmenaHotela').text("Ime i adresa hotela već postoje").show().delay(3000).fadeOut();                    }
+            });
+		}
     });
     
     function popuniFormuZaIzmenuHotela(data) {

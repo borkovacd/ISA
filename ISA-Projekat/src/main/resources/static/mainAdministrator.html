@@ -144,6 +144,8 @@
 								<th>Naziv</th>
 								<th>Adresa</th>
 								<th>Opis</th>
+								<th>Administrator hotela</th>
+								<th></th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -155,15 +157,51 @@
 					</div>
 		 		</div>
 		 	</div>
+		 	
+		 	<div  style="margin-left:5%; margin-top:3.5%" class="col-sm-5-homepage" >
+		 		<form method="post" class="registration-form">
+	            	<table style= "width:20%; float:left" id="dodajRestoran" class="textTabeleBezIvica">
+	                    <tr>
+	                    	<th style="font-style:italic">Registruj administratora hotela</th>
+	                    	<th><h5 style="display: inline-block; color: yellow; font-weight:bold;" id="greskaUnosRestorani"></h5></th>
+	                    </tr> 
+			      		<tr>
+			      			<td align="left"><label>Naziv: </label></td>
+			      			<td><input type="text" id="naziv"></input></td>
+			      		</tr>
+						<tr align="left">
+			      			<td align="left"><label>Kategorija:</label></td>
+			      			<td>
+                               	 <select style="color:#cccccc" id="kategorija">
+                                    	<option style="color:#cccccc" value="rostilj">roštilj</option>
+                                    	<option value="domaca kuhinja">domaća kuhinja</option>
+                                    	<option value="indijski restoran">indijski restoran</option>
+                                    	<option value="kineski restoran">kineski restoran</option>
+                                    	<option value="poslasticarnica">poslastičarnica</option>
+                                    	<option value="picerija">picerija</option>
+                               	 </select>
+                             </td>
+                        </tr>
+                        <tr>
+			      			 <td align="left"><label>Adresa: </label></td>
+			      			 <td><input type="text" id="adresa"></input></td>
+			      		</tr>
+			      		<tr align="right" >
+			      			<td>&nbsp;</td>
+			      			<td><button style="margin-top:5%" id="dodajRestoranButton" class="btn" type="submit">Dodaj</button></td>
+			      		</tr>
+			      	</table>
+			   </form>
+			</div>
 		 		
 	  </div> <!-- PRVI RED TABELA -->
 	  
 	  <div class="row">
 	  
 			<form method="post" class="registration-form">
-	            	<table style="width:60%; float:left; margin-left:5%" id="dodajHotel" class="textTabeleBezIvica">
+	            	<table style="width:80%; float:left; margin-left:5%" id="dodajHotel" class="textTabeleBezIvica">
 	                    <tr>
-	                    	<th style="font-style:italic; width:30%">Registruj novi hotel</th>
+	                    	<th style="font-style:italic; width:40%">Registruj novi hotel</th>
 	                    	<th><h5 style="display: inline-block; color: yellow; font-weight:bold;" id="greskaUnosHotela"></h5></th>
 	                    </tr> 
 			      		<tr>
