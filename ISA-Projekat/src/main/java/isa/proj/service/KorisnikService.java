@@ -1,10 +1,13 @@
 package isa.proj.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import isa.proj.model.Hotel;
 import isa.proj.model.Korisnik;
 import isa.proj.repository.KorisnikRepository;
 
@@ -16,4 +19,16 @@ public class KorisnikService {
 	public Optional<Korisnik> getById(Integer id) {
 		return korisnikRepository.findById(id);
 	}
+	
+	public List<Korisnik> getAllUsers() {
+		List<Korisnik> korisnici = new ArrayList<Korisnik>();
+		
+		//for each of the elements in the iterable, calling add method in korisnici and passing that element
+		korisnikRepository.findAll()
+		.forEach(korisnici::add); //method reference
+	
+		return korisnici;
+	}
+	
+	
 }

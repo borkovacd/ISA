@@ -2,6 +2,7 @@ package isa.proj.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,7 +57,7 @@ public class HotelController {
 		return hotelService.getAllHotels();
 	}*/
 	
-	@RequestMapping("/hotels/{id}")
+	@RequestMapping(method=RequestMethod.GET, value="/preuzmiHotel/{id}", produces="application/json", consumes = "application/json")
 	public Hotel getHotel(@PathVariable Integer id) {
 		return hotelService.getHotel(id);
 	}
@@ -72,7 +73,7 @@ public class HotelController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/hotels/{id}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/obrisiHotel/{id}", produces="application/json", consumes = "application/json")
 	public void deleteHotel(@RequestBody Hotel hotel, @PathVariable Integer id) {  //names like deleteHotel here don't matter
 		hotelService.deleteHotel(id,hotel);
 		

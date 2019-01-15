@@ -156,9 +156,12 @@
 		 		</div>
 		 	</div>
 		 		
-			<div  style="margin-left:5%; margin-top:3.5%" class="col-sm-5-homepage" >
-		 		<form method="post" class="registration-form">
-	            	<table style= " width:60%;float:left" id="dodajHotel" class="textTabeleBezIvica">
+	  </div> <!-- PRVI RED TABELA -->
+	  
+	  <div class="row">
+	  
+			<form method="post" class="registration-form">
+	            	<table style="width:60%; float:left; margin-left:5%" id="dodajHotel" class="textTabeleBezIvica">
 	                    <tr>
 	                    	<th style="font-style:italic; width:30%">Registruj novi hotel</th>
 	                    	<th><h5 style="display: inline-block; color: yellow; font-weight:bold;" id="greskaUnosHotela"></h5></th>
@@ -181,8 +184,39 @@
 			      		</tr>
 			      	</table>
 			   </form>
-		 </div>
-	  </div> <!-- PRVI RED TABELA -->
+			   
+			   <form  style="float:right" method="post" class="registration-form">
+	            	<table style="width:60%;float:right" id="izmeniHotel" class="textTabeleBezIvica">
+	                    <tr>
+	                    	<th style="font-style:italic; width:30%">Izmeni postojeći hotel</th>
+	                    	<th><h5 style="display: inline-block; color: yellow; font-weight:bold;" id="greskaIzmenaHotela"></h5></th>
+	                    </tr> 
+			      		<tr>
+			      			<td align="left"><label>Naziv: </label></td>
+			      			<td><input type="text" id="nazivHotelaPH"></input></td>
+			      		</tr>
+                        <tr>
+			      			 <td align="left"><label>Adresa: </label></td>
+			      			 <td><input type="text" id="adresaHotelaPH"></input></td>
+			      		</tr>
+			      		<tr>
+			      			<td align="left"><label>Opis: </label></td>
+			      			<td colspan="2"><textarea id="opisHotelaPH"></textarea></td>
+			      		</tr>
+			      		<tr style="visibility: hidden">
+			      			<td><label>ID: </label></td>
+			      			<td><input type="text" id="idHotelaPH"></input></td>
+			      		</tr>
+			      		<tr align="right" >
+			      			<td>&nbsp;</td>
+			      			<td><button style="margin-top:5%" id="izmeniHotelButton" class="btn" type="submit">Izmeni</button></td>
+			      		</tr>
+			      	</table>
+			   </form>
+			
+			      								
+		</div>
+	  </div> <!-- DRUGI RED TABELA -->
   </div> <!-- KRAJ TABA SA HOTELIMA -->
   
   <!--TAB ZA RAD RENT A CAR SERVISIMA-->
@@ -264,7 +298,6 @@
 							<th>Prezime</th>
 							<th>Telefon</th>
 							<th>Email</th>
-							<th>Datum registracije</th>
 							<th>Uloga</th>
 							<th></th>
 						</tr>
@@ -291,9 +324,11 @@
 			      		<td><label>Tip:</label></td>
 			      		<td>
                             <select style="color:#cccccc" id="tipK">
-                                    <option value="Administrator">Administrator</option>
-		      					<option value="Dostavljac">Dostavljac</option>
-		      					<option value="Kupac">Kupac</option>
+                                    <option value="Korisnik">Korisnik</option>
+		      					<option value="AdministratorAviokompanije">Administrator aviokompanije</option>
+		      					<option value="AdministratorHotela">Administrator hotela</option>
+		      					<option value="AdministratorRentACarServisa">Administrator rent-a-car servisa</option>
+		      					<option value="AdministratorSistema">Administrator sistema</option>
                             </select>
                          </td>
                     </tr>
