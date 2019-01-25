@@ -64,13 +64,22 @@ $(document).ready(function() {
     function upisHotela(hoteli){
     	$('#tabelaHoteli tr').not(':first').remove();
     	var html = '';
+    	var pom = '';
         for(var i=0; i<hoteli.length; i++)
         	if((hoteli.length == 0) || (hoteli==null)) {
         		html += '<tr>'+
 					'<td align="center" style="font-size:18px;" >Ne postoje dostupni hoteli</td>'+
 					'</tr>';
         	} else {
-        		html += '<tr><td>' + hoteli[i].nazivHotela + '</td><td>' + hoteli[i].adresaHotela + '</td><td>' + hoteli[i].opisHotela + '</td><td>' + '</td><td><button style="background-color: #19b9e7;" class="btn btn-link-2" id="'+hoteli[i].id+'">Izmeni</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Obrisi</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Registruj admina</td></tr>';
+        		if(hoteli[i].adminHotela == null) {
+        			pom = '<td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Registruj admina</td>'
+        		} else {
+        			pom = '<td>' + hoteli[i].adminHotela + '</td>';
+        		}
+        		
+        		html += '<tr><td>' + hoteli[i].nazivHotela + '</td><td>' + hoteli[i].adresaHotela + '</td><td>' + hoteli[i].opisHotela + '</td>' + 
+        				pom + 
+        		      	'<td><button style="background-color: #19b9e7;" class="btn btn-link-2" id="'+hoteli[i].id+'">Izmeni</td><td><button class="btn btn-link-2" id="'+hoteli[i].id+'">Obrisi</td></tr>';
         	}
         $('#tabelaHoteli tr:first').after(html);  
         }
@@ -138,6 +147,17 @@ $(document).ready(function() {
                 success: function(data) {
                     if(data){
                     	popuniFormuZaIzmenuHotela(data);
+                    }
+                }
+            });
+        } else if(text == "Registruj admina") {
+        	$.get({
+                url:'http://localhost:5050/preuzmiHotel/'+id,
+                contentType: 'application/json',
+                success: function(data) {
+                    if(data){
+                    	popuniFormuZaRegistrovanjeAdminaHotela(data);
+                    	
                     }
                 }
             });
@@ -224,6 +244,12 @@ $(document).ready(function() {
     	
     }
     
+    function popuniFormuZaRegistrovanjeAdminaHotela(data) {
+    	$('#nazivHotelaAdmina').val(data.nazivHotela);
+    	$('#idHotelaAdmina').val(data.id);
+    	
+    }
+    
     //ciscenje polja za dodavanje hotela
     function ocistiDodavanjeHotela(){
         $("#nazivHotela").val("");
@@ -267,7 +293,7 @@ $(document).ready(function() {
     			'<td>'+ korisnici[i].telefon+'</td>'+
     			'<td>'+ korisnici[i].email+'</td>'+
     			'<td>'+ korisnici[i].uloga+'</td>'+
-    			'<td><button class="btn btn-link2" id="'+korisnici[i].korisnickoIme+'">Promeni tip</button></td>'+
+    			'<td><button class="btn btn-link2" id="'+korisnici[i].idKorisnika+'">Promeni tip</button></td>'+
     			'</tr>';
     	}
     	$('#tabelaKorisnici tr:first').after(html);
@@ -276,25 +302,30 @@ $(document).ready(function() {
     //klik na dugme 'Promeni tip' u tabeli 
     $("#tabelaKorisnici").on('click','button',function(event) {
     	var id = $(this).attr("id");
-    	$("#imeK").val(id);
+    	$("#idK").val(id);
     	var red = $(this).parent().parent();
-    	var uloga = red.children('td').first().next().next().next().next().next().next().text();
+    	var ime = red.children('td').first().text();
+    	$("#imeK").val(ime);
+    	var uloga = red.children('td').first().next().next().next().next().next().text();
     	$("#tipK").val(uloga);
+    	
     });
     
-    /*
+    
     //klik na dugme 'Promeni' u formi za izmenu
     $("#promenaTipaButton").on('click',function(event) {
     	event.preventDefault();
+    	var idKorisnika = $("#idK").val();
     	var korisnickoIme = $("#imeK").val();
     	var tip = $("#tipK").val();
     	if(korisnickoIme) {
     		var k = new Object();
+    		k.idKorisnika = idKorisnika;
     		k.korisnickoIme = korisnickoIme;
     		k.uloga = tip;
     		
     		$.post({
-    			url:'rest/promeniTipKorisnika',
+    			url:'http://localhost:5050/korisnik/promeniTipKorisnika',
     			contentType: 'application/json',
     			data: JSON.stringify(k),
     			success: function(data) {
@@ -305,6 +336,7 @@ $(document).ready(function() {
     						if(data) {
     							upisKorisnika(data);
     						}
+    						$("#idK").val("");
     						$("#imeK").val("");
 	    					$("#tipK").val("Korisnik");
     					}
@@ -312,7 +344,7 @@ $(document).ready(function() {
     			}
     		});
     	}
-    });*/
+    });
     
     /*************************** KRAJ RAD SA KORISNICIMA ****************************/
     

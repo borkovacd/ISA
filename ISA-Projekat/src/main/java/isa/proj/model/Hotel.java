@@ -42,6 +42,9 @@ public class Hotel {
 	private String opisHotela;
 	
 	@OneToOne
+	private AdministratorHotela adminHotela;
+	
+	@OneToOne
 	private CenovnikHotela cenovnikHotela;
 	
 	@OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -66,7 +69,7 @@ public class Hotel {
 		
 	}
 
-	public Hotel(Integer id, String nazivHotela, String adresaHotela, String opisHotela, CenovnikHotela cenovnikHotela,
+	public Hotel(Integer id, String nazivHotela, String adresaHotela, String opisHotela, AdministratorHotela adminHotela, CenovnikHotela cenovnikHotela,
 			Set<DodatnaUsluga> dodatneUsluge, Set<Soba> sobe, Double prosecnaOcenaHotela,
 			List<Integer> oceneHotela, List<Double> prosecneOceneSoba, PrihodHotela prihodHotela) {
 		super();
@@ -74,6 +77,7 @@ public class Hotel {
 		this.nazivHotela = nazivHotela;
 		this.adresaHotela = adresaHotela;
 		this.opisHotela = opisHotela;
+		this.adminHotela = adminHotela;
 		this.cenovnikHotela = cenovnikHotela;
 		this.dodatneUsluge = dodatneUsluge;
 		this.sobe = sobe;
@@ -113,6 +117,14 @@ public class Hotel {
 
 	public void setOpisHotela(String opisHotela) {
 		this.opisHotela = opisHotela;
+	}
+
+	public AdministratorHotela getAdminHotela() {
+		return adminHotela;
+	}
+
+	public void setAdminHotela(AdministratorHotela adminHotela) {
+		this.adminHotela = adminHotela;
 	}
 
 	public CenovnikHotela getCenovnikHotela() {
