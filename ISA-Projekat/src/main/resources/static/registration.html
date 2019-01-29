@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <style>
+        	.nova-table100 {
+ 				 position: relative;
+  				 padding-top: 12px;
+			}
+        </style>
+    
+    	<script src="js/jquery-3.3.1.min.js"></script>
+	    <script type="text/javascript" src="js/registracija.js"></script>
+          <script src="all4bootstrap/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="all4bootstrap/assets/js/jquery.backstretch.min.js"></script>
+        <script src="all4bootstrap/assets/js/scripts.js"></script>
+        
+		 <style>
+ 		small{
+ 			font-size: little !important;
+ 			font-weight: bold;
+ 			color: red !important;
+ 			display: block;
+ 			align: center;
+ 		}
+ 		</style>
+      
+        <title>Registracija</title>
+
+		<style>
+ 		small{
+ 			font-size: little !important;
+ 			font-weight: bold;
+ 			color: red !important;
+ 			display: block;
+ 			align: center;
+ 		}
+ 		</style>
+		
+		<!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="all4bootstrap/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="all4bootstrap/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="all4bootstrap/assets/css/form-elements.css">
+        <link rel="stylesheet" href="all4bootstrap/assets/css/style.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="all4bootstrap/assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="all4bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="all4bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="all4bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="all4bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+		
+
+
+    </head>
+    
+    <body>
+    
+     <div class="col-sm-5-new">
+                        	
+                        	<div class="form-box"> 
+                        		<div class="form-top">
+	                        		<div class="form-top-left">
+	                        			<h3>Registracija</h3>
+	                            		<p>Popunite polja forme kako biste se uspešno registrovali:</p>
+	                        		</div>
+	                        		<div class="form-top-right">
+	                        			<i class="fa fa-pencil"></i>
+	                        		</div>
+	                            </div>
+	                            <div class="form-bottom">
+				                    <form id="registracijaForma" method="post" class="registration-form">
+				                    	<div class="form-group">
+				                    		<label class="sr-only" >Ime</label>
+				                        	<input type="text" id="ime" placeholder="Unesite ime..."  class="form-first-name form-control" >
+				                        	
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" >Prezime</label>
+				                        	<input type="text" id="prezime" placeholder="Unesite prezime..." class="form-last-name form-control">
+				                        	
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" >Korisničko ime</label>
+				                        	<input type="text" id="korisnickoIme" placeholder="Unesite korisničko ime..." class="form-email form-control">
+				                        	<small id="korisnickoImeErr">Uneto korisničko ime već postoji!</small>
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" >Lozinka</label>
+				                        	<input type="password" id="lozinka" placeholder="Unesite lozinku..." class="form-email form-control">
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" >Email</label>
+				                        	<input type="email" id="email" placeholder="Unesite email adresu..."class="form-email form-control">
+				                        	<small id="emailAdresaErr">Uneta email adresa već postoji!</small>
+											<small id="emailAdresaErrFormat">Nepravilan format email adrese!</small>
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" >Telefon</label>
+				                        	<input type="text" id="telefon" placeholder="Unesite kontakt telefon..."  class="form-email form-control">
+				                        	<small id="telefonErr">Broj telefona nije validan!</small>
+				                        </div>
+				                        
+				                        <button type="submit" class="btn" id="reg">Registruj se</button>
+				                    </form>
+			                    </div>
+                        	</div>
+                        	
+                        </div>
+                    
+                
+
+    </body>
+
+</html>
