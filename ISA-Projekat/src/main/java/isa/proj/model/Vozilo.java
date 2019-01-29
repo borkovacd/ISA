@@ -28,11 +28,27 @@ public class Vozilo
 	private String registracija ;
 	
 	@NotNull
+	@Column(name = "voziloMarka")
+	private String marka ;
+	
+	@NotNull
 	@Column(name = "voziloModel")
 	private String model ;
 	
 	@Column(name = "voziloGodiste")
 	private String godiste ;
+	
+	@Column(name = "voziloTip")
+	private String tip ;
+	
+	@Column(name = "voziloBrojSedista")
+	private Integer brojSedista;
+	
+	@Column(name = "voziloProsecnaOcena")
+	private Double prosecnaOcena;
+	
+	@Column(name = "voziloCena")
+	private Double cena ;
 	
 	
 
