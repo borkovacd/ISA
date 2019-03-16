@@ -13,7 +13,11 @@ public class KorisnikService {
 	@Autowired
 	private KorisnikRepository korisnikRepository;
 	
-	public Optional<Korisnik> getById(Integer id) {
-		return korisnikRepository.findById(id);
+	public Korisnik getById(Integer id) {
+		return korisnikRepository.findById(id).get();
+	}
+	
+	public Korisnik save(Korisnik korisnik) {
+		return korisnikRepository.save(korisnik);
 	}
 }
