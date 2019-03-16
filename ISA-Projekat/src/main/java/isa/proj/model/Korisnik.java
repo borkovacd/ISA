@@ -9,8 +9,9 @@ import javax.persistence.Id;
 public class Korisnik {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private Integer idKorisnika;
+	
 	private String korisnickoIme;
 	private String lozinka;
 	private String ime;

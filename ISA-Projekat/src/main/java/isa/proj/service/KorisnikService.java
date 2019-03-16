@@ -1,5 +1,6 @@
 package isa.proj.service;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,26 @@ public class KorisnikService {
 	private KorisnikRepository korisnikRepository;
 	
 	public Korisnik getById(Integer id) {
-		return korisnikRepository.findById(id).get();
+		return korisnikRepository.findById(id).orElse(null);
 	}
 	
 	public Korisnik save(Korisnik korisnik) {
 		return korisnikRepository.save(korisnik);
+	}
+	
+	public List<Korisnik> getAllUsers() {
+		List<Korisnik> korisnici = new ArrayList<Korisnik>();
+		
+		//for each of the elements in the iterable, calling add method in korisnici and passing that element
+		korisnikRepository.findAll()
+		.forEach(korisnici::add); //method reference
+	
+		return korisnici;
+	}
+
+	public void promeniTipKorisnika(Korisnik korisnik) {
+		Korisnik k = korisnikRepository.findById(korisnik.getIdKorisnika()).get();
+		k.setUloga(korisnik.getUloga());
+		korisnikRepository.save(k);
 	}
 }
