@@ -32,6 +32,13 @@ public class Vozilo
 	@JoinColumn(name="rentACarId", referencedColumnName="rentACarId")
 	private RentACar rentACar;
 
+	// Inspo
+	
+	private double prosecnaOcena;
+	private double brojOcena ;
+	private double sumaOcena ;
+	
+
 	public Vozilo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -138,6 +145,31 @@ public class Vozilo
 		this.rentACar = rentACar;
 	}
 	
+	
+	public double getProsecnaOcena() {
+		return prosecnaOcena;
+	}
+
+	public void setProsecnaOcena(double prosecnaOcena) {
+		this.prosecnaOcena = prosecnaOcena;
+	}
+
+	public double getBrojOcena() {
+		return brojOcena;
+	}
+
+	public void setBrojOcena(double brojOcena) {
+		this.brojOcena = brojOcena;
+	}
+
+	public double getSumaOcena() {
+		return sumaOcena;
+	}
+
+	public void setSumaOcena(double sumaOcena) {
+		this.sumaOcena = sumaOcena;
+	}
+
 	
 	
 	

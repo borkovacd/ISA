@@ -39,6 +39,12 @@ public class RentACar
 	
 	@OneToMany(targetEntity=Korisnik.class, mappedBy="rentACar", cascade = CascadeType.ALL)
 	private List<Korisnik> administratori = new ArrayList<>();
+	
+	// Inspo
+	
+	private double prosecnaOcena ;
+	private double brojOcena ;
+	private double sumaOcena ;
 
 	public RentACar() {
 		super();
@@ -140,6 +146,31 @@ public class RentACar
 	public void setAdministratori(List<Korisnik> administratori) {
 		this.administratori = administratori;
 	}
+
+	public double getProsecnaOcena() {
+		return prosecnaOcena;
+	}
+
+	public void setProsecnaOcena(double prosecnaOcena) {
+		this.prosecnaOcena = prosecnaOcena;
+	}
+
+	public double getBrojOcena() {
+		return brojOcena;
+	}
+
+	public void setBrojOcena(double brojOcena) {
+		this.brojOcena = brojOcena;
+	}
+
+	public double getSumaOcena() {
+		return sumaOcena;
+	}
+
+	public void setSumaOcena(double sumaOcena) {
+		this.sumaOcena = sumaOcena;
+	}
+	
 	
 	
 }
