@@ -1,3 +1,31 @@
 <p>
   Izmeniti ulogu postojeceg korisnika u admina sistema ili admina nadleznog za aviokompanije, rent servise ili hotele
 </p>
+
+<br>
+<div style="text-align: center">
+  <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Registracija administratora </p>
+</div>
+
+<div style="text-align: left">
+  <p  style="color: black;font-size:30px; font-family: 'Ink Free'">Korisnici</p>
+  <div>
+    <div style=" display: inline-block; width: 50%;margin-top: 20px">
+      <div *ngFor="let u of regularUsers ">
+        <br>
+        <label style="font-size: 18px">{{u.korisnickoIme}}</label>
+        <div>
+          <button
+            style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white;"
+            (click)="promeniUlogu(u.korisnickoIme)">Promeni ulogu
+          </button>
+          <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white;"
+                  (click)="ukloniKorisnika(u.korisnickoIme)">Ukloni kornisnika
+          </button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
