@@ -21,7 +21,7 @@ public class UserService {
 		
 		List<Korisnik> allUsers = userRepository.findAll();
 		List<Korisnik> regularUsers = new ArrayList<Korisnik>();
-		
+	
 		for(int i = 0; i < allUsers.size(); i++) {
 			if(allUsers.get(i).getUloga() == UlogaKorisnika.OBICAN_KORISNIK) {
 				regularUsers.add(allUsers.get(i));
@@ -29,8 +29,21 @@ public class UserService {
 		}
 		
 		return regularUsers;
+	}
+
+
+	public List<Korisnik> getAllAdministrators() {
 		
+		List<Korisnik> allUsers = userRepository.findAll();
+		List<Korisnik> administrators = new ArrayList<Korisnik>();
 		
+		for(int i = 0; i < allUsers.size(); i++) {
+			if(allUsers.get(i).getUloga() != UlogaKorisnika.OBICAN_KORISNIK) {
+				administrators.add(allUsers.get(i));
+			}
+		}
+		
+		return administrators;
 	}
 
 }

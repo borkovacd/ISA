@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../service/user.service';
 import {Router} from '@angular/router';
 
+
 @Component({
   selector : 'system-administrator-administratori',
   templateUrl : './system-administrator-administratori.component.html',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 export class SystemAdministratorAdministratoriComponent implements  OnInit {
 
   regularUsers = []
+  administrators: [];
 
   constructor(protected router: Router,
               private userService: UserService ) { }
@@ -18,6 +20,10 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
 
     this.userService.getRegularUsers().subscribe(data => {
       this.regularUsers = data;
+    });
+
+    this.userService.getAdministrators().subscribe(data => {
+      this.administrators = data;
     });
 
 

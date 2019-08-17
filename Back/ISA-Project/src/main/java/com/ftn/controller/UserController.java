@@ -26,5 +26,12 @@ public class UserController {
 		List<Korisnik> regularUsers = userService.getAllRegularUsers();
 		return new ResponseEntity<>(regularUsers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/getAdministrators", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Korisnik>> getAdministrators() throws Exception {	
+		List<Korisnik> administrators = userService.getAllAdministrators();
+		return new ResponseEntity<>(administrators, HttpStatus.OK);
+	}
 
 }

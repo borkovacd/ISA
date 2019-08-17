@@ -24,4 +24,9 @@ export class UserService{
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getRegularUsers`, {headers});
   }
+
+  getAdministrators(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAdministrators`, {headers});
+  }
 }

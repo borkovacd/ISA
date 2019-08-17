@@ -8,7 +8,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule} from 'igniteui-angular';
+import {IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule, IgxAvatarModule} from 'igniteui-angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { SystemAdministratorComponent} from './users/system-administrator/system-administrator.component';
@@ -18,6 +18,7 @@ import { SystemAdministratorHoteliComponent} from './users/system-administrator/
 import { UserService} from './service/user.service';
 import { HotelService} from './service/hotel.service';
 import {HttpClientModule} from '@angular/common/http';
+import {MatGridListModule} from '@angular/material';
 
 
 @NgModule({
@@ -42,7 +43,9 @@ import {HttpClientModule} from '@angular/common/http';
     IgxIconModule,
     IgxButtonGroupModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    IgxAvatarModule,
+    MatGridListModule
   ],
   providers: [
     HotelService,

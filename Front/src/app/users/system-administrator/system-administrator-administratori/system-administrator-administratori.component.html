@@ -1,31 +1,41 @@
-<p>
-  Izmeniti ulogu postojeceg korisnika u admina sistema ili admina nadleznog za aviokompanije, rent servise ili hotele
-</p>
-
-<br>
 <div style="text-align: center">
   <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Registracija administratora </p>
 </div>
-
-<div style="text-align: left">
-  <p  style="color: black;font-size:30px; font-family: 'Ink Free'">Korisnici</p>
-  <div>
-    <div style=" display: inline-block; width: 50%;">
-      <div *ngFor="let u of regularUsers ">
+<br>
+<mat-grid-list cols="4">
+  <mat-grid-tile colspan="2">
+    <div style=" display: inline-block;">
+      <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Korisnici</p>
+      <div *ngFor="let u of regularUsers" style="margin-top: -30px">
         <br>
-        <label style="font-size: 18px">{{u.korisnickoIme}}</label>
+        <label style="font-size: 20px;">{{u.korisnickoIme}}</label>
         <div>
           <button
-            style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white;"
+            style="height: 60px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white;"
             (click)="promeniUlogu(u.korisnickoIme)">Promeni ulogu
           </button>
-          <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white;"
+          <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #ff6666;color: white;"
                   (click)="ukloniKorisnika(u.korisnickoIme)">Ukloni kornisnika
           </button>
         </div>
         <br>
       </div>
     </div>
-  </div>
-</div>
-
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <div style=" display: inline-block;">
+      <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Administratori</p>
+      <div *ngFor="let a of administrators" style="margin-top: -30px">
+        <br>
+        <label style="font-size: 20px;">{{a.korisnickoIme}}&nbsp;</label>
+        <label style="font-size: 20px; color: #1a8cff">{{a.uloga}}</label>
+        <div>
+          <button style="height: 60px;width: 120px;border-radius: 12px;background-color: #ff6666;color: white;"
+                  (click)="ukloniKorisnika(a.korisnickoIme)">Ukloni administratora
+          </button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
