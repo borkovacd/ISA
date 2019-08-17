@@ -37,8 +37,8 @@ public class RentACar
 	private double prihod;
 	private ArrayList<RezervacijaVozila> listaRezervacija;
 	
-	@OneToMany(targetEntity=Korisnik.class, mappedBy="rentACar", cascade = CascadeType.ALL)
-	private List<Korisnik> administratori = new ArrayList<>();
+	/*@OneToMany(targetEntity=Korisnik.class, mappedBy="rentACar", cascade = CascadeType.ALL)
+	private List<Korisnik> administratori = new ArrayList<>();*/
 	
 	// Inspo
 	
@@ -139,13 +139,13 @@ public class RentACar
 		this.listaRezervacija = listaRezervacija;
 	}
 
-	public List<Korisnik> getAdministratori() {
+	/*public List<Korisnik> getAdministratori() {
 		return administratori;
 	}
 
 	public void setAdministratori(List<Korisnik> administratori) {
 		this.administratori = administratori;
-	}
+	}*/
 
 	public double getProsecnaOcena() {
 		return prosecnaOcena;

@@ -2,7 +2,7 @@ package com.ftn.model;
 
 import javax.persistence.*;
 
-import com.ftn.model.rentacar.RentACar;
+import com.ftn.enums.UlogaKorisnika;
 
 @Entity
 public class Korisnik {
@@ -19,13 +19,15 @@ public class Korisnik {
 	private String telefon;
 	private String grad;
 	
+	@Enumerated(EnumType.STRING)
 	private UlogaKorisnika uloga; 
+	
 	private boolean prvoLogovanje = true;
 	private boolean verifikovan;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	/*@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IdRentACar", referencedColumnName="rentACarId")
-	private RentACar rentACar = null;
+	private RentACar rentACar = null;*/
 
 	public Korisnik() {
 		super();
@@ -132,13 +134,13 @@ public class Korisnik {
 		this.verifikovan = verifikovan;
 	}
 
-	public RentACar getRentACar() {
+	/*public RentACar getRentACar() {
 		return rentACar;
 	}
 
 	public void setRentACar(RentACar rentACar) {
 		this.rentACar = rentACar;
-	}
+	}*/
 	
 	
 
