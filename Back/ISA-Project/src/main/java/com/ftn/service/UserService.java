@@ -19,35 +19,65 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-
+	/************ Borkovac *************/
+	
 	public List<Korisnik> getAllRegularUsers() {
-		
 		List<Korisnik> allUsers = userRepository.findAll();
 		List<Korisnik> regularUsers = new ArrayList<Korisnik>();
-	
 		for(int i = 0; i < allUsers.size(); i++) {
 			if(allUsers.get(i).getUloga() == UlogaKorisnika.OBICAN_KORISNIK) {
 				regularUsers.add(allUsers.get(i));
 			}
 		}
-		
 		return regularUsers;
 	}
 
 
 	public List<Korisnik> getAllAdministrators() {
-		
 		List<Korisnik> allUsers = userRepository.findAll();
 		List<Korisnik> administrators = new ArrayList<Korisnik>();
-		
 		for(int i = 0; i < allUsers.size(); i++) {
 			if(allUsers.get(i).getUloga() != UlogaKorisnika.OBICAN_KORISNIK) {
 				administrators.add(allUsers.get(i));
 			}
 		}
-		
 		return administrators;
 	}
+	
+	public boolean changeRole(Long id, String novaUloga) {
+		if(userRepository.getOne(id) != null) {
+			Korisnik korisnik = userRepository.getOne(id);
+			//System.out.println("Korisnicnko ime: " + korisnik.getKorisnickoIme());
+			//System.out.println("Nova uloga: " + novaUloga);
+			if(novaUloga.equals("ADMINISTRATOR_SISTEMA")) 
+				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_SISTEMA);
+			else if(novaUloga.equals("ADMINISTRATOR_AVIOKOMPANIJE")) 
+				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE);
+			else if(novaUloga.equals("ADMINISTRATOR_HOTELA")) 
+				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_HOTELA);
+			else if(novaUloga.equals("ADMINISTRATOR_RENT_A_CAR")) 
+				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_RENT_A_CAR);
+			userRepository.save(korisnik);
+			//System.out.println("Uloga je sada: " + korisnik.getUloga());
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	public List<Korisnik> getAllHotelAdministrators() {
+		List<Korisnik> allUsers = userRepository.findAll();
+		List<Korisnik> hotelAdministrators = new ArrayList<Korisnik>();
+		for(int i = 0; i < allUsers.size(); i++) {
+			if(allUsers.get(i).getUloga() == UlogaKorisnika.ADMINISTRATOR_HOTELA) {
+				hotelAdministrators.add(allUsers.get(i));
+			}
+		}
+		return hotelAdministrators;
+	}
+	
+	
+	/************ *********** *************/
 	
 	// Olga
 	

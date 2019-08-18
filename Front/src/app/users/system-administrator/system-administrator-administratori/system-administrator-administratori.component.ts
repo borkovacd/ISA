@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../service/user.service';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -12,11 +13,24 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
 
   regularUsers = []
   administrators: [];
+  promenaUloge: boolean;
+  pu: any;
+  novaUloga: any;
+  public form: FormGroup;
 
   constructor(protected router: Router,
-              private userService: UserService ) { }
+              public fb: FormBuilder,
+              private userService: UserService ) {
+    this.form = this.fb.group({
+      'novaUloga': ['', Validators.compose([Validators.required])],
+    })
+    this.novaUloga = this.form.controls['novaUloga'];
+  }
+
 
   public ngOnInit() {
+
+    this.promenaUloge = false;
 
     this.userService.getRegularUsers().subscribe(data => {
       this.regularUsers = data;
@@ -29,11 +43,25 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
 
   }
 
-  promeniUlogu(korisnickoIme: any) {
-    
+  promeniUlogu(u: any) {
+    this.promenaUloge = true;
+    this.pu = u;
   }
 
   ukloniKorisnika(korisnickoIme: any) {
+    
+  }
+
+  potvrdiPromenu(pu: any, novaUloga: string) {
+
+    this.novaUloga =
+
+    this.userService.changeRole(pu.id, novaUloga).subscribe(data => {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
+
+    })
     
   }
 }

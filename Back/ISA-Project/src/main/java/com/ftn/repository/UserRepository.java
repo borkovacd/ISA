@@ -35,4 +35,6 @@ public interface UserRepository extends JpaRepository<Korisnik, Long>
 	public List<Korisnik> findAll();
 	public void deleteById(Long id);
 	public void deleteByEmail(String email);
+	
+	public Korisnik findByKorisnickoIme(String administratorHotela);
 }

@@ -59,8 +59,7 @@ export class SystemAdministratorHoteliComponent implements  OnInit {
     );
 
     this.hotelService.registerHotel(hotel).subscribe(data => {
-      this.router.navigateByUrl('/welcomepage' );
-
+      this.router.navigateByUrl('/welcomepage');
     })
   }
 

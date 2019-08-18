@@ -24,7 +24,7 @@
       <label style="margin-top:20px">Administrator:</label>
       <select class="form-control margin" [formControl]="administratorHotela">
         <option></option>
-        <option *ngFor="let admin of administratoriHotela ">{{admin.username}}</option>
+        <option *ngFor="let admin of administratoriHotela ">{{admin.korisnickoIme}}</option>
       </select>
 
       <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()" [disabled]="!form.valid">

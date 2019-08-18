@@ -6,7 +6,7 @@ import { SystemAdministratorComponent} from './users/system-administrator/system
 
 
 const routes: Routes = [
-  // {path: '', component: WelcomePageComponent, pathMatch: 'full'},
+  {path: 'welcomepage', component: WelcomePageComponent},
   {path: '', component: SystemAdministratorComponent, pathMatch: 'full'},
 ];
 
