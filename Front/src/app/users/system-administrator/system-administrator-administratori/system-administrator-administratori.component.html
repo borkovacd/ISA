@@ -6,7 +6,7 @@
   <mat-grid-tile colspan="1">
     <div style=" display: inline-block;">
       <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Korisnici</p>
-      <div *ngFor="let u of regularUsers" style="margin-top: -30px">
+      <div *ngFor="let u of regularUsers" style="margin-top: -30px;">
         <br>
         <label style="font-size: 20px;">{{u.korisnickoIme}}</label>
         <div>
@@ -23,7 +23,7 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile colspan="1" >
-    <div *ngIf="promenaUloge == true" style=" display: inline-block;">
+    <div *ngIf="promenaUloge == true" style=" display: block;">
       <label style="font-size: 20px;">{{pu.korisnickoIme}}</label>
       <br>
       <label style="font-size: 20px;">Nova uloga:</label>
