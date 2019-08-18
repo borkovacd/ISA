@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../service/user.service';
 import {AviokompanijaService} from '../../../service/aviokompanija.service';
+import {HotelModel} from '../../../model/hotel.model';
+import {AviokompanijaModel} from '../../../model/aviokompanija.model';
 
 @Component({
   selector : 'system-administrator-aviokompanije',
@@ -39,7 +41,30 @@ export class SystemAdministratorAviokompanijeComponent implements  OnInit {
   }
 
   public ngOnInit() {
+    this.userService.getAviokompanijaAdministrators().subscribe(data => {
+      this.administratoriAviokompanija = data;
+    })
+  }
 
+  confirmClick() {
+    this.registerAviokompaniju();
+  }
+
+  registerAviokompaniju() {
+    const aviokompanija = new AviokompanijaModel(
+      this.name.value,
+      this.address.value,
+      this.description.value,
+      this.administratorAviokompanije.value,
+    );
+
+    this.aviokompanijaService.registerAviokompanija(aviokompanija).subscribe(data => {
+      this.router.navigateByUrl('administratorPage');
+    })
+  }
+
+  exit() {
+    this.router.navigateByUrl('/welcomepage');
   }
 
 }

@@ -1,19 +1,16 @@
-package com.ftn.model.hotels;
-
-import java.util.List;
+package com.ftn.model.aviokompanija;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.ftn.model.Korisnik;
 
 @Entity
-public class Hotel {
+public class Aviokompanija {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +23,13 @@ public class Hotel {
 	private String opis;
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	private Korisnik administrator; //administrator hotela
+	private Korisnik administrator; //administrator aviokompanije
 
-	public Hotel() {
+	public Aviokompanija() {
 		
 	}
 	
-	public Hotel(String naziv, String adresa, String opis, Korisnik administrator) {
+	public Aviokompanija(String naziv, String adresa, String opis, Korisnik administrator) {
 		super();
 		this.naziv = naziv;
 		this.adresa = adresa;
@@ -79,8 +76,4 @@ public class Hotel {
 	public void setAdministrator(Korisnik administrator) {
 		this.administrator = administrator;
 	}
-	
-	
-	
-
 }

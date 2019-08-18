@@ -17,7 +17,16 @@ export class UserService {
   getHotelAdministrators(): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getHotelAdministrators`, {headers});
+  }
 
+  getRentCarAdministrators(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRentCarAdministrators`, {headers});
+  }
+
+  getAviokompanijaAdministrators(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAviokompanijaAdministrators`, {headers});
   }
 
   getRegularUsers(): Observable<any> {

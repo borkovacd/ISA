@@ -54,6 +54,20 @@ public class UserController {
 		return new ResponseEntity<>(hotelAdministrators, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getRentCarAdministrators", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Korisnik>> getRentCarAdministrators() {	
+		List<Korisnik> rentCarAdministrators = userService.getAllRentCarAdministrators();
+		return new ResponseEntity<>(rentCarAdministrators, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getAviokompanijaAdministrators", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Korisnik>> getAviokompanijaAdministrators() {	
+		List<Korisnik> aviokompanijaAdministrators = userService.getAllAviokompanijaAdministrators();
+		return new ResponseEntity<>(aviokompanijaAdministrators, HttpStatus.OK);
+	}
+	
 	
 
 }

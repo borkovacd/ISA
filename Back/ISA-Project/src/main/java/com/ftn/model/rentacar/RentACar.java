@@ -40,6 +40,12 @@ public class RentACar
 	/*@OneToMany(targetEntity=Korisnik.class, mappedBy="rentACar", cascade = CascadeType.ALL)
 	private List<Korisnik> administratori = new ArrayList<>();*/
 	
+	// OLGA LOOK PLEASE 
+	/********* ja sam ovako dodao kod sebe, ako ti ne odgovara ovo ti javi pa menjaj *****/
+	@OneToOne(fetch = FetchType.EAGER)
+	private Korisnik administrator; //administrator rent a car
+
+	
 	// Inspo
 	
 	private double prosecnaOcena ;
@@ -51,19 +57,29 @@ public class RentACar
 		// TODO Auto-generated constructor stub
 	}
 
-	public RentACar(String naziv, String adresa, String opis) {
+	public RentACar(String naziv, String adresa, String opis, Korisnik administrator) {
 		super();
 		this.naziv = naziv;
 		this.adresa = adresa;
 		this.opis = opis;
+		this.administrator = administrator;
+	}
+
+	public Korisnik getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Korisnik administrator) {
+		this.administrator = administrator;
 	}
 
 	// sa spiskom vozila
-	public RentACar(String naziv, String adresa, String opis, List<Vozilo> spisakVozila) {
+	public RentACar(String naziv, String adresa, String opis, Korisnik administrator, List<Vozilo> spisakVozila) {
 		super();
 		this.naziv = naziv;
 		this.adresa = adresa;
 		this.opis = opis;
+		this.administrator = administrator;
 		this.spisakVozila = spisakVozila;
 	}
 

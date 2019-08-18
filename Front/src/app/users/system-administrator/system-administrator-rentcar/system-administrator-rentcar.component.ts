@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {RentCarService} from '../../../service/rentcar.service';
 import {UserService} from '../../../service/user.service';
+import {HotelModel} from '../../../model/hotel.model';
+import {RentCarModel} from '../../../model/rentcar.model';
 
 @Component({
   selector : 'system-administrator-rentcar',
@@ -39,7 +41,31 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
   }
 
   public ngOnInit() {
-
+    this.userService.getRentCarAdministrators().subscribe(data => {
+      this.administratoriRentCar = data;
+    })
   }
+
+  confirmClick() {
+    this.registerRentCar();
+  }
+
+  registerRentCar() {
+    const rentCar = new RentCarModel(
+      this.name.value,
+      this.address.value,
+      this.description.value,
+      this.administratorRentCar.value,
+    );
+
+    this.rentCarService.registerRentCar(rentCar).subscribe(data => {
+      this.router.navigateByUrl('administratorPage');
+    })
+  }
+
+  exit() {
+    this.router.navigateByUrl('/welcomepage');
+  }
+
 
 }

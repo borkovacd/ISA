@@ -76,6 +76,30 @@ public class UserService {
 		return hotelAdministrators;
 	}
 	
+	public List<Korisnik> getAllRentCarAdministrators() {
+		List<Korisnik> allUsers = userRepository.findAll();
+		List<Korisnik> rentCarAdministrators = new ArrayList<Korisnik>();
+		for(int i = 0; i < allUsers.size(); i++) {
+			if(allUsers.get(i).getUloga() == UlogaKorisnika.ADMINISTRATOR_RENT_A_CAR) {
+				rentCarAdministrators.add(allUsers.get(i));
+			}
+		}
+		return rentCarAdministrators;
+	}
+
+
+	public List<Korisnik> getAllAviokompanijaAdministrators() {
+		List<Korisnik> allUsers = userRepository.findAll();
+		List<Korisnik> aviokompanijaAdministrators = new ArrayList<Korisnik>();
+		for(int i = 0; i < allUsers.size(); i++) {
+			if(allUsers.get(i).getUloga() == UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE) {
+				aviokompanijaAdministrators.add(allUsers.get(i));
+			}
+		}
+		return aviokompanijaAdministrators;
+	}
+
+	
 	
 	/************ *********** *************/
 	
@@ -209,6 +233,7 @@ public class UserService {
 		
 		return "verifikovan";
 	}
+
 
 
 }

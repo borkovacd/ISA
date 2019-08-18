@@ -25,7 +25,7 @@ public class HotelService {
 		hotel.setOpis(hotelDTO.getDescription());
 		if(userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela()) != null) {
 			Korisnik administratorHotela = userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela());
-			hotel.setKorisnik(administratorHotela);
+			hotel.setAdministrator(administratorHotela);
 		} else {
 			return false;
 		}
