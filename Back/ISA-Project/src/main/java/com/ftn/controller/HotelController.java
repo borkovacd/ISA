@@ -23,12 +23,12 @@ public class HotelController {
 	
 	@PostMapping("/registerHotel")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> registerHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
+	public void registerHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
 		boolean hotelRegistration = hotelService.registerHotel(hotelDTO);
-		if(hotelRegistration) 
+		/*if(hotelRegistration) 
 			return new ResponseEntity<>("Uspesno registrovanje", HttpStatus.OK);
 		else 
-			return new ResponseEntity<>("Neuspesno registrovanje", HttpStatus.OK);
+			return new ResponseEntity<>("Neuspesno registrovanje", HttpStatus.OK);*/
 	}
 
 }

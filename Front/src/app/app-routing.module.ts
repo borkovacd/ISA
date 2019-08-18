@@ -8,6 +8,7 @@ import { SystemAdministratorComponent} from './users/system-administrator/system
 const routes: Routes = [
   {path: 'welcomepage', component: WelcomePageComponent},
   {path: '', component: SystemAdministratorComponent, pathMatch: 'full'},
+  {path: 'administratorPage', component: SystemAdministratorComponent},
 ];
 
 @NgModule({

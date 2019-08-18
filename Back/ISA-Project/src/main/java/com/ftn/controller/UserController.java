@@ -25,31 +25,31 @@ public class UserController {
 	
 	@RequestMapping(value = "/getRegularUsers", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Korisnik>> getRegularUsers() throws Exception {	
+	public ResponseEntity<List<Korisnik>> getRegularUsers() {	
 		List<Korisnik> regularUsers = userService.getAllRegularUsers();
 		return new ResponseEntity<>(regularUsers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getAdministrators", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Korisnik>> getAdministrators() throws Exception {	
+	public ResponseEntity<List<Korisnik>> getAdministrators() {	
 		List<Korisnik> administrators = userService.getAllAdministrators();
 		return new ResponseEntity<>(administrators, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/changeRole/{id}", method = RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> changeRole(@PathVariable Long id,@RequestBody String novaUloga) throws Exception {	
+	public void changeRole(@PathVariable Long id,@RequestBody String novaUloga) {	
 		boolean uspesnaPromena = userService.changeRole(id, novaUloga);
-		if (uspesnaPromena) {
+		/*if (uspesnaPromena) {
 			return new ResponseEntity<>("Uspesna promena", HttpStatus.OK);
 		} else 
-			return new ResponseEntity<>("Neuspesna promena", HttpStatus.OK);	
+			return new ResponseEntity<>("Neuspesna promena", HttpStatus.OK);*/
 	}
 	
 	@RequestMapping(value = "/getHotelAdministrators", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Korisnik>> getHotelAdministrators() throws Exception {	
+	public ResponseEntity<List<Korisnik>> getHotelAdministrators() {	
 		List<Korisnik> hotelAdministrators = userService.getAllHotelAdministrators();
 		return new ResponseEntity<>(hotelAdministrators, HttpStatus.OK);
 	}
