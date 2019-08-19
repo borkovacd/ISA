@@ -1,6 +1,7 @@
 package com.ftn.dto;
 
 import com.ftn.enums.UlogaKorisnika;
+import com.ftn.model.Korisnik;
 
 public class KorisnikDTO 
 {
@@ -36,6 +37,19 @@ public class KorisnikDTO
 		this.telefon = telefon;
 		this.grad = grad;
 		this.uloga = uloga;
+	}
+	
+	public KorisnikDTO(Korisnik korisnik) {
+		this.id = korisnik.getId();
+		this.ime = korisnik.getIme();
+		this.prezime = korisnik.getPrezime();
+		this.email = korisnik.getEmail();
+		this.lozinka = korisnik.getLozinka();
+		this.korisnickoIme = korisnik.getKorisnickoIme();
+		this.grad = korisnik.getGrad();
+		this.telefon = korisnik.getTelefon();
+		this.uloga = korisnik.getUloga();
+		
 	}
 
 	public Long getId() {

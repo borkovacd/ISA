@@ -103,7 +103,8 @@ public class UserService {
 	
 	/************ *********** *************/
 	
-	// Olga
+	
+	/****** Olga *********/
 	
 	// registracija
 	public String register(KorisnikDTO korisnik) throws NoSuchAlgorithmException // zbog enkripcije
@@ -235,5 +236,27 @@ public class UserService {
 	}
 
 
+	public String changePassword(KorisnikDTO kdto) {
+		String enkriptovanaLozinka = "";
+		try 
+		{
+			enkriptovanaLozinka = encriptPassword(kdto.getLozinka());
+			
+		} 
+		catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return enkriptovanaLozinka;
+	}
+
+
+	public void save(Korisnik k) {
+		userRepository.save(k);
+		
+	}
+
+
+	/********* Ende - Olga *********/
 
 }
