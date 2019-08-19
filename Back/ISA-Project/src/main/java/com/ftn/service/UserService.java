@@ -98,6 +98,11 @@ public class UserService {
 		}
 		return aviokompanijaAdministrators;
 	}
+	
+	public Korisnik getKorisnikData(Long id) {
+		Korisnik korisnik = userRepository.getOne(id);
+		return korisnik;
+	}
 
 	
 	

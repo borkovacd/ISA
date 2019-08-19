@@ -43,4 +43,9 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.put(`${this.BASE_URL}/changeRole/${id}`, novaUloga, {headers});
   }
+
+  getKorisnikData(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getKorisnikData/2`, {headers});
+  }
 }

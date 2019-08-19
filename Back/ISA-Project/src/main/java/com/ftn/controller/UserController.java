@@ -79,6 +79,13 @@ public class UserController {
 		return new ResponseEntity<>(aviokompanijaAdministrators, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getKorisnikData/{id}", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Korisnik> getKorisnikData(@PathVariable Long id) {	
+		Korisnik korisnik = userService.getKorisnikData(id);
+		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
+	}
+	
 	/***** Olga 
 	 * @throws NoSuchAlgorithmException ******/
 	

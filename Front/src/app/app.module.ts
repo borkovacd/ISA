@@ -18,14 +18,18 @@ import { SystemAdministratorHoteliComponent} from './users/system-administrator/
 import { SystemAdministratorAviokompanijeComponent} from './users/system-administrator/system-administrator-aviokompanije/system-administrator-aviokompanije.component';
 import { SystemAdministratorRentcarComponent} from './users/system-administrator/system-administrator-rentcar/system-administrator-rentcar.component';
 import { HotelAdministratorComponent} from './users/hotel-administrator/hotel-administrator.component';
+import { HotelAdministratorHoteliComponent} from './users/hotel-administrator/hotel-administrator-hoteli/hotel-administrator-hoteli.component';
+import { HotelAdministratorProfilComponent} from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil.component';
+import {GoogleMapComponent} from './google-map/google-map.component';
 
 import { UserService} from './service/user.service';
 import { HotelService} from './service/hotel.service';
 import { RentCarService} from './service/rentcar.service';
 import { AviokompanijaService} from './service/aviokompanija.service';
 import {HttpClientModule} from '@angular/common/http';
-import {MatGridListModule} from '@angular/material';
-import {HotelAdministratorHoteliComponent} from './users/hotel-administrator/hotel-administrator-hoteli/hotel-administrator-hoteli.component';
+import {MatCheckboxModule, MatGridListModule} from '@angular/material';
+import {MatTableModule} from '@angular/material';
+
 
 
 @NgModule({
@@ -39,6 +43,8 @@ import {HotelAdministratorHoteliComponent} from './users/hotel-administrator/hot
     SystemAdministratorAviokompanijeComponent,
     HotelAdministratorComponent,
     HotelAdministratorHoteliComponent,
+    HotelAdministratorProfilComponent,
+    GoogleMapComponent
 
   ],
   imports: [
@@ -59,11 +65,13 @@ import {HotelAdministratorHoteliComponent} from './users/hotel-administrator/hot
     IgxAvatarModule,
     MatGridListModule,
     AgmCoreModule.forRoot({
-      //Moj API KEY
-      //AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs
+      // Moj API KEY
+      // AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs
       apiKey: 'AIzaSyBaCRWKG19SlY8InIsNe8qZa-NvMuzB-VE',
       libraries: ['places']
-    })
+    }),
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [
     HotelService,
