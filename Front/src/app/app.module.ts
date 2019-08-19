@@ -59,7 +59,9 @@ import {HotelAdministratorHoteliComponent} from './users/hotel-administrator/hot
     IgxAvatarModule,
     MatGridListModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs',
+      //Moj API KEY
+      //AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs
+      apiKey: 'AIzaSyBaCRWKG19SlY8InIsNe8qZa-NvMuzB-VE',
       libraries: ['places']
     })
   ],

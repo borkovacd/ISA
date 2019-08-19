@@ -19,9 +19,12 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
   hotels = [];
 
+  showMap: boolean;
+  showLocation: boolean;
 
-  @ViewChild('search', {static: true})
+  @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
+
 
   constructor(protected router: Router,
               private hotelService: HotelService,
@@ -31,39 +34,17 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
   public ngOnInit() {
 
+    this.showMap = false;
+    this.showLocation = false;
+
     this.hotelService.getHotelsByAdministrator().subscribe(data => {
       this.hotels = data;
     });
 
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
-
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-        });
-      });
-    });
   }
 
   // Get Current Location Coordinates
-  private setCurrentLocation() {
+  /*private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -72,36 +53,6 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
         this.getAddress(this.latitude, this.longitude);
       });
     }
-  }
-
-
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
-  }
-
-  /* pogledaj ovo */
-  private getLocation(address: string): Observable<any> {
-    console.log('Getting address: ', address);
-    const geocoder = new google.maps.Geocoder();
-    return Observable.create(observer => {
-      geocoder.geocode({
-        address: address
-      }, (results, status) => {
-        if (status == google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-          this.latitude = results[0].geometry.location.lat();
-          this.longitude = results[0].geometry.location.lng();
-          this.zoom = 12;
-        } else {
-          console.log('Error: ', results, ' & Status: ', status);
-          observer.error();
-        }
-      });
-    });
   }
 
   getAddress(latitude, longitude) {
@@ -120,10 +71,40 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
       }
 
     });
-  }
+  }*/
 
 
-  showOnMap(adresa: any) {
+  showOnMap() {
+    this.showLocation = true;
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      //this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          this.showMap = true;
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 15;
+        });
+      });
+    });
+
 
   }
 

@@ -4,26 +4,27 @@
        style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
     <h1 style="margin-top: 20px">{{hotel.naziv}}</h1>
     <p style="font-size: 20px">{{hotel.adresa}}</p>
-    <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="showOnMap(hotel.adresa)" >
+    <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="showOnMap()" >
       Prikazi na mapi
     </button>
+    <div class="form-group" *ngIf="showLocation == true">
+      <input value="{{hotel.adresa}}" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+    </div>
     <p style="font-size: 20px">{{hotel.opis}}</p>
-
   </div>
 </div>
 
-<div class="form-group">
+<!--<div class="form-group">
   <label>Enter address</label>
-  <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+  <input value="{{orderLine.price}} type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+</div>-->
+
+<div *ngIf="showMap == true">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" ></agm-marker>
+  </agm-map>
 </div>
 
-<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-  <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-              (dragEnd)="markerDragEnd($event)"></agm-marker>
-</agm-map>
 
-<h5>Address: {{address}}</h5>
-<div>Latitude: {{latitude}}</div>
-<div>Longitude: {{longitude}}</div>
 
 
