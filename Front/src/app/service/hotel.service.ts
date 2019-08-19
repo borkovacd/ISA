@@ -22,5 +22,8 @@ export class HotelService {
     return this.http.post(`${this.BASE_URL}/registerHotel`, body, {headers});
   }
 
-
+  getHotelsByAdministrator(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getHotelsByAdministrator/2`, {headers});
+  }
 }

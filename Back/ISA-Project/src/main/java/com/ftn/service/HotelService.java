@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,18 @@ public class HotelService {
 		return true;
 
 	}
+
+	public ArrayList<Hotel> getHotelsByAdministrator(Long id) {
+		ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+		Korisnik administrator = userRepository.getOne(id);
+		for(int i=0; i<hotelRepository.findAll().size(); i++) {
+			if(hotelRepository.findAll().get(i).getAdministrator().getKorisnickoIme().equals(administrator.getKorisnickoIme()))
+				hotels.add(hotelRepository.findAll().get(i));
+		}
+		return hotels;
+	}
+	
+	
 	
 
 }

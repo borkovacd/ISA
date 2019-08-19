@@ -10,12 +10,14 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule, IgxAvatarModule} from 'igniteui-angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { SystemAdministratorComponent} from './users/system-administrator/system-administrator.component';
 import { SystemAdministratorAdministratoriComponent} from './users/system-administrator/system-administrator-administratori/system-administrator-administratori.component';
 import { SystemAdministratorHoteliComponent} from './users/system-administrator/system-administrator-hoteli/system-administrator-hoteli.component';
 import { SystemAdministratorAviokompanijeComponent} from './users/system-administrator/system-administrator-aviokompanije/system-administrator-aviokompanije.component';
 import { SystemAdministratorRentcarComponent} from './users/system-administrator/system-administrator-rentcar/system-administrator-rentcar.component';
+import { HotelAdministratorComponent} from './users/hotel-administrator/hotel-administrator.component';
 
 import { UserService} from './service/user.service';
 import { HotelService} from './service/hotel.service';
@@ -23,6 +25,7 @@ import { RentCarService} from './service/rentcar.service';
 import { AviokompanijaService} from './service/aviokompanija.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MatGridListModule} from '@angular/material';
+import {HotelAdministratorHoteliComponent} from './users/hotel-administrator/hotel-administrator-hoteli/hotel-administrator-hoteli.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import {MatGridListModule} from '@angular/material';
     SystemAdministratorAdministratoriComponent,
     SystemAdministratorHoteliComponent,
     SystemAdministratorRentcarComponent,
-    SystemAdministratorAviokompanijeComponent
+    SystemAdministratorAviokompanijeComponent,
+    HotelAdministratorComponent,
+    HotelAdministratorHoteliComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,11 @@ import {MatGridListModule} from '@angular/material';
     ReactiveFormsModule,
     HttpClientModule,
     IgxAvatarModule,
-    MatGridListModule
+    MatGridListModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs',
+      libraries: ['places']
+    })
   ],
   providers: [
     HotelService,
