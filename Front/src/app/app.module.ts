@@ -20,7 +20,6 @@ import { SystemAdministratorRentcarComponent} from './users/system-administrator
 import { HotelAdministratorComponent} from './users/hotel-administrator/hotel-administrator.component';
 import { HotelAdministratorHoteliComponent} from './users/hotel-administrator/hotel-administrator-hoteli/hotel-administrator-hoteli.component';
 import { HotelAdministratorProfilComponent} from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil.component';
-import {GoogleMapComponent} from './google-map/google-map.component';
 
 import { UserService} from './service/user.service';
 import { HotelService} from './service/hotel.service';
@@ -44,7 +43,6 @@ import {MatTableModule} from '@angular/material';
     HotelAdministratorComponent,
     HotelAdministratorHoteliComponent,
     HotelAdministratorProfilComponent,
-    GoogleMapComponent
 
   ],
   imports: [

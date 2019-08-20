@@ -21,9 +21,12 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
   showMap: boolean;
   showLocation: boolean;
+  hideData: boolean;
+  tempAdresa: any;
 
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
+
 
 
   constructor(protected router: Router,
@@ -36,6 +39,7 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
     this.showMap = false;
     this.showLocation = false;
+    this.hideData = false;
 
     this.hotelService.getHotelsByAdministrator().subscribe(data => {
       this.hotels = data;
@@ -74,8 +78,11 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   }*/
 
 
-  showOnMap() {
+  showOnMap(adresa: any) {
+
+    this.hideData = true;
     this.showLocation = true;
+    this.tempAdresa = adresa;
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -109,5 +116,10 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   }
 
 
+  closeMap() {
+    this.hideData = false;
+    this.showMap = false;
+    this.showLocation = false;
+  }
 }
 
