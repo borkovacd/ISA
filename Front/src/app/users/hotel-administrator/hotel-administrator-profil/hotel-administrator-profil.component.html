@@ -1,4 +1,4 @@
-<div
+<!--<div
   style="text-align: center; margin-left: 20%;margin-right: 20%">
   <div *ngIf="korisnik!=null" style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
     <h1 style="margin-top: 20px">{{korisnik.korisnickoIme}}</h1>
@@ -12,4 +12,157 @@
     <p style="font-size: 20px">{{korisnik.verifikovan}}</p>
     <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="azurirajPodatke(korisnik.id)"> Ažuriraj podatke </button>
   </div>
+</div>-->
+
+<div class="container" *ngIf="korisnik!=null">
+  <div class="row my-2">
+    <div class="col-lg-8 order-lg-2">
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item active">
+          <a data-toggle="tab" class="nav-link active"
+             href="#profile" [ngClass]="{ 'active':activeTab==='profile'}" (click)="search('profile')"
+          >Profile</a>
+        </li>
+        <li class="nav-item">
+          <a  data-toggle="tab" class="nav-link"
+             href="#edit" [ngClass]="{ 'active':activeTab==='edit'}" (click)="result('edit')"
+          >Edit</a>
+        </li>
+      </ul>
+      <div class="tab-content py-4">
+        <div class="tab-pane" id="profile" [ngClass]="{ 'active':activeTab==='profile'}">
+          <h5 class="mb-3">User Profile</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>About</h6>
+              <p>
+                Web Designer, UI/UX Engineer
+              </p>
+              <h6>Hobbies</h6>
+              <p>
+                Indie music, skiing and hiking. I love the great outdoors.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6>Recent badges</h6>
+              <a href="#" class="badge badge-dark badge-pill">html5</a>
+              <a href="#" class="badge badge-dark badge-pill">react</a>
+              <a href="#" class="badge badge-dark badge-pill">codeply</a>
+              <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+              <a href="#" class="badge badge-dark badge-pill">css3</a>
+              <a href="#" class="badge badge-dark badge-pill">jquery</a>
+              <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+              <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+              <hr>
+              <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+              <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+              <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+            </div>
+            <div class="col-md-12">
+              <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
+              <table class="table table-sm table-hover table-striped">
+                <tbody>
+                <tr>
+                  <td>
+                    <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <div class="tab-pane" id="edit" [ngClass]="{ 'active':activeTab==='edit'}">
+          <form role="form">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Ime</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value={{korisnik.ime}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Prezime</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value={{korisnik.prezime}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Email</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="email" value={{korisnik.email}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Grad</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value={{korisnik.grad}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Telefon</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value={{korisnik.telefon}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Korisnicko ime</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value={{korisnik.korisnickoIme}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Lozinka</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="password" value={{korisnik.lozinka}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Potvrdite lozinku</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="password" value={{korisnik.lozinka}}>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-9">
+                <input type="reset" class="btn btn-secondary" value="Cancel">
+                <input type="button" class="btn btn-primary" value="Save Changes">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 order-lg-1 text-center">
+      <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/cef31105-8a6e-4211-a74b-2f0bbd9791fb-profile_image-150x150.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+      <h6 class="mt-2">Upload a different photo</h6>
+      <label class="custom-file">
+        <input type="file" id="file" class="custom-file-input">
+        <span class="custom-file-control">Choose file</span>
+      </label>
+    </div>
+  </div>
 </div>
+

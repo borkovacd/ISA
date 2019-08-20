@@ -8,10 +8,12 @@ import {UserService} from '../../../service/user.service';
 })
 export class HotelAdministratorProfilComponent implements  OnInit {
 
-  korisnik: any = null;
-
   constructor(protected router: Router,
               private userService: UserService) { }
+
+  korisnik: any = null;
+
+  activeTab = 'profile';
 
   public ngOnInit() {
 
@@ -22,5 +24,13 @@ export class HotelAdministratorProfilComponent implements  OnInit {
 
   azurirajPodatke(id: any) {
 
+  }
+
+  search(activeTab) {
+    this.activeTab = activeTab;
+  }
+
+  result(activeTab) {
+    this.activeTab = activeTab;
   }
 }

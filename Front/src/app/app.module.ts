@@ -63,9 +63,7 @@ import {MatTableModule} from '@angular/material';
     IgxAvatarModule,
     MatGridListModule,
     AgmCoreModule.forRoot({
-      // Moj API KEY
-      // AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs
-      apiKey: 'AIzaSyBaCRWKG19SlY8InIsNe8qZa-NvMuzB-VE',
+      apiKey: 'AIzaSyAXwTtS46pzFqyqxA9lzUMkpmyBsVtkGHs',
       libraries: ['places']
     }),
     MatTableModule,
