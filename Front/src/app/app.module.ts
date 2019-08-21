@@ -30,6 +30,9 @@ import {MatCheckboxModule, MatGridListModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
 import {PrijavaComponent} from './prijava/prijava.component';
 import {RegistracijaComponent} from './registracija/registracija.component';
+import { EditHotelComponent } from './hotels/edit-hotel/edit-hotel.component';
+import { RoomsComponent } from './hotels/rooms/rooms.component';
+import { AddEditRoomComponent } from './hotels/add-edit-room/add-edit-room.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import {RegistracijaComponent} from './registracija/registracija.component';
     HotelAdministratorHoteliComponent,
     HotelAdministratorProfilComponent,
     PrijavaComponent,
-    RegistracijaComponent
+    RegistracijaComponent,
+    EditHotelComponent,
+    RoomsComponent,
+    AddEditRoomComponent,
   ],
   imports: [
     BrowserModule,

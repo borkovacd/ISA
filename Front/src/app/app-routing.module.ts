@@ -6,15 +6,19 @@ import { SystemAdministratorComponent} from './users/system-administrator/system
 import {HotelAdministratorComponent} from './users/hotel-administrator/hotel-administrator.component';
 import {RegistracijaComponent} from "./registracija/registracija.component";
 import {PrijavaComponent} from "./prijava/prijava.component";
+import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
+import {RoomsComponent} from './hotels/rooms/rooms.component';
 
 const routes: Routes = [
-  {path: 'welcomepage', component: WelcomePageComponent,
-  children: [
-    {path: 'prijava', component: PrijavaComponent},
-    {path:'registracija', component: RegistracijaComponent}
-  ]},
-  {path: '', component: HotelAdministratorComponent, pathMatch: 'full'},
-  {path: 'administratorPage', component: SystemAdministratorComponent},
+  {path: '', component: WelcomePageComponent , pathMatch: 'full',
+    children: [
+      {path: 'prijava', component: PrijavaComponent},
+      {path: 'registracija', component: RegistracijaComponent}
+    ]},
+  {path: 'hotelAdminPage', component: HotelAdministratorComponent},
+  {path: 'hotelAdminPage/hotel/:idHotela', component: EditHotelComponent},
+  {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
+  {path: 'systemAdminPage', component: SystemAdministratorComponent},
 ];
 
 @NgModule({

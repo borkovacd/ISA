@@ -7,13 +7,22 @@
       Prikazi na mapi
     </button>
     <p style="font-size: 20px">{{hotel.opis}}</p>
+    <div style="margin-bottom: 20px">
+      <button
+        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+        (click)="izmeniHotel(hotel.id)">Izmeni
+      </button>
+      <button
+        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 40px"
+        (click)="pregledSoba(hotel.id)">Sobe
+      </button>
+      <button
+        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 40px"
+        (click)="pregledCenovnika(hotel.id)">Cenovnik
+      </button>
+    </div>
   </div>
 </div>
-
-<!--<div class="form-group">
-  <label>Enter address</label>
-  <input value="{{orderLine.price}} type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
-</div>-->
 
 <div class="form-group" [hidden]="!showLocation">
   <input value="{{tempAdresa}}" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>

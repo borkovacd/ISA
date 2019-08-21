@@ -121,5 +121,23 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
     this.showMap = false;
     this.showLocation = false;
   }
+
+  izmeniHotel(id: any) {
+    this.hotelService.checkIfReservedHotel(id).subscribe(data => {
+      if (data == false){
+        this.router.navigateByUrl('edit/hotel/' + id);
+      } else {
+        alert('Soba u tom smestaju je rezervisana!');
+      }
+    })
+  }
+
+  pregledSoba(idHotela: any) {
+    this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
+  }
+
+  pregledCenovnika(idHotela: any){
+    this.router.navigateByUrl('welcomepage/room/' + idHotela);
+  }
 }
 

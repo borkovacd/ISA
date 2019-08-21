@@ -26,4 +26,16 @@ export class HotelService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getHotelsByAdministrator/2`, {headers});
   }
+
+  checkIfReservedHotel(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedHotel/${id}`, {headers});
+  }
+
+  izmeniHotel(object: HotelModel, id: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/izmeniHotel/${id}`, body, {headers});
+  }
 }
+
