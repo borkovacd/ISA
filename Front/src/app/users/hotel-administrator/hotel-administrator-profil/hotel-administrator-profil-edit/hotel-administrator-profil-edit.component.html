@@ -1,0 +1,59 @@
+<div>
+  <form [formGroup]="form">
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Ime</label>
+      <div class="col-lg-9">
+        <input [formControl]="ime" class="form-control" type="text" >
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Prezime</label>
+      <div class="col-lg-9">
+        <input [formControl]="prezime" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Email</label>
+      <div class="col-lg-9">
+        <input [formControl]="email" class="form-control" type="email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Grad</label>
+      <div class="col-lg-9">
+        <input [formControl]="grad" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Telefon</label>
+      <div class="col-lg-9">
+        <input [formControl]="telefon" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Korisnicko ime</label>
+      <div class="col-lg-9">
+        <input [formControl]="korisnickoIme" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Lozinka</label>
+      <div class="col-lg-9">
+        <input [formControl]="lozinka" class="form-control" type="password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Potvrdite lozinku</label>
+      <div class="col-lg-9">
+        <input [formControl]="ponovljenaLozinka" class="form-control" type="password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label"></label>
+      <div class="col-lg-9">
+        <input type="reset" class="btn btn-secondary" value="Cancel">
+        <input type="button" class="btn btn-primary" value="Save Changes">
+      </div>
+    </div>
+  </form>
+</div>

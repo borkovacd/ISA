@@ -13,20 +13,9 @@ export class HotelAdministratorProfilComponent implements  OnInit {
 
   korisnik: any = null;
 
-  activeTab = 'profile';
-
   public ngOnInit() {
-
     this.userService.getKorisnikData().subscribe(data => {
       this.korisnik = data;
     });
-  }
-
-  search(activeTab) {
-    this.activeTab = activeTab;
-  }
-
-  result(activeTab) {
-    this.activeTab = activeTab;
   }
 }
