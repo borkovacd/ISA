@@ -37,5 +37,67 @@ public class RezervacijaHotela {
 	private Korisnik korisnik;
 	
 	private double cena;
+	
+	public RezervacijaHotela() {
+		
+	}
+
+	public RezervacijaHotela(LocalDate datumPocetka, LocalDate datumKraja, List<Soba> sobe, Korisnik korisnik,
+			double cena) {
+		super();
+		this.datumPocetka = datumPocetka;
+		this.datumKraja = datumKraja;
+		this.sobe = sobe;
+		this.korisnik = korisnik;
+		this.cena = cena;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDate getDatumPocetka() {
+		return datumPocetka;
+	}
+
+	public void setDatumPocetka(LocalDate datumPocetka) {
+		this.datumPocetka = datumPocetka;
+	}
+
+	public LocalDate getDatumKraja() {
+		return datumKraja;
+	}
+
+	public void setDatumKraja(LocalDate datumKraja) {
+		this.datumKraja = datumKraja;
+	}
+
+	public List<Soba> getSobe() {
+		return sobe;
+	}
+
+	public void setSobe(List<Soba> sobe) {
+		this.sobe = sobe;
+	}
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
+	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
 
 }

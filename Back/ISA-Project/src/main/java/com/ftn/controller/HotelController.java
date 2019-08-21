@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,23 @@ public class HotelController {
 	public ResponseEntity<List<Hotel>> getHotelsByAdministrator(@PathVariable Long id) {
 		ArrayList<Hotel> hotels = hotelService.getHotelsByAdministrator(id);
 		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+	}
+	
+	@PutMapping("/editHotel/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Hotel> editHotel( @PathVariable Long id, @RequestBody HotelDTO hotelDTO) {
+		Hotel hotel = hotelService.editHotel(id, hotelDTO);
+		return new ResponseEntity<>(hotel, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/checkIfReservedHotel/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkIfReservedHotel(@PathVariable Long id) {
+		//Ako hotel ne poseduje rezervisane sobe, taken je FALSE
+		//u suprotnom taken ima vrednost TRUE
+		boolean taken = hotelService.checkIfHotelIsReserved(id);
+		return taken;
 	}
 	
 	
