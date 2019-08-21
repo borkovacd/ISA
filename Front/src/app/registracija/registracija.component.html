@@ -1,5 +1,5 @@
 <h2>Registracija</h2>
-<form [formGroup]="registerForm" (ngSubmit)="submit()">
+<form class="form-horizontal">
 
   <div class="form-group col-md-3">
     <label for="name" style="font-family: 'Verdana'">Ime:</label>
@@ -103,8 +103,8 @@
 
 
   <div class="form-group">
-    <button  class="btn btn-primary" style="font-family: 'Verdana'">Registruj se</button>
-    <a [routerLink]="['/login']" class="btn btn-link">Odustani</a>
+    <button  class="btn btn-primary" (click)="submit()" style="font-family: 'Verdana'">Registruj se</button>
+    <a [routerLink]="['/welcomepage']" class="btn btn-link">Odustani</a>
   </div>
 </form>
 

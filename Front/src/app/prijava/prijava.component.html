@@ -1,1 +1,22 @@
-<p>prijava works!</p>
+<h2>Prijava</h2>
+<form class="form-horizontal" >
+
+  <p class="text-center text-danger">{{poruka}}</p>
+
+  <div class="form-group col-md-3">
+    <label style="font-family: 'Verdana'">Email: </label>
+    <input type="text" name="email" class="form-control" placeholder="Email" type="text" id="emailValue" [(ngModel)] = "korisnik.email" [ngModelOptions] = "{standalone:true}" />
+  </div>
+
+
+  <div class="form-group col-md-3">
+    <label style="font-family: 'Verdana'">Lozinka: </label>
+    <input type="password" name="password" class="form-control" placeholder="******" type="password" id="passValue" [(ngModel)] = "korisnik.lozinka" [ngModelOptions] = "{standalone:true}" />
+  </div>
+
+  <div class="form-group">
+    <button style="font-family: 'Verdana'" class="btn btn-primary" (click)="onSubmit()">Prijavi se</button>
+    <a [routerLink]="['/registracija']" class="btn btn-link">Registruj se</a>
+    <a [routerLink]="['/welcomepage']" class="btn btn-link">Odustani</a>
+  </div>
+</form>

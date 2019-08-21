@@ -115,6 +115,7 @@ export class RegistracijaComponent implements OnInit {
     if (!provera) {
       this.userService.register(this.korisnik).subscribe(
         data => {
+          alert('Nemanja');
           this.poruka = 'Dobicete mail za verifikaciju, ulogujte se na svoj mail da ga potvrdite!';
           this.userService.verifikujNalog(data.email).subscribe(
             data => {
@@ -127,6 +128,7 @@ export class RegistracijaComponent implements OnInit {
 
         error => {
           this.poruka = 'Email koji ste uneli vec postoji vezan za drugi korisnicki nalog!';
+          alert('OOlga');
         }
       );
     }
