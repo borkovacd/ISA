@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {KorisnikModel} from '../model/Korisnik.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -48,4 +49,35 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getKorisnikData/2`, {headers});
   }
+
+  // Olga
+
+  register(k: KorisnikModel) {
+    return this.http.post<KorisnikModel>(`${this.BASE_URL}/register`, k);
+  }
+
+  verifikujNalog(mail: string) {
+    return this.http.get<KorisnikModel>(`http://localhost:8080/api/user/verifikujNalog` + mail);
+  }
+
+  logIn(k: KorisnikModel) {
+    return this.http.post<KorisnikModel>('http://localhost:8080/api/user/logIn', k);
+  }
+
+  logOut() {
+    return this.http.get<KorisnikModel>('http://localhost:8080/api/user/logOut');
+  }
+
+  changePassword(k : KorisnikModel){
+    return this.http.post<KorisnikModel>('http://localhost:8080/api/user/changePassword', k);
+  }
+
+  vratiTrenutnogKorisnika(){
+    return this.http.get<KorisnikModel>('http://localhost:8080/api/user/currentUser');
+  }
+
+
+
+
+
 }
