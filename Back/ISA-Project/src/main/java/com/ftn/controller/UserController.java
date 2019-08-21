@@ -120,10 +120,12 @@ public class UserController {
 		{
 			request.getSession().setAttribute("ulogovan", k1);
 			KorisnikDTO kDTO = new KorisnikDTO(k1);
+			kDTO.setStatusKorisnika(povVrFunkc);
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
 		} else 
 		{
 			KorisnikDTO kDTO = new KorisnikDTO();
+			kDTO.setStatusKorisnika(povVrFunkc);
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
 		}
 		
@@ -143,6 +145,7 @@ public class UserController {
 			k.setPrvoLogovanje(true);
 			userService.save(k);
 			KorisnikDTO kd = new KorisnikDTO(k);
+			kd.setStatusKorisnika("ok");
 			return new ResponseEntity<>(kd, HttpStatus.OK);
 		} else 
 		{

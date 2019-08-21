@@ -41,7 +41,6 @@ import {MatTableModule} from '@angular/material';
     SystemAdministratorAviokompanijeComponent,
     HotelAdministratorComponent,
     HotelAdministratorHoteliComponent,
-    HotelAdministratorProfilComponent
 
   ],
   imports: [

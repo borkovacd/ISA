@@ -15,8 +15,7 @@ public class KorisnikDTO
 	private String telefon;
 	private String grad;
 	
-	// FALI deo za rent-a-car
-	// private String poruka;
+	private String statusKorisnika; // na osnovu ovoga redirekcija
 	
 	private UlogaKorisnika uloga ;
 
@@ -122,6 +121,14 @@ public class KorisnikDTO
 
 	public void setUloga(UlogaKorisnika uloga) {
 		this.uloga = uloga;
+	}
+
+	public String getStatusKorisnika() {
+		return statusKorisnika;
+	}
+
+	public void setStatusKorisnika(String statusKorisnika) {
+		this.statusKorisnika = statusKorisnika;
 	}
 	
 	
