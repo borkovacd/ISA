@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector : 'welcome-page',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePageComponent implements  OnInit{
 
-  constructor() { }
+  constructor(protected router: Router) {
+
+  }
 
   public ngOnInit() {
   }
 
+  ulogujSe() {
+    this.router.navigateByUrl('/prijava');
+  }
+
+  registrujSe() {
+    this.router.navigateByUrl('/registracija');
+  }
 }

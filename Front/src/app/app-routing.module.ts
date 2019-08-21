@@ -10,15 +10,17 @@ import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
 
 const routes: Routes = [
-  {path: '', component: WelcomePageComponent , pathMatch: 'full',
-    children: [
+  {path: '', component: WelcomePageComponent , pathMatch: 'full'},
+    /*children: [
       {path: 'prijava', component: PrijavaComponent},
       {path: 'registracija', component: RegistracijaComponent}
-    ]},
+    ]},*/
   {path: 'hotelAdminPage', component: HotelAdministratorComponent},
-  {path: 'hotelAdminPage/hotel/:idHotela', component: EditHotelComponent},
+  {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
+  {path: 'prijava', component: PrijavaComponent},
+  {path: 'registracija', component: RegistracijaComponent}
 ];
 
 @NgModule({

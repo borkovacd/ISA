@@ -125,7 +125,7 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   izmeniHotel(id: any) {
     this.hotelService.checkIfReservedHotel(id).subscribe(data => {
       if (data == false){
-        this.router.navigateByUrl('edit/hotel/' + id);
+        this.router.navigateByUrl('hotelAdminPage/editHotel/' + id);
       } else {
         alert('Soba u tom smestaju je rezervisana!');
       }
