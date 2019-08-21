@@ -30,7 +30,6 @@ import {MatCheckboxModule, MatGridListModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +41,7 @@ import {MatTableModule} from '@angular/material';
     SystemAdministratorAviokompanijeComponent,
     HotelAdministratorComponent,
     HotelAdministratorHoteliComponent,
-    HotelAdministratorProfilComponent,
+    HotelAdministratorProfilComponent
 
   ],
   imports: [
