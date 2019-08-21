@@ -20,7 +20,8 @@ const routes: Routes = [
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
   {path: 'prijava', component: PrijavaComponent},
-  {path: 'registracija', component: RegistracijaComponent}
+  {path: 'registracija', component: RegistracijaComponent},
+  {path: 'welcomepage', component: WelcomePageComponent},
 ];
 
 @NgModule({

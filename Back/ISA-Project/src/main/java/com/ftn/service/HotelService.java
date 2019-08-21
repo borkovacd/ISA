@@ -62,12 +62,6 @@ public class HotelService {
 		hotel.setAdresa(hotelDTO.getAddress());
 		//DODATI PROVERU DA AKO I NAZIV I ADRESA VEC POSTOJE NE MOZE DA SE REGISTRUJE HOTEL
 		hotel.setOpis(hotelDTO.getDescription());
-		if(userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela()) != null) {
-			Korisnik administratorHotela = userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela());
-			hotel.setAdministrator(administratorHotela);
-		} else {
-			return null;
-		}
 		hotelRepository.save(hotel);
 		return hotel;
 	}
@@ -87,5 +81,10 @@ public class HotelService {
 			}
 		}
 		return taken;
+	}
+
+	public Hotel getHotel(Long id) {
+		Hotel hotel = hotelRepository.getOne(id);
+		return hotel;
 	}
 }

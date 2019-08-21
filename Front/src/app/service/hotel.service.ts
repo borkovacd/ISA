@@ -37,5 +37,11 @@ export class HotelService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.put(`${this.BASE_URL}/izmeniHotel/${id}`, body, {headers});
   }
+
+  getHotel(idHotela: any): Observable<any>  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getHotel/${idHotela}`, {headers});
+  }
+
 }
 

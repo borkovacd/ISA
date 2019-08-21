@@ -22,10 +22,6 @@ export class HotelAdministratorProfilComponent implements  OnInit {
     });
   }
 
-  azurirajPodatke(id: any) {
-
-  }
-
   search(activeTab) {
     this.activeTab = activeTab;
   }

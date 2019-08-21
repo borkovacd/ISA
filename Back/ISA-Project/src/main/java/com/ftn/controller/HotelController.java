@@ -44,12 +44,11 @@ public class HotelController {
 		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
 	}
 	
-	@PutMapping("/editHotel/{id}")
+	@PutMapping("/izmeniHotel/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Hotel> editHotel( @PathVariable Long id, @RequestBody HotelDTO hotelDTO) {
 		Hotel hotel = hotelService.editHotel(id, hotelDTO);
 		return new ResponseEntity<>(hotel, HttpStatus.OK);
-
 	}
 	
 	@GetMapping("/checkIfReservedHotel/{id}")
@@ -60,6 +59,17 @@ public class HotelController {
 		boolean taken = hotelService.checkIfHotelIsReserved(id);
 		return taken;
 	}
+	
+	@GetMapping("/getHotel/{idHotela}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Hotel> getHotel(@PathVariable Long idHotela) {
+		Hotel hotel = hotelService.getHotel(idHotela);
+		if (hotel == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(hotel, HttpStatus.OK);
+	}
+
 	
 	
 
