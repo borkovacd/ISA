@@ -28,6 +28,8 @@ import { AviokompanijaService} from './service/aviokompanija.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MatCheckboxModule, MatGridListModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
+import {PrijavaComponent} from './prijava/prijava.component';
+import {RegistracijaComponent} from './registracija/registracija.component';
 
 
 @NgModule({
@@ -41,8 +43,9 @@ import {MatTableModule} from '@angular/material';
     SystemAdministratorAviokompanijeComponent,
     HotelAdministratorComponent,
     HotelAdministratorHoteliComponent,
-    HotelAdministratorProfilComponent
-
+    HotelAdministratorProfilComponent,
+    PrijavaComponent,
+    RegistracijaComponent
   ],
   imports: [
     BrowserModule,
