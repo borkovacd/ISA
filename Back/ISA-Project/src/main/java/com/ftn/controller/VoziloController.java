@@ -68,6 +68,7 @@ public class VoziloController
 	
 	// vraca jedno vozilo
 	@GetMapping("/vratiJednoVozilo/{idRentACar}/{idVozilo}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Vozilo> vratiJednoVozilo(@PathVariable Long idRentACar,@PathVariable Long idVozilo) throws Exception 
 	{		
 		Vozilo v = voziloService.findByVoziloId(idVozilo);
@@ -84,6 +85,7 @@ public class VoziloController
 	
 	// izmena vozila
 	@PutMapping("/izmeniVozilo/{idRentACar}/{idVozila}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Vozilo> izmeniVozilo(@PathVariable Long idRentACar,@PathVariable Long idVozila,
 			@RequestBody VoziloDTO dto) throws Exception {
 
@@ -109,12 +111,4 @@ public class VoziloController
 		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
 	}
 
-
-	
-	
-
-	
-	
-	
-	
 }

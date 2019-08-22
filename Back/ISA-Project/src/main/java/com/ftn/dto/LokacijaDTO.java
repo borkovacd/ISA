@@ -1,43 +1,16 @@
-package com.ftn.model.rentacar;
+package com.ftn.dto;
 
-import javax.persistence.*;
-
-@Entity
-public class Lokacija 
+public class LokacijaDTO 
 {
-	@Id
-	@GeneratedValue
-	private long id;
 	private String adresa;
-	// inspo
 	private String drzava ;
 	private String grad ;
 	private double longitude ;
 	private double latitude ;
 	
-	// rentACar se nalazi na toj lokaciji
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="rentACarId", referencedColumnName="rentACarId")
-	private RentACar rentACar;
-
-	public Lokacija() {
+	public LokacijaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Lokacija(String adresa, RentACar rentACar) {
-		super();
-		
-		this.adresa = adresa;
-		this.rentACar = rentACar;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getAdresa() {
@@ -46,14 +19,6 @@ public class Lokacija
 
 	public void setAdresa(String adresa) {
 		this.adresa = adresa;
-	}
-
-	public RentACar getRentACar() {
-		return rentACar;
-	}
-
-	public void setRentACar(RentACar rentACar) {
-		this.rentACar = rentACar;
 	}
 
 	public String getDrzava() {
@@ -89,5 +54,5 @@ public class Lokacija
 	}
 	
 	
-	
 }
+
