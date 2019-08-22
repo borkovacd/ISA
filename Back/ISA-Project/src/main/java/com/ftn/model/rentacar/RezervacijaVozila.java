@@ -2,23 +2,53 @@ package com.ftn.model.rentacar;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.ftn.model.Korisnik;
 
 // KORAK 2 tacka 2.10 
+@Entity
 public class RezervacijaVozila 
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	private Date datumPreuzimanja;
-	private Lokacija mestoPreuzimanja;
 	private Date datumVracanja;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Lokacija mestoPreuzimanja;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Lokacija mestoVracanja;
+	
 	private String tipVozila;
 	private int brPutnika;
 	
 	// FALI
 	// opciono cenovni rang
 	
+	// private int minCena ;
+	// private int maxCena ;
+	
 	// lista rezervisanih vozila
-	ArrayList<Vozilo> rezervisanaVozila;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Vozilo> rezervisanaVozila;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Vozilo vozilo;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Korisnik korisnik;
 
 	public RezervacijaVozila() {
 		super();
@@ -84,13 +114,43 @@ public class RezervacijaVozila
 		this.brPutnika = brPutnika;
 	}
 
-	public ArrayList<Vozilo> getRezervisanaVozila() {
+	public List<Vozilo> getRezervisanaVozila() {
 		return rezervisanaVozila;
 	}
 
 	public void setRezervisanaVozila(ArrayList<Vozilo> rezervisanaVozila) {
 		this.rezervisanaVozila = rezervisanaVozila;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
+	}
+
+	public Vozilo getVozilo() {
+		return vozilo;
+	}
+
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
+	}
+
+	public void setRezervisanaVozila(List<Vozilo> rezervisanaVozila) {
+		this.rezervisanaVozila = rezervisanaVozila;
+	}
+	
+	
 	
 	
 	

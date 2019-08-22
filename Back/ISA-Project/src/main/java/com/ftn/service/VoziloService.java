@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.VoziloDTO;
+import com.ftn.model.Korisnik;
 import com.ftn.model.rentacar.RentACar;
+import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.RentCarRepository;
+import com.ftn.repository.RezervacijaVozilaRepository;
+import com.ftn.repository.UserRepository;
 import com.ftn.repository.VoziloRepository;
 
 @Service
@@ -20,6 +24,12 @@ public class VoziloService
 	
 	@Autowired
 	private RentCarRepository rentRepository;
+	
+	@Autowired
+	private UserRepository userRepository ;
+	
+	@Autowired
+	private RezervacijaVozilaRepository rezVoziloRepository ;
 	
 	
 	// Dodavanje vozila
@@ -165,5 +175,44 @@ public class VoziloService
 			
 		return taken;
 	}
+	
+	
+	
+	// vraca vozila izabranog korisnika
+	public ArrayList<Vozilo> getVozilaKorisnik(Long idKorisnik) throws Exception 
+	{
+		ArrayList<Vozilo> vozila = new ArrayList<Vozilo>();
+		Korisnik korisnik = userRepository.getOne(idKorisnik);
+		
+		List<RezervacijaVozila> rezervacijeVozila = rezVoziloRepository.findAll();
+		List<Vozilo> svaVozila = voziloRepository.findAll();
+		
+		
+		// ukoliko ne postoji nijedno vozilo
+		if (svaVozila.size() == 0) // svaVozila == null
+		{
+			return vozila ;
+		}
+		
+		// ukoliko ne postoji nijedna rezervacija
+		if (rezervacijeVozila.size() == 0) // rezervacijeVozila == null
+		{
+			return vozila ;
+		}
+		
+		for (int i = 0; i < rezervacijeVozila.size(); i++) // prolazak kroz sve rezervacije
+		{
+			if (rezVoziloRepository.findAll().get(i).getKorisnik().getId() == idKorisnik) // Da li je to rezervacija ovog korisnika?
+			{
+
+				Vozilo v = rezVoziloRepository.findAll().get(i).getVozilo();
+				vozila.add(v);
+			}
+		}
+		
+		return vozila ;
+		
+	}
+	
 
 }

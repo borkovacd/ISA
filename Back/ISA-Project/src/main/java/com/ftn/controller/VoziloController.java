@@ -1,6 +1,7 @@
 package com.ftn.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.RentCarDTO;
 import com.ftn.dto.VoziloDTO;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.service.RentACarService;
@@ -109,6 +111,15 @@ public class VoziloController
 	{
 		boolean response = voziloService.obrisiVozilo(idRentACar, idVozila);
 		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
+	}
+	
+	// 2.7
+	@GetMapping("/vratiVozilaKorisnika/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Vozilo>> vratiVozilaKorisnika(@PathVariable Long id) throws Exception 
+	{
+		ArrayList<Vozilo> vozila = voziloService.getVozilaKorisnik(id);
+		return new ResponseEntity<List<Vozilo>>(vozila, HttpStatus.OK);
 	}
 
 }
