@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.RentCarDTO;
 import com.ftn.dto.VoziloDTO;
-import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.service.RentACarService;
@@ -112,6 +111,17 @@ public class VoziloController
 		boolean response = voziloService.obrisiVozilo(idRentACar, idVozila);
 		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
 	}
+	
+	// vraca sva vozila - 2.7
+	// 2.7
+		@GetMapping("/vratiSvaVozila")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Vozilo>> vratiSvaVozila() throws Exception 
+		{
+			List<Vozilo> vozila = voziloService.getAll();
+			return new ResponseEntity<List<Vozilo>>(vozila, HttpStatus.OK);
+		}
+
 	
 	// 2.7
 	@GetMapping("/vratiVozilaKorisnika/{id}")

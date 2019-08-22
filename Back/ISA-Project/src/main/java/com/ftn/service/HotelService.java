@@ -28,6 +28,8 @@ public class HotelService {
 	@Autowired
 	private UserRepository userRepository;
 
+	
+	/******** Borkovac *********/
 	public Hotel registerHotel(HotelDTO hotelDTO) {
 		Hotel hotel = new Hotel();
 		hotel.setNaziv(hotelDTO.getName());
@@ -95,4 +97,54 @@ public class HotelService {
 		Hotel hotel = hotelRepository.getOne(id);
 		return hotel;
 	}
+	
+	/***********************/
+	/******* Olga **********/
+	
+	// vraca sve hotele
+	public ArrayList<Hotel> getSviHoteli()
+	{
+		return (ArrayList<Hotel>) hotelRepository.findAll();
+	}
+	
+	// vraca hotele izabranog korisnika
+		public ArrayList<Hotel> getHoteliKorisnik(Long idKorisnik) throws Exception 
+		{
+			ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
+			Korisnik korisnik = userRepository.getOne(idKorisnik);
+			
+			List<RezervacijaHotela> rezervacijeHotela = rezervacijaHotelaRepository.findAll();
+			List<Hotel> sviHoteli = hotelRepository.findAll();
+			
+			
+			// ukoliko ne postoji nijedan hotel
+			if (sviHoteli.size() == 0) // sviHoteli == null
+			{
+				return hoteli ;
+			}
+			
+			// ukoliko ne postoji nijedna rezervacija
+			if (rezervacijeHotela.size() == 0) // rezervacijeHotela == null
+			{
+				return hoteli ;
+			}
+			
+			for (int i = 0; i < rezervacijeHotela.size(); i++) // prolazak kroz sve rezervacije
+			{
+				if (rezervacijaHotelaRepository.findAll().get(i).getKorisnik().getId() == idKorisnik) // Da li je to rezervacija ovog korisnika?
+				{
+					for (Soba s : rezervacijaHotelaRepository.findAll().get(i).getSobe())
+					{
+						Hotel h = s.getHotel();
+						hoteli.add(h);
+						break ;
+					}
+				}
+			}
+			
+			return hoteli;
+			
+		}
+
+	/***********************/
 }

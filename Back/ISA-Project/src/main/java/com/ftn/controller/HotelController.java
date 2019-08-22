@@ -27,6 +27,9 @@ public class HotelController {
 	@Autowired
 	private HotelService hotelService;
 	
+	
+	/************ Borkovac **********/
+	
 	@PostMapping("/registerHotel")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Hotel> registerHotel(@RequestBody HotelDTO hotelDTO) {
@@ -66,6 +69,28 @@ public class HotelController {
 		}
 		return new ResponseEntity<>(hotel, HttpStatus.OK);
 	}
+	
+	/**********************/
+	/******* Olga *********/
+	
+	// vraca sve hotele
+	@GetMapping("/vratiSveHotele")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Hotel>> vratiSveHotele() throws Exception 
+	{
+		ArrayList<Hotel> hoteli = hotelService.getSviHoteli();
+		return new ResponseEntity<List<Hotel>>(hoteli, HttpStatus.OK);
+	}
+	
+	// 2.7
+		@GetMapping("/vratiHoteleKorisnika/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Hotel>> vratiHoteleKorisnika(@PathVariable Long id) throws Exception 
+		{
+			ArrayList<Hotel> hoteli = hotelService.getHoteliKorisnik(id);
+			return new ResponseEntity<List<Hotel>>(hoteli, HttpStatus.OK);
+		}
+	/**********************/
 
 	
 	
