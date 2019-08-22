@@ -6,7 +6,6 @@ import com.ftn.model.Korisnik;
 public class KorisnikDTO 
 {
 	
-	private Long id;
 	private String ime;
 	private String prezime;
 	private String korisnickoIme;
@@ -24,10 +23,10 @@ public class KorisnikDTO
 		// TODO Auto-generated constructor stub
 	}
 
-	public KorisnikDTO(Long id, String ime, String prezime, String korisnickoIme, String lozinka, String email,
+	public KorisnikDTO(String ime, String prezime, String korisnickoIme, String lozinka, String email,
 			String telefon, String grad, UlogaKorisnika uloga) {
 		super();
-		this.id = id;
+		
 		this.ime = ime;
 		this.prezime = prezime;
 		this.korisnickoIme = korisnickoIme;
@@ -39,7 +38,7 @@ public class KorisnikDTO
 	}
 	
 	public KorisnikDTO(Korisnik korisnik) {
-		this.id = korisnik.getId();
+		
 		this.ime = korisnik.getIme();
 		this.prezime = korisnik.getPrezime();
 		this.korisnickoIme = korisnik.getKorisnickoIme();
@@ -51,14 +50,7 @@ public class KorisnikDTO
 		
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getIme() {
 		return ime;
 	}

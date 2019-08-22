@@ -20,11 +20,20 @@ public class RentCarController {
 	@Autowired
 	private RentACarService rentCarService;
 	
+	/**** Borkovac ******/
+	
 	@PostMapping("/registerRentCar")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RentACar> registerRentCar(@RequestBody RentCarDTO rentCarDTO) {
 		RentACar rentACar = rentCarService.registerRentCar(rentCarDTO);
 		return new ResponseEntity<RentACar>(rentACar, HttpStatus.OK);
 	}
+	
+	/******************/
+	
+	/***** Olga *******/
+	
+	
+	/******************/
 
 }

@@ -227,7 +227,7 @@ public class UserService {
 		return k1;
 	}
 	
-	public Korisnik returnKorisnikById(KorisnikDTO k) 
+	public Korisnik returnKorisnikById(Korisnik k) 
 	{
 		return userRepository.findOneById(k.getId());
 	}

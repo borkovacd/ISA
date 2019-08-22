@@ -119,7 +119,7 @@ public class UserController {
 	{
 		
 		String povVrFunkc = userService.logIn(korisnik);
-		Korisnik k1 = userService.returnKorisnikById(korisnik);
+		Korisnik k1 = userService.returnKorisnikByEmail(korisnik.getEmail());
 		
 		if(k1 != null) // ukoliko postoji registrovan korisnik, sa aktiviranim nalogom
 		{

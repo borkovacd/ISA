@@ -10,7 +10,7 @@ public class Vozilo
 {
 	@Id
 	@GeneratedValue
-	private long voziloId ;
+	private Long voziloId ;
 	
 	private double cena ;
 	private String naziv ;
