@@ -32,7 +32,7 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
     this.form = this.fb.group({
       'name': ['', Validators.compose([Validators.required])],
       'address': ['', Validators.compose([Validators.required])],
-      'description': ['', Validators.compose([Validators.required])],
+      'description': [''],
       'administratorRentCar': ['', Validators.compose([Validators.required])]
     })
 

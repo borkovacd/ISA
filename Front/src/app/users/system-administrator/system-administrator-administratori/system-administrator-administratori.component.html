@@ -35,7 +35,10 @@
             <option>ADMINISTRATOR_HOTELA</option>
             <option>ADMINISTRATOR_RENT_A_CAR</option>
           </select>
-          <button style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px" (click)="potvrdiPromenu(pu, this.novaUloga.value)">Potvrdi </button>
+          <small class="form-text error" *ngIf="novaUloga.errors?.required && novaUloga.touched" style="color: red">
+            Izbor uloge je obavezan!
+          </small>
+          <button style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px" (click)="potvrdiPromenu(pu, this.novaUloga.value)" [disabled]="!form.valid">Potvrdi </button>
           <br>
         </div>
       </form>
