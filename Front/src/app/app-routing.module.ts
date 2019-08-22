@@ -9,6 +9,7 @@ import {PrijavaComponent} from "./prijava/prijava.component";
 import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
 import {RegistrovaniKorisnikComponent} from "./registrovani-korisnik/registrovani-korisnik.component";
+import {AddEditRoomComponent} from './hotels/add-edit-room/add-edit-room.component';
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'hotelAdminPage', component: HotelAdministratorComponent},
   {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
+  {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},

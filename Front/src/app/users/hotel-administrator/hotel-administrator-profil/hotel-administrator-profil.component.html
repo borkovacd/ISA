@@ -18,38 +18,27 @@
   <div class="row my-2">
     <div class="col-lg-8 order-lg-2">
 
-      <!--<ul class="nav nav-tabs">
-        <li class="nav-item active">
-          <a data-toggle="tab" class="nav-link active"
-             href="#profile" [ngClass]="{ 'active':activeTab==='profile'}" (click)="search('profile')"
-          >Profile</a>
-        </li>
-        <li class="nav-item">
-          <a data-toggle="tab" class="nav-link"
-             href="#edit" [ngClass]="{ 'active':activeTab==='edit'}" (click)="result('edit')"
-          >Edit</a>
-        </li>
-      </ul>-->
 
-      <igx-tabs tabsType="fixed">
-        <igx-tabs-group label="Profil">
+      <igx-tabs tabsType="fixed" >
+        <igx-tabs-group icon="person" label="Profil">
           <app-hotel-administrator-profil-page></app-hotel-administrator-profil-page>
         </igx-tabs-group>
-        <igx-tabs-group label="Izmeni">
+        <igx-tabs-group icon="edit" label="Izmeni">
           <app-hotel-administrator-profil-edit></app-hotel-administrator-profil-edit>
         </igx-tabs-group>
       </igx-tabs>
-
     </div>
 
-    <!--<div class="col-lg-4 order-lg-1 text-center">
-      <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/cef31105-8a6e-4211-a74b-2f0bbd9791fb-profile_image-150x150.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-      <h6 class="mt-2">Upload a different photo</h6>
-      <label class="custom-file">
-        <input type="file" id="file" class="custom-file-input">
-        <span class="custom-file-control">Choose file</span>
-      </label>
-    </div>-->
+
+    <div class="col-lg-4 order-lg-1 text-center">
+        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/cef31105-8a6e-4211-a74b-2f0bbd9791fb-profile_image-150x150.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        <h6 class="mt-2">Upload a different photo</h6>
+        <label class="custom-file">
+          <input type="file" id="file" class="custom-file-input">
+          <span class="custom-file-control">Choose file</span>
+        </label>
+      </div>
+
   </div>
 </div>
 

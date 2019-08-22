@@ -12,6 +12,7 @@ export class HotelAdministratorComponent implements  OnInit {
   constructor() { }
 
   public ngOnInit() {
+    //alert(localStorage.getItem('loggedUser'));
 
   }
 
