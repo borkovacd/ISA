@@ -30,6 +30,7 @@ public class HotelService {
 
 	
 	/******** Borkovac *********/
+	
 	public Hotel registerHotel(HotelDTO hotelDTO) {
 		Hotel hotel = new Hotel();
 		hotel.setNaziv(hotelDTO.getName());

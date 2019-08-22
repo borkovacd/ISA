@@ -36,6 +36,7 @@ import { AddEditRoomComponent } from './hotels/add-edit-room/add-edit-room.compo
 import { HotelAdministratorProfilPageComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-page/hotel-administrator-profil-page.component';
 import { HotelAdministratorProfilEditComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-edit/hotel-administrator-profil-edit.component';
 import { RegistrovaniKorisnikComponent } from './registrovani-korisnik/registrovani-korisnik.component';
+import {RoomService} from './service/room.service';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { RegistrovaniKorisnikComponent } from './registrovani-korisnik/registrov
     HotelService,
     AviokompanijaService,
     RentCarService,
-    UserService
+    UserService,
+    RoomService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],
