@@ -45,8 +45,9 @@ export class PrijavaComponent implements OnInit {
     if (!provera) {
       this.userService.logIn(this.korisnik).subscribe(
         data => {
+          alert(data.statusKorisnika);
           if (data.statusKorisnika == 'obican') {
-            this.router.navigate(['/glavnaRegistrovani']);
+            this.router.navigate(['/registrovaniKorisnik']);
           } else if (data.statusKorisnika == 'avio') {
             this.router.navigate(['/glavna']);
           } else if (data.statusKorisnika == 'prvo') {
@@ -54,7 +55,7 @@ export class PrijavaComponent implements OnInit {
           } else if (data.statusKorisnika == 'rent') {
             this.router.navigate(['/glavnaRentACar']);
           } else if (data.statusKorisnika == 'sistem') {
-            this.router.navigate(['/glavnaAdminSistema']);
+            this.router.navigate(['/systemAdminPage']);
           } else if (data.statusKorisnika == 'greska') {
             this.poruka = 'Uneli ste neispravnu email adresu ili lozinku!';
           } else {

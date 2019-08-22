@@ -124,6 +124,7 @@ export class RegistracijaComponent implements OnInit {
               this.poruka = '';
             }
           );
+          alert('Prosla verifikacija!');
         },
 
         error => {

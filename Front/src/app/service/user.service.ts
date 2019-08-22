@@ -57,7 +57,7 @@ export class UserService {
   }
 
   verifikujNalog(mail: string) {
-    return this.http.get<KorisnikModel>(`http://localhost:8080/api/user/verifikujNalog/` + mail);
+    return this.http.get<KorisnikModel>(`${this.BASE_URL}/verifikujNalog/` + mail);
   }
 
   logIn(k: KorisnikModel) {

@@ -112,7 +112,7 @@ public class UserService {
 	/****** Olga *********/
 	
 	// registracija
-	public String register(KorisnikDTO korisnik) throws NoSuchAlgorithmException // zbog enkripcije
+	public String register(KorisnikDTO korisnik) // zbog enkripcije
 	{
 		
 		Korisnik k1 = userRepository.findOneByEmail(korisnik.getEmail());
@@ -122,7 +122,13 @@ public class UserService {
 		else 
 		{
 			String tempPassword = "";
-			tempPassword = encriptPassword(korisnik.getLozinka());
+			
+			try {
+				tempPassword = encriptPassword(korisnik.getLozinka());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Korisnik k = new Korisnik(korisnik.getIme(), korisnik.getPrezime(), korisnik.getKorisnickoIme(), tempPassword, korisnik.getEmail(), korisnik.getTelefon(), korisnik.getGrad());
 			k.setUloga(UlogaKorisnika.OBICAN_KORISNIK); // kad se registruje, postaje OBICAN KORISNIK
 			k.setVerifikovan(false); // inicijalno nije verifikovan, mora potvrditi
@@ -184,18 +190,18 @@ public class UserService {
 				else 
 				{
 					if(k1.getUloga().equals(UlogaKorisnika.OBICAN_KORISNIK))
-						return "obicanKorisnik";
+						return "obican";
 					
 					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE) && !k1.isPrvoLogovanje())
-						return "prvoLogovanje"; // mora promeniti pass pre prvog logovanja
+						return "prvo"; // mora promeniti pass pre prvog logovanja
 					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE))
-						return "adminAvio";
+						return "avio";
 					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_HOTELA))
-						return "adminHotel";
+						return "hotel";
 					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_RENT_A_CAR))
-						return "adminRentACar";
+						return "rent";
 					else
-						return "adminSistem";
+						return "sistem";
 				}
 			}
 		} 
@@ -229,32 +235,16 @@ public class UserService {
 	public String aktivirajNalog(String email) 
 	{
 		Korisnik k = userRepository.findOneByEmail(email);
-		
-		// FALI SLANJE EMAIL-A KORISNIKU I PRAVA POTVRDA
+		System.out.println("Mejl korisnika je: " + k.getEmail() + ", a ime je: " + k.getIme());
+		// salje se email
 		
 		k.setVerifikovan(true);	
 		k.setUloga(UlogaKorisnika.OBICAN_KORISNIK);
     	
     	userRepository.save(k);
 		
-		return "verifikovan";
+		return "Verifikovali ste mail, mozete posetiti sajt.";
 	}
-
-
-	public String changePassword(KorisnikDTO kdto) {
-		String enkriptovanaLozinka = "";
-		try 
-		{
-			enkriptovanaLozinka = encriptPassword(kdto.getLozinka());
-			
-		} 
-		catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return enkriptovanaLozinka;
-	}
-
 
 	public void save(Korisnik k) {
 		userRepository.save(k);

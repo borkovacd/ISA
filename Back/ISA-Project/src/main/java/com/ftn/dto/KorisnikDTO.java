@@ -42,11 +42,11 @@ public class KorisnikDTO
 		this.id = korisnik.getId();
 		this.ime = korisnik.getIme();
 		this.prezime = korisnik.getPrezime();
-		this.email = korisnik.getEmail();
-		this.lozinka = korisnik.getLozinka();
 		this.korisnickoIme = korisnik.getKorisnickoIme();
-		this.grad = korisnik.getGrad();
+		this.lozinka = korisnik.getLozinka();
+		this.email = korisnik.getEmail();
 		this.telefon = korisnik.getTelefon();
+		this.grad = korisnik.getGrad();
 		this.uloga = korisnik.getUloga();
 		
 	}

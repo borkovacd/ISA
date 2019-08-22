@@ -32,7 +32,7 @@ public class EmailService
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
 
-		String htmlMsg = "<h3>Pozdrav "+k.getIme()+"</h3><br> <p>Da biste aktivirali profil posetite  <a href=\"http://localhost:8080/user/aktivirajNalog/"+k.getEmail()+"\">link</a></p>";
+		String htmlMsg = "<h3>Pozdrav "+k.getIme()+"</h3><br> <p>Da biste aktivirali profil posetite  <a href=\"http://localhost:8080/api/user/aktivirajNalog/"+k.getEmail()+"\">link</a></p>";
 		mimeMessage.setContent(htmlMsg, "text/html");
 		helper.setTo(k.getEmail());
 		helper.setSubject("Verifikacija clanstva");

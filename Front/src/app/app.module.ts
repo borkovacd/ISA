@@ -35,6 +35,7 @@ import { RoomsComponent } from './hotels/rooms/rooms.component';
 import { AddEditRoomComponent } from './hotels/add-edit-room/add-edit-room.component';
 import { HotelAdministratorProfilPageComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-page/hotel-administrator-profil-page.component';
 import { HotelAdministratorProfilEditComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-edit/hotel-administrator-profil-edit.component';
+import { RegistrovaniKorisnikComponent } from './registrovani-korisnik/registrovani-korisnik.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { HotelAdministratorProfilEditComponent } from './users/hotel-administrat
     AddEditRoomComponent,
     HotelAdministratorProfilPageComponent,
     HotelAdministratorProfilEditComponent,
+    RegistrovaniKorisnikComponent,
   ],
   imports: [
     BrowserModule,

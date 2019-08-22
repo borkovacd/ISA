@@ -2,6 +2,8 @@ package com.ftn.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -30,7 +32,10 @@ public class UserController {
 	
 	// Dodato zbog slanja mejla za verifikaciju naloga
 	@Autowired
-	private EmailService emailService ;
+	EmailService emailService ;
+	
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	
 	/****** Borkovac *******/
 	
@@ -122,7 +127,7 @@ public class UserController {
 			KorisnikDTO kDTO = new KorisnikDTO(k1);
 			kDTO.setStatusKorisnika(povVrFunkc);
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
-		} else 
+		} else // ne postoji registrovan takav korisnik
 		{
 			KorisnikDTO kDTO = new KorisnikDTO();
 			kDTO.setStatusKorisnika(povVrFunkc);
@@ -131,30 +136,8 @@ public class UserController {
 		
 	}
 	
-	// vrsi sifrovanje unete lozinke, za prvo logovanje
-	@RequestMapping(value="/changePassword", method = RequestMethod.POST)
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<KorisnikDTO> changePassword(@RequestBody KorisnikDTO kdto)
-	{
-		Korisnik k = userService.returnKorisnikById(kdto);
-		String s = userService.changePassword(kdto);
-		
-		if(!k.getLozinka().equals(s)) // ne sme sifrovana biti ista kao i pocetna
-		{
-			k.setLozinka(s);
-			k.setPrvoLogovanje(true);
-			userService.save(k);
-			KorisnikDTO kd = new KorisnikDTO(k);
-			kd.setStatusKorisnika("ok");
-			return new ResponseEntity<>(kd, HttpStatus.OK);
-		} else 
-		{
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
-	
 	// vrsi verifikaciju 
-	@RequestMapping(value="/verifikujNalog/{mail}", method = RequestMethod.GET)
+	@RequestMapping(value="/verifikujNalog/{email}", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<KorisnikDTO> verifikujNalog(@PathVariable String email)
 	{
@@ -167,14 +150,14 @@ public class UserController {
 			emailService.sendNotificaitionAsync(k);
 		}catch( Exception e )
 		{
-			
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
 
 		return new ResponseEntity<>(kDTO, HttpStatus.OK);
 	}
 	
 	// vrsi aktivaciju naloga
-	@RequestMapping(value="/aktivirajNalog/{mail}", method = RequestMethod.GET)
+	@RequestMapping(value="/aktivirajNalog/{email}", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public String aktivirajNalog(@PathVariable String email){
 

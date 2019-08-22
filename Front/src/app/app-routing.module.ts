@@ -8,6 +8,7 @@ import {RegistracijaComponent} from "./registracija/registracija.component";
 import {PrijavaComponent} from "./prijava/prijava.component";
 import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
+import {RegistrovaniKorisnikComponent} from "./registrovani-korisnik/registrovani-korisnik.component";
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
   {path: 'welcomepage', component: WelcomePageComponent},
+  {path: 'registrovaniKorisnik', component: RegistrovaniKorisnikComponent}
 ];
 
 @NgModule({

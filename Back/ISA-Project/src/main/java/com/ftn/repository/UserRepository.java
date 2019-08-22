@@ -3,9 +3,11 @@ package com.ftn.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.ftn.model.Korisnik;
 
+@Repository
 public interface UserRepository extends JpaRepository<Korisnik, Long> 
 {
 	/*public Category save(Category cat);
@@ -29,12 +31,12 @@ public interface UserRepository extends JpaRepository<Korisnik, Long>
 
 	 */
 	
-	public Korisnik save(Korisnik korisnik);
 	public Korisnik findOneByEmail(String email);
 	public Korisnik findOneById(Long id);
 	public List<Korisnik> findAll();
 	public void deleteById(Long id);
 	public void deleteByEmail(String email);
+	public Korisnik save(Korisnik korisnik);
 	
 	public Korisnik findByKorisnickoIme(String administratorHotela);
 }
