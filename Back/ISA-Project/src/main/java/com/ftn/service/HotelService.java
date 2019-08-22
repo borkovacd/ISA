@@ -32,7 +32,15 @@ public class HotelService {
 		Hotel hotel = new Hotel();
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
-		//DODATI PROVERU DA AKO I NAZIV I ADRESA VEC POSTOJE NE MOZE DA SE REGISTRUJE HOTEL
+		
+		//Provera da li vec postoji hotel sa istim nazivom i adresom
+		ArrayList<Hotel> existingHotels = (ArrayList<Hotel>) hotelRepository.findAll();
+		for(Hotel existingHotel: existingHotels) {
+			if(existingHotel.getNaziv().equals(hotel.getNaziv()) && existingHotel.getAdresa().equals(hotel.getAdresa())) {
+				return null;
+			}
+		}
+		
 		hotel.setOpis(hotelDTO.getDescription());
 		if(userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela()) != null) {
 			Korisnik administratorHotela = userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela());

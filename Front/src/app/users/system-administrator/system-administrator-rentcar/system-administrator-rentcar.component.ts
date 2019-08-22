@@ -19,6 +19,9 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
   public description: AbstractControl;
   public administratorRentCar: AbstractControl;
 
+  alertMessage: string;
+  showAlert: boolean = false;
+
   administratoriRentCar = []
 
   constructor(protected  router: Router,
@@ -41,6 +44,8 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
   }
 
   public ngOnInit() {
+    this.showAlert = false;
+
     this.userService.getRentCarAdministrators().subscribe(data => {
       this.administratoriRentCar = data;
     })
@@ -59,7 +64,13 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
     );
 
     this.rentCarService.registerRentCar(rentCar).subscribe(data => {
-      this.redirectTo('/systemAdminPage');
+      if (data == null) {
+        this.alertMessage = 'Rent a car servis nije uspešno registrovan! Pokušajte ponovo.';
+      } else {
+        this.alertMessage = 'Rent a car servis je uspešno registrovan!';
+      }
+      this.showAlert = true;
+      //this.redirectTo('/systemAdminPage');
     });
   }
 
@@ -69,6 +80,12 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
   }
 
   exit() {
+    this.redirectTo('/systemAdminPage');
+  }
+
+  closeAlert() {
+    //this.showAlert = false;
+    //this.alert.nativeElement.classList.remove('show');
     this.redirectTo('/systemAdminPage');
   }
 }

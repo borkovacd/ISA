@@ -65,8 +65,12 @@ export class SystemAdministratorHoteliComponent implements  OnInit {
     );
 
     this.hotelService.registerHotel(hotel).subscribe(data => {
+      if (data == null) {
+        this.alertMessage = 'Hotel nije uspešno registrovan! Pokušajte ponovo.';
+      } else {
+        this.alertMessage = 'Hotel je uspešno registrovan!';
+      }
       this.showAlert = true;
-      this.alertMessage = 'Hotel je uspesno registrovan';
       //this.redirectTo('/systemAdminPage');
     });
   }

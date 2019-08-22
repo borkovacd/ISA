@@ -29,7 +29,7 @@ public class HotelController {
 	
 	@PostMapping("/registerHotel")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Hotel> registerHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
+	public ResponseEntity<Hotel> registerHotel(@RequestBody HotelDTO hotelDTO) {
 		Hotel hotel = hotelService.registerHotel(hotelDTO);
 		return new ResponseEntity<Hotel>(hotel, HttpStatus.OK);
 	}
