@@ -59,13 +59,16 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
     );
 
     this.rentCarService.registerRentCar(rentCar).subscribe(data => {
-      this.router.navigateByUrl('administratorPage');
-    })
+      this.redirectTo('/systemAdminPage');
+    });
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
   }
 
   exit() {
-    this.router.navigateByUrl('/welcomepage');
+    this.redirectTo('/systemAdminPage');
   }
-
-
 }

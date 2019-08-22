@@ -1,8 +1,14 @@
 <br>
-<div style="text-align: center">
+<div *ngIf="showAlert" #alert class="alert alert-primary alert-dismissible fade show" role="alert" style="text-align: center">
+  <button type="button" style="margin-right: 10%" class="close" aria-label="Zatvori" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3>{{alertMessage}}</h3>
+</div>
+<div *ngIf="!showAlert" style="text-align: center">
   <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Registracija hotela</p>
 </div>
-<div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+<div *ngIf="!showAlert" style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
   <form [formGroup]="form">
     <div class="form-group">
 
@@ -38,4 +44,5 @@
     </div>
   </form>
 </div>
+
 

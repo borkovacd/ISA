@@ -29,12 +29,9 @@ public class HotelController {
 	
 	@PostMapping("/registerHotel")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public void registerHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
-		boolean hotelRegistration = hotelService.registerHotel(hotelDTO);
-		/*if(hotelRegistration) 
-			return new ResponseEntity<>("Uspesno registrovanje", HttpStatus.OK);
-		else 
-			return new ResponseEntity<>("Neuspesno registrovanje", HttpStatus.OK);*/
+	public ResponseEntity<Hotel> registerHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
+		Hotel hotel = hotelService.registerHotel(hotelDTO);
+		return new ResponseEntity<Hotel>(hotel, HttpStatus.OK);
 	}
 	
 	@GetMapping("/getHotelsByAdministrator/{id}")

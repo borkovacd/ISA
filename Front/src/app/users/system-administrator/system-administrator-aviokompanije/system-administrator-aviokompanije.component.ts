@@ -59,12 +59,16 @@ export class SystemAdministratorAviokompanijeComponent implements  OnInit {
     );
 
     this.aviokompanijaService.registerAviokompanija(aviokompanija).subscribe(data => {
-      this.router.navigateByUrl('administratorPage');
-    })
+      this.redirectTo('/systemAdminPage');
+    });
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
   }
 
   exit() {
-    this.router.navigateByUrl('/welcomepage');
+    this.redirectTo('/systemAdminPage');
   }
-
 }

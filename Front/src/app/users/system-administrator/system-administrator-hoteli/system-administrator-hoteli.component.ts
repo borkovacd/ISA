@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HotelModel} from '../../../model/hotel.model';
@@ -12,6 +12,8 @@ import {UserService} from '../../../service/user.service';
 })
 export class SystemAdministratorHoteliComponent implements  OnInit {
 
+  @ViewChild('alert', { static: true }) alert: ElementRef;
+
   public form: FormGroup;
   public name: AbstractControl;
   public address: AbstractControl;
@@ -19,6 +21,8 @@ export class SystemAdministratorHoteliComponent implements  OnInit {
   public administratorHotela: AbstractControl;
 
   administratoriHotela = []
+  alertMessage: string;
+  showAlert: boolean = false;
 
   constructor(protected  router: Router,
               public fb: FormBuilder,
@@ -41,6 +45,8 @@ export class SystemAdministratorHoteliComponent implements  OnInit {
 
   public ngOnInit() {
 
+    this.showAlert = false;
+
     this.userService.getHotelAdministrators().subscribe(data => {
       this.administratoriHotela = data;
     })
@@ -59,11 +65,24 @@ export class SystemAdministratorHoteliComponent implements  OnInit {
     );
 
     this.hotelService.registerHotel(hotel).subscribe(data => {
-      this.router.navigateByUrl('administratorPage');
-    })
+      this.showAlert = true;
+      this.alertMessage = 'Hotel je uspesno registrovan';
+      //this.redirectTo('/systemAdminPage');
+    });
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
   }
 
   exit() {
-    this.router.navigateByUrl('/welcomepage');
+    this.redirectTo('/systemAdminPage');
+  }
+
+  closeAlert() {
+    //this.showAlert = false;
+    //this.alert.nativeElement.classList.remove('show');
+    this.redirectTo('/systemAdminPage');
   }
 }

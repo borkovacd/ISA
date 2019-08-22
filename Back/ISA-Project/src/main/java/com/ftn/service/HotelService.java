@@ -28,7 +28,7 @@ public class HotelService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public boolean registerHotel(HotelDTO hotelDTO) {
+	public Hotel registerHotel(HotelDTO hotelDTO) {
 		Hotel hotel = new Hotel();
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
@@ -38,10 +38,10 @@ public class HotelService {
 			Korisnik administratorHotela = userRepository.findByKorisnickoIme(hotelDTO.getAdministratorHotela());
 			hotel.setAdministrator(administratorHotela);
 		} else {
-			return false;
+			return null;
 		}
 		hotelRepository.save(hotel);
-		return true;
+		return hotel;
 	}
 
 	public ArrayList<Hotel> getHotelsByAdministrator(Long id) {

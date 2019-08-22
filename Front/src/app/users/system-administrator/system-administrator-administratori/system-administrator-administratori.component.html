@@ -24,25 +24,20 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="1" >
     <div *ngIf="promenaUloge == true" style=" display: block;">
-      <label style="font-size: 20px;">{{pu.korisnickoIme}}</label>
-      <br>
-      <label style="font-size: 20px;">Nova uloga:</label>
-      <form [formGroup]="novaUloga">
+      <form [formGroup]="form">
         <div class="form-group">
+          <label style="font-size: 20px;">{{pu.korisnickoIme}}</label>
+          <br>
+          <label style="font-size: 20px;">Nova uloga:</label>
           <select class="form-control margin" [formControl]="novaUloga">
             <option>ADMINISTRATOR_SISTEMA</option>
             <option>ADMINISTRATOR_AVIOKOMPANIJE</option>
             <option>ADMINISTRATOR_HOTELA</option>
             <option>ADMINISTRATOR_RENT_A_CAR</option>
           </select>
+          <button style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px" (click)="potvrdiPromenu(pu, this.novaUloga.value)">Potvrdi </button>
+          <br>
         </div>
-      <div>
-        <button
-            style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px"
-            (click)="potvrdiPromenu(pu, this.novaUloga.value)">Potvrdi
-          </button>
-        <br>
-      </div>
       </form>
     </div>
   </mat-grid-tile>

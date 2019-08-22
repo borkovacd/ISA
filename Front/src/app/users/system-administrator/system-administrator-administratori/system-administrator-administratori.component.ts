@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../service/user.service';
-import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NavigationEnd, Router} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -15,18 +15,17 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
   administrators: [];
   promenaUloge: boolean;
   pu: any;
-  novaUloga: any;
-  public form: FormGroup;
+  novaUloga: AbstractControl;
+  public form: FormGroup
 
   constructor(protected router: Router,
               public fb: FormBuilder,
-              private userService: UserService ) {
+              private userService: UserService,) {
     this.form = this.fb.group({
       'novaUloga': ['', Validators.compose([Validators.required])],
     })
     this.novaUloga = this.form.controls['novaUloga'];
   }
-
 
   public ngOnInit() {
 
@@ -49,19 +48,17 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
   }
 
   ukloniKorisnika(korisnickoIme: any) {
-    
+
   }
 
   potvrdiPromenu(pu: any, novaUloga: string) {
-
-    this.novaUloga =
-
     this.userService.changeRole(pu.id, novaUloga).subscribe(data => {
-      this.router.routeReuseStrategy.shouldReuseRoute = function () {
-        return false;
-      };
+      this.redirectTo('/systemAdminPage');
+    });
+  }
 
-    })
-    
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
   }
 }
