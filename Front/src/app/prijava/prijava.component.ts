@@ -50,7 +50,11 @@ export class PrijavaComponent implements OnInit {
             this.router.navigate(['/registrovaniKorisnik']);
           } else if (data.statusKorisnika == 'avio') {
             this.router.navigate(['/glavna']);
-          } else if (data.statusKorisnika == 'prvo') {
+          }
+          else if (data.statusKorisnika == 'hotel') {
+            this.router.navigate(['/hotelAdminPage']);
+          }
+          else if (data.statusKorisnika == 'prvo') {
             this.router.navigate(['/promenaLozinke']);
           } else if (data.statusKorisnika == 'rent') {
             this.router.navigate(['/glavnaRentACar']);
