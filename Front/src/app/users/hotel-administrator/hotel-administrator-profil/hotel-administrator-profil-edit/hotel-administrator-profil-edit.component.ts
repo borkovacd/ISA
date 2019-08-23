@@ -20,6 +20,7 @@ export class HotelAdministratorProfilEditComponent implements OnInit {
   public korisnickoIme: AbstractControl;
   public lozinka: AbstractControl;
   public ponovljenaLozinka: AbstractControl;
+  public passwordsMatch: boolean = false;
 
   constructor(protected router: Router,
               private userService: UserService,
@@ -59,8 +60,22 @@ export class HotelAdministratorProfilEditComponent implements OnInit {
   }
 
   saveChanges() {
-    this.editUser();
+    this.passwordsMatch = this.checkPasswords();
+    if(this.passwordsMatch == true) {
+      this.editUser();
+    } else {
+      alert('Lozinke se ne poklapaju');
+    }
+
   }
+
+  checkPasswords() {
+    if (this.lozinka.value == this.ponovljenaLozinka.value) {
+      return true;
+    }
+    return false;
+  }
+
 
   editUser() {
     const user = new KorisnikProfilModel (

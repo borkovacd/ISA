@@ -137,7 +137,11 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   }
 
   pregledCenovnika(idHotela: any){
-    this.router.navigateByUrl('welcomepage/room/' + idHotela);
+    this.router.navigateByUrl('hotelAdminPage/pricelist/' + idHotela);
+  }
+
+  pregledDodatnihUsluga(idHotela: any) {
+    this.router.navigateByUrl('hotelAdminPage/additionalServices/' + idHotela);
   }
 }
 

@@ -96,7 +96,7 @@ public class UserController {
 	
 	@PutMapping("/editUser/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Korisnik> editUser( @PathVariable Long id, @RequestBody KorisnikProfilDTO korisnikProfilDTO) {
+	public ResponseEntity<Korisnik> editUser( @PathVariable Long id, @RequestBody KorisnikProfilDTO korisnikProfilDTO) throws NoSuchAlgorithmException {
 		Korisnik korisnik = userService.editUser(id, korisnikProfilDTO);
 		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
 	}

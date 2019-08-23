@@ -107,14 +107,21 @@ public class UserService {
 		return korisnik;
 	}
 	
-	public Korisnik editUser(Long id, KorisnikProfilDTO korisnikProfilDTO) {
+	public Korisnik editUser(Long id, KorisnikProfilDTO korisnikProfilDTO) throws NoSuchAlgorithmException {
 		Korisnik korisnik = userRepository.getOne(id);
 		korisnik.setIme(korisnikProfilDTO.getIme());
 		korisnik.setPrezime(korisnikProfilDTO.getPrezime());
 		korisnik.setGrad(korisnikProfilDTO.getGrad());
 		korisnik.setTelefon(korisnikProfilDTO.getTelefon());
 		korisnik.setEmail(korisnikProfilDTO.getEmail());
-		//treba lozinku isto promeniti, prvo uraditi hesovanje
+		//Provera da li se lozinke poklapaju + hesovanje lozinke
+		if(korisnikProfilDTO.getLozinka().equals(korisnikProfilDTO.getPonovljenaLozinka())) {
+			String encriptedPass = "";
+			encriptedPass = encriptPassword(korisnikProfilDTO.getLozinka());
+			korisnik.setLozinka(encriptedPass);
+		} else {
+			return null;
+		}
 		userRepository.save(korisnik);
 		return korisnik;
 		
