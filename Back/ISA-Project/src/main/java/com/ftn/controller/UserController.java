@@ -13,13 +13,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.KorisnikDTO;
+import com.ftn.dto.KorisnikProfilDTO;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.service.EmailService;
 import com.ftn.service.UserService;
 
@@ -88,6 +91,13 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Korisnik> getKorisnikData(@PathVariable Long id) {	
 		Korisnik korisnik = userService.getKorisnikData(id);
+		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
+	}
+	
+	@PutMapping("/editUser/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Korisnik> editUser( @PathVariable Long id, @RequestBody KorisnikProfilDTO korisnikProfilDTO) {
+		Korisnik korisnik = userService.editUser(id, korisnikProfilDTO);
 		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
 	}
 	

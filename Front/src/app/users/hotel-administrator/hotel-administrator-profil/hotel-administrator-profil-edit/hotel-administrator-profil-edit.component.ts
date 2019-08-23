@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../../../service/user.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {KorisnikProfilModel} from '../../../../model/korisnikProfil.model';
 
 @Component({
   selector: 'app-hotel-administrator-profil-edit',
@@ -57,4 +58,28 @@ export class HotelAdministratorProfilEditComponent implements OnInit {
     });
   }
 
+  saveChanges() {
+    this.editUser();
+  }
+
+  editUser() {
+    const user = new KorisnikProfilModel (
+      this.ime.value,
+      this.prezime.value,
+      this.lozinka.value,
+      this.ponovljenaLozinka.value,
+      this.email.value,
+      this.telefon.value,
+      this.grad.value,
+    );
+
+    this.userService.editUser(user).subscribe(data => {
+      this.redirectTo('/hotelAdminPage');
+    });
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
+  }
 }

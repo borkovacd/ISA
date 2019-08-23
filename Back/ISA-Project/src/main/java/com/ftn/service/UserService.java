@@ -8,9 +8,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.dto.HotelDTO;
 import com.ftn.dto.KorisnikDTO;
+import com.ftn.dto.KorisnikProfilDTO;
 import com.ftn.enums.UlogaKorisnika;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.repository.UserRepository;
 
 @Service
@@ -103,8 +106,19 @@ public class UserService {
 		Korisnik korisnik = userRepository.getOne(id);
 		return korisnik;
 	}
-
 	
+	public Korisnik editUser(Long id, KorisnikProfilDTO korisnikProfilDTO) {
+		Korisnik korisnik = userRepository.getOne(id);
+		korisnik.setIme(korisnikProfilDTO.getIme());
+		korisnik.setPrezime(korisnikProfilDTO.getPrezime());
+		korisnik.setGrad(korisnikProfilDTO.getGrad());
+		korisnik.setTelefon(korisnikProfilDTO.getTelefon());
+		korisnik.setEmail(korisnikProfilDTO.getEmail());
+		//treba lozinku isto promeniti, prvo uraditi hesovanje
+		userRepository.save(korisnik);
+		return korisnik;
+		
+	}
 	
 	/************ *********** *************/
 	

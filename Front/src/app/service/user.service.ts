@@ -2,6 +2,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {KorisnikModel} from '../model/Korisnik.model';
+import {HotelModel} from '../model/hotel.model';
+import {KorisnikProfilModel} from '../model/korisnikProfil.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -49,6 +51,13 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getKorisnikData/2`, {headers});
   }
+
+  editUser(object: KorisnikProfilModel): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/editUser/2`, body, {headers});
+  }
+
 
   // Olga
 
