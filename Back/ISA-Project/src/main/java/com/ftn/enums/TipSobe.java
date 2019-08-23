@@ -1,0 +1,13 @@
+package com.ftn.enums;
+
+public enum TipSobe {
+	
+	JEDNOKREVETNA_SOBA,
+	DVOKREVETNA_SOBA,
+	TROKREVETNA_SOBA,
+	APARTMAN,
+	STUDIO,
+	SUITE,
+	FAMILY_ROOM
+
+}

@@ -15,6 +15,6 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
 	values (1, 0, 4, 0, 2, "APARTMAN", 1);
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (2, 1, 2, 0, 5, "DVOKREVETNA_SOBA", 1);
+	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 1);
 
 

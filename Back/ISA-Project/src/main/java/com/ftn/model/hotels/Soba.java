@@ -1,11 +1,15 @@
 package com.ftn.model.hotels;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.ftn.enums.TipSobe;
 
 @Entity
 public class Soba {
@@ -21,7 +25,8 @@ public class Soba {
 	
 	private int sprat;
 	
-	private String tipSobe;
+	@Enumerated(EnumType.STRING)
+	private TipSobe tipSobe;
 
 	private boolean imaBalkon = false;
 
@@ -35,7 +40,7 @@ public class Soba {
 		
 	}
 	
-	public Soba(Hotel hotel, int kapacitet, int sprat, String tipSobe, boolean imaBalkon, boolean rezervisana) {
+	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, boolean rezervisana) {
 		super();
 		this.hotel = hotel;
 		this.kapacitet = kapacitet;
@@ -77,14 +82,6 @@ public class Soba {
 		this.sprat = sprat;
 	}
 
-	public String getTipSobe() {
-		return tipSobe;
-	}
-
-	public void setTipSobe(String tipSobe) {
-		this.tipSobe = tipSobe;
-	}
-
 	public boolean isImaBalkon() {
 		return imaBalkon;
 	}
@@ -100,6 +97,16 @@ public class Soba {
 	public void setRezervisana(boolean rezervisana) {
 		this.rezervisana = rezervisana;
 	}
+
+	public TipSobe getTipSobe() {
+		return tipSobe;
+	}
+
+	public void setTipSobe(TipSobe tipSobe) {
+		this.tipSobe = tipSobe;
+	}
+	
+	
 
 
 

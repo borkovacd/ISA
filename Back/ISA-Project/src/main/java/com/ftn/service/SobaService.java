@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.SobaDTO;
-import com.ftn.model.Korisnik;
+import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
 import com.ftn.repository.HotelRepository;
 import com.ftn.repository.RezervacijaHotelaRepository;
 import com.ftn.repository.SobaRepository;
+
 @Service
 public class SobaService {
 	
@@ -28,7 +29,20 @@ public class SobaService {
 		Soba soba = new Soba();
 		soba.setKapacitet(sobaDTO.getCapacity());
 		soba.setSprat(sobaDTO.getFloor());
-		soba.setTipSobe(sobaDTO.getRoomType());
+		if(sobaDTO.getRoomType().equals("JEDNOKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.JEDNOKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("DVOKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.DVOKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("TROKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.TROKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("APARTMAN")) 
+			soba.setTipSobe(TipSobe.APARTMAN);
+		else if(sobaDTO.getRoomType().equals("STUDIO")) 
+			soba.setTipSobe(TipSobe.STUDIO);
+		else if(sobaDTO.getRoomType().equals("SUITE")) 
+			soba.setTipSobe(TipSobe.SUITE);
+		else if(sobaDTO.getRoomType().equals("FAMILY_ROOM")) 
+			soba.setTipSobe(TipSobe.FAMILY_ROOM);
 		soba.setImaBalkon(sobaDTO.isHasBalcony());
 		Hotel hotel = hotelRepository.getOne(idHotela);
 		soba.setHotel(hotel);
@@ -74,7 +88,20 @@ public class SobaService {
 		Soba soba = sobaRepository.getOne(idRoom);
 		soba.setKapacitet(sobaDTO.getCapacity());
 		soba.setSprat(sobaDTO.getFloor());
-		soba.setTipSobe(sobaDTO.getRoomType());
+		if(sobaDTO.getRoomType().equals("JEDNOKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.JEDNOKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("DVOKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.DVOKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("TROKREVETNA_SOBA")) 
+			soba.setTipSobe(TipSobe.TROKREVETNA_SOBA);
+		else if(sobaDTO.getRoomType().equals("APARTMAN")) 
+			soba.setTipSobe(TipSobe.APARTMAN);
+		else if(sobaDTO.getRoomType().equals("STUDIO")) 
+			soba.setTipSobe(TipSobe.STUDIO);
+		else if(sobaDTO.getRoomType().equals("SUITE")) 
+			soba.setTipSobe(TipSobe.SUITE);
+		else if(sobaDTO.getRoomType().equals("FAMILY_ROOM")) 
+			soba.setTipSobe(TipSobe.FAMILY_ROOM);
 		soba.setImaBalkon(sobaDTO.isHasBalcony());
 		soba.setRezervisana(false);
 		sobaRepository.save(soba);
