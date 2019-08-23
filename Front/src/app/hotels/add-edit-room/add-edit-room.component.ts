@@ -16,6 +16,7 @@ export class AddEditRoomComponent implements OnInit {
   public floor: AbstractControl;
   public hasBalcony: AbstractControl;
   public roomType: AbstractControl;
+  naslovStranice: string;
 
 
   public method_name = 'DODAJ';
@@ -43,6 +44,7 @@ export class AddEditRoomComponent implements OnInit {
 
     if (mode == 'edit') {
       this.method_name = 'IZMENI';
+      this.naslovStranice = 'Izmena sobe';
       this.roomService.getRoom(idRoom).subscribe(data => {
         this.form.controls['capacity'].setValue(data.kapacitet);
         this.form.controls['floor'].setValue(data.sprat);
@@ -51,6 +53,7 @@ export class AddEditRoomComponent implements OnInit {
       })
     } else if (mode == 'add') {
       this.method_name = 'DODAJ';
+      this.naslovStranice = 'Dodavanje sobe';
     }
   }
 

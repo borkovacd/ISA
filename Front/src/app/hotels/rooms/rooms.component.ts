@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
+import {HotelService} from '../../service/hotel.service';
 
 @Component({
   selector: 'app-rooms',
@@ -11,13 +12,18 @@ export class RoomsComponent implements OnInit {
 
   rooms = []
   idRoom: any;
+  nazivHotela: string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
-              private roomService: RoomService) {}
+              private roomService: RoomService,
+              private hotelService: HotelService) {}
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
-    alert(idHotela);
+
+    this.hotelService.getHotel(idHotela).subscribe(data => {
+      this.nazivHotela = data.naziv;
+    })
     this.roomService.getAllRooms(idHotela).subscribe(data => {
       this.rooms = data;
     })

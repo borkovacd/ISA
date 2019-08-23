@@ -13,8 +13,8 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 	values (2, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
 
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (1, 0, 4, 0, 2, "Apartman", 1);
+	values (1, 0, 4, 0, 2, "APARTMAN", 1);
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (2, 1, 2, 0, 5, "Dvokrevetna soba", 1);
+	values (2, 1, 2, 0, 5, "DVOKREVETNA_SOBA", 1);
 
 

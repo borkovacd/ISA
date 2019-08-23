@@ -67,16 +67,19 @@ public class HotelService {
 	
 	public Hotel editHotel(Long id, HotelDTO hotelDTO) {
 		Hotel hotel = hotelRepository.getOne(id);
+		System.out.println(hotel.getNaziv());
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
 		//Provera da li vec postoji hotel sa istim nazivom i adresom
 		ArrayList<Hotel> existingHotels = (ArrayList<Hotel>) hotelRepository.findAll();
 		for(Hotel existingHotel: existingHotels) {
-			if(existingHotel.getNaziv().equals(hotel.getNaziv()) && existingHotel.getAdresa().equals(hotel.getAdresa())) {
-				return null;
+			if(existingHotel.getId() != id) 
+				if(existingHotel.getNaziv().equals(hotel.getNaziv()) && existingHotel.getAdresa().equals(hotel.getAdresa())) {
+					return null;
 			}
 		}
 		hotel.setOpis(hotelDTO.getDescription());
+		System.out.println("novi: "  + hotel.getNaziv());
 		hotelRepository.save(hotel);
 		return hotel;
 	}

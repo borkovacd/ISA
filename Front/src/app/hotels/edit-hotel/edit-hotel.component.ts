@@ -16,6 +16,7 @@ export class EditHotelComponent implements OnInit {
   public name: AbstractControl;
   public address: AbstractControl;
   public description: AbstractControl;
+  public administratorHotela: any;
 
 
   constructor(protected  router: Router,
@@ -41,6 +42,7 @@ export class EditHotelComponent implements OnInit {
       this.form.controls['name'].setValue(data.naziv);
       this.form.controls['address'].setValue(data.adresa);
       this.form.controls['description'].setValue(data.opis);
+      this.administratorHotela = data.administratorHotela;
     })
   }
 
@@ -57,7 +59,7 @@ export class EditHotelComponent implements OnInit {
       this.name.value,
       this.address.value,
       this.description.value,
-      this.name.value
+      ''
     );
 
     const idHotela = this.route.snapshot.params.idHotela;

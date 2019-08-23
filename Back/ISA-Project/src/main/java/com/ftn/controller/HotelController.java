@@ -48,7 +48,7 @@ public class HotelController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Hotel> editHotel( @PathVariable Long id, @RequestBody HotelDTO hotelDTO) {
 		Hotel hotel = hotelService.editHotel(id, hotelDTO);
-		return new ResponseEntity<>(hotel, HttpStatus.OK);
+		return new ResponseEntity<Hotel>(hotel, HttpStatus.OK);
 	}
 	
 	@GetMapping("/checkIfReservedHotel/{id}")

@@ -8,7 +8,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule, IgxAvatarModule} from 'igniteui-angular';
+import {IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule, IgxAvatarModule, IgxCheckboxModule} from 'igniteui-angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
@@ -82,7 +82,8 @@ import {RoomService} from './service/room.service';
       libraries: ['places']
     }),
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    IgxCheckboxModule
   ],
   providers: [
     HotelService,
