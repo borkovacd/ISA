@@ -8,24 +8,24 @@ import {RegistracijaComponent} from "./registracija/registracija.component";
 import {PrijavaComponent} from "./prijava/prijava.component";
 import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
-import {RegistrovaniKorisnikComponent} from "./registrovani-korisnik/registrovani-korisnik.component";
 import {AddEditRoomComponent} from './hotels/add-edit-room/add-edit-room.component';
+import {RegisteredUserComponent} from "./users/registered-user/registered-user.component";
+import {RentAdministratorComponent} from "./users/rent-administrator/rent-administrator.component";
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
-    /*children: [
-      {path: 'prijava', component: PrijavaComponent},
-      {path: 'registracija', component: RegistracijaComponent}
-    ]},*/
+
   {path: 'hotelAdminPage', component: HotelAdministratorComponent},
   {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
   {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
+  {path: 'welcomepage', component: WelcomePageComponent},
+
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
-  {path: 'welcomepage', component: WelcomePageComponent},
-  {path: 'registrovaniKorisnik', component: RegistrovaniKorisnikComponent}
+  {path: 'registrovaniKorisnik', component: RegisteredUserComponent},
+  {path: 'rentAdminPage', component: RentAdministratorComponent}
 ];
 
 @NgModule({

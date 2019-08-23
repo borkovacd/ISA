@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {KorisnikModel} from '../model/Korisnik.model';
 import {UserService} from '../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registracija',
@@ -20,7 +21,7 @@ export class RegistracijaComponent implements OnInit {
   poruka = '';
   porukaTelefon = '';
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService, private router:Router) {
   }
 
   ngOnInit() {
@@ -115,7 +116,7 @@ export class RegistracijaComponent implements OnInit {
     if (!provera) {
       this.userService.register(this.korisnik).subscribe(
         data => {
-          alert('Nemanja');
+          this.router.navigateByUrl('/welcomepage');
           this.poruka = 'Dobicete mail za verifikaciju, ulogujte se na svoj mail da ga potvrdite!';
           this.userService.verifikujNalog(data.email).subscribe(
             data => {
