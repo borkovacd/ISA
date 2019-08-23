@@ -35,10 +35,15 @@ import { RoomsComponent } from './hotels/rooms/rooms.component';
 import { AddEditRoomComponent } from './hotels/add-edit-room/add-edit-room.component';
 import { HotelAdministratorProfilPageComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-page/hotel-administrator-profil-page.component';
 import { HotelAdministratorProfilEditComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-edit/hotel-administrator-profil-edit.component';
-import { RegistrovaniKorisnikComponent } from './registrovani-korisnik/registrovani-korisnik.component';
 import {RoomService} from './service/room.service';
 import { PricelistComponent } from './hotels/pricelist/pricelist.component';
 import { AdditionalServicesComponent } from './hotels/additional-services/additional-services.component';
+import { RegisteredUserComponent } from './users/registered-user/registered-user.component';
+import { RentAdministratorComponent } from './users/rent-administrator/rent-administrator.component';
+import { RentAdministratorServisiComponent } from './users/rent-administrator/rent-administrator-servisi/rent-administrator-servisi.component';
+import { RentAdministratorProfilComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil.component';
+import { RentAdministratorProfilEditComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil-edit/rent-administrator-profil-edit.component';
+import { RentAdministratorProfilPageComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil-page/rent-administrator-profil-page.component';
 
 
 @NgModule({
@@ -60,9 +65,14 @@ import { AdditionalServicesComponent } from './hotels/additional-services/additi
     AddEditRoomComponent,
     HotelAdministratorProfilPageComponent,
     HotelAdministratorProfilEditComponent,
-    RegistrovaniKorisnikComponent,
     PricelistComponent,
     AdditionalServicesComponent,
+    RegisteredUserComponent,
+    RentAdministratorComponent,
+    RentAdministratorServisiComponent,
+    RentAdministratorProfilComponent,
+    RentAdministratorProfilEditComponent,
+    RentAdministratorProfilPageComponent,
   ],
   imports: [
     BrowserModule,

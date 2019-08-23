@@ -1,0 +1,83 @@
+<div>
+  <form [formGroup]="form">
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Ime</label>
+      <div class="col-lg-9">
+        <input [formControl]="ime" class="form-control" type="text" >
+        <small class="form-text error" *ngIf="ime.errors?.required && ime.touched" style="color: red">
+          Ime je obavezno!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Prezime</label>
+      <div class="col-lg-9">
+        <input [formControl]="prezime" class="form-control" type="text">
+        <small class="form-text error" *ngIf="prezime.errors?.required && prezime.touched" style="color: red">
+          Prezime je obavezno!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Email</label>
+      <div class="col-lg-9">
+        <input [formControl]="email" class="form-control" type="email">
+        <small class="form-text error" *ngIf="email.errors?.required && email.touched" style="color: red">
+          Email je obavezan!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Grad</label>
+      <div class="col-lg-9">
+        <input [formControl]="grad" class="form-control" type="text">
+        <small class="form-text error" *ngIf="grad.errors?.required && grad.touched" style="color: red">
+          Grad je obavezan!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Telefon</label>
+      <div class="col-lg-9">
+        <input [formControl]="telefon" class="form-control" type="text">
+        <small class="form-text error" *ngIf="telefon.errors?.required && telefon.touched" style="color: red">
+          Telefon je obavezan!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Korisnicko ime</label>
+      <div class="col-lg-9">
+        <input [formControl]="korisnickoIme" class="form-control" type="text" disabled="true">
+        <small class="form-text error" *ngIf="korisnickoIme.errors?.required && korisnickoIme.touched" style="color: red">
+          Korisnicko ime je obavezno!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Lozinka</label>
+      <div class="col-lg-9">
+        <input [formControl]="lozinka" class="form-control" type="password">
+        <small class="form-text error" *ngIf="lozinka.errors?.required && lozinka.touched" style="color: red">
+          Lozinka je obavezna!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label">Potvrdite lozinku</label>
+      <div class="col-lg-9">
+        <input [formControl]="ponovljenaLozinka" class="form-control" type="password">
+        <small class="form-text error" *ngIf="ponovljenaLozinka.errors?.required && ponovljenaLozinka.touched" style="color: red">
+          Ponavljanje lozinke je obavezno!
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-3 col-form-label form-control-label"></label>
+      <div class="col-lg-9">
+        <input type="reset" class="btn btn-secondary" value="Otkazi">
+        <input type="button" class="btn btn-primary" (click)="saveChanges()" [disabled]="!form.valid" value="Potvrdi">
+      </div>
+    </div>
+  </form>
+</div>

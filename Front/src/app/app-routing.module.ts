@@ -8,17 +8,15 @@ import {RegistracijaComponent} from "./registracija/registracija.component";
 import {PrijavaComponent} from "./prijava/prijava.component";
 import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
-import {RegistrovaniKorisnikComponent} from "./registrovani-korisnik/registrovani-korisnik.component";
 import {AddEditRoomComponent} from './hotels/add-edit-room/add-edit-room.component';
 import {PricelistComponent} from './hotels/pricelist/pricelist.component';
 import {AdditionalServicesComponent} from './hotels/additional-services/additional-services.component';
+import {RegisteredUserComponent} from "./users/registered-user/registered-user.component";
+import {RentAdministratorComponent} from "./users/rent-administrator/rent-administrator.component";
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
-    /*children: [
-      {path: 'prijava', component: PrijavaComponent},
-      {path: 'registracija', component: RegistracijaComponent}
-    ]},*/
+
   {path: 'hotelAdminPage', component: HotelAdministratorComponent},
   {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
@@ -26,10 +24,11 @@ const routes: Routes = [
   {path: 'hotelAdminPage/additionalServices/:idHotela', component: AdditionalServicesComponent},
   {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
+  {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
-  {path: 'welcomepage', component: WelcomePageComponent},
-  {path: 'registrovaniKorisnik', component: RegistrovaniKorisnikComponent}
+  {path: 'registrovaniKorisnik', component: RegisteredUserComponent},
+  {path: 'rentAdminPage', component: RentAdministratorComponent}
 ];
 
 @NgModule({

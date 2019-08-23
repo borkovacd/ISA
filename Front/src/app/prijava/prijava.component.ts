@@ -57,7 +57,7 @@ export class PrijavaComponent implements OnInit {
           else if (data.statusKorisnika == 'prvo') {
             this.router.navigate(['/promenaLozinke']);
           } else if (data.statusKorisnika == 'rent') {
-            this.router.navigate(['/glavnaRentACar']);
+            this.router.navigate(['/rentAdminPage']);
           } else if (data.statusKorisnika == 'sistem') {
             this.router.navigate(['/systemAdminPage']);
           } else if (data.statusKorisnika == 'greska') {

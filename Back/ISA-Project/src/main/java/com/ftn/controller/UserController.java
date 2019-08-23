@@ -181,10 +181,12 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<KorisnikDTO> logOut(@Context HttpServletRequest request) 
 	{
+
 		Korisnik k = (Korisnik) request.getSession().getAttribute("ulogovan");
 		request.getSession().invalidate();
-		KorisnikDTO kDTO = new KorisnikDTO(k);
+		KorisnikDTO kDTO = new KorisnikDTO();
 		return new ResponseEntity<>(kDTO, HttpStatus.OK);
+	
 		
 	}
 	
