@@ -20,6 +20,7 @@ export class RentAdministratorProfilEditComponent implements OnInit {
   public korisnickoIme: AbstractControl;
   public lozinka: AbstractControl;
   public ponovljenaLozinka: AbstractControl;
+  public passwordsMatch : boolean = false ;
 
   constructor(protected router: Router,
               private userService: UserService,
@@ -61,8 +62,21 @@ export class RentAdministratorProfilEditComponent implements OnInit {
     });
   }
 
+  checkPasswords() {
+    if (this.lozinka.value == this.ponovljenaLozinka.value) {
+      return true;
+    }
+    return false;
+  }
+
   saveChanges() {
-    this.editUser();
+    this.passwordsMatch = this.checkPasswords();
+    if(this.passwordsMatch == true) {
+      this.editUser();
+    } else {
+      alert('Lozinke se ne poklapaju');
+    }
+
   }
 
   editUser() {

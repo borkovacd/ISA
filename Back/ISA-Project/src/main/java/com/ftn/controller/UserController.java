@@ -112,11 +112,11 @@ public class UserController {
 		
 		String povVrFunkcije = userService.register(korisnik);
 		
-		if(povVrFunkcije == "ok") // ne postoji korisnik sa tim email-om
+		if(povVrFunkcije == "ok") // ne postoji korisnik sa tim email-om ili username-om
 		{
 			return new ResponseEntity<>(korisnik, HttpStatus.OK);
 		} 
-		else // vraca  "greska", jer vec postoji korisnik sa tim email-om
+		else // vraca  "greska", jer vec postoji korisnik sa tim email-om ili username-om
 		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // mozda je bolje vratiti OK
 		}

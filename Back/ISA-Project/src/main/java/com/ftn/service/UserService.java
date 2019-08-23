@@ -137,8 +137,9 @@ public class UserService {
 	{
 		
 		Korisnik k1 = userRepository.findOneByEmail(korisnik.getEmail());
+		Korisnik k2 = userRepository.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		
-		if(k1 != null) // ukoliko vec postoji korisnik sa tim mejlom
+		if(k1 != null || k2 != null) // ukoliko vec postoji korisnik sa tim mejlom ili korisnickim imenom
 			return "greska";
 		else 
 		{
