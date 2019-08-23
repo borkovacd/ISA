@@ -17,7 +17,8 @@ export class RoomsComponent implements OnInit {
               private roomService: RoomService) {}
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
-    this.roomService.getAllRooms(idHotela).subscribe(data =>{
+    alert(idHotela);
+    this.roomService.getAllRooms(idHotela).subscribe(data => {
       this.rooms = data;
     })
 
@@ -45,7 +46,7 @@ export class RoomsComponent implements OnInit {
       if (data == false) {
         this.roomService.deleteRoom(idHotela , id).subscribe(data => {
           alert('Soba je uspesno obrisana');
-          this.router.navigateByUrl('hotelAdminPage/room/' + idHotela);
+          this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
         })
         location.reload();
       } else {

@@ -16,16 +16,15 @@ export  class RoomService {
 
   }
 
-  /*createRoom(object: RoomModel, idAccomodation: any): Observable<any> {
+  createRoom(object: RoomModel, idHotela: any): Observable<any> {
     const body = JSON.stringify(object);
-    const token = localStorage.getItem('agentId');
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': token});
-    return this.http.post(`${this.BASE_URL}/createRoom/${idAccomodation}/${token}`, body, {headers: headers});
-  }*/
-
-  getAllRooms(idHotel: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get(`${this.BASE_URL}/getAllRooms/${idHotel}`, {headers});
+    return this.http.post(`${this.BASE_URL}/createRoom/${idHotela}`, body, {headers});
+  }
+
+  getAllRooms(idHotela: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAllRooms/${idHotela}`, {headers});
   }
 
   checkIfReservedRoom(id: any): Observable<any> {
@@ -35,20 +34,18 @@ export  class RoomService {
 
   deleteRoom(idHotela: any, idRoom: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.delete(`${this.BASE_URL}/deleteRoom/${idHotela}/${idRoom}`, {headers});
+    return this.http.delete(`${this.BASE_URL}/deleteRoom/${idRoom}`, {headers});
   }
 
-  /*getOneRoom(idA: any, idR: any): Observable<any> {
-    const token = localStorage.getItem('agentId');
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': token});
-    return this.http.get(`${this.BASE_URL}/getOneRoom/${idA}/${idR}/${token}`, {headers: headers});
+  getRoom(idRoom: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRoom/${idRoom}`, {headers});
   }
 
-  editRoom(object: RoomModel, idAccomodation: any, id: any): Observable<any> {
+  editRoom(object: RoomModel, idRoom: any): Observable<any> {
     const body = JSON.stringify(object);
-    const token = localStorage.getItem('agentId');
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': token});
-    return this.http.put(`${this.BASE_URL}/editRoom/${idAccomodation}/${id}/${token}`, body, {headers: headers});
-  }*/
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/editRoom/${idRoom}`, body, {headers});
+  }
 
 }

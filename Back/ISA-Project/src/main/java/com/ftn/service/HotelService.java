@@ -65,13 +65,17 @@ public class HotelService {
 		return hotels;
 	}
 	
-	
-	//MENJACE SE, NECE ADMIN MOCI DA SE PROMENI, MOZDA I POVRATNA VREDNOST
 	public Hotel editHotel(Long id, HotelDTO hotelDTO) {
 		Hotel hotel = hotelRepository.getOne(id);
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
-		//DODATI PROVERU DA AKO I NAZIV I ADRESA VEC POSTOJE NE MOZE DA SE REGISTRUJE HOTEL
+		//Provera da li vec postoji hotel sa istim nazivom i adresom
+		ArrayList<Hotel> existingHotels = (ArrayList<Hotel>) hotelRepository.findAll();
+		for(Hotel existingHotel: existingHotels) {
+			if(existingHotel.getNaziv().equals(hotel.getNaziv()) && existingHotel.getAdresa().equals(hotel.getAdresa())) {
+				return null;
+			}
+		}
 		hotel.setOpis(hotelDTO.getDescription());
 		hotelRepository.save(hotel);
 		return hotel;

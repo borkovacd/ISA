@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.SobaDTO;
+import com.ftn.model.Korisnik;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
@@ -24,8 +25,15 @@ public class SobaService {
 	private RezervacijaHotelaRepository rezervacijaHotelaRepository;
 
 	public Soba createRoom(SobaDTO sobaDTO, Long idHotela) {
-		// TODO Auto-generated method stub
-		return null;
+		Soba soba = new Soba();
+		soba.setKapacitet(sobaDTO.getCapacity());
+		soba.setSprat(sobaDTO.getFloor());
+		soba.setTipSobe(sobaDTO.getRoomType());
+		soba.setImaBalkon(sobaDTO.isHasBalcony());
+		Hotel hotel = hotelRepository.getOne(idHotela);
+		soba.setHotel(hotel);
+		sobaRepository.save(soba);
+		return soba;
 	}
 
 	public ArrayList<Soba> getAllRooms(Long idHotela) {
@@ -63,13 +71,19 @@ public class SobaService {
 	}
 
 	public Soba editRoom(Long idRoom, SobaDTO sobaDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Soba soba = sobaRepository.getOne(idRoom);
+		soba.setKapacitet(sobaDTO.getCapacity());
+		soba.setSprat(sobaDTO.getFloor());
+		soba.setTipSobe(sobaDTO.getRoomType());
+		soba.setImaBalkon(sobaDTO.isHasBalcony());
+		soba.setRezervisana(false);
+		sobaRepository.save(soba);
+		return soba;
 	}
 
 	public boolean deleteRoom(Long idRoom) {
-		// TODO Auto-generated method stub
-		return false;
+		sobaRepository.deleteById(idRoom);
+		return true;
 	}
 
 }
