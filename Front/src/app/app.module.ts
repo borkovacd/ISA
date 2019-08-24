@@ -54,6 +54,9 @@ import { RentAdministratorProfilPageComponent } from './users/rent-administrator
 import { PricelistsComponent } from './hotels/pricelists/pricelists.component';
 import { AddEditPricelistComponent } from './hotels/add-edit-pricelist/add-edit-pricelist.component';
 import {PricelistService} from './service/pricelist.service';
+import { PricesComponent } from './hotels/prices/prices.component';
+import { AddEditPriceComponent } from './hotels/add-edit-price/add-edit-price.component';
+import {PriceService} from './service/price.service';
 
 
 @NgModule({
@@ -84,6 +87,8 @@ import {PricelistService} from './service/pricelist.service';
     RentAdministratorProfilPageComponent,
     PricelistsComponent,
     AddEditPricelistComponent,
+    PricesComponent,
+    AddEditPriceComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,7 +123,8 @@ import {PricelistService} from './service/pricelist.service';
     RentCarService,
     UserService,
     RoomService,
-    PricelistService
+    PricelistService,
+    PriceService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

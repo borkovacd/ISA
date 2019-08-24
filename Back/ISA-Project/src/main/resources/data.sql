@@ -8,18 +8,21 @@ insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka,
 	values (4, "djurkovic.masa@gmail.com", "Novi Sad", "Masa",  "masa", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Djurkovic", false, "0604561231", true, "OBICAN_KORISNIK");
 
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (1, "Novosadskog Sajma 35, Novi Sad", "Hotel Park", "Hotel Park je smešten na obodu velikog parka u Novom Sadu. Ovaj potpuno klimatizovan hotel u ponudi ima elegantno opremljene smeštajne jedinice sa besplatnim internetom i TV-om sa kablovskim kanalima.", 2);
+	values (5, "Novosadskog Sajma 35, Novi Sad", "Hotel Park", "Hotel Park je smešten na obodu velikog parka u Novom Sadu. Ovaj potpuno klimatizovan hotel u ponudi ima elegantno opremljene smeštajne jedinice sa besplatnim internetom i TV-om sa kablovskim kanalima.", 2);
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (2, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
+	values (6, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
 
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (1, 0, 4, 0, 2, "APARTMAN", 1);
+	values (1, 0, 4, 0, 2, "APARTMAN", 5);
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 1);
+	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 5);
 	
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (1, DATE '2019-06-01', DATE '2019-08-31', 1);
+	values (9, DATE '2019-06-01', DATE '2019-08-31', 5);
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (2, DATE '2019-03-01', DATE '2019-05-31', 1);
+	values (10, DATE '2019-03-01', DATE '2019-05-31', 5);
+	
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (20, 2500, null,'JEDNOKREVETNA_SOBA', 9);
 
 

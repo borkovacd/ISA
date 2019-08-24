@@ -73,11 +73,11 @@ export class PricelistsComponent implements OnInit {
     this.router.navigateByUrl('hotelAdminPage/pricelist/' +  idHotela  + '/add/');
   }
 
-  editPricelist(id: any) {
-    
+  deletePricelist(id: any) {
+
   }
 
-  deletePricelist(id: any) {
-    
+  showPricelist(idPriceList: any) {
+    this.router.navigateByUrl('hotelAdminPage/prices/' +  idPriceList);
   }
 }

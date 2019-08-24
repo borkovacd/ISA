@@ -14,6 +14,8 @@ import {RegisteredUserComponent} from "./users/registered-user/registered-user.c
 import {RentAdministratorComponent} from "./users/rent-administrator/rent-administrator.component";
 import {PricelistsComponent} from './hotels/pricelists/pricelists.component';
 import {AddEditPricelistComponent} from './hotels/add-edit-pricelist/add-edit-pricelist.component';
+import {PricesComponent} from './hotels/prices/prices.component';
+import {AddEditPriceComponent} from './hotels/add-edit-price/add-edit-price.component';
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -22,9 +24,11 @@ const routes: Routes = [
   {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
   {path: 'hotelAdminPage/pricelists/:idHotela', component: PricelistsComponent},
+  {path: 'hotelAdminPage/prices/:idPriceList', component: PricesComponent},
   {path: 'hotelAdminPage/additionalServices/:idHotela', component: AdditionalServicesComponent},
   {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
   {path: 'hotelAdminPage/pricelist/:idHotela/:mode/:idPriceList', component: AddEditPricelistComponent},
+  {path: 'hotelAdminPage/price/:idPriceList/:mode/:idPrice', component: AddEditPriceComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
   {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},
