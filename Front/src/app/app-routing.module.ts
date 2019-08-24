@@ -9,10 +9,11 @@ import {PrijavaComponent} from "./prijava/prijava.component";
 import {EditHotelComponent} from './hotels/edit-hotel/edit-hotel.component';
 import {RoomsComponent} from './hotels/rooms/rooms.component';
 import {AddEditRoomComponent} from './hotels/add-edit-room/add-edit-room.component';
-import {PricelistComponent} from './hotels/pricelist/pricelist.component';
 import {AdditionalServicesComponent} from './hotels/additional-services/additional-services.component';
 import {RegisteredUserComponent} from "./users/registered-user/registered-user.component";
 import {RentAdministratorComponent} from "./users/rent-administrator/rent-administrator.component";
+import {PricelistsComponent} from './hotels/pricelists/pricelists.component';
+import {AddEditPricelistComponent} from './hotels/add-edit-pricelist/add-edit-pricelist.component';
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -20,9 +21,10 @@ const routes: Routes = [
   {path: 'hotelAdminPage', component: HotelAdministratorComponent},
   {path: 'hotelAdminPage/editHotel/:idHotela', component: EditHotelComponent},
   {path: 'hotelAdminPage/rooms/:idHotela', component: RoomsComponent},
-  {path: 'hotelAdminPage/pricelist/:idHotela', component: PricelistComponent},
+  {path: 'hotelAdminPage/pricelists/:idHotela', component: PricelistsComponent},
   {path: 'hotelAdminPage/additionalServices/:idHotela', component: AdditionalServicesComponent},
   {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
+  {path: 'hotelAdminPage/pricelist/:idHotela/:mode/:idPriceList', component: AddEditPricelistComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
   {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},

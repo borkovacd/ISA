@@ -2,20 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
 import {HotelService} from '../../service/hotel.service';
+import {PricelistService} from '../../service/pricelist.service';
 
 @Component({
-  selector: 'app-pricelist',
-  templateUrl: './pricelist.component.html',
-  styleUrls: ['./pricelist.component.css']
+  selector: 'app-pricelists',
+  templateUrl: './pricelists.component.html',
+  styleUrls: ['./pricelists.component.css']
 })
-export class PricelistComponent implements OnInit {
+export class PricelistsComponent implements OnInit {
 
-  items = []
+  pricelists = []
   nazivHotela: string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
-              private hotelService: HotelService) {}
+              private hotelService: HotelService,
+              private pricelistService: PricelistService) {}
   ngOnInit() {
 
     const idHotela = this.route.snapshot.params.idHotela;
@@ -24,9 +26,9 @@ export class PricelistComponent implements OnInit {
       this.nazivHotela = data.naziv;
     })
 
-    /*this.roomService.getAllRooms(idHotela).subscribe(data => {
-      this.rooms = data;
-    })*/
+    this.pricelistService.getAllPricelists(idHotela).subscribe(data => {
+      this.pricelists = data;
+    })
 
   }
 
@@ -66,7 +68,8 @@ export class PricelistComponent implements OnInit {
 
   }
 
-  addPriceListItem() {
-
+  addPricelist() {
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.router.navigateByUrl('hotelAdminPage/pricelist/' +  idHotela  + '/add/');
   }
 }

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.dto.KorisnikDTO;
 import com.ftn.dto.KorisnikProfilDTO;
 import com.ftn.model.Korisnik;
-import com.ftn.model.hotels.Hotel;
 import com.ftn.service.EmailService;
 import com.ftn.service.UserService;
 

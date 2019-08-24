@@ -8,7 +8,15 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {IgxTabsModule, IgxNavbarModule, IgxIconModule, IgxButtonGroupModule, IgxAvatarModule, IgxCheckboxModule} from 'igniteui-angular';
+import {
+  IgxTabsModule,
+  IgxNavbarModule,
+  IgxIconModule,
+  IgxButtonGroupModule,
+  IgxAvatarModule,
+  IgxCheckboxModule,
+  IgxDatePickerModule
+} from 'igniteui-angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
@@ -26,7 +34,7 @@ import { HotelService} from './service/hotel.service';
 import { RentCarService} from './service/rentcar.service';
 import { AviokompanijaService} from './service/aviokompanija.service';
 import {HttpClientModule} from '@angular/common/http';
-import {MatCheckboxModule, MatGridListModule} from '@angular/material';
+import {MatCheckboxModule, MatDatepickerModule, MatGridListModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
 import {PrijavaComponent} from './prijava/prijava.component';
 import {RegistracijaComponent} from './registracija/registracija.component';
@@ -36,7 +44,6 @@ import { AddEditRoomComponent } from './hotels/add-edit-room/add-edit-room.compo
 import { HotelAdministratorProfilPageComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-page/hotel-administrator-profil-page.component';
 import { HotelAdministratorProfilEditComponent } from './users/hotel-administrator/hotel-administrator-profil/hotel-administrator-profil-edit/hotel-administrator-profil-edit.component';
 import {RoomService} from './service/room.service';
-import { PricelistComponent } from './hotels/pricelist/pricelist.component';
 import { AdditionalServicesComponent } from './hotels/additional-services/additional-services.component';
 import { RegisteredUserComponent } from './users/registered-user/registered-user.component';
 import { RentAdministratorComponent } from './users/rent-administrator/rent-administrator.component';
@@ -44,6 +51,9 @@ import { RentAdministratorServisiComponent } from './users/rent-administrator/re
 import { RentAdministratorProfilComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil.component';
 import { RentAdministratorProfilEditComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil-edit/rent-administrator-profil-edit.component';
 import { RentAdministratorProfilPageComponent } from './users/rent-administrator/rent-administrator-profil/rent-administrator-profil-page/rent-administrator-profil-page.component';
+import { PricelistsComponent } from './hotels/pricelists/pricelists.component';
+import { AddEditPricelistComponent } from './hotels/add-edit-pricelist/add-edit-pricelist.component';
+import {PricelistService} from './service/pricelist.service';
 
 
 @NgModule({
@@ -65,7 +75,6 @@ import { RentAdministratorProfilPageComponent } from './users/rent-administrator
     AddEditRoomComponent,
     HotelAdministratorProfilPageComponent,
     HotelAdministratorProfilEditComponent,
-    PricelistComponent,
     AdditionalServicesComponent,
     RegisteredUserComponent,
     RentAdministratorComponent,
@@ -73,6 +82,8 @@ import { RentAdministratorProfilPageComponent } from './users/rent-administrator
     RentAdministratorProfilComponent,
     RentAdministratorProfilEditComponent,
     RentAdministratorProfilPageComponent,
+    PricelistsComponent,
+    AddEditPricelistComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,14 +108,17 @@ import { RentAdministratorProfilPageComponent } from './users/rent-administrator
     }),
     MatTableModule,
     MatCheckboxModule,
-    IgxCheckboxModule
+    IgxCheckboxModule,
+    IgxDatePickerModule,
+    MatDatepickerModule
   ],
   providers: [
     HotelService,
     AviokompanijaService,
     RentCarService,
     UserService,
-    RoomService
+    RoomService,
+    PricelistService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

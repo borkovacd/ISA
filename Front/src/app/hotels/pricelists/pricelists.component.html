@@ -16,7 +16,24 @@
     <p  style="color: black;font-size:40px; font-weight: bolder; font-family: 'Ink Free'; margin-bottom: 5%">Pregled cenovnika</p>
   </div>
   <div style="text-align: center">
-    <button class="btn btn-outline-primary" style="width: 40%;margin-top: 20px; font-size: 1.5em;margin-bottom: 30px;" (click)="addPriceListItem()">Dodaj stavku cenovnika</button>
+    <button class="btn btn-outline-primary" style="width: 40%;margin-top: 20px; font-size: 1.5em;margin-bottom: 30px;" (click)="addPricelist()">Dodaj cenovnik</button>
+  </div>
+
+  <div style="margin-top: 30px;width: 45%;display: inline-block">
+    <h3>Cenovnik:</h3>
+    <table class="table tables" style=" border: 1px solid black ;">
+      <tr>
+        <th class="th-style">Od:</th>
+        <th class="th-style">Do:</th>
+      </tr>
+
+      <tr *ngFor="let pricelist of pricelists;">
+        <td>{{pricelist.pocetakVazenja}}</td>
+        <td>{{pricelist.prestanakVazenja}}</td>
+      </tr>
+
+
+    </table>
   </div>
 
 
