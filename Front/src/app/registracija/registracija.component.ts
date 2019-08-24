@@ -37,58 +37,49 @@ export class RegistracijaComponent implements OnInit {
     } else {
       $('#name').removeClass('border-danger');
     }
-
     if (this.korisnik.prezime == '') {
       $('#surname').addClass('border-danger');
       provera = true;
     } else {
       $('#surname').removeClass('border-danger');
     }
-
     if (this.korisnik.korisnickoIme == '') {
       $('#username').addClass('border-danger');
       provera = true;
     } else {
       $('#username').removeClass('border-danger');
     }
-
     if (this.korisnik.lozinka == '') {
       $('#password').addClass('border-danger');
       provera = true;
     } else {
       $('#password').removeClass('border-danger');
     }
-
     if (this.ponovljenaLozinka == '') {
       $('#password1').addClass('border-danger');
       provera = true;
     } else {
       $('#password1').removeClass('border-danger');
     }
-
     if (this.korisnik.email == '') {
       $('#email').addClass('border-danger');
       provera = true;
     } else {
       $('#email').removeClass('border-danger');
     }
-
     if (this.korisnik.telefon == '') {
       $('#brTel').addClass('border-danger');
       provera = true;
     } else {
       $('#brTel').removeClass('border-danger');
     }
-
     if (this.korisnik.grad == '') {
       $('#grad').addClass('border-danger');
       provera = true;
     } else {
       $('#grad').removeClass('border-danger');
     }
-
     // lozinka i lozinka1 se moraju poklapati
-
     if (this.ponovljenaLozinka != this.korisnik.lozinka) {
       provera = true;
       this.lozinke = 'Unete lozinke se ne poklapaju!';
@@ -99,9 +90,7 @@ export class RegistracijaComponent implements OnInit {
       $('#password').removeClass('border-danger');
       $('#password1').removeClass('border-danger');
     }
-
     // u broj telefona smeju biti unesene samo cifre
-
     if (isNaN(+this.korisnik.telefon)) {
       provera = true;
       this.porukaTelefon = 'Dozvoljeno je uneti samo brojeve!';
@@ -110,7 +99,6 @@ export class RegistracijaComponent implements OnInit {
       this.porukaTelefon = '';
       $('#brTel').removeClass('border-danger');
     }
-
      */
 
     if (!provera) {

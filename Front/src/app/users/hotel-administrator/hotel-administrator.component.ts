@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../service/user.service";
+import {Router} from "@angular/router";
 
 
 
@@ -9,13 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HotelAdministratorComponent implements  OnInit {
 
-  constructor() { }
+  constructor(private  userService: UserService, protected router: Router) { }
 
   public ngOnInit() {
 
   }
 
-  logout() {
-
+  logout()
+  {
+    this.userService.logOut().subscribe(
+      data => {
+        this.router.navigate(['/welcomepage']);
+      }
+    )
   }
 }

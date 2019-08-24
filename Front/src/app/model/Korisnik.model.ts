@@ -1,12 +1,12 @@
 export class KorisnikModel
 {
-  id : number;
   email : string;
   grad : string;
   ime : string;
-  prezime : string;
   korisnickoIme : string;
   lozinka : string;
+  prezime : string;
+
 
   telefon : string;
 
