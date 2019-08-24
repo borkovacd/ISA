@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RoomService} from '../../service/room.service';
-import {RoomModel} from '../../model/room.model';
 import {PricelistService} from '../../service/pricelist.service';
+import {PricelistModel} from '../../model/pricelist.model';
 
 @Component({
   selector: 'app-add-edit-pricelist',
@@ -15,6 +14,8 @@ export class AddEditPricelistComponent implements OnInit {
   public form: FormGroup;
   public startDate: AbstractControl;
   public endDate: AbstractControl;
+  d1: any;
+  d2: any;
   naslovStranice: string;
 
 
@@ -34,13 +35,12 @@ export class AddEditPricelistComponent implements OnInit {
   ngOnInit() {
 
     const mode = this.route.snapshot.params.mode;
-    const idPriceList = this.route.snapshot.params.idPriceList;
     const idHotela = this.route.snapshot.params.idHotela;
 
     if (mode == 'edit') {
       this.method_name = 'IZMENI';
       this.naslovStranice = 'Izmena cenovnika';
-      this.pricelistService.getPricelist(idPriceList).subscribe(data => {
+      this.pricelistService.getPricelist(idHotela).subscribe(data => {
         this.form.controls['startDate'].setValue(data.pocetakVazenja);
         this.form.controls['endDate'].setValue(data.prestanakVazenja);
       })
@@ -73,7 +73,7 @@ export class AddEditPricelistComponent implements OnInit {
   }
   editRoom() {
     const idHotela = this.route.snapshot.params.idHotela;
-    const idRoom = this.route.snapshot.params.idRoom;
+    const idRoom = this.route.snapshot.params.idPriceList;
 
     const room = new RoomModel(
       this.capacity.value,
@@ -92,6 +92,18 @@ export class AddEditPricelistComponent implements OnInit {
   }
 
   private createPricelist() {
+    const idHotela = this.route.snapshot.params.idHotela;
+
+    this.d1 = this.startDate.value;
+    this.d2 = this.endDate.value;
+
+    const pricelist = new PricelistModel(
+      this.d1,
+      this.d2
+    );
+    this.pricelistService.createPricelist(pricelist, idHotela).subscribe(data => {
+      this.router.navigateByUrl('hotelAdminPage/pricelists/' +  idHotela);
+    });
 
   }
 

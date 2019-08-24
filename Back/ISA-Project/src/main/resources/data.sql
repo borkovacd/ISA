@@ -18,6 +18,8 @@ insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip
 	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 1);
 	
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (1, DATE '2019-06-01', DATE '2019-09-01', 1);
+	values (1, DATE '2019-06-01', DATE '2019-08-31', 1);
+insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
+	values (2, DATE '2019-03-01', DATE '2019-05-31', 1);
 
 

@@ -113,7 +113,6 @@ public class UserService {
 		korisnik.setPrezime(korisnikProfilDTO.getPrezime());
 		korisnik.setGrad(korisnikProfilDTO.getGrad());
 		korisnik.setTelefon(korisnikProfilDTO.getTelefon());
-		korisnik.setEmail(korisnikProfilDTO.getEmail());
 		//Provera da li se lozinke poklapaju + hesovanje lozinke
 		if(korisnikProfilDTO.getLozinka().equals(korisnikProfilDTO.getPonovljenaLozinka())) {
 			String encriptedPass = "";

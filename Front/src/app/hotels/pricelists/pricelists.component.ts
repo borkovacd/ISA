@@ -72,4 +72,12 @@ export class PricelistsComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     this.router.navigateByUrl('hotelAdminPage/pricelist/' +  idHotela  + '/add/');
   }
+
+  editPricelist(id: any) {
+    
+  }
+
+  deletePricelist(id: any) {
+    
+  }
 }

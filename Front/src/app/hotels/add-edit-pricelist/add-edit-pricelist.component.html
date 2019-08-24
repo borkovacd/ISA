@@ -23,7 +23,8 @@
       </small>
 
       <label style="font-size: 20px;">Datum prestanka važenja:</label>
-      <igx-date-picker [formControl]="endDate"></igx-date-picker>
+      <input type="date" class="form-control margin" [formControl]="endDate" name="checkInDate" id="input-checkOut"
+             placeholder="Unesite datum prestanka važenja">
       <small class="form-text error" *ngIf="endDate.errors?.required && endDate.touched" style="color: red">
         Izbor krajnjeg datuma je obavezan!
       </small>

@@ -6,7 +6,6 @@ public class KorisnikProfilDTO {
 	private String prezime;
 	private String lozinka;
 	private String ponovljenaLozinka;
-	private String email;
 	private String telefon;
 	private String grad;
 	
@@ -44,14 +43,6 @@ public class KorisnikProfilDTO {
 
 	public void setPonovljenaLozinka(String ponovljenaLozinka) {
 		this.ponovljenaLozinka = ponovljenaLozinka;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getTelefon() {
