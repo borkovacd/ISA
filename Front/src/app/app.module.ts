@@ -57,6 +57,10 @@ import {PricelistService} from './service/pricelist.service';
 import { PricesComponent } from './hotels/prices/prices.component';
 import { AddEditPriceComponent } from './hotels/add-edit-price/add-edit-price.component';
 import {PriceService} from './service/price.service';
+import { AddEditVoziloComponent } from './rentServisi/add-edit-vozilo/add-edit-vozilo.component';
+import { EditRentComponent } from './rentServisi/edit-rent/edit-rent.component';
+import { VozilaComponent } from './rentServisi/vozila/vozila.component';
+import { FilijaleComponent } from './rentServisi/filijale/filijale.component';
 
 
 @NgModule({
@@ -89,6 +93,10 @@ import {PriceService} from './service/price.service';
     AddEditPricelistComponent,
     PricesComponent,
     AddEditPriceComponent,
+    AddEditVoziloComponent,
+    EditRentComponent,
+    VozilaComponent,
+    FilijaleComponent,
   ],
   imports: [
     BrowserModule,
