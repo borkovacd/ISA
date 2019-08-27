@@ -78,6 +78,7 @@ export class PricelistsComponent implements OnInit {
   }
 
   showPricelist(idPriceList: any) {
-    this.router.navigateByUrl('hotelAdminPage/prices/' +  idPriceList);
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.router.navigateByUrl('hotelAdminPage/prices/' + idHotela + '/' + idPriceList);
   }
 }

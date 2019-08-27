@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {PricelistModel} from '../model/pricelist.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({'Content-Type': 'application/json',}),
 };
 @Injectable()
 export  class PricelistService {
@@ -31,4 +31,13 @@ export  class PricelistService {
     return this.http.post(`${this.BASE_URL}/createPricelist/${idHotela}`, body, {headers});
   }
 
+  getRoomTypesInHotel(idPriceList: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRoomTypesInHotel/${idPriceList}`, {headers});
+  }
+
+  getAdditionalServiceTypesInHotel(idPriceList: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type' : 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAdditionalServiceTypesInHotel/${idPriceList}`, {headers});
+  }
 }

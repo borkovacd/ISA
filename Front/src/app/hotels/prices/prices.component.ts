@@ -30,20 +30,21 @@ export class PricesComponent implements OnInit {
 
   addPrice() {
     const idPriceList = this.route.snapshot.params.idPriceList;
-    this.router.navigateByUrl('hotelAdminPage//price' +  idPriceList  + '/add/');
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.router.navigateByUrl('hotelAdminPage/price/' + idHotela + '/' + idPriceList  + '/add/');
   }
 
   goBack() {
-    const idPriceList = this.route.snapshot.params.idPriceList;
-    this.router.navigateByUrl('hotelAdminPage/pricelist/' + idPriceList );
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.router.navigateByUrl('hotelAdminPage/pricelists/' + idHotela);
 
   }
 
   editRoom(id: any) {
-    
+
   }
 
   deleteRoom(id: any) {
-    
+
   }
 }

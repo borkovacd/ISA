@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.CenovnikHotelaDTO;
+import com.ftn.enums.TipDodatneUsluge;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
+import com.ftn.model.hotels.DodatnaUsluga;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
 import com.ftn.repository.CenovnikHotelaRepository;
 import com.ftn.repository.HotelRepository;
+import com.ftn.repository.SobaRepository;
 
 @Service
 public class CenovnikHotelaService {
@@ -22,6 +25,8 @@ public class CenovnikHotelaService {
 	private CenovnikHotelaRepository cenovnikHotelaRepository;
 	@Autowired
 	private HotelRepository hotelRepository;
+	@Autowired
+	private SobaRepository sobaRepository;
 
 	public ArrayList<CenovnikHotela> getAllPricelists(Long idHotela) {
 		ArrayList<CenovnikHotela> cenovnici = new ArrayList<CenovnikHotela>();
@@ -54,6 +59,37 @@ public class CenovnikHotelaService {
 		cenovnikHotela.setHotel(hotel);
 		cenovnikHotelaRepository.save(cenovnikHotela);
 		return cenovnikHotela;
+	}
+
+	public CenovnikHotela getPricelist(Long idPriceList) {
+		CenovnikHotela cenovnik = cenovnikHotelaRepository.getOne(idPriceList);
+		return cenovnik;
+	}
+
+	public ArrayList<TipSobe> getRoomTypesInHotel(Long idPriceList) {
+		ArrayList<TipSobe> tipoviSoba = new ArrayList<TipSobe>();
+		CenovnikHotela cenovnik = cenovnikHotelaRepository.getOne(idPriceList);
+		if(cenovnik == null) 
+			return tipoviSoba;
+		Hotel hotel = hotelRepository.getOne(cenovnik.getHotel().getId());
+		if(hotel == null)
+			return tipoviSoba;
+		ArrayList<Soba> sveSobe = (ArrayList<Soba>) sobaRepository.findAll();
+		ArrayList<Soba> sobeHotela = new ArrayList<Soba>();
+		for(Soba soba: sveSobe) {
+			if(soba.getHotel().getId() == hotel.getId())
+				sobeHotela.add(soba);
+		}
+		for(Soba soba: sobeHotela) {
+			if(!tipoviSoba.contains(soba.getTipSobe()))
+				tipoviSoba.add(soba.getTipSobe());
+		}
+		return tipoviSoba;
+	}
+
+	public ArrayList<TipDodatneUsluge> getAdditionalServiceTypesInHotel(Long idPriceList) {
+		
+		return null;
 	}
 
 }

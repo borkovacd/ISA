@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.CenovnikHotelaDTO;
 import com.ftn.dto.SobaDTO;
+import com.ftn.enums.TipDodatneUsluge;
+import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
+import com.ftn.model.hotels.DodatnaUsluga;
 import com.ftn.model.hotels.Soba;
 import com.ftn.service.CenovnikHotelaService;
 
@@ -39,16 +42,31 @@ public class CenovnikHotelaController {
 		CenovnikHotela cenovnikHotela = cenovnikHotelaService.createPricelist(cenvnikHotelaDTO, idHotela);
 		return new ResponseEntity<CenovnikHotela>(cenovnikHotela, HttpStatus.OK);
 	}
-
-	/*@GetMapping("/getRoom/{idRoom}")
+	
+	@GetMapping("/getPricelist/{idPriceList}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Soba> getRoom(@PathVariable Long idRoom) {
-		Soba soba = sobaService.getRoom(idRoom);
-		if (soba == null) {
+	public ResponseEntity<CenovnikHotela> getPricelist(@PathVariable Long idPriceList) {
+		CenovnikHotela cenovnik = cenovnikHotelaService.getPricelist(idPriceList);
+		if (cenovnik == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(soba, HttpStatus.OK);
-	}*/
+		return new ResponseEntity<>(cenovnik, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getRoomTypesInHotel/{idPriceList}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<TipSobe>> getRoomTypesInHotel(@PathVariable Long idPriceList) {
+		ArrayList<TipSobe> tipoviSoba = cenovnikHotelaService.getRoomTypesInHotel(idPriceList);
+		return new ResponseEntity<ArrayList<TipSobe>>(tipoviSoba, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAdditionalServiceTypesInHotel/{idPriceList}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<TipDodatneUsluge>> getAdditionalServiceTypesInHotel(@PathVariable Long idPriceList) {
+		ArrayList<TipDodatneUsluge> tipoviDodatnihUsluga = cenovnikHotelaService.getAdditionalServiceTypesInHotel(idPriceList);
+		return new ResponseEntity<ArrayList<TipDodatneUsluge>>(tipoviDodatnihUsluga, HttpStatus.OK);
+	}
+	
 	
 
 }

@@ -24,8 +24,12 @@
     style="text-align: center; margin-left: 20%;margin-right: 20%">
     <div *ngFor="let price of prices"
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
-      <p style="margin-top: 20px">Tip sobe:{{price.tipSobe}}</p>
-      <p style="margin-top: 20px">Tip dodatneUsluge:{{price.tipDodatneUsluge}}</p>
+      <div *ngIf="price.tipSobe != null">
+        <p style="margin-top: 20px">Tip sobe:{{price.tipSobe}}</p>
+      </div>
+      <div *ngIf="price.tipDodatneUsluge != null">
+        <p style="margin-top: 20px">Tip dodatneUsluge:{{price.tipDodatneUsluge}}</p>
+      </div>
       <p style="font-size: 20px">Cena:  {{price.cena}}</p>
       <div style="margin-bottom: 20px">
         <button
