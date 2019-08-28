@@ -50,10 +50,6 @@ export class RoomsComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     this.roomService.checkIfReservedRoom(id).subscribe(data => {
       if (data == false) {
-        this.roomService.deleteRoom(idHotela , id).subscribe(data => {
-          alert('Soba je uspesno obrisana');
-          this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
-        })
         location.reload();
       } else {
         alert('Soba je rezervisana!');

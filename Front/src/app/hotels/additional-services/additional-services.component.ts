@@ -43,6 +43,10 @@ export class AdditionalServicesComponent implements OnInit {
   }
 
   deleteAdditionalService(id: any) {
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.additionalServiceService.deleteAdditionalService(id).subscribe(data => {
+      location.reload();
+    })
 
   }
 }

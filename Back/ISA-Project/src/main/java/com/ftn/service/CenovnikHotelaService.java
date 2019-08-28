@@ -11,9 +11,11 @@ import com.ftn.dto.CenovnikHotelaDTO;
 import com.ftn.enums.TipDodatneUsluge;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
+import com.ftn.model.hotels.DodatnaUsluga;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
 import com.ftn.repository.CenovnikHotelaRepository;
+import com.ftn.repository.DodatnaUslugaRepository;
 import com.ftn.repository.HotelRepository;
 import com.ftn.repository.SobaRepository;
 
@@ -26,6 +28,8 @@ public class CenovnikHotelaService {
 	private HotelRepository hotelRepository;
 	@Autowired
 	private SobaRepository sobaRepository;
+	@Autowired
+	private DodatnaUslugaRepository dodatnaUslugaRepository;
 
 	public ArrayList<CenovnikHotela> getAllPricelists(Long idHotela) {
 		ArrayList<CenovnikHotela> cenovnici = new ArrayList<CenovnikHotela>();
@@ -87,8 +91,24 @@ public class CenovnikHotelaService {
 	}
 
 	public ArrayList<TipDodatneUsluge> getAdditionalServiceTypesInHotel(Long idPriceList) {
-		
-		return null;
+		ArrayList<TipDodatneUsluge> tipoviDodatnihUsluga = new ArrayList<TipDodatneUsluge>();
+		CenovnikHotela cenovnik = cenovnikHotelaRepository.getOne(idPriceList);
+		if(cenovnik == null) 
+			return tipoviDodatnihUsluga;
+		Hotel hotel = hotelRepository.getOne(cenovnik.getHotel().getId());
+		if(hotel == null)
+			return tipoviDodatnihUsluga;
+		ArrayList<DodatnaUsluga> sveDodatneUsluge = (ArrayList<DodatnaUsluga>) dodatnaUslugaRepository.findAll();
+		ArrayList<DodatnaUsluga> dodatneUslugeHotela = new ArrayList<DodatnaUsluga>();
+		for(DodatnaUsluga du: sveDodatneUsluge) {
+			if(du.getHotel().getId() == hotel.getId())
+				dodatneUslugeHotela.add(du);
+		}
+		for(DodatnaUsluga du: dodatneUslugeHotela) {
+			if(!tipoviDodatnihUsluga.contains(du.getTipDodatneUsluge()))
+				tipoviDodatnihUsluga.add(du.getTipDodatneUsluge());
+		}
+		return tipoviDodatnihUsluga;
 	}
 
 }

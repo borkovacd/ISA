@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {AdditionalServiceModel} from '../model/additionalService.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -14,21 +15,21 @@ export  class AdditionalServiceService {
 
   }
 
-  /*createRoom(object: RoomModel, idHotela: any): Observable<any> {
-    const body = JSON.stringify(object);
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(`${this.BASE_URL}/createRoom/${idHotela}`, body, {headers});
-  }*/
-
   getAllAdditionalServices(idHotela: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getAllAdditionalServices/${idHotela}`, {headers});
   }
 
-  /*deleteRoom(idHotela: any, idRoom: any): Observable<any> {
+  deleteAdditionalService(idAdditionalService: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.delete(`${this.BASE_URL}/deleteRoom/${idRoom}`, {headers});
-  }*/
+    return this.http.delete(`${this.BASE_URL}/deleteAdditionalService/${idAdditionalService}`, {headers});
+  }
 
 
+  createAdditionalService(object: AdditionalServiceModel, idHotela: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/createAdditionalService/${idHotela}`, body, {headers});
+
+  }
 }
