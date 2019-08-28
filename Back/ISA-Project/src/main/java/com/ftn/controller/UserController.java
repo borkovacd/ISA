@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,8 +89,20 @@ public class UserController {
 	
 	@RequestMapping(value = "/getKorisnikData/{id}", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Korisnik> getKorisnikData(@PathVariable Long id) {	
+	public ResponseEntity<Korisnik> getKorisnikData(@PathVariable Long id,  @Context HttpServletRequest request) {	
 		Korisnik korisnik = userService.getKorisnikData(id);
+		
+		 HttpSession session = request.getSession();
+         System.out.println("\nSesija KorisnikData: " + session);
+		
+		Korisnik k1 = (Korisnik) session.getAttribute("ulogovan");
+		String email = (String) session.getAttribute("borkovac.dragan@gmail.com");
+		
+		if (email == null)
+			System.out.println("Email korisnika u metodi je null!");
+		else
+			System.out.println("Mejl ulogovanog korisnika je: " + email);
+		
 		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
 	}
 	
@@ -132,12 +145,25 @@ public class UserController {
 		
 		if(k1 != null) // ukoliko postoji registrovan korisnik, sa aktiviranim nalogom
 		{
-			request.getSession().setAttribute("ulogovan", k1);
+			HttpSession session = request.getSession();
+			System.out.println("Sesija LOGIN: " + session);
+			
+			session.setAttribute("ulogovan", k1);
+			session.setAttribute("borkovac.dragan@gmail.com", k1.getEmail());
 			KorisnikDTO kDTO = new KorisnikDTO(k1);
+			System.out.println("Log korisnik email: " + k1.getEmail());
+			System.out.println("Log korisnikDTO email: " + kDTO.getEmail());
+			
+			
+			
+			Korisnik mica = (Korisnik) session.getAttribute("ulogovan");
+			String email = (String) session.getAttribute("borkovac.dragan@gmail.com");
+			System.out.println("Email ulogovanog je: " + email); 
 			kDTO.setStatusKorisnika(povVrFunkc);
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
 		} else // ne postoji registrovan takav korisnik
 		{
+			System.out.println("Javlja da ne postoji ulogovan, a postoji!");
 			KorisnikDTO kDTO = new KorisnikDTO();
 			kDTO.setStatusKorisnika(povVrFunkc);
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
@@ -182,7 +208,8 @@ public class UserController {
 	{
 
 		Korisnik k = (Korisnik) request.getSession().getAttribute("ulogovan");
-		request.getSession().invalidate();
+		System.out.println("LogOUT korisnik email: " + k.getEmail());
+		//request.getSession().invalidate();
 		KorisnikDTO kDTO = new KorisnikDTO();
 		return new ResponseEntity<>(kDTO, HttpStatus.OK);
 	

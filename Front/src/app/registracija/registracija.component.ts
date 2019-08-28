@@ -4,6 +4,7 @@ import {KorisnikModel} from '../model/Korisnik.model';
 import {UserService} from '../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router";
+import * as $ from 'jQuery';
 
 @Component({
   selector: 'app-registracija',
@@ -21,59 +22,58 @@ export class RegistracijaComponent implements OnInit {
   poruka = '';
   porukaTelefon = '';
 
-  constructor(private http: HttpClient, private userService: UserService, private router:Router) {
+  constructor(private http: HttpClient, private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
   submit() {
-    const provera = false;
+    let provera : boolean = false;
 
-    /*
-    if (this.korisnik.ime == '') {
+    if (this.korisnik.ime == "") {
       $('#name').addClass('border-danger');
       provera = true;
     } else {
       $('#name').removeClass('border-danger');
     }
-    if (this.korisnik.prezime == '') {
+    if (this.korisnik.prezime == "") {
       $('#surname').addClass('border-danger');
       provera = true;
     } else {
       $('#surname').removeClass('border-danger');
     }
-    if (this.korisnik.korisnickoIme == '') {
+    if (this.korisnik.korisnickoIme == "") {
       $('#username').addClass('border-danger');
       provera = true;
     } else {
       $('#username').removeClass('border-danger');
     }
-    if (this.korisnik.lozinka == '') {
+    if (this.korisnik.lozinka == "") {
       $('#password').addClass('border-danger');
       provera = true;
     } else {
       $('#password').removeClass('border-danger');
     }
-    if (this.ponovljenaLozinka == '') {
+    if (this.ponovljenaLozinka == "") {
       $('#password1').addClass('border-danger');
       provera = true;
     } else {
       $('#password1').removeClass('border-danger');
     }
-    if (this.korisnik.email == '') {
+    if (this.korisnik.email == "") {
       $('#email').addClass('border-danger');
       provera = true;
     } else {
       $('#email').removeClass('border-danger');
     }
-    if (this.korisnik.telefon == '') {
+    if (this.korisnik.telefon == "") {
       $('#brTel').addClass('border-danger');
       provera = true;
     } else {
       $('#brTel').removeClass('border-danger');
     }
-    if (this.korisnik.grad == '') {
+    if (this.korisnik.grad == "") {
       $('#grad').addClass('border-danger');
       provera = true;
     } else {
@@ -99,7 +99,7 @@ export class RegistracijaComponent implements OnInit {
       this.porukaTelefon = '';
       $('#brTel').removeClass('border-danger');
     }
-     */
+
 
     if (!provera) {
       this.userService.register(this.korisnik).subscribe(
@@ -107,6 +107,7 @@ export class RegistracijaComponent implements OnInit {
           this.router.navigateByUrl('/welcomepage');
           this.poruka = 'Dobicete mail za verifikaciju, ulogujte se na svoj mail da ga potvrdite!';
           this.userService.verifikujNalog(data.email).subscribe(
+            // tslint:disable-next-line:no-shadowed-variable
             data => {
               this.korisnik = new KorisnikModel();
               this.ponovljenaLozinka = '';
@@ -118,7 +119,7 @@ export class RegistracijaComponent implements OnInit {
 
         error => {
           this.poruka = 'Email koji ste uneli vec postoji vezan za drugi korisnicki nalog!';
-          alert('OOlga');
+
         }
       );
     }

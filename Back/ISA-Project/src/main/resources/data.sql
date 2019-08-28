@@ -22,7 +22,6 @@ insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id)
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 
 	values (32, "PARKING", 5);
 
-
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
 	values (9, DATE '2019-06-01', DATE '2019-08-31', 5);
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
@@ -30,5 +29,3 @@ insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja,
 	
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (20, 2500, null,'JEDNOKREVETNA_SOBA', 9);
-
-
