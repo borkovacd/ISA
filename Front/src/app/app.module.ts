@@ -63,6 +63,7 @@ import { VozilaComponent } from './rentServisi/vozila/vozila.component';
 import { FilijaleComponent } from './rentServisi/filijale/filijale.component';
 import { AddAdditionalServiceComponent } from './hotels/add-additional-service/add-additional-service.component';
 import {AdditionalServiceService} from './service/additionalService.service';
+import { WelcomePageHoteliComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli.component';
 
 
 @NgModule({
@@ -100,6 +101,7 @@ import {AdditionalServiceService} from './service/additionalService.service';
     VozilaComponent,
     FilijaleComponent,
     AddAdditionalServiceComponent,
+    WelcomePageHoteliComponent,
   ],
   imports: [
     BrowserModule,
