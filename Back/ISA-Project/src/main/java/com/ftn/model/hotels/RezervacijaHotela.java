@@ -32,6 +32,9 @@ public class RezervacijaHotela {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Soba> sobe;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<DodatnaUsluga> dodatneUsluge;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Korisnik korisnik;
@@ -42,12 +45,13 @@ public class RezervacijaHotela {
 		
 	}
 
-	public RezervacijaHotela(LocalDate datumPocetka, LocalDate datumKraja, List<Soba> sobe, Korisnik korisnik,
+	public RezervacijaHotela(LocalDate datumPocetka, LocalDate datumKraja, List<Soba> sobe, List<DodatnaUsluga> dodatneUsluge, Korisnik korisnik,
 			double cena) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumKraja = datumKraja;
 		this.sobe = sobe;
+		this.dodatneUsluge = dodatneUsluge;
 		this.korisnik = korisnik;
 		this.cena = cena;
 	}
@@ -99,5 +103,15 @@ public class RezervacijaHotela {
 	public void setCena(double cena) {
 		this.cena = cena;
 	}
+
+	public List<DodatnaUsluga> getDodatneUsluge() {
+		return dodatneUsluge;
+	}
+
+	public void setDodatneUsluge(List<DodatnaUsluga> dodatneUsluge) {
+		this.dodatneUsluge = dodatneUsluge;
+	}
+	
+	
 
 }
