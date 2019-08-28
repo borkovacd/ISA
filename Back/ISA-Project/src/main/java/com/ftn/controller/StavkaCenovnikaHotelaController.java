@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.dto.SobaDTO;
 import com.ftn.dto.StavkaCenovnikaHotelaDTO;
-import com.ftn.model.hotels.Soba;
 import com.ftn.model.hotels.StavkaCenovnikaHotela;
 import com.ftn.service.StavkaCenovnikaHotelaService;
 
@@ -33,7 +31,7 @@ public class StavkaCenovnikaHotelaController {
 		return new ResponseEntity<ArrayList<StavkaCenovnikaHotela>>(stavkeCenovnika, HttpStatus.OK);
 	}
 	
-	@PostMapping("/createPrice/{idPriceList")
+	@PostMapping("/createPrice/{idPriceList}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<StavkaCenovnikaHotela> createPrice(@RequestBody StavkaCenovnikaHotelaDTO stavkaDTO, @PathVariable Long idPriceList) {
 		StavkaCenovnikaHotela stavkaCenovnika = stavkaCenovnikaHotelaService.createPrice(stavkaDTO, idPriceList);

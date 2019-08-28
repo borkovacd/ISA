@@ -90,9 +90,24 @@ public class StavkaCenovnikaHotelaService {
 			stavkaCenovnika.setTipDodatneUsluge(TipDodatneUsluge.TERETANA);
 			stavkaCenovnika.setTipSobe(null);
 		}
+		
 		stavkaCenovnika.setCena(Double.parseDouble(stavkaDTO.getCena())); 	
 		CenovnikHotela cenovnik = cenovnikHotelaRepository.getOne(idPriceList);
 		stavkaCenovnika.setCenovnik(cenovnik);
+		
+		//Provera da li u cenovniku vec postoji cena za unetu stavku
+		ArrayList<StavkaCenovnikaHotela> sveStavkeCenovnika = (ArrayList<StavkaCenovnikaHotela>) stavkaCenovnikaHotelaRepository.findAll();
+		ArrayList<StavkaCenovnikaHotela> stavkeCenovnika = new ArrayList<StavkaCenovnikaHotela>();
+		for(StavkaCenovnikaHotela stavka : sveStavkeCenovnika) {
+			if(stavka.getCenovnik().getId() == cenovnik.getId()) {
+				if(stavkaCenovnika.getTipSobe() == stavka.getTipSobe() && stavkaCenovnika.getTipSobe() != null) {
+					return null;
+				} else if (stavkaCenovnika.getTipDodatneUsluge() == stavka.getTipDodatneUsluge() && stavkaCenovnika.getTipDodatneUsluge() != null) {
+					return null;
+				}
+			}
+		}
+		
 		stavkaCenovnikaHotelaRepository.save(stavkaCenovnika);
 		return stavkaCenovnika;
 

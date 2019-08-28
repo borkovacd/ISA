@@ -26,6 +26,8 @@ export class AddEditPriceComponent implements OnInit {
   endDate: string;
   hotelName: string;
 
+  alertMessage: string;
+  showAlert: boolean = false;
 
   public method_name = 'DODAJ';
   constructor(protected  router: Router,
@@ -44,6 +46,8 @@ export class AddEditPriceComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.showAlert = false;
 
     const mode = this.route.snapshot.params.mode;
     const idPriceList = this.route.snapshot.params.idPriceList;
@@ -92,7 +96,12 @@ export class AddEditPriceComponent implements OnInit {
     );
 
     this.priceService.createPrice(price, idPriceList).subscribe(data => {
-      this.router.navigateByUrl('hotelAdminPage/prices/' +  idHotela + '/' + idPriceList);
+      if (data == null) {
+        this.alertMessage = 'Stavka cenovnika nije uspešno dodatana! Pokušajte ponovo!';
+      } else {
+        this.alertMessage = 'Stavka cenovnika je uspešno dodata!';
+      }
+      this.showAlert = true;
     })
   }
 
@@ -105,6 +114,12 @@ export class AddEditPriceComponent implements OnInit {
   private editPrice() {
 
   }
+  closeAlert() {
+    const idHotela = this.route.snapshot.params.idHotela;
+    const idPriceList = this.route.snapshot.params.idPriceList;
+    this.router.navigateByUrl('hotelAdminPage/prices/' +  idHotela + '/' + idPriceList);
+  }
+
 
 }
 
