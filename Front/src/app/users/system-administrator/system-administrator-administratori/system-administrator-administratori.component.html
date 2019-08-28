@@ -1,63 +1,60 @@
-<div style="text-align: center">
-  <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Registracija administratora </p>
+<div class="container-fluid">
+  <div style="text-align: center">
+    <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Registracija administratora </p>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col" style="width: 33%">
+      <div style="display: inline-block; margin-left: 10%">
+        <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Korisnici</p>
+        <div *ngFor="let u of regularUsers" style="margin-top: -30px;">
+          <br>
+          <label style="font-size: 20px;">{{u.korisnickoIme}}</label>
+          <div>
+            <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white;" (click)="promeniUlogu(u)">Promeni ulogu</button>
+            <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #ff6666;color: white;" (click)="ukloniKorisnika(u.korisnickoIme)">Ukloni kornisnika</button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="width: 33%">
+      <div *ngIf="promenaUloge == true" style="display: block; margin-right: 30%">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label style="font-size: 20px;">{{pu.korisnickoIme}}</label>
+            <br>
+            <label style="font-size: 20px;">Nova uloga:</label>
+            <select class="form-control margin" [formControl]="novaUloga">
+              <option>ADMINISTRATOR_SISTEMA</option>
+              <option>ADMINISTRATOR_AVIOKOMPANIJE</option>
+              <option>ADMINISTRATOR_HOTELA</option>
+              <option>ADMINISTRATOR_RENT_A_CAR</option>
+            </select>
+            <small class="form-text error" *ngIf="novaUloga.errors?.required && novaUloga.touched" style="color: red">
+              Izbor uloge je obavezan!
+            </small>
+            <button style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px" (click)="potvrdiPromenu(pu, this.novaUloga.value)" [disabled]="!form.valid">Potvrdi </button>
+            <br>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col" style="width: 33%">
+      <div style=" display: inline-block;">
+        <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Administratori</p>
+        <div *ngFor="let admin of administrators" style="margin-top: -30px">
+          <br>
+          <label style="font-size: 20px;">{{admin.korisnickoIme}}&nbsp;</label>
+          <label style="font-size: 20px; color: #1a8cff">{{admin.uloga}}</label>
+          <div>
+            <button style="height: 60px;width: 120px;border-radius: 12px;background-color: #ff6666;color: white;" (click)="ukloniKorisnika(admin.korisnickoIme)">Ukloni administratora
+            </button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<br>
-<mat-grid-list cols="4">
-  <mat-grid-tile colspan="1">
-    <div style=" display: inline-block;">
-      <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Korisnici</p>
-      <div *ngFor="let u of regularUsers" style="margin-top: -30px;">
-        <br>
-        <label style="font-size: 20px;">{{u.korisnickoIme}}</label>
-        <div>
-          <button
-            style="height: 60px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white;"
-            (click)="promeniUlogu(u)">Promeni ulogu
-          </button>
-          <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #ff6666;color: white;"
-                  (click)="ukloniKorisnika(u.korisnickoIme)">Ukloni kornisnika
-          </button>
-        </div>
-        <br>
-      </div>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" >
-    <div *ngIf="promenaUloge == true" style=" display: block;">
-      <form [formGroup]="form">
-        <div class="form-group">
-          <label style="font-size: 20px;">{{pu.korisnickoIme}}</label>
-          <br>
-          <label style="font-size: 20px;">Nova uloga:</label>
-          <select class="form-control margin" [formControl]="novaUloga">
-            <option>ADMINISTRATOR_SISTEMA</option>
-            <option>ADMINISTRATOR_AVIOKOMPANIJE</option>
-            <option>ADMINISTRATOR_HOTELA</option>
-            <option>ADMINISTRATOR_RENT_A_CAR</option>
-          </select>
-          <small class="form-text error" *ngIf="novaUloga.errors?.required && novaUloga.touched" style="color: red">
-            Izbor uloge je obavezan!
-          </small>
-          <button style="height: 40px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white; margin-top: 10px" (click)="potvrdiPromenu(pu, this.novaUloga.value)" [disabled]="!form.valid">Potvrdi </button>
-          <br>
-        </div>
-      </form>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2">
-    <div style=" display: inline-block;">
-      <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Administratori</p>
-      <div *ngFor="let a of administrators" style="margin-top: -30px">
-        <br>
-        <label style="font-size: 20px;">{{a.korisnickoIme}}&nbsp;</label>
-        <label style="font-size: 20px; color: #1a8cff">{{a.uloga}}</label>
-        <div>
-          <button style="height: 60px;width: 120px;border-radius: 12px;background-color: #ff6666;color: white;"
-                  (click)="ukloniKorisnika(a.korisnickoIme)">Ukloni administratora
-          </button>
-        </div>
-        <br>
-      </div>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
