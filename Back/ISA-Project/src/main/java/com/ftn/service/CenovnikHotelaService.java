@@ -53,8 +53,41 @@ public class CenovnikHotelaService {
 		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
 		LocalDate d1 = LocalDate.parse(cenvnikHotelaDTO.getStartDate(), europeanDateFormatter);
 		LocalDate d2 = LocalDate.parse(cenvnikHotelaDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provere datuma
+		if(d1.isAfter(d2)) { //da li je datum pocetka posle datuma prestanka vazenja
+			return null;
+		}
+		
+		ArrayList<CenovnikHotela> sviCenovnici = (ArrayList<CenovnikHotela>) cenovnikHotelaRepository.findAll();
+		ArrayList<CenovnikHotela> cenovniciHotela = new ArrayList<CenovnikHotela>();
+		for(CenovnikHotela cenovnik : sviCenovnici) {
+			if(cenovnik.getHotel().getId() == idHotela)
+				cenovniciHotela.add(cenovnik);
+		}
+		for(CenovnikHotela cenovnik : cenovniciHotela) {
+			if(d1.isBefore(cenovnik.getPocetakVazenja())) { //pocetak vazenja pre pocetka postojeceg
+				if(d2.isAfter(cenovnik.getPocetakVazenja())) { //kraj vazenja posle pocetka postojeceg
+					return null; // preklapanje!
+				}
+			} else if(d1.isAfter(cenovnik.getPocetakVazenja())) { //pocetak vazenja posle pocetka postojeceg
+				if(d1.isBefore(cenovnik.getPrestanakVazenja())) { //pocetak vazenja pre kraja postojeceg
+					return null; // preklapanje!
+				}
+			} else if(d1.isEqual(cenovnik.getPocetakVazenja())) { //pocetak vazenja isti kao pocetak postojeceg
+				return null;
+			} else if(d1.isEqual(cenovnik.getPrestanakVazenja())) { //pocetak vazenja isti kao kraj postojeceg
+				return null;
+			} else if(d2.isEqual(cenovnik.getPocetakVazenja())) { //prestanak vazenja isti kao pocetak postojeceg
+				return null;
+			} else if(d2.isEqual(cenovnik.getPrestanakVazenja())) { //prestanak vazenja isti kao prestanak postojeceg
+				return null;
+			}
+		}
+		
 		cenovnikHotela.setPocetakVazenja(d1);
 		cenovnikHotela.setPrestanakVazenja(d2);
+		
 		Hotel hotel = hotelRepository.getOne(idHotela);
 		if(hotel == null) {
 			return null;
