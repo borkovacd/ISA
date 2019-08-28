@@ -11,7 +11,6 @@ import com.ftn.dto.CenovnikHotelaDTO;
 import com.ftn.enums.TipDodatneUsluge;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
-import com.ftn.model.hotels.DodatnaUsluga;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
 import com.ftn.repository.CenovnikHotelaRepository;

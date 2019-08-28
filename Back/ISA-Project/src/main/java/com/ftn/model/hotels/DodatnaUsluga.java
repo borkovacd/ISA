@@ -19,7 +19,7 @@ public class DodatnaUsluga {
 	private Long id;
 	
 	@Enumerated(EnumType.STRING)
-	private TipDodatneUsluge tipDodateneUsluge;
+	private TipDodatneUsluge tipDodatneUsluge;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Hotel hotel;
@@ -36,12 +36,12 @@ public class DodatnaUsluga {
 		this.id = id;
 	}
 
-	public TipDodatneUsluge getTipDodateneUsluge() {
-		return tipDodateneUsluge;
+	public TipDodatneUsluge getTipDodatneUsluge() {
+		return tipDodatneUsluge;
 	}
 
-	public void setTipDodateneUsluge(TipDodatneUsluge tipDodateneUsluge) {
-		this.tipDodateneUsluge = tipDodateneUsluge;
+	public void setTipDodateneUsluge(TipDodatneUsluge tipDodatneUsluge) {
+		this.tipDodatneUsluge = tipDodatneUsluge;
 	}
 
 	public Hotel getHotel() {

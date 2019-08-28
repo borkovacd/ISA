@@ -9,10 +9,8 @@ import com.ftn.dto.StavkaCenovnikaHotelaDTO;
 import com.ftn.enums.TipDodatneUsluge;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
-import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.StavkaCenovnikaHotela;
 import com.ftn.repository.CenovnikHotelaRepository;
-import com.ftn.repository.HotelRepository;
 import com.ftn.repository.StavkaCenovnikaHotelaRepository;
 
 @Service

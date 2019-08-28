@@ -61,6 +61,8 @@ import { AddEditVoziloComponent } from './rentServisi/add-edit-vozilo/add-edit-v
 import { EditRentComponent } from './rentServisi/edit-rent/edit-rent.component';
 import { VozilaComponent } from './rentServisi/vozila/vozila.component';
 import { FilijaleComponent } from './rentServisi/filijale/filijale.component';
+import { AddAdditionalServiceComponent } from './hotels/add-additional-service/add-additional-service.component';
+import {AdditionalServiceService} from './service/additionalService.service';
 
 
 @NgModule({
@@ -97,6 +99,7 @@ import { FilijaleComponent } from './rentServisi/filijale/filijale.component';
     EditRentComponent,
     VozilaComponent,
     FilijaleComponent,
+    AddAdditionalServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -132,7 +135,8 @@ import { FilijaleComponent } from './rentServisi/filijale/filijale.component';
     UserService,
     RoomService,
     PricelistService,
-    PriceService
+    PriceService,
+    AdditionalServiceService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

@@ -17,6 +17,12 @@ insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
 	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 5);
 	
+insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 
+	values (31, "TERETANA", 5);
+insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 
+	values (32, "PARKING", 5);
+
+
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
 	values (9, DATE '2019-06-01', DATE '2019-08-31', 5);
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 

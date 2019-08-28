@@ -38,7 +38,7 @@ export class AddEditPriceComponent implements OnInit {
     this.form = this.fb.group({
       'priceType': ['', Validators.compose([Validators.required])],
       'tipStavke': ['', Validators.compose([Validators.required])],
-      'cena': ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')])],
+      'cena': ['', Validators.compose([Validators.required, Validators.pattern('^(\\d*\\.)?\\d+$')])],
     })
     this.priceType = this.form.controls['priceType'];
     this.tipStavke = this.form.controls['tipStavke'];
@@ -97,7 +97,7 @@ export class AddEditPriceComponent implements OnInit {
 
     this.priceService.createPrice(price, idPriceList).subscribe(data => {
       if (data == null) {
-        this.alertMessage = 'Stavka cenovnika nije uspešno dodatana! Pokušajte ponovo!';
+        this.alertMessage = 'Stavka cenovnika nije uspešno dodata! Pokušajte ponovo!';
       } else {
         this.alertMessage = 'Stavka cenovnika je uspešno dodata!';
       }

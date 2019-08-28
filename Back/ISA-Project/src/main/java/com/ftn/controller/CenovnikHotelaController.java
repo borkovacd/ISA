@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.CenovnikHotelaDTO;
-import com.ftn.dto.SobaDTO;
 import com.ftn.enums.TipDodatneUsluge;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.CenovnikHotela;
-import com.ftn.model.hotels.DodatnaUsluga;
-import com.ftn.model.hotels.Soba;
 import com.ftn.service.CenovnikHotelaService;
 
 @RestController

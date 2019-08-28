@@ -16,6 +16,7 @@ import {PricelistsComponent} from './hotels/pricelists/pricelists.component';
 import {AddEditPricelistComponent} from './hotels/add-edit-pricelist/add-edit-pricelist.component';
 import {PricesComponent} from './hotels/prices/prices.component';
 import {AddEditPriceComponent} from './hotels/add-edit-price/add-edit-price.component';
+import {AddAdditionalServiceComponent} from './hotels/add-additional-service/add-additional-service.component';
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'hotelAdminPage/room/:idHotela/:mode/:idRoom', component: AddEditRoomComponent},
   {path: 'hotelAdminPage/pricelist/:idHotela/:mode/:idPriceList', component: AddEditPricelistComponent},
   {path: 'hotelAdminPage/price/:idHotela/:idPriceList/:mode/:idPrice', component: AddEditPriceComponent},
+  {path: 'hotelAdminPage/additionalService/:idHotela', component: AddAdditionalServiceComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
   {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},

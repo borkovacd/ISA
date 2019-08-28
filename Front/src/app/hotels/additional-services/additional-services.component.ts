@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
+import {AdditionalServiceService} from '../../service/additionalService.service';
 
 @Component({
   selector: 'app-additional-services',
@@ -9,12 +10,14 @@ import {HotelService} from '../../service/hotel.service';
 })
 export class AdditionalServicesComponent implements OnInit {
 
-  items = []
+  additionalServices = [];
   nazivHotela: string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
-              private hotelService: HotelService) {}
+              private hotelService: HotelService,
+              private additionalServiceService: AdditionalServiceService) {}
+
   ngOnInit() {
 
     const idHotela = this.route.snapshot.params.idHotela;
@@ -23,49 +26,23 @@ export class AdditionalServicesComponent implements OnInit {
       this.nazivHotela = data.naziv;
     })
 
-    /*this.roomService.getAllRooms(idHotela).subscribe(data => {
-      this.rooms = data;
-    })*/
-
-  }
-
-  /*addRoom() {
-    const idHotela = this.route.snapshot.params.idHotela;
-    this.router.navigateByUrl('hotelAdminPage/room/' +  idHotela  + '/add/');
-  }
-
-  editRoom(id: any){
-    const idHotela = this.route.snapshot.params.idHotela;
-    this.roomService.checkIfReservedRoom(id).subscribe(data => {
-      if (data == false) {
-        this.router.navigateByUrl('hotelAdminPage/room/' + idHotela + '/edit/' + id );
-      } else {
-        alert('Soba je rezervisana!');
-      }
+    this.additionalServiceService.getAllAdditionalServices(idHotela).subscribe(data => {
+      this.additionalServices = data;
     })
   }
 
-  deleteRoom(id: any) {
-    const idHotela = this.route.snapshot.params.idHotela;
-    this.roomService.checkIfReservedRoom(id).subscribe(data => {
-      if (data == false) {
-        this.roomService.deleteRoom(idHotela , id).subscribe(data => {
-          alert('Soba je uspesno obrisana');
-          this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
-        })
-        location.reload();
-      } else {
-        alert('Soba je rezervisana!');
-      }
-    })
-  }*/
-
-  goBack(){
+  goBack() {
     this.router.navigateByUrl('hotelAdminPage' );
 
   }
 
   addAdditionalService() {
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.router.navigateByUrl('hotelAdminPage/additionalService/' +  idHotela);
+
+  }
+
+  deleteAdditionalService(id: any) {
 
   }
 }
