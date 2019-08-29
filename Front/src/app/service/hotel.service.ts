@@ -43,5 +43,10 @@ export class HotelService {
     return this.http.get(`${this.BASE_URL}/getHotel/${idHotela}`, {headers});
   }
 
+  getAllHotels(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAllHotels`, {headers});
+  }
+
 }
 
