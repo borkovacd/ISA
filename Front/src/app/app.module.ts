@@ -68,6 +68,8 @@ import { WelcomePageHoteliComponent } from './welcome-page/welcome-page-hoteli/w
 import { AddEditFilijalaComponent } from './rentServisi/add-edit-filijala/add-edit-filijala.component';
 
 import { WelcomePageHoteliSobeComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-sobe/welcome-page-hoteli-sobe.component';
+import { WelcomePageHoteliDodatneUslugeComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-dodatne-usluge/welcome-page-hoteli-dodatne-usluge.component';
+import { WelcomePageHoteliCenovnikComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
 
 
 @NgModule({
@@ -110,6 +112,10 @@ import { WelcomePageHoteliSobeComponent } from './welcome-page/welcome-page-hote
     AddEditFilijalaComponent,
 
     WelcomePageHoteliSobeComponent,
+
+    WelcomePageHoteliDodatneUslugeComponent,
+
+    WelcomePageHoteliCenovnikComponent,
   ],
   imports: [
     BrowserModule,

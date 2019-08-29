@@ -95,11 +95,19 @@ export class WelcomePageHoteliComponent implements OnInit {
   }
 
   pregledCenovnika(idHotela: any){
-    this.router.navigateByUrl('hotelAdminPage/pricelists/' + idHotela);
+    this.router.navigateByUrl('welcomepage/pricelist/' + idHotela);
   }
 
   pregledDodatnihUsluga(idHotela: any) {
-    this.router.navigateByUrl('hotelAdminPage/additionalServices/' + idHotela);
+    this.router.navigateByUrl('welcomepage/additionalServices/' + idHotela);
+  }
+
+  ulogujSe() {
+    this.router.navigateByUrl('/prijava');
+  }
+
+  registrujSe() {
+    this.router.navigateByUrl('/registracija');
   }
 }
 

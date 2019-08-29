@@ -23,6 +23,8 @@ import {VozilaComponent} from "./rentServisi/vozila/vozila.component";
 import {FilijaleComponent} from "./rentServisi/filijale/filijale.component";
 
 import {WelcomePageHoteliSobeComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-sobe/welcome-page-hoteli-sobe.component';
+import {WelcomePageHoteliDodatneUslugeComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-dodatne-usluge/welcome-page-hoteli-dodatne-usluge.component';
+import {WelcomePageHoteliCenovnikComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
 
 
 const routes: Routes = [
@@ -38,11 +40,17 @@ const routes: Routes = [
   {path: 'hotelAdminPage/pricelist/:idHotela/:mode/:idPriceList', component: AddEditPricelistComponent},
   {path: 'hotelAdminPage/price/:idHotela/:idPriceList/:mode/:idPrice', component: AddEditPriceComponent},
   {path: 'hotelAdminPage/additionalService/:idHotela', component: AddAdditionalServiceComponent},
+
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
 
-  {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
+  {path: 'welcomepage', component: WelcomePageComponent},
+  {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},
+  {path: 'welcomepage/additionalServices/:idHotela', component: WelcomePageHoteliDodatneUslugeComponent},
+  {path: 'welcomepage/pricelist/:idHotela', component: WelcomePageHoteliCenovnikComponent},
+
+
   {path: 'registrovaniKorisnik', component: RegisteredUserComponent},
 
 
@@ -50,9 +58,7 @@ const routes: Routes = [
   {path: 'rentAdminPage/editRent/:idRent', component: EditRentComponent},
   {path: 'rentAdminPage/vozila/:idRent', component: VozilaComponent},
   {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent},
-
   {path: 'rentAdminPage', component: RentAdministratorComponent},
-  {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},
 
 ];
 

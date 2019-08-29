@@ -48,7 +48,6 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
 
   goBack(){
     this.router.navigateByUrl('welcomepage' );
-
   }
 
   confirmClick() {
@@ -67,6 +66,14 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
     this.roomService.getAvailableRooms(timePeriod, idHotela).subscribe(data => {
       this.rooms = data;
     });
+  }
+
+  ulogujSe() {
+    this.router.navigateByUrl('/prijava');
+  }
+
+  registrujSe() {
+    this.router.navigateByUrl('/registracija');
   }
 
 }
