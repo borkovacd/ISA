@@ -25,6 +25,8 @@ import {FilijaleComponent} from "./rentServisi/filijale/filijale.component";
 import {WelcomePageHoteliSobeComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-sobe/welcome-page-hoteli-sobe.component';
 import {WelcomePageHoteliDodatneUslugeComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-dodatne-usluge/welcome-page-hoteli-dodatne-usluge.component';
 import {WelcomePageHoteliCenovnikComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
+import { AddEditFilijalaComponent } from './rentServisi/add-edit-filijala/add-edit-filijala.component';
+import { AddEditVoziloComponent } from './rentServisi/add-edit-vozilo/add-edit-vozilo.component';
 
 
 const routes: Routes = [
@@ -59,6 +61,9 @@ const routes: Routes = [
   {path: 'rentAdminPage/vozila/:idRent', component: VozilaComponent},
   {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent},
   {path: 'rentAdminPage', component: RentAdministratorComponent},
+  {path: 'rentAdminPage/vozilo/:idRent/:mode/:idVozilo', component: AddEditVoziloComponent},
+  {path: 'rentAdminPage/filijala/:idRent/:mode/:idFilijala', component: AddEditFilijalaComponent},
+
 
 ];
 
