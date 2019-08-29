@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.dto.HotelDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.RentCarRepository;
@@ -62,14 +64,44 @@ public class RentACarService {
 		return rentCarRepository.findOneByRentACarId(id);
 	}
 	
-	
-	
-	
-	// Metoda za dodavanje filijale
-	
-	// Metode za izmenu filijale
-	
-	// Metoda za brisanje filijale
-	
+	// izmena servisa
+	public RentACar editRent(Long id, RentCarDTO dto) 
+	{
+		RentACar rent = rentCarRepository.findOneByRentACarId(id);
+		rent.setNaziv(dto.getName());
+		rent.setAdresa(dto.getAddress());
+		
+		ArrayList<RentACar> allRents = (ArrayList<RentACar>) rentCarRepository.findAll();
+
+		for(RentACar r: allRents) 
+		{
+			// ukoliko vec postoji sa zadatom adresom i imenom, a razlicit id
+			if(r.getRentACarId() != id) 
+				if(r.getNaziv().equals(rent.getNaziv()) && r.getAdresa().equals(rent.getAdresa())) {
+					return null;
+			}
+		}
+		
+		rent.setOpis(dto.getDescription());
+		rentCarRepository.save(rent);
+		return rent;
+	}
+
+	// vraca sve servise od tog administratora
+	public ArrayList<RentACar> getRentsByAdministrator(Long id)
+	{
+		ArrayList<RentACar> newRents = new ArrayList<RentACar>();
+		Korisnik administrator = userRepository.findOneById(id);
+		
+		for (int i = 0; i < rentCarRepository.findAll().size(); i++)
+		{
+			if (rentCarRepository.findAll().get(i).getAdministrator().getKorisnickoIme().equals(administrator.getKorisnickoIme()))
+			{
+				newRents.add(rentCarRepository.findAll().get(i));
+			}
+		}
+		
+		return newRents ;
+	}
 	/********************/
 }
