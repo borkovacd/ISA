@@ -23,6 +23,8 @@ import {VozilaComponent} from "./rentServisi/vozila/vozila.component";
 import {FilijaleComponent} from "./rentServisi/filijale/filijale.component";
 
 import {WelcomePageHoteliSobeComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-sobe/welcome-page-hoteli-sobe.component';
+import {AddEditVoziloComponent} from "./rentServisi/add-edit-vozilo/add-edit-vozilo.component";
+import {AddEditFilijalaComponent} from "./rentServisi/add-edit-filijala/add-edit-filijala.component";
 
 
 const routes: Routes = [
@@ -49,10 +51,11 @@ const routes: Routes = [
   {path: 'rentAdminPage', component: RentAdministratorComponent},
   {path: 'rentAdminPage/editRent/:idRent', component: EditRentComponent},
   {path: 'rentAdminPage/vozila/:idRent', component: VozilaComponent},
-  {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent}
+  {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent},
+  {path: 'rentAdminPage/vozilo/:idRent/:mode/:idVozilo', component: AddEditVoziloComponent},
+  {path: 'rentAdminPage/filijala/:idRent/:mode/:idFilijala', component: AddEditFilijalaComponent},
 
-  {path: 'rentAdminPage', component: RentAdministratorComponent},
-  {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},
+  {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent}
 
 ];
 
