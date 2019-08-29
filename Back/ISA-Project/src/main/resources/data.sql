@@ -40,3 +40,8 @@ insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id
 	values (5, 31);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (5, 32);
+	
+insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
+	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 5);
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
+	values (5, "petrovic.petar@gmail.com", "Beograd", "Petar",  "petar", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Petrovic", false, "0604561231", true, "ADMINISTRATOR_HOTELA");

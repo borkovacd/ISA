@@ -70,6 +70,13 @@ public class HotelController {
 		return new ResponseEntity<>(hotel, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getAllHotels")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Hotel>> getAllHotels() {
+		ArrayList<Hotel> hotels = hotelService.getAllHotels();
+		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+	}
+	
 	/**********************/
 	/******* Olga *********/
 	

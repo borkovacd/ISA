@@ -106,6 +106,11 @@ public class HotelService {
 		return hotel;
 	}
 	
+	public ArrayList<Hotel> getAllHotels() {
+		ArrayList<Hotel> hotels = (ArrayList<Hotel>) hotelRepository.findAll();
+		return hotels;
+	}
+	
 	/***********************/
 	/******* Olga **********/
 	
