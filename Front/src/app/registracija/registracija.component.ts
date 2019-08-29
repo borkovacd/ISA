@@ -118,7 +118,7 @@ export class RegistracijaComponent implements OnInit {
         },
 
         error => {
-          this.poruka = 'Email koji ste uneli vec postoji vezan za drugi korisnicki nalog!';
+          this.poruka = 'Email ili korisnicko ime koje ste uneli vec postoje vezani za drugi korisnicki nalog!';
 
         }
       );

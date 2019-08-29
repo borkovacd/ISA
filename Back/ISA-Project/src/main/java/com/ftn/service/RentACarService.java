@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ftn.dto.HotelDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.model.Korisnik;
-import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
-import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.RentCarRepository;
 import com.ftn.repository.UserRepository;
 
@@ -29,7 +26,7 @@ public class RentACarService {
 		rentCar.setNaziv(rentCarDTO.getName());
 		rentCar.setAdresa(rentCarDTO.getAddress());
 		
-		//Provera da li vec postoji hotel sa istim nazivom i adresom
+		//Provera da li vec postoji rent sa istim nazivom i adresom
 		ArrayList<RentACar> existingServices = (ArrayList<RentACar>) rentCarRepository.findAll();
 		for(RentACar existingService: existingServices) {
 			if(existingService.getNaziv().equals(rentCar.getNaziv()) && existingService.getAdresa().equals(rentCar.getAdresa())) {

@@ -4,6 +4,7 @@ import {KorisnikModel} from '../model/Korisnik.model';
 import {UserService} from '../service/user.service';
 import {Router} from '@angular/router';
 import {FormGroup} from '@angular/forms';
+import * as $ from 'jQuery' ;
 
 @Component({
   selector: 'app-prijava',
@@ -23,9 +24,8 @@ export class PrijavaComponent implements OnInit {
   }
 
   onSubmit() {
-    const provera = false;
+    let provera : boolean = false;
 
-    /*
     if(this.korisnik.email == ""){
       $("#emailValue").addClass('border-danger');
       provera = true;
@@ -40,12 +40,9 @@ export class PrijavaComponent implements OnInit {
       $("#passValue").removeClass('border-danger');
     }
 
-     */
-
     if (!provera) {
       this.userService.logIn(this.korisnik).subscribe(
         data => {
-          alert(data.statusKorisnika);
           if (data.statusKorisnika == 'obican') {
             this.router.navigate(['/registrovaniKorisnik']);
           } else if (data.statusKorisnika == 'avio') {

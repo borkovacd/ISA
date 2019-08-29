@@ -17,6 +17,9 @@ import {AddEditPricelistComponent} from './hotels/add-edit-pricelist/add-edit-pr
 import {PricesComponent} from './hotels/prices/prices.component';
 import {AddEditPriceComponent} from './hotels/add-edit-price/add-edit-price.component';
 import {AddAdditionalServiceComponent} from './hotels/add-additional-service/add-additional-service.component';
+import {EditRentComponent} from "./rentServisi/edit-rent/edit-rent.component";
+import {VozilaComponent} from "./rentServisi/vozila/vozila.component";
+import {FilijaleComponent} from "./rentServisi/filijale/filijale.component";
 
 const routes: Routes = [
   {path: '', component: WelcomePageComponent , pathMatch: 'full'},
@@ -32,11 +35,16 @@ const routes: Routes = [
   {path: 'hotelAdminPage/price/:idHotela/:idPriceList/:mode/:idPrice', component: AddEditPriceComponent},
   {path: 'hotelAdminPage/additionalService/:idHotela', component: AddAdditionalServiceComponent},
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
+
   {path: 'welcomepage', component: WelcomePageComponent},
   {path: 'prijava', component: PrijavaComponent},
   {path: 'registracija', component: RegistracijaComponent},
   {path: 'registrovaniKorisnik', component: RegisteredUserComponent},
-  {path: 'rentAdminPage', component: RentAdministratorComponent}
+
+  {path: 'rentAdminPage', component: RentAdministratorComponent},
+  {path: 'rentAdminPage/editRent/:idRent', component: EditRentComponent},
+  {path: 'rentAdminPage/vozila/:idRent', component: VozilaComponent},
+  {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent}
 ];
 
 @NgModule({

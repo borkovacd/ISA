@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.dto.HotelDTO;
 import com.ftn.dto.RentCarDTO;
-import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.service.RentACarService;
 

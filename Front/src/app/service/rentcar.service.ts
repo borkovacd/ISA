@@ -22,5 +22,24 @@ export class RentCarService {
     return this.http.post(`${this.BASE_URL}/registerRentCar`, body, {headers});
   }
 
+  getRentsByAdministrator(): Observable<any>
+  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRentsByAdministrator/3`, {headers});
+  }
+
+  izmeniRent(object: RentCarModel, id: any) : Observable<any>
+  {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/izmeniRent/${id}`, body, {headers});
+  }
+
+  getRent(idRent: any): Observable<any>
+  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRent/${idRent}`, {headers});
+  }
+
 
 }

@@ -3,7 +3,7 @@ insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka,
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
 	values (2, "borkovac.dragan@gmail.com", "Novi Sad", "Dragan",  "dragan", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Borkovac", false, "0605959769", true, "ADMINISTRATOR_HOTELA");
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (3, "savic.olga@gmail.com", "Novi Sad", "Olga",  "olga", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Savic", false, "06345624543", true, "OBICAN_KORISNIK");
+	values (3, "savic.olga@gmail.com", "Novi Sad", "Olga",  "olga", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Savic", false, "06345624543", true, "ADMINISTRATOR_RENT_A_CAR");
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
 	values (4, "djurkovic.masa@gmail.com", "Novi Sad", "Masa",  "masa", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Djurkovic", false, "0604561231", true, "OBICAN_KORISNIK");
 
