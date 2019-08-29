@@ -17,25 +17,26 @@
     <p  style="color: black;font-size:40px; font-weight: bolder; font-family: 'Ink Free'; margin-bottom: 5%">Pregled soba</p>
   </div>
 
-  <div>
+  <div *ngIf="!timePeriodConfirmed">
     <form [formGroup]="form">
-      <div class="form-group">
+      <div style="text-align: center" class="form-group">
 
-        <label style="font-size: 20px;">Datum početka važenja:</label>
-        <input type="date" class="form-control margin" [formControl]="startDate" name="checkInDate" id="input-checkIn"
-               placeholder="Unesite datum početka važenja">
-        <small class="form-text error" *ngIf="startDate.errors?.required && startDate.touched" style="color: red">
-          Izbor početnog datuma je obavezan!
-        </small>
+        <div style="margin-top: 2%">
+          <label style="font-size: 20px;">Početni datum:</label>
+          <input style="width: 50%; margin-left: 25%" type="date" class="form-control margin" [formControl]="startDate" name="checkInDate" id="input-checkIn">
+          <small class="form-text error" *ngIf="startDate.errors?.required && startDate.touched" style="color: red">
+            Izbor početnog datuma je obavezan!
+          </small>
+        </div>
 
-        <label style="font-size: 20px;">Datum prestanka važenja:</label>
-        <input type="date" class="form-control margin" [formControl]="endDate" name="checkInDate" id="input-checkOut"
-               placeholder="Unesite datum prestanka važenja">
-        <small class="form-text error" *ngIf="endDate.errors?.required && endDate.touched" style="color: red">
-          Izbor krajnjeg datuma je obavezan!
-        </small>
-
-        <div style="text-align: right; margin-right: 20%">
+        <div style="margin-top: 2%">
+          <label style="font-size: 20px;">Krajnji datum:</label>
+          <input style="width: 50%; margin-left: 25%" type="date" class="form-control margin" [formControl]="endDate" name="checkInDate" id="input-checkOut">
+          <small class="form-text error" *ngIf="endDate.errors?.required && endDate.touched" style="color: red">
+            Izbor krajnjeg datuma je obavezan!
+          </small>
+        </div>
+        <div style="text-align: right; margin-right: 30%">
           <button class="btn btn-primary" style="text-align: center; width: 15%;margin-top: 30px" (click)="confirmClick()"
                   [disabled]="!form.valid"> Potvrdi
           </button>

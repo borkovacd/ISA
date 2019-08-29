@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.SobaDTO;
+import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.hotels.Soba;
 import com.ftn.service.SobaService;
 
@@ -73,6 +74,13 @@ public class SobaController {
 	public boolean deleteRoom(@PathVariable Long idRoom) {
 		boolean response = sobaService.deleteRoom(idRoom);
 		return response;
+	}
+	
+	@PostMapping("/getAvailableRooms/{idHotela}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Soba>> getAvailableRooms(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idHotela) {
+		ArrayList<Soba> sobe = sobaService.getAvailableRooms(vpDTO, idHotela);
+		return new ResponseEntity<ArrayList<Soba>>(sobe, HttpStatus.OK);
 	}
 
 	

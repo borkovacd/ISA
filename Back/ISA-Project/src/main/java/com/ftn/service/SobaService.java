@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.SobaDTO;
+import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.enums.TipSobe;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
@@ -66,6 +69,8 @@ public class SobaService {
 		return sobe;
 	}
 
+	//Provera da li je soba bila rezervisana ili je trenutno rezervisana
+	//tacnije da li se soba nalazi u rezervacijama
 	public boolean checkIfRoomIsReserved(Long id) {
 		boolean taken = false;
 		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
@@ -111,6 +116,60 @@ public class SobaService {
 	public boolean deleteRoom(Long idRoom) {
 		sobaRepository.deleteById(idRoom);
 		return true;
+	}
+
+	public ArrayList<Soba> getAvailableRooms(VremenskiPeriodDTO vpDTO, Long idHotela) {
+		
+		ArrayList<Soba> slobodneSobe = new ArrayList<Soba>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(vpDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(vpDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		ArrayList<Soba> sobeHotela = new ArrayList<Soba>();
+		ArrayList<Soba> sveSobe = (ArrayList<Soba>) sobaRepository.findAll();
+		Hotel hotel = hotelRepository.getOne(idHotela);
+		if(hotel == null) {
+			return null;
+		} else {
+			for(Soba soba : sveSobe) {
+				if(soba.getHotel().getId() == idHotela) {
+					sobeHotela.add(soba);
+				}
+			}
+		}
+		
+		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		
+		for(Soba soba: sobeHotela) {
+			boolean slobodna = true;
+			for(RezervacijaHotela rezervacija : rezervacije) {
+				for(Soba rezervisanaSoba: rezervacija.getSobe()) { 
+					if(rezervisanaSoba.getId() == soba.getId()) { //Da li se soba nalazi medju rezervacijama
+						if(d1.isBefore(rezervacija.getDatumPocetka())) {
+							if(d2.isAfter(rezervacija.getDatumPocetka())) {
+								slobodna = false;
+							}
+						} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
+							if(d2.isBefore(rezervacija.getDatumKraja())) {
+								slobodna = false;
+							}
+						}
+					}
+				}
+			}
+			if(slobodna == true) {
+				slobodneSobe.add(soba);
+			}
+		}
+		
+		return slobodneSobe;
 	}
 
 }

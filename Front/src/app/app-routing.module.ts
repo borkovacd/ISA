@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'rentAdminPage', component: RentAdministratorComponent},
   {path: 'rentAdminPage/editRent/:idRent', component: EditRentComponent},
   {path: 'rentAdminPage/vozila/:idRent', component: VozilaComponent},
-  {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent}
+  {path: 'rentAdminPage/filijale/:idRent', component: FilijaleComponent},
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},
   {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../../service/room.service';
 import {HotelService} from '../../../service/hotel.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PricelistModel} from '../../../model/pricelist.model';
+import {TimePeriodModel} from '../../../model/timePeriod.model';
 
 @Component({
   selector: 'app-welcome-page-hoteli-sobe',
@@ -35,15 +35,14 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.timePeriodConfirmed = false;
+
     const idHotela = this.route.snapshot.params.idHotela;
 
     this.hotelService.getHotel(idHotela).subscribe(data => {
       this.nazivHotela = data.naziv;
     })
-    /*this.roomService.getAllRooms(idHotela).subscribe(data => {
-      this.rooms = data;
-    })*/
 
   }
 
@@ -53,14 +52,21 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
   }
 
   confirmClick() {
+
+    this.timePeriodConfirmed = true;
     const idHotela = this.route.snapshot.params.idHotela;
 
     this.d1 = this.startDate.value;
     this.d2 = this.endDate.value;
 
-    /*this.pricelistService.createPricelist(pricelist, idHotela).subscribe(data => {
-      this.router.navigateByUrl('hotelAdminPage/pricelists/' +  idHotela);
-    });*/
+    const timePeriod = new TimePeriodModel (
+      this.d1,
+      this.d2
+    );
+
+    this.roomService.getAvailableRooms(timePeriod, idHotela).subscribe(data => {
+      this.rooms = data;
+    });
   }
 
 }

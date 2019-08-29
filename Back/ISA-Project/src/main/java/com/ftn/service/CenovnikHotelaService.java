@@ -54,7 +54,7 @@ public class CenovnikHotelaService {
 		LocalDate d1 = LocalDate.parse(cenvnikHotelaDTO.getStartDate(), europeanDateFormatter);
 		LocalDate d2 = LocalDate.parse(cenvnikHotelaDTO.getEndDate(), europeanDateFormatter);
 		
-		//Provere datuma
+		//Provera datuma
 		if(d1.isAfter(d2)) { //da li je datum pocetka posle datuma prestanka vazenja
 			return null;
 		}

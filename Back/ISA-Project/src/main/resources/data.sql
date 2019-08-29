@@ -31,15 +31,13 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 	values (20, 2500, null,'JEDNOKREVETNA_SOBA', 9);
 	
 insert into isa_project.rezervacija_hotela (id, cena, datum_kraja, datum_pocetka, korisnik_id)
-	values (51, 2450, DATE '2019-08-25', DATE '2019-09-01', 2);
+	values (1, 2450, DATE '2019-08-25', DATE '2019-09-01', 2);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
-	values (5, 1);
-insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
-	values (5, 2);
+	values (1, 1);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
-	values (5, 31);
+	values (1, 31);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
-	values (5, 32);
+	values (1, 32);
 	
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
 	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 5);
