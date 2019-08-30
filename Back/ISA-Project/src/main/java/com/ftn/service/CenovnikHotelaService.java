@@ -144,4 +144,39 @@ public class CenovnikHotelaService {
 		return tipoviDodatnihUsluga;
 	}
 
+	public CenovnikHotela getActivePricelist(Long idHotela) {
+		ArrayList<CenovnikHotela> sviCenovnici = (ArrayList<CenovnikHotela>) cenovnikHotelaRepository.findAll();
+		ArrayList<CenovnikHotela> cenovniciHotela = new ArrayList<CenovnikHotela>();
+		for(CenovnikHotela cenovnik : sviCenovnici) {
+			if(cenovnik.getHotel().getId() == idHotela)
+				cenovniciHotela.add(cenovnik);
+		}
+		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		for(CenovnikHotela cenovnik : cenovniciHotela) {
+			if(currentDate.isEqual(cenovnik.getPocetakVazenja())) { //ako je danasnji datum isti kao pocetak vazenja cenovnika
+				return cenovnik;
+			} else if(currentDate.isAfter(cenovnik.getPocetakVazenja())) { //ako je posle pocetka vazenja
+				if(currentDate.isBefore(cenovnik.getPrestanakVazenja())) { //a pre kraja vazenja
+					return cenovnik;
+				}
+ 			} 
+		}
+		
+		CenovnikHotela tempCenovnik = null;
+		if(cenovniciHotela != null) { 
+			tempCenovnik = cenovniciHotela.get(0); //uzima prvi cenovnik iz liste cenovnika hotela
+		}
+		//Uzima se cenovnik ciji datum prestanka je najkasniji
+		if(cenovniciHotela.size() > 1) {
+			for(int i=1; i<cenovniciHotela.size(); i++) { 
+				if(cenovniciHotela.get(i).getPrestanakVazenja().isAfter(tempCenovnik.getPrestanakVazenja())) {
+					tempCenovnik = cenovniciHotela.get(i);
+				}
+			}
+		}
+		return tempCenovnik;
+	}
+
 }

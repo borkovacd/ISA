@@ -50,6 +50,16 @@ public class CenovnikHotelaController {
 		return new ResponseEntity<>(cenovnik, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getActivePricelist/{idHotela}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<CenovnikHotela> getActivePricelist(@PathVariable Long idHotela) {
+		CenovnikHotela cenovnik = cenovnikHotelaService.getActivePricelist(idHotela);
+		if (cenovnik == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(cenovnik, HttpStatus.OK);
+	}
+	
 	@GetMapping("/getRoomTypesInHotel/{idPriceList}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<TipSobe>> getRoomTypesInHotel(@PathVariable Long idPriceList) {

@@ -42,4 +42,8 @@ export  class PricelistService {
   }
 
 
+  getActivePricelist(idHotela: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getActivePricelist/${idHotela}`, {headers});
+  }
 }

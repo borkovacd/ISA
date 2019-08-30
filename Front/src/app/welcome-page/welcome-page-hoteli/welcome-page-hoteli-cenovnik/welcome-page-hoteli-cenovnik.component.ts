@@ -12,38 +12,38 @@ import {PriceService} from '../../../service/price.service';
 export class WelcomePageHoteliCenovnikComponent implements OnInit {
 
   prices = []
+  nazivHotela : string;
+  d1: any;
+  d2: any;
+  activePricelist: any;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private hotelService: HotelService,
-              private priceService: PriceService) {}
+              private priceService: PriceService,
+              private pricelistService: PricelistService) {}
 
   ngOnInit() {
 
-    /*const idPriceList = this.route.snapshot.params.idPriceList;
-
-    this.priceService.getAllPrices(idPriceList).subscribe(data => {
-      this.prices = data;
-    })*/
-
-  }
-
-  addPrice() {
-    const idPriceList = this.route.snapshot.params.idPriceList;
     const idHotela = this.route.snapshot.params.idHotela;
-    this.router.navigateByUrl('hotelAdminPage/price/' + idHotela + '/' + idPriceList  + '/add/');
+
+    this.hotelService.getHotel(idHotela).subscribe(data => {
+      this.nazivHotela = data.naziv;
+    })
+
+    this.pricelistService.getActivePricelist(idHotela).subscribe(data => {
+      this.activePricelist = data;
+      this.d1 = data.pocetakVazenja;
+      this.d2 = data.prestanakVazenja;
+
+      this.priceService.getAllPrices(this.activePricelist.id).subscribe(prices => {
+        this.prices = prices;
+      });
+    });
   }
 
   goBack(){
     this.router.navigateByUrl('welcomepage' );
-  }
-
-  editRoom(id: any) {
-
-  }
-
-  deleteRoom(id: any) {
-
   }
 
   ulogujSe() {
