@@ -1,1 +1,41 @@
-<p>edit-rent works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'" title="T R A V E L L A N D">
+    <i class="fa fa-user"> Ime Prezime </i>
+    <button class="btn-primary">Izloguj se</button>
+  </igx-navbar>
+</div>
+<br>
+<div style="text-align: center">
+  <p  style="color: black;font-size:40px; font-family: 'Ink Free'">Izmena rent-a-car servisa</p>
+</div>
+<div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+  <form [formGroup]="form">
+    <div class="form-group">
+
+      <label style="margin-top: 20px">Naziv:</label>
+      <input name="name" class="form-control margin" [formControl]="name">
+      <small class="form-text error" *ngIf="name.errors?.required && name.touched" style="color: red">
+        Naziv je obavezan!
+      </small>
+
+      <label style="margin-top:20px">Adresa:</label>
+      <input name="address" class="form-control margin" [formControl]="address">
+      <small class="form-text error" *ngIf="address.errors?.required && address.touched" style="color: red">
+        Adresa je obavezna!
+      </small>
+
+      <label style="margin-top:20px">Opis:</label>
+      <textarea name="description" class="form-control" [formControl]="description"></textarea>
+
+      <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()" [disabled]="!form.valid">
+        Izmeni
+      </button>
+
+      <button class="btn btn-primary" style="width: 100% ; margin-top: 20px" (click)="exit()">
+        Zatvori
+      </button>
+
+    </div>
+  </form>
+</div>
+
