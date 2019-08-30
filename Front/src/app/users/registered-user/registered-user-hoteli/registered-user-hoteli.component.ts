@@ -86,7 +86,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
   }
 
   izaberiHotel(id: any) {
-    
+
   }
 }
 
