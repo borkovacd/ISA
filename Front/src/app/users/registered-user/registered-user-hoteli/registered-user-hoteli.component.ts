@@ -1,14 +1,14 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {HotelService} from '../../service/hotel.service';
+import {HotelService} from '../../../service/hotel.service';
 import {MapsAPILoader} from '@agm/core';
 
 @Component({
-  selector: 'app-welcome-page-hoteli',
-  templateUrl: './welcome-page-hoteli.component.html',
-  styleUrls: ['./welcome-page-hoteli.component.css']
+  selector: 'app-registered-user-hoteli',
+  templateUrl: './registered-user-hoteli.component.html',
+  styleUrls: ['./registered-user-hoteli.component.css']
 })
-export class WelcomePageHoteliComponent implements OnInit {
+export class RegisteredUserHoteliComponent implements OnInit {
 
   latitude: number;
   longitude: number;
@@ -25,8 +25,6 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
-
-
 
   constructor(protected router: Router,
               private hotelService: HotelService,
@@ -79,10 +77,7 @@ export class WelcomePageHoteliComponent implements OnInit {
         });
       });
     });
-
-
   }
-
 
   closeMap() {
     this.hideData = false;
@@ -90,18 +85,9 @@ export class WelcomePageHoteliComponent implements OnInit {
     this.showLocation = false;
   }
 
-  pregledSoba(idHotela: any) {
-    this.router.navigateByUrl('welcomepage/rooms/' + idHotela);
+  izaberiHotel(id: any) {
+    
   }
-
-  pregledCenovnika(idHotela: any){
-    this.router.navigateByUrl('welcomepage/pricelist/' + idHotela);
-  }
-
-  pregledDodatnihUsluga(idHotela: any) {
-    this.router.navigateByUrl('welcomepage/additionalServices/' + idHotela);
-  }
-
 }
 
 

@@ -53,7 +53,7 @@ const routes: Routes = [
   {path: 'welcomepage/pricelist/:idHotela', component: WelcomePageHoteliCenovnikComponent},
 
 
-  {path: 'registrovaniKorisnik', component: RegisteredUserComponent},
+  {path: 'registeredUserPage', component: RegisteredUserComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},

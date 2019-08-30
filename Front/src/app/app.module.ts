@@ -72,6 +72,7 @@ import { WelcomePageHoteliDodatneUslugeComponent } from './welcome-page/welcome-
 import { WelcomePageHoteliCenovnikComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
 import {VoziloService} from "./service/vozilo.service";
 import {LokacijaService} from "./service/lokacija.service";
+import { RegisteredUserHoteliComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli.component';
 
 
 @NgModule({
@@ -118,6 +119,8 @@ import {LokacijaService} from "./service/lokacija.service";
     WelcomePageHoteliDodatneUslugeComponent,
 
     WelcomePageHoteliCenovnikComponent,
+
+    RegisteredUserHoteliComponent,
   ],
   imports: [
     BrowserModule,
