@@ -1,1 +1,67 @@
-<p>add-edit-vozilo works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'" title="T R A V E L L A N D">
+    <i class="fa fa-user"> Ime Prezime </i>
+    <button class="btn-primary">Izloguj se</button>
+  </igx-navbar>
+</div>
+
+<br>
+<div style="text-align: center">
+  <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 10%">{{naslovStranice}}</p>
+</div>
+
+<div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+
+  <form [formGroup]="form">
+    <div class="form-group">
+
+      <label style="margin-top: 20px">Tip:</label>
+      <input name="tip" class="form-control margin" [formControl]="tip">
+      <small class="form-text error" *ngIf="tip.errors?.required && tip.touched" style="color: red">
+        Tip je obavezan!
+      </small>
+
+      <label style="margin-top: 20px">Naziv:</label>
+      <input name="naziv" class="form-control margin" [formControl]="naziv">
+      <small class="form-text error" *ngIf="naziv.errors?.required && naziv.touched" style="color: red">
+        Naziv je obavezan!
+      </small>
+
+      <label style="margin-top:20px">Cena:</label>
+      <input name="cena" class="form-control margin" [formControl]="cena" >
+      <small class="form-text error" *ngIf="cena.errors?.required && cena.touched" style="color: red">
+        Cena je obavezna!
+      </small>
+
+      <label style="margin-top: 20px">Marka:</label>
+      <input name="marka" class="form-control margin" [formControl]="marka">
+      <small class="form-text error" *ngIf="marka.errors?.required && marka.touched" style="color: red">
+        Marka je obavezna!
+      </small>
+
+      <label style="margin-top: 20px">Model:</label>
+      <input name="model" class="form-control margin" [formControl]="model">
+      <small class="form-text error" *ngIf="model.errors?.required && model.touched" style="color: red">
+        Model je obavezan!
+      </small>
+
+      <label style="margin-top: 20px">Godina proizvodnje:</label>
+      <input name="godinaProizvodnje" class="form-control margin" [formControl]="godinaProizvodnje">
+      <small class="form-text error" *ngIf="godinaProizvodnje.errors?.required && godinaProizvodnje.touched" style="color: red">
+        Godina proizvodnje je obavezna!
+      </small>
+
+      <label style="margin-top: 20px">Broj sedista:</label>
+      <input name="brojSedista" class="form-control margin" [formControl]="brojSedista">
+      <small class="form-text error" *ngIf="brojSedista.errors?.required && brojSedista.touched" style="color: red">
+        Broj sedista je obavezan!
+      </small>
+
+      <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()"
+              [disabled]="!form.valid">
+        {{method_name}}
+      </button>
+      <button class="btn btn-primary" style="width: 100% ; margin-top: 20px" (click)="exit()">ZATVORI</button>
+    </div>
+  </form>
+</div>

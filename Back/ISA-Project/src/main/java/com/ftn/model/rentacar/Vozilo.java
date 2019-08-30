@@ -2,14 +2,22 @@ package com.ftn.model.rentacar;
 
 import java.util.ArrayList;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 // KORAK 3 tacka 2.10 - vozilo 
 @Entity
 public class Vozilo 
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long voziloId ;
 	
 	private double cena ;
@@ -44,10 +52,9 @@ public class Vozilo
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vozilo(long voziloId, double cena, String naziv, String marka, String model, int godinaProizvodnje,
+	public Vozilo(double cena, String naziv, String marka, String model, int godinaProizvodnje,
 			int brojSedista, String tip) {
 		super();
-		this.voziloId = voziloId;
 		this.cena = cena;
 		this.naziv = naziv;
 		this.marka = marka;
@@ -57,11 +64,13 @@ public class Vozilo
 		this.tip = tip;
 	}
 
-	public long getVoziloId() {
+	
+
+	public Long getVoziloId() {
 		return voziloId;
 	}
 
-	public void setVoziloId(long voziloId) {
+	public void setVoziloId(Long voziloId) {
 		this.voziloId = voziloId;
 	}
 

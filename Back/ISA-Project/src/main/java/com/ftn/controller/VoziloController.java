@@ -36,21 +36,10 @@ public class VoziloController
 	// Dodavanje vozila
 	@PostMapping("/dodajVozilo/{idRentACar}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public void dodajVozilo(@RequestBody VoziloDTO voziloDTO, @PathVariable Long idRentACar) throws Exception 
+	public ResponseEntity<Vozilo> dodajVozilo(@RequestBody VoziloDTO voziloDTO, @PathVariable Long idRentACar) 
 	{
-		Vozilo v = voziloService.findByNaziv(voziloDTO.getNaziv());
-		
-		if (v != null) // vec postoji vozilo sa tim imenom
-		{
-			System.out.println("Vec postoji vozilo sa unetim imenom!");
-			//return new ResponseEntity<Vozilo>(HttpStatus.BAD_REQUEST);
-		}
-		
-		else
-		{
-			voziloService.dodajVozilo(voziloDTO, idRentACar);
-			//return new ResponseEntity<Vozilo>(v, HttpStatus.OK);
-		}
+		Vozilo vozilo = voziloService.dodajVozilo(voziloDTO, idRentACar);
+		return new ResponseEntity<Vozilo>(vozilo, HttpStatus.OK);
 		
 	}
 	

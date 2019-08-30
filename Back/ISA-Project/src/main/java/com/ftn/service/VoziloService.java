@@ -33,7 +33,7 @@ public class VoziloService
 	
 	
 	// Dodavanje vozila
-	public void dodajVozilo(VoziloDTO dto, Long idRentACar) throws Exception 
+	public Vozilo dodajVozilo(VoziloDTO dto, Long idRentACar)  
 	{
 		
 		String nazivRent = rentRepository.getOne(idRentACar).getNaziv();
@@ -51,6 +51,7 @@ public class VoziloService
 		v.setTip(dto.getTip());
 		
 		voziloRepository.save(v);
+		return v ;
 		
 	}
 	
@@ -77,7 +78,7 @@ public class VoziloService
 		v.setRezervisano(false);
 		v.setTip(dto.getTip());
 		
-		v.setVoziloId(idVozila);
+		//v.setVoziloId(idVozila);
 		
 		voziloRepository.save(v);
 		

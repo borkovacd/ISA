@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Lokacija 
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String adresa;
 	// inspo
