@@ -70,6 +70,8 @@ import { AddEditFilijalaComponent } from './rentServisi/add-edit-filijala/add-ed
 import { WelcomePageHoteliSobeComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-sobe/welcome-page-hoteli-sobe.component';
 import { WelcomePageHoteliDodatneUslugeComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-dodatne-usluge/welcome-page-hoteli-dodatne-usluge.component';
 import { WelcomePageHoteliCenovnikComponent } from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
+import {VoziloService} from "./service/vozilo.service";
+import {LokacijaService} from "./service/lokacija.service";
 
 
 @NgModule({
@@ -152,7 +154,9 @@ import { WelcomePageHoteliCenovnikComponent } from './welcome-page/welcome-page-
     RoomService,
     PricelistService,
     PriceService,
-    AdditionalServiceService
+    AdditionalServiceService,
+    VoziloService,
+    LokacijaService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],
