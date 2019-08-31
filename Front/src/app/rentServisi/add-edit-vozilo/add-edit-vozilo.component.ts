@@ -27,7 +27,7 @@ export class AddEditVoziloComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private voziloService: VoziloService) {
+              private voziloService: VoziloService,) {
 
     this.form = this.fb.group({
       'cena': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,100}$')])],
@@ -85,8 +85,13 @@ export class AddEditVoziloComponent implements OnInit {
   createVozilo()
   {
     const idRent = this.route.snapshot.params.idRent ;
-    const vozilo = new VoziloModel(this.cena.value, this.naziv.value, this.marka.value, this.model.value, this.godinaProizvodnje.value,
-      this.brojSedista.value, this.tip.value);
+    const vozilo = new VoziloModel(this.cena.value,
+      this.naziv.value,
+      this.marka.value,
+      this.model.value,
+      this.godinaProizvodnje.value,
+      this.brojSedista.value,
+      this.tip.value);
 
     this.voziloService.dodajVozilo(vozilo, idRent).subscribe(data => {
       this.router.navigateByUrl('rentAdminPage/vozila/' + idRent);
