@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 import com.ftn.dto.HotelDTO;
 import com.ftn.dto.PretragaHotelaDTO;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.CenovnikHotela;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
+import com.ftn.model.hotels.StavkaCenovnikaHotela;
+import com.ftn.repository.CenovnikHotelaRepository;
 import com.ftn.repository.HotelRepository;
 import com.ftn.repository.RezervacijaHotelaRepository;
 import com.ftn.repository.SobaRepository;
+import com.ftn.repository.StavkaCenovnikaHotelaRepository;
 import com.ftn.repository.UserRepository;
 
 @Service
@@ -30,6 +34,10 @@ public class HotelService {
 	private RezervacijaHotelaRepository rezervacijaHotelaRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private CenovnikHotelaRepository cenovnikHotelaRepository;
+	@Autowired
+	private StavkaCenovnikaHotelaRepository stavkaCenovnikaHotelaRepository;
 
 	
 	/******** Borkovac *********/
@@ -139,6 +147,8 @@ public class HotelService {
 				}
 			}
 			List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+			List<CenovnikHotela> cenovnici = cenovnikHotelaRepository.findAll();
+			List<StavkaCenovnikaHotela> stavkeCenovnika = stavkaCenovnikaHotelaRepository.findAll();
 			for(Soba soba: sobeHotela) {
 				boolean slobodna = true;
 				for(RezervacijaHotela rezervacija : rezervacije) {
@@ -157,8 +167,18 @@ public class HotelService {
 					}
 				}
 				if(slobodna == true) {
-					if(!hoteliPoDatumu.contains(hotel)) {
-						hoteliPoDatumu.add(hotel);
+					for(CenovnikHotela cenovnik : cenovnici) {
+						if(cenovnik.getHotel().getId() == hotel.getId()) { //ako je cenovnik hotela u kojem je slobodna soba
+							for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) {
+								if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) {
+									if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
+										if(!hoteliPoDatumu.contains(hotel)) {
+											hoteliPoDatumu.add(hotel);
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
