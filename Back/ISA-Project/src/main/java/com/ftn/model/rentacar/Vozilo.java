@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.ftn.enums.TipVozila;
+
 // KORAK 3 tacka 2.10 - vozilo 
 @Entity
 public class Vozilo 
@@ -27,7 +29,8 @@ public class Vozilo
 	private int godinaProizvodnje;
 	private int brojSedista;
 	
-	private String tip;
+	@Enumerated(EnumType.STRING)
+	private TipVozila tip ;
 	
 	// za svako vozilo vezana je lista ocena
 	//private ArrayList<Integer> ocena;
@@ -54,7 +57,7 @@ public class Vozilo
 	}
 
 	public Vozilo(double cena, String naziv, String marka, String model, int godinaProizvodnje,
-			int brojSedista, String tip) {
+			int brojSedista, TipVozila tip) {
 		super();
 		this.cena = cena;
 		this.naziv = naziv;
@@ -123,14 +126,13 @@ public class Vozilo
 		this.brojSedista = brojSedista;
 	}
 
-	public String getTip() {
+	public TipVozila getTip() {
 		return tip;
 	}
 
-	public void setTip(String tip) {
+	public void setTip(TipVozila tip) {
 		this.tip = tip;
 	}
-
 
 	public boolean isRezervisano() {
 		return rezervisano;

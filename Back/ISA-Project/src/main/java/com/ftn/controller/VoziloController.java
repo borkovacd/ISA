@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.RentCarDTO;
 import com.ftn.dto.VoziloDTO;
+import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.service.RentACarService;
@@ -100,6 +101,31 @@ public class VoziloController
 		boolean response = voziloService.obrisiVozilo(idRentACar, idVozila);
 		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
 	}
+	
+	// provera da li je vozilo rezervisano
+	@GetMapping("/checkIfReservedVozilo/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkIfReservedVozilo(@PathVariable Long id) 
+	{
+		//Ako vozilo nije rezervisano, taken je FALSE
+		//u suprotnom taken ima vrednost TRUE
+		
+		boolean taken = voziloService.checkIfVoziloIsReserved(id);
+		return taken;
+	}
+	
+	// vraca slobodna vozila jednog servisa
+	@PostMapping("/getAvailableVozila/{idRent}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Vozilo>> getAvailableVozila(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idRent) 
+	{
+		ArrayList<Vozilo> vozila = voziloService.getSlobodnaVozilaPeriod(vpDTO, idRent);
+		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
+	}
+	
+	
+	
+	
 	
 	// vraca sva vozila - 2.7
 	// 2.7

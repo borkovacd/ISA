@@ -1,35 +1,69 @@
 package com.ftn.model.rentacar;
 
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class CenovnikRentACar 
 {
-	Vozilo vozilo ;
-	private int brojDana ;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private LocalDate pocetakVazenja;
 	
+	private LocalDate prestanakVazenja;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private RentACar rentACar ;
+
 	public CenovnikRentACar() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CenovnikRentACar(Vozilo vozilo, int brojDana) {
+	public CenovnikRentACar(LocalDate pocetakVazenja, LocalDate prestanakVazenja) {
 		super();
-		this.vozilo = vozilo;
-		this.brojDana = brojDana;
+		this.pocetakVazenja = pocetakVazenja;
+		this.prestanakVazenja = prestanakVazenja;
 	}
 
-	public Vozilo getVozilo() {
-		return vozilo;
+	public Long getId() {
+		return id;
 	}
 
-	public void setVozilo(Vozilo vozilo) {
-		this.vozilo = vozilo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public int getBrojDana() {
-		return brojDana;
+	public LocalDate getPocetakVazenja() {
+		return pocetakVazenja;
 	}
 
-	public void setBrojDana(int brojDana) {
-		this.brojDana = brojDana;
+	public void setPocetakVazenja(LocalDate pocetakVazenja) {
+		this.pocetakVazenja = pocetakVazenja;
+	}
+
+	public LocalDate getPrestanakVazenja() {
+		return prestanakVazenja;
+	}
+
+	public void setPrestanakVazenja(LocalDate prestanakVazenja) {
+		this.prestanakVazenja = prestanakVazenja;
+	}
+
+	public RentACar getRentACar() {
+		return rentACar;
+	}
+
+	public void setRentACar(RentACar rentACar) {
+		this.rentACar = rentACar;
 	}
 	
 	

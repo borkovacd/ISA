@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.VoziloDTO;
+import com.ftn.dto.VremenskiPeriodDTO;
+import com.ftn.enums.TipSobe;
+import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -48,7 +53,35 @@ public class VoziloService
 		v.setModel(dto.getModel());
 		v.setNaziv(dto.getNaziv());
 		v.setRezervisano(false);
-		v.setTip(dto.getTip());
+		
+		if (dto.getTip().equals("LIMUZINA"))
+		{
+			v.setTip(TipVozila.LIMUZINA);
+		}
+		else if(dto.getTip().equals("KARAVAN")) 
+		{
+			v.setTip(TipVozila.KARAVAN);
+		}
+		else if(dto.getTip().equals("KUPE")) 
+		{
+			v.setTip(TipVozila.KUPE);
+		}
+		else if(dto.getTip().equals("KABRIOLET")) 
+		{
+			v.setTip(TipVozila.KABRIOLET);
+		}
+		else if(dto.getTip().equals("MINIVEN")) 
+		{
+			v.setTip(TipVozila.MINIVEN);
+		}
+		else if(dto.getTip().equals("DZIP")) 
+		{
+			v.setTip(TipVozila.DZIP);
+		}
+		else if(dto.getTip().equals("PICKUP")) 
+		{
+			v.setTip(TipVozila.PICKUP);
+		}
 		
 		voziloRepository.save(v);
 		return v ;
@@ -76,9 +109,36 @@ public class VoziloService
 		v.setModel(dto.getModel());
 		v.setNaziv(dto.getNaziv());
 		v.setRezervisano(false);
-		v.setTip(dto.getTip());
 		
-		//v.setVoziloId(idVozila);
+		if (dto.getTip().equals("LIMUZINA"))
+		{
+			v.setTip(TipVozila.LIMUZINA);
+		}
+		else if(dto.getTip().equals("KARAVAN")) 
+		{
+			v.setTip(TipVozila.KARAVAN);
+		}
+		else if(dto.getTip().equals("KUPE")) 
+		{
+			v.setTip(TipVozila.KUPE);
+		}
+		else if(dto.getTip().equals("KABRIOLET")) 
+		{
+			v.setTip(TipVozila.KABRIOLET);
+		}
+		else if(dto.getTip().equals("MINIVEN")) 
+		{
+			v.setTip(TipVozila.MINIVEN);
+		}
+		else if(dto.getTip().equals("DZIP")) 
+		{
+			v.setTip(TipVozila.DZIP);
+		}
+		else if(dto.getTip().equals("PICKUP")) 
+		{
+			v.setTip(TipVozila.PICKUP);
+		}
+		
 		
 		voziloRepository.save(v);
 		
@@ -156,16 +216,95 @@ public class VoziloService
 		boolean taken = false;
 	
 		List<Vozilo> vozila = voziloRepository.findAll();
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
 		
-		for (Vozilo v: vozila)
+		Vozilo vozilo = voziloRepository.findOneByVoziloId(idVozila);
+		
+		
+		// prolazi kroz sve rezervacije i gleda da li se to vozilo nalazi u rezervacijama
+		// i da li je status tog vozila da je rezervisano
+		for (RezervacijaVozila rez : rezervacije)
 		{
-			if (v.getVoziloId() == idVozila && v.isRezervisano() == true) // ukoliko je vozilo sa tim id-jem i ukoliko je rezervisano
+			if (rez.getVozilo().getVoziloId() == idVozila && vozilo.isRezervisano() == true)
 			{
-				taken = true ;
+				taken = true ; 
 			}
 		}
 			
 		return taken;
+	}
+	
+	// vraca slobodna vozilaza izabran rent-a-car u datom vremenskom periodu
+	public ArrayList<Vozilo> getSlobodnaVozilaPeriod(VremenskiPeriodDTO vpDTO, Long idRent)
+	{
+		ArrayList<Vozilo> slobodnaVozila = new ArrayList<Vozilo>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(vpDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(vpDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		ArrayList<Vozilo> vozilaRent = new ArrayList<Vozilo>();
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		
+		RentACar rent = rentRepository.getOne(idRent);
+		
+		// ukoliko nije prosledjen dobar rent-a-car
+		if (rent == null)
+		{
+			return null ;
+		}
+		else
+		{
+			for (Vozilo v: svaVozila)
+			{
+				if (v.getRentACar().getRentACarId() == idRent)
+				{
+					vozilaRent.add(v);
+				}
+			}
+		}
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		
+		for (Vozilo v: vozilaRent)
+		{
+			boolean slobodno = true ;
+			for (RezervacijaVozila rez: rezervacije)
+			{
+				if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
+				{
+					if (d1.isBefore(rez.getDatumPreuzimanja()))
+					{
+						if (d2.isAfter(rez.getDatumPreuzimanja()))
+						{
+							slobodno = false ;
+						}
+						
+						else if(d1.isAfter(rez.getDatumPreuzimanja()))
+						{
+							if (d2.isBefore(rez.getDatumVracanja()))
+							{
+								slobodno = false ;
+							}
+						}
+					}
+				}
+			}
+			
+			if (slobodno == true)
+			{
+				slobodnaVozila.add(v);
+			}
+			
+		}
+		
+		return slobodnaVozila ;
 	}
 	
 	

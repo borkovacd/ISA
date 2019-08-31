@@ -1,6 +1,7 @@
 package com.ftn.model.rentacar;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class RezervacijaVozila
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Date datumPreuzimanja;
-	private Date datumVracanja;
+	private LocalDate datumPreuzimanja;
+	private LocalDate datumVracanja;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Lokacija mestoPreuzimanja;
@@ -40,10 +41,6 @@ public class RezervacijaVozila
 	// private int minCena ;
 	// private int maxCena ;
 	
-	// lista rezervisanih vozila
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Vozilo> rezervisanaVozila;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Vozilo vozilo;
 
@@ -55,7 +52,7 @@ public class RezervacijaVozila
 		// TODO Auto-generated constructor stub
 	}
 
-	public RezervacijaVozila(Date datumPreuzimanja, Lokacija mestoPreuzimanja, Date datumVracanja,
+	public RezervacijaVozila(LocalDate datumPreuzimanja, Lokacija mestoPreuzimanja, LocalDate datumVracanja,
 			Lokacija mestoVracanja, String tipVozila, int brPutnika) {
 		super();
 		this.datumPreuzimanja = datumPreuzimanja;
@@ -66,13 +63,7 @@ public class RezervacijaVozila
 		this.brPutnika = brPutnika;
 	}
 
-	public Date getDatumPreuzimanja() {
-		return datumPreuzimanja;
-	}
-
-	public void setDatumPreuzimanja(Date datumPreuzimanja) {
-		this.datumPreuzimanja = datumPreuzimanja;
-	}
+	
 
 	public Lokacija getMestoPreuzimanja() {
 		return mestoPreuzimanja;
@@ -82,11 +73,20 @@ public class RezervacijaVozila
 		this.mestoPreuzimanja = mestoPreuzimanja;
 	}
 
-	public Date getDatumVracanja() {
+	
+	public LocalDate getDatumPreuzimanja() {
+		return datumPreuzimanja;
+	}
+
+	public void setDatumPreuzimanja(LocalDate datumPreuzimanja) {
+		this.datumPreuzimanja = datumPreuzimanja;
+	}
+
+	public LocalDate getDatumVracanja() {
 		return datumVracanja;
 	}
 
-	public void setDatumVracanja(Date datumVracanja) {
+	public void setDatumVracanja(LocalDate datumVracanja) {
 		this.datumVracanja = datumVracanja;
 	}
 
@@ -114,13 +114,6 @@ public class RezervacijaVozila
 		this.brPutnika = brPutnika;
 	}
 
-	public List<Vozilo> getRezervisanaVozila() {
-		return rezervisanaVozila;
-	}
-
-	public void setRezervisanaVozila(ArrayList<Vozilo> rezervisanaVozila) {
-		this.rezervisanaVozila = rezervisanaVozila;
-	}
 
 	public Long getId() {
 		return id;
@@ -146,10 +139,6 @@ public class RezervacijaVozila
 		this.vozilo = vozilo;
 	}
 
-	public void setRezervisanaVozila(List<Vozilo> rezervisanaVozila) {
-		this.rezervisanaVozila = rezervisanaVozila;
-	}
-	
 	
 	
 	
