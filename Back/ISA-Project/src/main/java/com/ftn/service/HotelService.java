@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.HotelDTO;
+import com.ftn.dto.PretragaHotelaDTO;
 import com.ftn.model.Korisnik;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
@@ -111,6 +114,105 @@ public class HotelService {
 		return hotels;
 	}
 	
+	public ArrayList<Hotel> searchHotels(PretragaHotelaDTO phDTO) {
+		
+		ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
+		
+		ArrayList<Hotel> hoteliPoDatumu = new ArrayList<Hotel>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(phDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(phDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		for(Hotel hotel: hotelRepository.findAll()) {
+			ArrayList<Soba> sobeHotela = new ArrayList<Soba>();
+			ArrayList<Soba> sveSobe = (ArrayList<Soba>) sobaRepository.findAll();
+			for(Soba soba : sveSobe) {
+				if(soba.getHotel().getId() == hotel.getId()) {
+					sobeHotela.add(soba);
+				}
+			}
+			List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+			for(Soba soba: sobeHotela) {
+				boolean slobodna = true;
+				for(RezervacijaHotela rezervacija : rezervacije) {
+					for(Soba rezervisanaSoba: rezervacija.getSobe()) { 
+						if(rezervisanaSoba.getId() == soba.getId()) { //Da li se soba nalazi medju rezervacijama
+							if(d1.isBefore(rezervacija.getDatumPocetka())) {
+								if(d2.isAfter(rezervacija.getDatumPocetka())) {
+									slobodna = false;
+								}
+							} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
+								if(d2.isBefore(rezervacija.getDatumKraja())) {
+									slobodna = false;
+								}
+							}
+						}
+					}
+				}
+				if(slobodna == true) {
+					if(!hoteliPoDatumu.contains(hotel)) {
+						hoteliPoDatumu.add(hotel);
+					}
+				}
+			}
+		}
+		
+		ArrayList<Hotel> hoteliPoNazivu = new ArrayList<Hotel>();
+		String naziv = null;
+		if(phDTO.getHotelName() != "") {
+			naziv = phDTO.getHotelName();
+			naziv = naziv.toUpperCase();
+		}
+		
+		if(naziv != null) {
+			for(Hotel hotel: hoteliPoDatumu) {
+				if(hotel.getNaziv().toUpperCase().equals(naziv)) {
+					hoteliPoNazivu.add(hotel);
+				}
+			}
+		}
+		
+		ArrayList<Hotel> hoteliPoLokaciji = new ArrayList<Hotel>();
+		String lokacija = null;
+		if(phDTO.getHotelLocation() != "") {
+			lokacija = phDTO.getHotelLocation();
+			lokacija = lokacija.toUpperCase();
+		}
+		
+		if(lokacija != null) {
+			if(naziv != null) {
+				for(Hotel hotel: hoteliPoNazivu) {
+					if(hotel.getAdresa().toUpperCase().contains(lokacija)) {
+						hoteli.add(hotel);
+					}
+				}
+			} else {
+				for(Hotel hotel: hoteliPoDatumu) {
+					if(hotel.getAdresa().toUpperCase().contains(lokacija)) {
+						hoteli.add(hotel);
+					}
+				}
+			}
+		} else {
+			hoteli = hoteliPoNazivu;
+		}
+		
+		if(naziv==null && lokacija==null) {
+			hoteli = hoteliPoDatumu;
+		}
+		
+		
+		return hoteli;
+		
+	}
+	
 	/***********************/
 	/******* Olga **********/
 	
@@ -158,6 +260,8 @@ public class HotelService {
 			return hoteli;
 			
 		}
+
+		
 
 	/***********************/
 }

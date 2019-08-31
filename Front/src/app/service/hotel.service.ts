@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import { HotelModel } from '../model/hotel.model';
 import {Observable} from 'rxjs';
+import {SearchHotelsModel} from '../model/searchHotels.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'text/plain'}),
@@ -48,5 +49,10 @@ export class HotelService {
     return this.http.get(`${this.BASE_URL}/getAllHotels`, {headers});
   }
 
+  searchHotels(object: SearchHotelsModel): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/searchHotels`, body, {headers});
+  }
 }
 
