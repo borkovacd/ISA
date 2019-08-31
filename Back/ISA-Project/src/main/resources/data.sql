@@ -45,3 +45,25 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 5);
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
 	values (5, "petrovic.petar@gmail.com", "Beograd", "Petar",  "petar", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Petrovic", false, "0604561231", true, "ADMINISTRATOR_HOTELA");
+
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(1, "Brace Dronjak 10", "Savic trans", "Vrlo kvalitetno i povoljno.", 3);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(2, "Bulevar Oslobodjenja 46", "Vujovic trans", "Vrlo skupo.", 3);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(3, "Grobljanska 16", "Borkovac trans", "Ne ici ovde.", 3);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(4, "Zeleznicka 15", "Big Savic trans", "Najbolje.", 3);
+
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
+	values (1, 5, 1000, 2019, "BMW", "X5", "BMW X5", 0, "dzip", 1);
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
+	values (2, 5, 200, 2015, "Mercedes", "Jeep", "Mercedes dzip", 0, "dzip", 1);
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
+	values (3, 5, 400, 2015, "Opel", "Astra", "Opel Astra", 0, "karavan", 2);
+	
+insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
+	values (1, "Brace Dronjak 10", "Srbija", "Novi Sad", 19, 46, 1);	
+insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
+	values (2, "Brace Dronjak 12", "Srbija", "Novi Sad", 19, 46, 1);	
+

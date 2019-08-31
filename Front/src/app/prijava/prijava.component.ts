@@ -44,7 +44,7 @@ export class PrijavaComponent implements OnInit {
       this.userService.logIn(this.korisnik).subscribe(
         data => {
           if (data.statusKorisnika == 'obican') {
-            this.router.navigate(['/registrovaniKorisnik']);
+            this.router.navigate(['/registeredUserPage']);
           } else if (data.statusKorisnika == 'avio') {
             this.router.navigate(['/glavna']);
           }

@@ -45,6 +45,10 @@ export class FilijaleComponent implements OnInit {
 
   deleteFilijala(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
+
+    this.lokService.obrisiFilijalu(idRent, id).subscribe(data => {
+      this.router.navigateByUrl('rentAdminPage');
+    });
   }
 
   goBack() {

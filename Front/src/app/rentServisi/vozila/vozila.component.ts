@@ -46,6 +46,10 @@ export class VozilaComponent implements OnInit {
 
   deleteVozilo(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
+
+    this.voziloService.obrisiVozilo(idRent, id).subscribe(data => {
+      this.router.navigateByUrl('rentAdminPage');
+    }) ;
   }
 
   goBack() {

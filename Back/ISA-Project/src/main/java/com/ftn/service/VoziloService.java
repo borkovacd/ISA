@@ -95,7 +95,7 @@ public class VoziloService
 				if (vozilo.getVoziloId() == idVozila)
 				{
 					// dodaj za brisanje iz cenovnika
-					voziloRepository.deleteByVoziloId(idVozila);
+					voziloRepository.deleteById(idVozila);
 					return true ;
 				}
 			}
