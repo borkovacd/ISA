@@ -7,7 +7,7 @@ public class Lokacija
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String adresa;
 	// inspo
 	private String drzava ;
@@ -15,10 +15,20 @@ public class Lokacija
 	private double longitude ;
 	private double latitude ;
 	
+	
+	public RentACar getRentACar() {
+		return rentACar;
+	}
+
+	public void setRentACar(RentACar rentACar) {
+		this.rentACar = rentACar;
+	}
+
 	// rentACar se nalazi na toj lokaciji
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="rentACarId", referencedColumnName="rentACarId")
 	private RentACar rentACar;
+	
 
 	public Lokacija() {
 		super();
@@ -29,14 +39,15 @@ public class Lokacija
 		super();
 		
 		this.adresa = adresa;
-		this.rentACar = rentACar;
 	}
 
-	public long getId() {
+
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -48,13 +59,6 @@ public class Lokacija
 		this.adresa = adresa;
 	}
 
-	public RentACar getRentACar() {
-		return rentACar;
-	}
-
-	public void setRentACar(RentACar rentACar) {
-		this.rentACar = rentACar;
-	}
 
 	public String getDrzava() {
 		return drzava;

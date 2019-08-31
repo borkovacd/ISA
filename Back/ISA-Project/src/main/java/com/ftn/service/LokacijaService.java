@@ -103,24 +103,15 @@ public class LokacijaService
 			
 			RentACar rentACar = rentRepository.findOneByRentACarId(idRentACar);
 			List<Lokacija> lokacije = new ArrayList<Lokacija>();
+			List<Lokacija> sveLokacije = lokRepository.findAll();
 			
-			for (int i = 0 ; i < rentACar.getLokacije().size(); i++)
+			for (Lokacija l: sveLokacije )
 			{
-				Lokacija l = new Lokacija();
-				
-				l.setAdresa(rentACar.getLokacije().get(i).getAdresa());
-				l.setDrzava(rentACar.getLokacije().get(i).getDrzava());
-				l.setGrad(rentACar.getLokacije().get(i).getGrad());
-				l.setLatitude(rentACar.getLokacije().get(i).getLatitude());
-				l.setLongitude(rentACar.getLokacije().get(i).getLongitude());
-				l.setRentACar(rentACar);
-				
-				lokacije.add(l);
-				lokRepository.save(l); // WARUM
-				
+				if (l.getRentACar().getRentACarId() == idRentACar)
+				{
+					lokacije.add(l);
+				}
 			}
-			
-			
 			return (ArrayList<Lokacija>) lokacije;
 		}
 		

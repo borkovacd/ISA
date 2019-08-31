@@ -122,24 +122,15 @@ public class VoziloService
 		
 		RentACar rentACar = rentRepository.findOneByRentACarId(idRentACar);
 		List<Vozilo> vozila = new ArrayList<Vozilo>();
+		List<Vozilo> svaVozila = voziloRepository.findAll();
 		
-		for (int i = 0 ; i < rentACar.getSpisakVozila().size(); i++)
+		for (Vozilo v: svaVozila)
 		{
-			Vozilo v = new Vozilo();
-			v.setRentACar(rentACar.getSpisakVozila().get(i).getRentACar());
-			v.setBrojSedista(rentACar.getSpisakVozila().get(i).getBrojSedista());
-			v.setCena(rentACar.getSpisakVozila().get(i).getCena());
-			v.setGodinaProizvodnje(rentACar.getSpisakVozila().get(i).getGodinaProizvodnje());
-			v.setMarka(rentACar.getSpisakVozila().get(i).getMarka());
-			v.setModel(rentACar.getSpisakVozila().get(i).getModel());
-			v.setNaziv(rentACar.getSpisakVozila().get(i).getNaziv());
-			v.setRezervisano(rentACar.getSpisakVozila().get(i).isRezervisano());
-			v.setTip(rentACar.getSpisakVozila().get(i).getTip());
-			
-			vozila.add(v);
-			voziloRepository.save(v); 	// WARUM
+			if (v.getRentACar().getRentACarId() == idRentACar)
+			{
+				vozila.add(v);
+			}
 		}
-		
 		
 		return (ArrayList<Vozilo>) vozila;
 	}

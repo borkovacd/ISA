@@ -30,7 +30,7 @@ public class Vozilo
 	private String tip;
 	
 	// za svako vozilo vezana je lista ocena
-	private ArrayList<Integer> ocena;
+	//private ArrayList<Integer> ocena;
 	
 	// rezervisano - DA / NE
 	private boolean rezervisano;
@@ -42,10 +42,11 @@ public class Vozilo
 
 	// Inspo
 	
+	/*
 	private double prosecnaOcena;
 	private double brojOcena ;
 	private double sumaOcena ;
-	
+	*/
 
 	public Vozilo() {
 		super();
@@ -130,13 +131,6 @@ public class Vozilo
 		this.tip = tip;
 	}
 
-	public ArrayList<Integer> getOcena() {
-		return ocena;
-	}
-
-	public void setOcena(ArrayList<Integer> ocena) {
-		this.ocena = ocena;
-	}
 
 	public boolean isRezervisano() {
 		return rezervisano;
@@ -154,32 +148,7 @@ public class Vozilo
 		this.rentACar = rentACar;
 	}
 	
-	
-	public double getProsecnaOcena() {
-		return prosecnaOcena;
-	}
-
-	public void setProsecnaOcena(double prosecnaOcena) {
-		this.prosecnaOcena = prosecnaOcena;
-	}
-
-	public double getBrojOcena() {
-		return brojOcena;
-	}
-
-	public void setBrojOcena(double brojOcena) {
-		this.brojOcena = brojOcena;
-	}
-
-	public double getSumaOcena() {
-		return sumaOcena;
-	}
-
-	public void setSumaOcena(double sumaOcena) {
-		this.sumaOcena = sumaOcena;
-	}
-
-	
+		
 	
 	
 }

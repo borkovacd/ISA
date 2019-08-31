@@ -13,12 +13,17 @@ public class RentACar
 
 	@Id
 	@GeneratedValue
-	private long rentACarId;
+	private Long rentACarId;
 	
 	private String naziv;
 	private String adresa;
 	private String opis;
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	private Korisnik administrator; //administrator rent a car
+
+	
+	/*
 	// u servisu se nalazi lista vozila
 	@OneToMany(targetEntity=Vozilo.class, mappedBy="rentACar", cascade = CascadeType.ALL)
 	private List<Vozilo> spisakVozila = new ArrayList<>();
@@ -26,31 +31,31 @@ public class RentACar
 	// filijale na kojima se rentACar nalazi
 	@OneToMany(targetEntity=Lokacija.class, mappedBy="rentACar", cascade = CascadeType.ALL)
 	private List<Lokacija> lokacije = new ArrayList<>();
+	*/
 	
 	//private List<Vozilo> cenovnik = new ArrayList<>();
 	
 	// FALI
 	// CenovnikUsluga
 	
+	/*
 	private ArrayList<Integer> ocene;
 	
 	private double prihod;
 	private ArrayList<RezervacijaVozila> listaRezervacija;
-	
+	*/
 	/*@OneToMany(targetEntity=Korisnik.class, mappedBy="rentACar", cascade = CascadeType.ALL)
 	private List<Korisnik> administratori = new ArrayList<>();*/
-	
-	// OLGA LOOK PLEASE 
-	/********* ja sam ovako dodao kod sebe, ako ti ne odgovara ovo ti javi pa menjaj *****/
-	@OneToOne(fetch = FetchType.EAGER)
-	private Korisnik administrator; //administrator rent a car
+
 
 	
 	// Inspo
 	
+	/*
 	private double prosecnaOcena ;
 	private double brojOcena ;
 	private double sumaOcena ;
+	*/
 
 	public RentACar() {
 		super();
@@ -80,14 +85,13 @@ public class RentACar
 		this.adresa = adresa;
 		this.opis = opis;
 		this.administrator = administrator;
-		this.spisakVozila = spisakVozila;
 	}
 
-	public long getRentACarId() {
+	public Long getRentACarId() {
 		return rentACarId;
 	}
 
-	public void setRentACarId(long rentACarId) {
+	public void setRentACarId(Long rentACarId) {
 		this.rentACarId = rentACarId;
 	}
 
@@ -114,79 +118,6 @@ public class RentACar
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-
-	public List<Vozilo> getSpisakVozila() {
-		return spisakVozila;
-	}
-
-	public void setSpisakVozila(List<Vozilo> spisakVozila) {
-		this.spisakVozila = spisakVozila;
-	}
-
-	public List<Lokacija> getLokacije() {
-		return lokacije;
-	}
-
-	public void setLokacije(List<Lokacija> lokacije) {
-		this.lokacije = lokacije;
-	}
-
-	public ArrayList<Integer> getOcene() {
-		return ocene;
-	}
-
-	public void setOcene(ArrayList<Integer> ocene) {
-		this.ocene = ocene;
-	}
-
-	public double getPrihod() {
-		return prihod;
-	}
-
-	public void setPrihod(double prihod) {
-		this.prihod = prihod;
-	}
-
-	public ArrayList<RezervacijaVozila> getListaRezervacija() {
-		return listaRezervacija;
-	}
-
-	public void setListaRezervacija(ArrayList<RezervacijaVozila> listaRezervacija) {
-		this.listaRezervacija = listaRezervacija;
-	}
-
-	/*public List<Korisnik> getAdministratori() {
-		return administratori;
-	}
-
-	public void setAdministratori(List<Korisnik> administratori) {
-		this.administratori = administratori;
-	}*/
-
-	public double getProsecnaOcena() {
-		return prosecnaOcena;
-	}
-
-	public void setProsecnaOcena(double prosecnaOcena) {
-		this.prosecnaOcena = prosecnaOcena;
-	}
-
-	public double getBrojOcena() {
-		return brojOcena;
-	}
-
-	public void setBrojOcena(double brojOcena) {
-		this.brojOcena = brojOcena;
-	}
-
-	public double getSumaOcena() {
-		return sumaOcena;
-	}
-
-	public void setSumaOcena(double sumaOcena) {
-		this.sumaOcena = sumaOcena;
-	}
-	
 	
 	
 }
