@@ -75,6 +75,12 @@ import {LokacijaService} from "./service/lokacija.service";
 import { RegisteredUserHoteliComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli.component';
 import { RegisteredUserHoteliSobeComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli-sobe/registered-user-hoteli-sobe.component';
 import { RegisteredUserHoteliDodatneUslugeComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli-dodatne-usluge/registered-user-hoteli-dodatne-usluge.component';
+import { AddEditPriceRentComponent } from './rentServisi/add-edit-price-rent/add-edit-price-rent.component';
+import { AddEditPricelistRentComponent } from './rentServisi/add-edit-pricelist-rent/add-edit-pricelist-rent.component';
+import { PricelistsRentComponent } from './rentServisi/pricelists-rent/pricelists-rent.component';
+import { PricesRentComponent } from './rentServisi/prices-rent/prices-rent.component';
+import {PriceRentService} from "./service/priceRent.service";
+import {PricelistRentService} from "./service/pricelistRent.service";
 
 
 @NgModule({
@@ -127,6 +133,14 @@ import { RegisteredUserHoteliDodatneUslugeComponent } from './users/registered-u
     RegisteredUserHoteliSobeComponent,
 
     RegisteredUserHoteliDodatneUslugeComponent,
+
+    AddEditPriceRentComponent,
+
+    AddEditPricelistRentComponent,
+
+    PricelistsRentComponent,
+
+    PricesRentComponent,
   ],
   imports: [
     BrowserModule,
@@ -165,7 +179,9 @@ import { RegisteredUserHoteliDodatneUslugeComponent } from './users/registered-u
     PriceService,
     AdditionalServiceService,
     VoziloService,
-    LokacijaService
+    LokacijaService,
+    PriceRentService,
+    PricelistRentService,
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

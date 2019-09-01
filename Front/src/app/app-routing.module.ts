@@ -29,6 +29,10 @@ import { AddEditFilijalaComponent } from './rentServisi/add-edit-filijala/add-ed
 import { AddEditVoziloComponent } from './rentServisi/add-edit-vozilo/add-edit-vozilo.component';
 import {RegisteredUserHoteliSobeComponent} from './users/registered-user/registered-user-hoteli/registered-user-hoteli-sobe/registered-user-hoteli-sobe.component';
 import {RegisteredUserHoteliDodatneUslugeComponent} from './users/registered-user/registered-user-hoteli/registered-user-hoteli-dodatne-usluge/registered-user-hoteli-dodatne-usluge.component';
+import {PricelistsRentComponent} from "./rentServisi/pricelists-rent/pricelists-rent.component";
+import {PricesRentComponent} from "./rentServisi/prices-rent/prices-rent.component";
+import {AddEditPricelistRentComponent} from "./rentServisi/add-edit-pricelist-rent/add-edit-pricelist-rent.component";
+import {AddEditPriceRentComponent} from "./rentServisi/add-edit-price-rent/add-edit-price-rent.component";
 
 
 const routes: Routes = [
@@ -67,6 +71,10 @@ const routes: Routes = [
   {path: 'rentAdminPage', component: RentAdministratorComponent},
   {path: 'rentAdminPage/vozilo/:idRent/:mode/:idVozilo', component: AddEditVoziloComponent},
   {path: 'rentAdminPage/filijala/:idRent/:mode/:idFilijala', component: AddEditFilijalaComponent},
+  {path: 'rentAdminPage/pricelistsRent/:idRent', component: PricelistsRentComponent},
+  {path: 'rentAdminPage/pricesRent/:idRent/:idPriceList', component: PricesRentComponent },
+  {path: 'rentAdminPage/pricelistRent/:idRent/:mode/:idPriceList', component: AddEditPricelistRentComponent },
+  {path: 'rentAdminPage/price/:idRent/:idPriceList/:mode/:idPrice', component: AddEditPriceRentComponent}
 
 
 ];

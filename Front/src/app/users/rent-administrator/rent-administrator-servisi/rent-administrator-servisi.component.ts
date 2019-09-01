@@ -39,7 +39,7 @@ export class RentAdministratorServisiComponent implements OnInit {
 
   pregledCenovnika(idRent: any)
   {
-
+    this.router.navigateByUrl('rentAdminPage/pricelistsRent/' + idRent);
   }
 
 }
