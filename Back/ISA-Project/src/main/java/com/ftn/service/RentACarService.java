@@ -49,6 +49,12 @@ public class RentACarService {
 	
 	/******* Olga *******/
 	
+	// vraca sve rent-a-car servise
+	public ArrayList<RentACar> vratiSveServise()
+	{
+		return (ArrayList<RentACar>) rentCarRepository.findAll();
+	}
+	
 	// vraca vozilo na osnovu imena
 	public RentACar findByNaziv(String naziv)
 	{

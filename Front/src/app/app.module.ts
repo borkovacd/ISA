@@ -81,6 +81,10 @@ import { PricelistsRentComponent } from './rentServisi/pricelists-rent/pricelist
 import { PricesRentComponent } from './rentServisi/prices-rent/prices-rent.component';
 import {PriceRentService} from "./service/priceRent.service";
 import {PricelistRentService} from "./service/pricelistRent.service";
+import { WelcomePageServisiComponent } from './welcome-page/welcome-page-servisi/welcome-page-servisi.component';
+import { WelcomePageServisiCenovnikComponent } from './welcome-page/welcome-page-servisi/welcome-page-servisi-cenovnik/welcome-page-servisi-cenovnik.component';
+import { WelcomePageServisiFilijaleComponent } from './welcome-page/welcome-page-servisi/welcome-page-servisi-filijale/welcome-page-servisi-filijale.component';
+import { WelcomePageServisiVozilaComponent } from './welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component';
 
 
 @NgModule({
@@ -141,6 +145,14 @@ import {PricelistRentService} from "./service/pricelistRent.service";
     PricelistsRentComponent,
 
     PricesRentComponent,
+
+    WelcomePageServisiComponent,
+
+    WelcomePageServisiCenovnikComponent,
+
+    WelcomePageServisiFilijaleComponent,
+
+    WelcomePageServisiVozilaComponent,
   ],
   imports: [
     BrowserModule,

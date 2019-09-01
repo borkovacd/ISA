@@ -33,6 +33,9 @@ import {PricelistsRentComponent} from "./rentServisi/pricelists-rent/pricelists-
 import {PricesRentComponent} from "./rentServisi/prices-rent/prices-rent.component";
 import {AddEditPricelistRentComponent} from "./rentServisi/add-edit-pricelist-rent/add-edit-pricelist-rent.component";
 import {AddEditPriceRentComponent} from "./rentServisi/add-edit-price-rent/add-edit-price-rent.component";
+import {WelcomePageServisiComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi.component";
+import {WelcomePageServisiFilijaleComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-filijale/welcome-page-servisi-filijale.component";
+import {WelcomePageServisiCenovnikComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-cenovnik/welcome-page-servisi-cenovnik.component";
 
 
 const routes: Routes = [
@@ -57,6 +60,9 @@ const routes: Routes = [
   {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},
   {path: 'welcomepage/additionalServices/:idHotela', component: WelcomePageHoteliDodatneUslugeComponent},
   {path: 'welcomepage/pricelist/:idHotela', component: WelcomePageHoteliCenovnikComponent},
+  {path: 'welcomepage/vozila/:idRent', component: WelcomePageServisiComponent},
+  {path: 'welcomepage/filijale/:idRent', component: WelcomePageServisiFilijaleComponent},
+  {path: 'welcomepage/pricelistRent/:idRent', component: WelcomePageServisiCenovnikComponent},
 
 
   {path: 'registeredUserPage', component: RegisteredUserComponent},

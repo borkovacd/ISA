@@ -38,6 +38,16 @@ public class RentCarController {
 	/******************/
 	
 	/***** Olga *******/
+	@GetMapping("/getAllRents")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<RentACar>> getAllRents()
+	{
+		ArrayList<RentACar> rents = rentCarService.vratiSveServise();
+		return new ResponseEntity<List<RentACar>>(rents, HttpStatus.OK);
+		
+	}
+	
+	
 	
 	// izmeni Rent-a-Car servis
 	@PutMapping("/izmeniRent/{id}")

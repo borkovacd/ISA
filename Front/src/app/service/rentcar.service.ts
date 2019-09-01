@@ -16,6 +16,12 @@ export class RentCarService {
 
   }
 
+  getAllRents(): Observable<any>
+  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAllRents`, {headers});
+  }
+
   registerRentCar(object: RentCarModel): Observable<any> {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
