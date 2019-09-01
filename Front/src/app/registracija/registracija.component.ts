@@ -16,11 +16,12 @@ export class RegistracijaComponent implements OnInit {
   registerForm: FormGroup;
 
   korisnik: KorisnikModel = new KorisnikModel();
-  ponovljenaLozinka = '';
+  ponovljenaLozinka = "";
   lozinke = '';
 
   poruka = '';
   porukaTelefon = '';
+  porukaIme = '';
 
   constructor(private http: HttpClient, private userService: UserService, private router: Router) {
   }
@@ -31,49 +32,49 @@ export class RegistracijaComponent implements OnInit {
   submit() {
     let provera : boolean = false;
 
-    if (this.korisnik.ime == "") {
-      $('#name').addClass('border-danger');
+    if (this.korisnik.ime == "" || this.korisnik.ime == undefined) {
+      $("#nameValue").addClass('border-danger');
       provera = true;
     } else {
-      $('#name').removeClass('border-danger');
+      $('#nameValue').removeClass('border-danger');
     }
-    if (this.korisnik.prezime == "") {
+    if (this.korisnik.prezime == "" || this.korisnik.prezime == undefined) {
       $('#surname').addClass('border-danger');
       provera = true;
     } else {
       $('#surname').removeClass('border-danger');
     }
-    if (this.korisnik.korisnickoIme == "") {
+    if (this.korisnik.korisnickoIme == "" || this.korisnik.korisnickoIme == undefined) {
       $('#username').addClass('border-danger');
       provera = true;
     } else {
       $('#username').removeClass('border-danger');
     }
-    if (this.korisnik.lozinka == "") {
-      $('#password').addClass('border-danger');
+    if (this.korisnik.lozinka == "" || this.korisnik.lozinka == undefined) {
+      $('#passValue').addClass('border-danger');
       provera = true;
     } else {
-      $('#password').removeClass('border-danger');
+      $('#passValue').removeClass('border-danger');
     }
-    if (this.ponovljenaLozinka == "") {
-      $('#password1').addClass('border-danger');
+    if (this.ponovljenaLozinka == "" || this.ponovljenaLozinka == undefined) {
+      $('#passValue1').addClass('border-danger');
       provera = true;
     } else {
-      $('#password1').removeClass('border-danger');
+      $('#passValue1').removeClass('border-danger');
     }
-    if (this.korisnik.email == "") {
+    if (this.korisnik.email == "" || this.korisnik.email == undefined) {
       $('#email').addClass('border-danger');
       provera = true;
     } else {
       $('#email').removeClass('border-danger');
     }
-    if (this.korisnik.telefon == "") {
+    if (this.korisnik.telefon == "" || this.korisnik.telefon == undefined) {
       $('#brTel').addClass('border-danger');
       provera = true;
     } else {
       $('#brTel').removeClass('border-danger');
     }
-    if (this.korisnik.grad == "") {
+    if (this.korisnik.grad == "" || this.korisnik.grad == undefined) {
       $('#grad').addClass('border-danger');
       provera = true;
     } else {

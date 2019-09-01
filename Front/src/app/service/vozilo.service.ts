@@ -9,17 +9,16 @@ const httpOptions = {
 };
 
 @Injectable()
-export class VoziloService{
+export class VoziloService {
 
   private BASE_URL = 'http://localhost:8080/api/vozilo';
 
-  constructor(private http: HttpClient)
-  {
+  constructor(private http: HttpClient) {
 
   }
 
   // dodaje novo vozilo
-  dodajVozilo(object: VoziloModel, idRentACar: any) : Observable<any> {
+  dodajVozilo(object: VoziloModel, idRentACar: any): Observable<any> {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/dodajVozilo/${idRentACar}`, body, {headers});
@@ -40,7 +39,10 @@ export class VoziloService{
 
 
   // provera da li je vozilo rezervisano
-
+  checkIfReservedVozilo(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedVozilo/${id}`, {headers});
+  }
 
   // obrisi vozilo
   obrisiVozilo(idRent: any, idVozilo: any): Observable<any> {
@@ -64,3 +66,4 @@ export class VoziloService{
   // vraca sva vozila jednog korisnika
 
 }
+

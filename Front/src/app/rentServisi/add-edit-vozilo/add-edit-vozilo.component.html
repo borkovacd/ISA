@@ -15,10 +15,18 @@
   <form [formGroup]="form">
     <div class="form-group">
 
-      <label style="margin-top: 20px">Tip:</label>
-      <input name="tip" class="form-control margin" [formControl]="tip">
+      <label style="font-size: 20px;">Tip vozila:</label>
+      <select class="form-control margin" [formControl]="tip">
+        <option>LIMUZINA</option>
+        <option>KARAVAN</option>
+        <option>KUPE</option>
+        <option>KABRIOLET</option>
+        <option>MINIVEN</option>
+        <option>DZIP</option>
+        <option>PICKUP</option>
+      </select>
       <small class="form-text error" *ngIf="tip.errors?.required && tip.touched" style="color: red">
-        Tip je obavezan!
+        Izbor tipa sobe je obavezan!
       </small>
 
       <label style="margin-top: 20px">Naziv:</label>

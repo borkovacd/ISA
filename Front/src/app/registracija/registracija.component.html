@@ -1,8 +1,8 @@
 <h2>Registracija</h2>
 <form class="form-horizontal">
   <div class="form-group col-md-3">
-    <label for="name" style="font-family: 'Verdana'">Ime:</label>
-    <input type="text" name="name" id = "name" class="form-control" placeholder="Ime.." required autofocus [(ngModel)]="korisnik.ime" [ngModelOptions] = "{standalone:true}" />
+    <label style="font-family: 'Verdana'">Ime:</label>
+    <input type="text" name="name" id = "nameValue" class="form-control" placeholder="Ime.." required autofocus [(ngModel)]="korisnik.ime" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -13,8 +13,8 @@
   </div>
 
   <div class="form-group col-md-3">
-    <label for="name" style="font-family: 'Verdana'">Prezime</label>
-    <input type="text" name="name" id = "surname" class="form-control"  placeholder="Prezime.." required autofocus [(ngModel)]="korisnik.prezime" [ngModelOptions] = "{standalone:true}" />
+    <label for="surname" style="font-family: 'Verdana'">Prezime</label>
+    <input type="text" name="surname" id = "surname" class="form-control"  placeholder="Prezime.." required autofocus [(ngModel)]="korisnik.prezime" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -25,8 +25,8 @@
   </div>
 
   <div class="form-group col-md-3">
-    <label for="name" style="font-family: 'Verdana'">Korisnicko ime:</label>
-    <input type="text" name="name" id = "username" class="form-control"  placeholder="Korisnicko ime.." required autofocus [(ngModel)]="korisnik.korisnickoIme" [ngModelOptions] = "{standalone:true}" />
+    <label for="username" style="font-family: 'Verdana'">Korisnicko ime:</label>
+    <input type="text" name="username" id = "username" class="form-control"  placeholder="Korisnicko ime.." required autofocus [(ngModel)]="korisnik.korisnickoIme" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -37,8 +37,8 @@
   </div>
 
   <div class="form-group col-md-3">
-    <label for="password" style="font-family: 'Verdana'">Lozinka:</label>
-    <input type="password" name="password" id = "password" class="form-control"  placeholder="Lozinka.." required autofocus [(ngModel)]="korisnik.lozinka" [ngModelOptions] = "{standalone:true}" />
+    <label style="font-family: 'Verdana'">Lozinka:</label>
+    <input type="password" name="passValue" id = "passValue" class="form-control"  placeholder="Lozinka.." required autofocus [(ngModel)]="korisnik.lozinka" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -49,8 +49,8 @@
   </div>
 
   <div class="form-group col-md-3">
-    <label for="password" style="font-family: 'Verdana'">Ponovite lozinku:</label>
-    <input type="password" name="password" id = "password1" class="form-control"  placeholder="Ponovljena lozinka.." required autofocus [(ngModel)]="ponovljenaLozinka" [ngModelOptions] = "{standalone:true}" />
+    <label style="font-family: 'Verdana'">Ponovite lozinku:</label>
+    <input type="password" name="passValue1" id = "passValue1" class="form-control"  placeholder="Ponovljena lozinka.." required autofocus [(ngModel)]="ponovljenaLozinka" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -75,8 +75,8 @@
   </div>
 
   <div class="form-group col-md-3">
-    <label for="name" style="font-family: 'Verdana'">Broj telefona:</label>
-    <input type="text" name="name" id = "brTel" class="form-control" placeholder="Broj telefona.." required autofocus [(ngModel)]="korisnik.telefon" [ngModelOptions] = "{standalone:true}" />
+    <label for="brTel" style="font-family: 'Verdana'">Broj telefona:</label>
+    <input type="text" name="brTel" id = "brTel" class="form-control" placeholder="Broj telefona.." required autofocus [(ngModel)]="korisnik.telefon" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">
@@ -89,8 +89,8 @@
   <p class="text-danger">{{porukaTelefon}}</p>
 
   <div class="form-group col-md-3">
-    <label for="name" style="font-family: 'Verdana'">Grad:</label>
-    <input type="text" name="name" id = "grad" class="form-control" placeholder="Grad.." required autofocus [(ngModel)]="korisnik.grad" [ngModelOptions] = "{standalone:true}" />
+    <label for="grad" style="font-family: 'Verdana'">Grad:</label>
+    <input type="text" name="grad" id = "grad" class="form-control" placeholder="Grad.." required autofocus [(ngModel)]="korisnik.grad" [ngModelOptions] = "{standalone:true}" />
   </div>
   <div class="col-md-3">
     <div class="form-control-feedback">

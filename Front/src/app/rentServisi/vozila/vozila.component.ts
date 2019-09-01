@@ -41,15 +41,33 @@ export class VozilaComponent implements OnInit {
 
   editVozilo(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
-    this.router.navigateByUrl('rentAdminPage/vozilo/' + idRent + '/edit/' + id);
+    this.voziloService.checkIfReservedVozilo(id).subscribe(data => {
+      if (data == false)
+      {
+        this.router.navigateByUrl('rentAdminPage/vozilo/' + idRent + '/edit/' + id);
+      }
+      else
+      {
+        alert('Vozilo je rezervisano, pa se ne moze vrsiti izmena!')
+      }
+    })
   }
 
   deleteVozilo(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
 
-    this.voziloService.obrisiVozilo(idRent, id).subscribe(data => {
-      this.router.navigateByUrl('rentAdminPage');
-    }) ;
+    this.voziloService.checkIfReservedVozilo(id).subscribe(data => {
+      if (data == false)
+      {
+        this.voziloService.obrisiVozilo(idRent, id).subscribe(data => {
+          this.router.navigateByUrl('rentAdminPage');
+        }) ;
+      } else
+      {
+        alert('Vozilo je rezervisano, pa se ne moze vrsiti brisanje!')
+      }
+    })
+
   }
 
   goBack() {

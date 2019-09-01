@@ -56,11 +56,11 @@ insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator
 	(4, "Zeleznicka 15", "Big Savic trans", "Najbolje.", 3);
 
 insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (1, 5, 1000, 2019, "BMW", "X5", "BMW X5", 0, "dzip", 1);
+	values (1, 5, 1000, 2019, "BMW", "X5", "BMW X5", 0, "LIMUZINA", 1);
 insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (2, 5, 200, 2015, "Mercedes", "Jeep", "Mercedes dzip", 0, "dzip", 1);
+	values (2, 5, 200, 2015, "Mercedes", "Jeep", "Mercedes dzip", 0, "KARAVAN", 1);
 insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (3, 5, 400, 2015, "Opel", "Astra", "Opel Astra", 0, "karavan", 2);
+	values (3, 5, 400, 2015, "Opel", "Astra", "Opel Astra", 0, "KABRIOLET", 2);
 	
 insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
 	values (1, "Brace Dronjak 10", "Srbija", "Novi Sad", 19, 46, 1);	
