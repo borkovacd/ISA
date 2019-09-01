@@ -168,12 +168,16 @@ public class HotelService {
 				}
 				if(slobodna == true) {
 					for(CenovnikHotela cenovnik : cenovnici) {
-						if(cenovnik.getHotel().getId() == hotel.getId()) { //ako je cenovnik hotela u kojem je slobodna soba
-							for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) {
-								if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) {
-									if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
-										if(!hoteliPoDatumu.contains(hotel)) {
-											hoteliPoDatumu.add(hotel);
+						if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) {
+							if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) {
+								if(cenovnik.getHotel().getId() == hotel.getId()) { //ako je cenovnik hotela u kojem je slobodna soba
+									for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) {
+										if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) {
+											if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
+												if(!hoteliPoDatumu.contains(hotel)) {
+													hoteliPoDatumu.add(hotel);
+												}
+											}
 										}
 									}
 								}
