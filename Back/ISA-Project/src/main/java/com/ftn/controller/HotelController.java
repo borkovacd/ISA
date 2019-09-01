@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.HotelDTO;
+import com.ftn.dto.PretragaHotelaDTO;
+import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.hotels.Hotel;
+import com.ftn.model.hotels.Soba;
 import com.ftn.service.HotelService;
 
 
@@ -75,6 +78,13 @@ public class HotelController {
 	public ResponseEntity<List<Hotel>> getAllHotels() {
 		ArrayList<Hotel> hotels = hotelService.getAllHotels();
 		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+	}
+	
+	@PostMapping("/searchHotels")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Hotel>> searchHotels(@RequestBody PretragaHotelaDTO phDTO) {
+		ArrayList<Hotel> hoteli = hotelService.searchHotels(phDTO);
+		return new ResponseEntity<ArrayList<Hotel>>(hoteli, HttpStatus.OK);
 	}
 	
 	/**********************/
