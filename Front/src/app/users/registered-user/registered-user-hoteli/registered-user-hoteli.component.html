@@ -2,6 +2,11 @@
   <div [hidden]="pretraga"  style="text-align: center">
     <button  class="btn btn-lg btn-outline-primary"  (click)="pretraziHotele()">Pretraži hotele</button>
   </div>
+  <div>
+    <button [hidden]="!pretraga" class="btn btn-primary" style="width: 10%;margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="goBack()">
+      <i class="fa fa-arrow-left"> Nazad</i>
+    </button>
+  </div>
   <div [hidden]="!pretraga" style="text-align: center">
     <p  style="color: black;font-size:40px; margin-top: 5%; font-family: 'Ink Free'">Pretraga hotela</p>
     <form [formGroup]="form">

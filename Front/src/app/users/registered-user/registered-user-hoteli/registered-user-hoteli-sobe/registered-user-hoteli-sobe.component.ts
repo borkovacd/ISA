@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../../../service/room.service';
 import {HotelService} from '../../../../service/hotel.service';
 import {TimePeriodModel} from '../../../../model/timePeriod.model';
+import {UserService} from '../../../../service/user.service';
 
 @Component({
   selector: 'app-registered-user-hoteli-sobe',
@@ -15,6 +16,10 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
   public form: FormGroup;
   public startDate: AbstractControl;
   public endDate: AbstractControl;
+  public numberOfGuests: AbstractControl;
+  public numberOfRooms: AbstractControl;
+  public priceRange: AbstractControl;
+
   d1: any;
   d2: any;
   rooms = []
@@ -25,13 +30,21 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private roomService: RoomService,
-              private hotelService: HotelService) {
+              private hotelService: HotelService,
+              private userService: UserService,) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
+      'numberOfGuests': ['', Validators.compose([Validators.required])],
+      'numberOfRooms': ['', Validators.compose([Validators.required])],
+      'priceRange': [''],
     })
     this.startDate = this.form.controls['startDate'];
     this.endDate = this.form.controls['endDate'];
+    this.numberOfGuests = this.form.controls['numberOfGuests'];
+    this.numberOfRooms = this.form.controls['numberOfRooms'];
+    this.priceRange = this.form.controls['priceRange'];
+
   }
 
   ngOnInit() {
@@ -66,6 +79,15 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     this.roomService.getAvailableRooms(timePeriod, idHotela).subscribe(data => {
       this.rooms = data;
     });
+  }
+
+  logout()
+  {
+    this.userService.logOut().subscribe(
+      data => {
+        this.router.navigate(['/welcomepage']);
+      }
+    )
   }
 
 }

@@ -143,6 +143,10 @@ export class RegisteredUserHoteliComponent implements OnInit {
       this.pretraga = false;
     });
   }
+
+  goBack(){
+    location.reload();
+  }
 }
 
 
