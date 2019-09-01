@@ -34,7 +34,7 @@ export class WelcomePageServisiComponent implements OnInit {
 
   pregledCenovnika(idRent: any)
   {
-    this.router.navigateByUrl('welcomepage/pricelistsRent/' + idRent);
+    this.router.navigateByUrl('welcomepage/pricelistRent/' + idRent);
   }
 
 }

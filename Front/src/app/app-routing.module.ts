@@ -36,6 +36,7 @@ import {AddEditPriceRentComponent} from "./rentServisi/add-edit-price-rent/add-e
 import {WelcomePageServisiComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi.component";
 import {WelcomePageServisiFilijaleComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-filijale/welcome-page-servisi-filijale.component";
 import {WelcomePageServisiCenovnikComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-cenovnik/welcome-page-servisi-cenovnik.component";
+import {WelcomePageServisiVozilaComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component";
 
 
 const routes: Routes = [
@@ -60,7 +61,7 @@ const routes: Routes = [
   {path: 'welcomepage/rooms/:idHotela', component: WelcomePageHoteliSobeComponent},
   {path: 'welcomepage/additionalServices/:idHotela', component: WelcomePageHoteliDodatneUslugeComponent},
   {path: 'welcomepage/pricelist/:idHotela', component: WelcomePageHoteliCenovnikComponent},
-  {path: 'welcomepage/vozila/:idRent', component: WelcomePageServisiComponent},
+  {path: 'welcomepage/vozila/:idRent', component: WelcomePageServisiVozilaComponent},
   {path: 'welcomepage/filijale/:idRent', component: WelcomePageServisiFilijaleComponent},
   {path: 'welcomepage/pricelistRent/:idRent', component: WelcomePageServisiCenovnikComponent},
 

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {VoziloModel} from '../model/vozilo.model';
+import {TimePeriodModel} from '../model/timePeriod.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -29,12 +30,6 @@ export class VoziloService {
   getVozilaRentACar(idRent: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getVozilaRentACar/${idRent}`, {headers});
-  }
-
-  // vraca sva vozila
-  vratiSvaVozila(): Observable<any> {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get(`${this.BASE_URL}/getVozilaRentACar`, {headers});
   }
 
 
@@ -65,5 +60,11 @@ export class VoziloService {
 
   // vraca sva vozila jednog korisnika
 
+  // vraca slobodna vozila za dat vremenski period
+  getAvailableVozila(object: TimePeriodModel, idRent: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/getAvailableVozila/${idRent}`, body, {headers});
+  }
 }
 

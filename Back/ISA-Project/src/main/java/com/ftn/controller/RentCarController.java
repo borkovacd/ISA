@@ -47,8 +47,6 @@ public class RentCarController {
 		
 	}
 	
-	
-	
 	// izmeni Rent-a-Car servis
 	@PutMapping("/izmeniRent/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
