@@ -74,7 +74,7 @@ const routes: Routes = [
   {path: 'rentAdminPage/pricelistsRent/:idRent', component: PricelistsRentComponent},
   {path: 'rentAdminPage/pricesRent/:idRent/:idPriceList', component: PricesRentComponent },
   {path: 'rentAdminPage/pricelistRent/:idRent/:mode/:idPriceList', component: AddEditPricelistRentComponent },
-  {path: 'rentAdminPage/price/:idRent/:idPriceList/:mode/:idPrice', component: AddEditPriceRentComponent}
+  {path: 'rentAdminPage/priceRent/:idRent/:idPriceList/:mode/:idPrice', component: AddEditPriceRentComponent}
 
 
 ];

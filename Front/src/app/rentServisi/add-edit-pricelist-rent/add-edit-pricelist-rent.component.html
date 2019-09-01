@@ -1,1 +1,40 @@
-<p>add-edit-pricelist-rent works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'" title="T R A V E L L A N D">
+    <i class="fa fa-user"> Ime Prezime </i>
+    <button class="btn-primary">Izloguj se</button>
+  </igx-navbar>
+</div>
+
+<br>
+<div style="text-align: center">
+  <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 10%">{{naslovStranice}}</p>
+</div>
+
+<div style="margin-bottom:50px;margin-right: 30%;margin-left: 30%">
+
+  <form [formGroup]="form">
+    <div class="form-group">
+
+      <label style="font-size: 20px;">Datum početka važenja:</label>
+      <input type="date" class="form-control margin" [formControl]="startDate" name="checkInDate" id="input-checkIn"
+             placeholder="Unesite datum početka važenja">
+      <small class="form-text error" *ngIf="startDate.errors?.required && startDate.touched" style="color: red">
+        Izbor početnog datuma je obavezan!
+      </small>
+
+      <label style="font-size: 20px;">Datum prestanka važenja:</label>
+      <input type="date" class="form-control margin" [formControl]="endDate" name="checkInDate" id="input-checkOut"
+             placeholder="Unesite datum prestanka važenja">
+      <small class="form-text error" *ngIf="endDate.errors?.required && endDate.touched" style="color: red">
+        Izbor krajnjeg datuma je obavezan!
+      </small>
+
+      <button class="btn btn-primary" style="width: 100%;margin-top: 30px" (click)="confirmClick()"
+              [disabled]="!form.valid">
+        {{method_name}}
+      </button>
+      <button class="btn btn-primary" style="width: 100% ; margin-top: 20px" (click)="exit()">ZATVORI</button>
+    </div>
+  </form>
+</div>
+
