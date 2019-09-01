@@ -27,6 +27,8 @@ import {WelcomePageHoteliDodatneUslugeComponent} from './welcome-page/welcome-pa
 import {WelcomePageHoteliCenovnikComponent} from './welcome-page/welcome-page-hoteli/welcome-page-hoteli-cenovnik/welcome-page-hoteli-cenovnik.component';
 import { AddEditFilijalaComponent } from './rentServisi/add-edit-filijala/add-edit-filijala.component';
 import { AddEditVoziloComponent } from './rentServisi/add-edit-vozilo/add-edit-vozilo.component';
+import {RegisteredUserHoteliSobeComponent} from './users/registered-user/registered-user-hoteli/registered-user-hoteli-sobe/registered-user-hoteli-sobe.component';
+import {RegisteredUserHoteliDodatneUslugeComponent} from './users/registered-user/registered-user-hoteli/registered-user-hoteli-dodatne-usluge/registered-user-hoteli-dodatne-usluge.component';
 
 
 const routes: Routes = [
@@ -54,6 +56,8 @@ const routes: Routes = [
 
 
   {path: 'registeredUserPage', component: RegisteredUserComponent},
+  {path: 'registeredUserPage/rooms/:idHotela', component: RegisteredUserHoteliSobeComponent},
+  {path: 'registeredUserPage/additionalServices/:idHotela', component: RegisteredUserHoteliDodatneUslugeComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},

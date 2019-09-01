@@ -112,6 +112,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
   }
 
   izaberiHotel(id: any) {
+    this.router.navigateByUrl('registeredUserPage/rooms/' + id);
 
   }
 

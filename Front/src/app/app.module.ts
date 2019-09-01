@@ -73,6 +73,8 @@ import { WelcomePageHoteliCenovnikComponent } from './welcome-page/welcome-page-
 import {VoziloService} from "./service/vozilo.service";
 import {LokacijaService} from "./service/lokacija.service";
 import { RegisteredUserHoteliComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli.component';
+import { RegisteredUserHoteliSobeComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli-sobe/registered-user-hoteli-sobe.component';
+import { RegisteredUserHoteliDodatneUslugeComponent } from './users/registered-user/registered-user-hoteli/registered-user-hoteli-dodatne-usluge/registered-user-hoteli-dodatne-usluge.component';
 
 
 @NgModule({
@@ -121,6 +123,10 @@ import { RegisteredUserHoteliComponent } from './users/registered-user/registere
     WelcomePageHoteliCenovnikComponent,
 
     RegisteredUserHoteliComponent,
+
+    RegisteredUserHoteliSobeComponent,
+
+    RegisteredUserHoteliDodatneUslugeComponent,
   ],
   imports: [
     BrowserModule,
