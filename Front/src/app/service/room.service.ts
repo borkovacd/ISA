@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {RoomModel} from '../model/room.model';
 import {TimePeriodModel} from '../model/timePeriod.model';
+import {CheckAvailabilityModel} from '../model/checkAvailability.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -53,5 +54,11 @@ export  class RoomService {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/getAvailableRooms/${idHotela}`, body, {headers});
+  }
+
+  checkAvailability(object: CheckAvailabilityModel, idHotela: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/checkAvailability/${idHotela}`, body, {headers});
   }
 }

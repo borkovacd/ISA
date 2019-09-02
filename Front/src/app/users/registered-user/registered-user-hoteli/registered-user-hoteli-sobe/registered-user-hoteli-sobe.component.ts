@@ -5,6 +5,7 @@ import {RoomService} from '../../../../service/room.service';
 import {HotelService} from '../../../../service/hotel.service';
 import {TimePeriodModel} from '../../../../model/timePeriod.model';
 import {UserService} from '../../../../service/user.service';
+import {CheckAvailabilityModel} from '../../../../model/checkAvailability.model';
 
 @Component({
   selector: 'app-registered-user-hoteli-sobe',
@@ -35,8 +36,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
-      'numberOfGuests': ['', Validators.compose([Validators.required])],
-      'numberOfRooms': ['', Validators.compose([Validators.required])],
+      'numberOfGuests': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,2}$')])],
+      'numberOfRooms': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,2}$')])],
       'priceRange': [''],
     })
     this.startDate = this.form.controls['startDate'];
@@ -71,14 +72,18 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     this.d1 = this.startDate.value;
     this.d2 = this.endDate.value;
 
-    const timePeriod = new TimePeriodModel (
+    const checkAvailabilityModel = new CheckAvailabilityModel (
       this.d1,
-      this.d2
+      this.d2,
+      this.numberOfGuests.value,
+      this.numberOfRooms.value,
+      this.priceRange.value,
     );
 
-    this.roomService.getAvailableRooms(timePeriod, idHotela).subscribe(data => {
+    this.roomService.checkAvailability(checkAvailabilityModel, idHotela).subscribe(data => {
       this.rooms = data;
     });
+
   }
 
   logout()

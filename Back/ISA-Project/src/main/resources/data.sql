@@ -13,15 +13,19 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 	values (6, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
 
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (1, 0, 4, 0, 2, "APARTMAN", 5);
+	values (1, 0, 4, 0, 2, "APARTMAN", 6);
 insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (2, 1, 2, 0, 5, "JEDNOKREVETNA_SOBA", 6);
+	values (2, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
+	values (3, 1, 4, 0, 5, "DVOKREVETNA_SOBA", 6);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
+	values (4, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6);
 
 	
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 
-	values (31, "TERETANA", 5);
+	values (31, "TERETANA", 6);
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 
-	values (32, "PARKING", 5);
+	values (32, "PARKING", 6);
 
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
 	values (9, DATE '2019-06-01', DATE '2019-08-31', 6);
@@ -32,6 +36,10 @@ insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja,
 	
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (20, 2500, null,'JEDNOKREVETNA_SOBA', 11);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (21, 5600, null,'APARTMAN', 11);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (22, 3600, null,'DVOKREVETNA_SOBA', 11);
 	
 insert into isa_project.rezervacija_hotela (id, cena, datum_kraja, datum_pocetka, korisnik_id)
 	values (1, 2450, DATE '2019-08-25', DATE '2019-09-01', 2);

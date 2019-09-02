@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.dto.ProveriDostupnostDTO;
 import com.ftn.dto.SobaDTO;
 import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.hotels.Soba;
@@ -80,6 +81,13 @@ public class SobaController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<Soba>> getAvailableRooms(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idHotela) {
 		ArrayList<Soba> sobe = sobaService.getAvailableRooms(vpDTO, idHotela);
+		return new ResponseEntity<ArrayList<Soba>>(sobe, HttpStatus.OK);
+	}
+	
+	@PostMapping("/checkAvailability/{idHotela}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Soba>> checkAvailability(@RequestBody ProveriDostupnostDTO pdDTO, @PathVariable Long idHotela) {
+		ArrayList<Soba> sobe = sobaService.checkAvailability(pdDTO, idHotela);
 		return new ResponseEntity<ArrayList<Soba>>(sobe, HttpStatus.OK);
 	}
 

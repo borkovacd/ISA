@@ -83,6 +83,7 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
     this.hideData = true;
     this.showLocation = true;
     this.tempAdresa = adresa;
+    this.showMap = true; //proba
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -102,7 +103,7 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
             return;
           }
 
-          this.showMap = true;
+          //this.showMap = true; originalno
 
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
