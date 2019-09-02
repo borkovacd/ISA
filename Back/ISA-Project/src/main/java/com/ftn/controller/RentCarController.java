@@ -47,6 +47,18 @@ public class RentCarController {
 		
 	}
 	
+	// provera da li u rent-a-car servisu ima rezervisanih vozila
+	@GetMapping("/checkIfReservedRent/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkIfReservedRent(@PathVariable Long id) 
+	{
+		//Ako rent ne poseduje rezervisana vozila, taken je FALSE
+		//u suprotnom taken ima vrednost TRUE
+		boolean taken = rentCarService.checkIfRentIsReserved(id);
+		
+		return taken;
+	}
+	
 	// izmeni Rent-a-Car servis
 	@PutMapping("/izmeniRent/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")

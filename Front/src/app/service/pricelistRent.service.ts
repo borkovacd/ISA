@@ -47,7 +47,14 @@ export class PricelistRentService {
     return this.http.get(`${this.BASE_URL}/getActivePricelistRent/${idRent}`, {headers});
   }
 
+  // brise cenovnik
+  obrisiCenovnik(idRent: any, idCenovnik: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.delete(`${this.BASE_URL}/obrisiCenovnik/${idRent}/${idCenovnik}`, {headers});
+  }
 
 
 
-}
+
+
+  }

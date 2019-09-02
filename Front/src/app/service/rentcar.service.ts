@@ -47,5 +47,11 @@ export class RentCarService {
     return this.http.get(`${this.BASE_URL}/getRent/${idRent}`, {headers});
   }
 
+  // provera da li u rent-a-car-u ima rezervisanih vozila
+  checkIfReservedRent(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedRent/${id}`, {headers});
+  }
+
 
 }

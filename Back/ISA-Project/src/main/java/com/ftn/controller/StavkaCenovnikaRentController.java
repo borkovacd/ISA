@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,16 @@ public class StavkaCenovnikaRentController
 		StavkaCenovnikaRent stavkaCenovnika = stavkaRentService.createPrice(stavkaDTO, idPriceList);
 		return new ResponseEntity<StavkaCenovnikaRent>(stavkaCenovnika, HttpStatus.OK);
 	}
+	
+	// brise cenovnik
+	@DeleteMapping("/obrisiStavkuCenovnik/{idRentACar}/{idCenovnik}/{idStavka}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean obrisiStavkuCenovnik(@PathVariable Long idRentACar, @PathVariable Long idCenovnik, @PathVariable Long idStavka) throws Exception 
+	{
+		boolean response = stavkaRentService.obrisiStavkuCenovnik(idRentACar, idCenovnik, idStavka);
+		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
+	}
+	
 	
 	
 }

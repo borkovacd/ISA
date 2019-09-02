@@ -39,8 +39,6 @@ export class EditRentComponent implements OnInit {
 
     const idRent = this.route.snapshot.params.idRent ;
 
-    alert('Id servisa je: ' + idRent);
-
     this.rentService.getRent(idRent).subscribe(data => {
       this.form.controls['name'].setValue(data.naziv);
       this.form.controls['address'].setValue(data.adresa);

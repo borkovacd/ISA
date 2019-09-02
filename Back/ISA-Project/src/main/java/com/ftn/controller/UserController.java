@@ -130,7 +130,7 @@ public class UserController {
 		} 
 		else // vraca  "greska", jer vec postoji korisnik sa tim email-om ili username-om
 		{
-			return new ResponseEntity<>(HttpStatus.OK); // mozda je bolje vratiti OK
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // mozda je bolje vratiti OK
 		}
 	}
 	

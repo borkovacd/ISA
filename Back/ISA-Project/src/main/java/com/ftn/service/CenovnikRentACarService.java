@@ -210,4 +210,22 @@ public class CenovnikRentACarService
 		return tempCenovnik;
 	}
 
+
+	// brise cenovnik
+	public boolean obrisiCenovnik(Long idRentACar, Long idCenovnik)
+	{
+		for (CenovnikRentACar cenovnik: cenRentRepository.findAll())
+		{
+			if (cenovnik.getRentACar().getRentACarId() == idRentACar)
+			{
+				if (cenovnik.getId() == idCenovnik)
+				{
+					cenRentRepository.deleteById(idCenovnik);
+					return true ;
+				}
+			}
+		}
+		
+		return false ; // ne postoji cenovnik sa tim id-jem
+	}
 }

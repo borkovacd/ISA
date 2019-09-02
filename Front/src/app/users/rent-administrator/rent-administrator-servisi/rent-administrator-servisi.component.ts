@@ -23,7 +23,14 @@ export class RentAdministratorServisiComponent implements OnInit {
 
   izmeniRent(id:any)
   {
-    this.router.navigateByUrl('rentAdminPage/editRent/' + id);
+    this.rentService.checkIfReservedRent(id).subscribe(data => {
+      if (data == false){
+        this.router.navigateByUrl('rentAdminPage/editRent/' + id);
+      } else {
+        alert('Vozilo u tom smestaju je rezervisano, pa se ne moze menjati!');
+      }
+    })
+
   }
 
   pregledVozila(idRent: any)

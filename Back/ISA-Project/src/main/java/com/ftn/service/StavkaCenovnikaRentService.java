@@ -55,7 +55,7 @@ public class StavkaCenovnikaRentService
 		return stavkeCenovnika;
 	}
 	
-	// kreira nocu cenu za stavku
+	// kreira novu cenu za stavku
 	public StavkaCenovnikaRent createPrice(StavkaCenovnikaRentDTO dto, Long idPriceList) 
 	{
 		StavkaCenovnikaRent stavkaCenovnika = new StavkaCenovnikaRent();
@@ -114,5 +114,31 @@ public class StavkaCenovnikaRentService
 
 	}
 
+ // brisanje stavke iz cenovnika
+	// brise stavku iz cenovnika
+	// brise cenovnik
+	public boolean obrisiStavkuCenovnik(Long idRentACar, Long idCenovnik, Long idStavka)
+	{
+		for (CenovnikRentACar cenovnik: cenRentRepository.findAll())
+		{
+			if (cenovnik.getRentACar().getRentACarId() == idRentACar)
+			{
+				if (cenovnik.getId() == idCenovnik)
+				{
+
+					for (StavkaCenovnikaRent stavka: stavkaRentRepository.findAll())
+					{
+						if (stavka.getCenovnik().getId() == idCenovnik && stavka.getId() == idStavka)
+						{
+							stavkaRentRepository.deleteById(idStavka);;
+							return true ;
+						}
+					}
+				}
+			}
+		}
+		
+		return false ; // ne postoji cenovnik sa tim id-jem
+	}
 
 }

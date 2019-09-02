@@ -29,5 +29,11 @@ export class PriceRentService{
 
   }
 
+  // brise stavku iz cenovnika
+  obrisiStavkuCenovnik(idRent: any, idCenovnik: any, idStavka: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.delete(`${this.BASE_URL}/obrisiStavkuCenovnik/${idRent}/${idCenovnik}/${idStavka}`, {headers});
+  }
+
 
 }

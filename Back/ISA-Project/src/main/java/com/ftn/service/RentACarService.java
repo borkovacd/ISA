@@ -1,15 +1,22 @@
 package com.ftn.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.RentCarDTO;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.RezervacijaHotela;
+import com.ftn.model.hotels.Soba;
 import com.ftn.model.rentacar.RentACar;
+import com.ftn.model.rentacar.RezervacijaVozila;
+import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.RentCarRepository;
+import com.ftn.repository.RezervacijaVozilaRepository;
 import com.ftn.repository.UserRepository;
+import com.ftn.repository.VoziloRepository;
 
 @Service
 public class RentACarService {
@@ -18,6 +25,12 @@ public class RentACarService {
 	private RentCarRepository rentCarRepository;
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RezervacijaVozilaRepository rezVozRepository ;
+	
+	@Autowired 
+	private VoziloRepository voziloRepository ;
 
 	/****** Borkovac *******/
 	
@@ -88,6 +101,31 @@ public class RentACarService {
 		rent.setOpis(dto.getDescription());
 		rentCarRepository.save(rent);
 		return rent;
+	}
+	
+	// provera da li u rent servisu ima rezervisanih vozila, prosledjen id servisa
+	public boolean checkIfRentIsReserved(Long id) 
+	{
+		boolean taken = false;
+		List<RezervacijaVozila> rezervacije = rezVozRepository.findAll();
+		
+		for(Vozilo v: voziloRepository.findAll()) // prolazak kroz sva vozila
+		{
+			if(v.getRentACar().getRentACarId() == id) // ogranicim se samo na vozila iz tog rent-a-car servisa
+			{
+				for(RezervacijaVozila rezervacija : rezervacije) // prolazak kroz sve rezervacije
+				{
+					// ukoliko se to vozilo nalazi medju rezervacijama i ukoliko je u tom momentu rezervisano
+					if(rezervacija.getVozilo().getVoziloId() == v.getVoziloId() && v.isRezervisano() == true) 
+					{
+						taken = true;
+					}
+				
+				}
+			}
+		}
+		
+		return taken;
 	}
 
 	// vraca sve servise od tog administratora

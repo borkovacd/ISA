@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,13 @@ public class CenovnikRentACarController
 	public ResponseEntity<CenovnikRentACar> createPricelistRent(@RequestBody CenovnikRentDTO cenvnikRentDTO, @PathVariable Long idRent) 
 	{
 		CenovnikRentACar cenovnikRent = cenovnikRentService.createPricelist(cenvnikRentDTO, idRent);
+		
+		if (cenovnikRent == null) // ima preklapanje sa postojecim cenovnikom
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		}
+		
 		return new ResponseEntity<CenovnikRentACar>(cenovnikRent, HttpStatus.OK);
 	}
 	
@@ -77,6 +85,15 @@ public class CenovnikRentACarController
 	{
 		ArrayList<TipVozila> tipoviVozila = cenovnikRentService.getTipoviVozilaRent(idPriceList);
 		return new ResponseEntity<ArrayList<TipVozila>>(tipoviVozila, HttpStatus.OK);
+	}
+	
+	// brise cenovnik
+	@DeleteMapping("/obrisiCenovnik/{idRentACar}/{idCenovnik}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean obrisiCenovnik(@PathVariable Long idRentACar, @PathVariable Long idCenovnik) throws Exception 
+	{
+		boolean response = cenovnikRentService.obrisiCenovnik(idRentACar, idCenovnik);
+		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
 	}
 	
 	

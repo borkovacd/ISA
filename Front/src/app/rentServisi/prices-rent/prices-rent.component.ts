@@ -43,6 +43,13 @@ export class PricesRentComponent implements OnInit {
   }
 
   deletePrice(id: any) {
+    const idRent = this.route.snapshot.params.idRent ;
+    const idPriceList = this.route.snapshot.params.idPriceList;
+
+    this.priceRentService.obrisiStavkuCenovnik(idRent, idPriceList, id).subscribe(data => {
+      this.router.navigateByUrl('rentAdminPage/pricelistsRent/' +  idRent);
+    });
+
 
   }
 
