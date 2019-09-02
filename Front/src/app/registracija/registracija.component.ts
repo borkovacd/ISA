@@ -107,6 +107,7 @@ export class RegistracijaComponent implements OnInit {
         data => {
           this.router.navigateByUrl('/welcomepage');
           this.poruka = 'Dobicete mail za verifikaciju, ulogujte se na svoj mail da ga potvrdite!';
+          alert('Dobicete mail za verifikaciju, ulogujte se na svoj mail da ga potvrdite!');
           this.userService.verifikujNalog(data.email).subscribe(
             // tslint:disable-next-line:no-shadowed-variable
             data => {
@@ -119,6 +120,7 @@ export class RegistracijaComponent implements OnInit {
         },
 
         error => {
+          alert('Email ili korisnicko ime koje ste uneli vec postoje vezani za drugi korisnicki nalog!');
           this.poruka = 'Email ili korisnicko ime koje ste uneli vec postoje vezani za drugi korisnicki nalog!';
 
         }

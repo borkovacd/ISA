@@ -78,7 +78,11 @@ export class AddEditPricelistRentComponent implements OnInit {
     );
     this.pricelistRentService.createPricelistRent(pricelist, idRent).subscribe(data => {
       this.router.navigateByUrl('rentAdminPage/pricelistsRent/' +  idRent);
-    });
+    },
+
+      error => {
+      alert('Vec postoji kreiran cenovnik za taj vremenski period!');
+      });
 
   }
 
