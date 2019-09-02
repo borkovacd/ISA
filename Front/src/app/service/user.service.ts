@@ -78,7 +78,7 @@ export class UserService {
   }
 
   changePassword(k : KorisnikModel){
-    return this.http.post<KorisnikModel>('http://localhost:8080/api/user/changePassword', k);
+    return this.http.post<KorisnikModel>('http://localhost:8080/api/user/promenaLozinke', k);
   }
 
   vratiTrenutnogKorisnika(){

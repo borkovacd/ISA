@@ -271,6 +271,20 @@ public class UserService {
 		userRepository.save(k);
 		
 	}
+	
+	public String promeniLozinku(KorisnikDTO dto)
+	{
+		String pomLozinka = "";
+		
+		try {
+				pomLozinka = encriptPassword(dto.getLozinka());
+		} catch (NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return pomLozinka ;
+	}
 
 
 	/********* Ende - Olga *********/

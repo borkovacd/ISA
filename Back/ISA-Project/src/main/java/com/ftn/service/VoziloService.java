@@ -335,7 +335,6 @@ public class VoziloService
 		{
 			if (rezVoziloRepository.findAll().get(i).getKorisnik().getId() == idKorisnik) // Da li je to rezervacija ovog korisnika?
 			{
-
 				Vozilo v = rezVoziloRepository.findAll().get(i).getVozilo();
 				vozila.add(v);
 			}

@@ -216,6 +216,33 @@ public class UserController {
 		
 	}
 	
+	// promena lozinke
+	// ukoliko je uneo vec postojecu lozinku, vratice BAD_REQUEST
+	@RequestMapping(value="/promenaLozinke", method = RequestMethod.POST)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<KorisnikDTO> promenaLozinke(@RequestBody KorisnikDTO kdto)
+	{
+		Korisnik k = userService.returnKorisnikByEmail(kdto.getEmail());
+		String s = userService.promeniLozinku(kdto);
+		
+		if (!k.getLozinka().equals(s))
+		{
+			k.setLozinka(s);
+			k.setPrvoLogovanje(true);
+			userService.save(k);
+			
+			KorisnikDTO kd = new KorisnikDTO(k);
+			return new ResponseEntity<KorisnikDTO>(kd, HttpStatus.OK);
+			
+		}
+		
+		else
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
 	// vraca trenutno ulogovanog korisnika
 	@RequestMapping(value="/currentUser", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")

@@ -87,6 +87,7 @@ import { WelcomePageServisiFilijaleComponent } from './welcome-page/welcome-page
 import { WelcomePageServisiVozilaComponent } from './welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component';
 import { RegisteredUserMyVozilaComponent } from './users/registered-user/registered-user-my-vozila/registered-user-my-vozila.component';
 import { RegisteredUserMyHoteliComponent } from './users/registered-user/registered-user-my-hoteli/registered-user-my-hoteli.component';
+import { RegisteredUserServisiComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi.component';
 
 
 @NgModule({
@@ -159,6 +160,8 @@ import { RegisteredUserMyHoteliComponent } from './users/registered-user/registe
     RegisteredUserMyVozilaComponent,
 
     RegisteredUserMyHoteliComponent,
+
+    RegisteredUserServisiComponent,
   ],
   imports: [
     BrowserModule,

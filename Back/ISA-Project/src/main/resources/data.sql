@@ -75,4 +75,14 @@ insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, 
 	values (1, "Brace Dronjak 10", "Srbija", "Novi Sad", 19, 46, 1);	
 insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
 	values (2, "Brace Dronjak 12", "Srbija", "Novi Sad", 19, 46, 1);	
+	
+insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
+values (1, '2019-06-01', '2019-08-01', 1);
+insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
+values (2, '2020-06-01', '2020-08-01', 1);
+
+insert into isa_project.rezervacija_vozila(id, br_putnika, datum_preuzimanja, datum_vracanja, tip_vozila, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id)
+values (1, 4, '2019-08-25', '2019-09-25', 'LIMUZINA', 4, 1, 1, 1);
+insert into isa_project.rezervacija_vozila(id, br_putnika, datum_preuzimanja, datum_vracanja, tip_vozila, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id)
+values (2, 4, '2020-08-25', '2020-09-25', 'LIMUZINA', 4, 1, 1, 1);
 

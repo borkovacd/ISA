@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {VoziloModel} from '../model/vozilo.model';
 import {TimePeriodModel} from '../model/timePeriod.model';
+import {KorisnikModel} from "../model/Korisnik.model";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -30,6 +31,12 @@ export class VoziloService {
   getVozilaRentACar(idRent: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getVozilaRentACar/${idRent}`, {headers});
+  }
+
+  // vraca vozila korisnika
+  vratiVozilaKorisnika(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/vratiVozilaKorisnika/4`, {headers});
   }
 
 
