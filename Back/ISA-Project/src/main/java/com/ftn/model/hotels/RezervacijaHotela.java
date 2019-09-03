@@ -43,6 +43,8 @@ public class RezervacijaHotela {
 	
 	public RezervacijaHotela() {
 		
+		sobe = new ArrayList<Soba>();
+		dodatneUsluge = new ArrayList<DodatnaUsluga>();
 	}
 
 	public RezervacijaHotela(LocalDate datumPocetka, LocalDate datumKraja, List<Soba> sobe, List<DodatnaUsluga> dodatneUsluge, Korisnik korisnik,

@@ -8,6 +8,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HotelReservationService } from "./service/hotelReservation.service";
 import {
   IgxTabsModule,
   IgxNavbarModule,
@@ -203,6 +204,7 @@ import { RegisteredUserServisiComponent } from './users/registered-user/register
     LokacijaService,
     PriceRentService,
     PricelistRentService,
+    HotelReservationService,
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

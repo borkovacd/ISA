@@ -6,6 +6,9 @@ import {HotelService} from '../../../../service/hotel.service';
 import {TimePeriodModel} from '../../../../model/timePeriod.model';
 import {UserService} from '../../../../service/user.service';
 import {CheckAvailabilityModel} from '../../../../model/checkAvailability.model';
+import {SearchHotelsModel} from "../../../../model/searchHotels.model";
+import {RoomReservationModel} from "../../../../model/roomReservation.model";
+import {HotelReservationService} from "../../../../service/hotelReservation.service";
 
 @Component({
   selector: 'app-registered-user-hoteli-sobe',
@@ -29,14 +32,17 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
   public check = false;
   listSelectedRooms = [];
+  listSelectedRoomsID = [];
   values = '';
+  dobarBrojSoba: boolean = false;
 
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private roomService: RoomService,
               private hotelService: HotelService,
-              private userService: UserService,) {
+              private userService: UserService,
+              private hotelReservationService: HotelReservationService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -55,6 +61,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
   ngOnInit() {
 
     this.timePeriodConfirmed = false;
+
+    this.dobarBrojSoba = false;
 
 
     const idHotela = this.route.snapshot.params.idHotela;
@@ -104,21 +112,25 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     this.check = false;
 
     if (this.listSelectedRooms.length === 0) {
-      this.listSelectedRooms.push(tipSobe+id);
-      this.values += tipSobe +  '(' + id +')' + '    ';
+      this.listSelectedRooms.push(tipSobe + id);
+      this.listSelectedRoomsID.push(id);
+      this.values += tipSobe + '(' + id + ')' + '    ';
     } else {
       for (var i = 0; i < this.listSelectedRooms.length; i++) {
-        if (this.listSelectedRooms[i] == tipSobe+id) {
+        if (this.listSelectedRooms[i] == tipSobe + id) {
           this.check = true;
           break;
         }
       }
       if (this.check == false) {
-        this.listSelectedRooms.push(tipSobe+id);
-        this.values += tipSobe +  '(' + id +')' + '    ';
+        this.listSelectedRooms.push(tipSobe + id);
+        this.listSelectedRoomsID.push(id);
+        this.values += tipSobe + '(' + id + ')' + '    ';
       }
     }
+    this.checkBrojSoba();
   }
+
 
 
   removeRoom(tipSobe: any, id: any) {
@@ -128,6 +140,7 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
       if (this.listSelectedRooms[i] == tipSobe+id) {
         this.listSelectedRooms = this.listSelectedRooms.filter(item => item != tipSobe+id);
+        this.listSelectedRoomsID = this.listSelectedRoomsID.filter(item => item != id);
         break;
       }
     }
@@ -135,5 +148,30 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     for (var i = 0; i < this.listSelectedRooms.length; i++) {
       this.values += this.listSelectedRooms[i] + '    ';
     }
+    this.checkBrojSoba();
+  }
+
+  checkBrojSoba() {
+    if(this.listSelectedRooms.length == this.numberOfRooms.value) {
+      this.dobarBrojSoba = true;
+    } else {
+      this.dobarBrojSoba = false;
+    }
+  }
+
+  nastaviRezervaciju() {
+    this.d1 = this.startDate.value;
+    this.d2 = this.endDate.value;
+
+    const roomReservation = new RoomReservationModel(
+      this.d1,
+      this.d2,
+      this.listSelectedRoomsID
+    );
+
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.hotelReservationService.createHotelReservation(roomReservation).subscribe(data => {
+      this.router.navigateByUrl('registeredUserPage/additionalServices/' + idHotela);
+    });
   }
 }

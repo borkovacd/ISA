@@ -337,7 +337,7 @@ public class SobaService {
 					if(brojGostiju <= 0) {
 						return odgovarajuceSobe;
 					} else {
-						
+						odgovarajuceSobe = new ArrayList<Soba>();
 						ArrayList<Soba> obrnutoSlobodneSobe = slobodneSobe;
 				        int m = obrnutoSlobodneSobe.size();
 				        for (int i = 0; i < m-1; i++) 
@@ -350,12 +350,19 @@ public class SobaService {
 				    
 				                }
 				        
+				        /*System.out.println("ISPIS LISTE POSLE OBRNTODSSDDS SORTIRANJA");
+						for(Soba slobodnaSoba: obrnutoSlobodneSobe) {
+							System.out.println("Soba " + slobodnaSoba.getTipSobe() + " " + slobodnaSoba.getKapacitet());
+						}*/
+				        
+				        
 						for(Soba soba2: obrnutoSlobodneSobe) {
 							odgovarajuceSobe.add(soba2);
-							tempBrojGostiju -= soba.getKapacitet();
+							tempBrojGostiju -= soba2.getKapacitet();
 							tempBrojSoba -= 1;
 							if(tempBrojSoba == 0) {
 								if(tempBrojGostiju <= 0) {
+									//System.out.println("I OVDE");
 									return odgovarajuceSobe;
 								} else
 									return null;
