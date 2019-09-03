@@ -281,14 +281,14 @@ public class SobaService {
 		
 		int brojGostiju = Integer.parseInt(pdDTO.getNumberOfGuests());
 		int brojSoba = Integer.parseInt(pdDTO.getNumberOfRooms());
-		System.out.println("Gositju: " + brojGostiju + " Jedinica: " + brojSoba);
-		int kapacitet = 0;
-		int broj = 0;
+		//System.out.println("Gositju: " + brojGostiju + " Jedinica: " + brojSoba);
+		//int kapacitet = 0;
+		//int broj = 0;
 		ArrayList<Soba> odgovarajuceSobe = new ArrayList<Soba>();
 		if(brojSoba == 1) { //ako se trazi jedna soba, neka lista sadrzi samo sobe sa tacnim kapacitetom ili sa vecim kapacitetom
 			for(Soba soba: slobodneSobe) {
 				if(soba.getKapacitet() >= brojGostiju) {
-					System.out.println("STO NISAM OVDE?");
+					//System.out.println("STO NISAM OVDE?");
 					odgovarajuceSobe.add(soba);
 				}
 					
@@ -296,12 +296,18 @@ public class SobaService {
 		} else {
 			System.out.println("OCIGLEDNO SI OVDE");
 			for(Soba soba: slobodneSobe) {
-				kapacitet += soba.getKapacitet();
-				broj++;
+				odgovarajuceSobe.add(soba);
+				brojGostiju -= soba.getKapacitet();
+				brojSoba -= 1;
+				if(brojSoba == 0) {
+					if(brojGostiju <= 0) {
+						return odgovarajuceSobe;
+					} else {
+						return null;
+					}
+				}
 			}
-			if(kapacitet >= brojGostiju && broj <= brojSoba) {
-				return slobodneSobe;
-			}
+			
 		}
 		
 		return odgovarajuceSobe;
