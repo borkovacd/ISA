@@ -273,11 +273,30 @@ public class SobaService {
 			}
 		}
 		
+		//Lista 'slobodneSobe' sadrzi sobe koje su odgovarajuce po vremenskom periodu i po cenovnom rangu
+		
+		System.out.println("ISPIS LISTE PRE SORTIRANJA");
 		for(Soba slobodnaSoba: slobodneSobe) {
 			System.out.println("Soba " + slobodnaSoba.getTipSobe() + " " + slobodnaSoba.getKapacitet());
 		}
 		
-		//Lista 'slobodneSobe' sadrzi sobe koje su odgovarajuce po vremenskom periodu i po cenovnom rangu
+		//Sortiranje slobodnih soba po kapacitetu od najmanje do najvece
+		int n = slobodneSobe.size();
+        for (int i = 0; i < n-1; i++) 
+            for (int j = 0; j < n-i-1; j++) 
+                if (slobodneSobe.get(j).getKapacitet() > slobodneSobe.get(j+1).getKapacitet()) 
+                { 
+                    // swap arr[j+1] and arr[i] 
+                    Soba temp = slobodneSobe.get(j);
+                    slobodneSobe.set(j, slobodneSobe.get(j+1));
+                    slobodneSobe.set(j+1, temp);
+    
+                } 
+    
+        System.out.println("ISPIS LISTE POSLE SORTIRANJA");
+		for(Soba slobodnaSoba: slobodneSobe) {
+			System.out.println("Soba " + slobodnaSoba.getTipSobe() + " " + slobodnaSoba.getKapacitet());
+		}
 		
 		int brojGostiju = Integer.parseInt(pdDTO.getNumberOfGuests());
 		int brojSoba = Integer.parseInt(pdDTO.getNumberOfRooms());
@@ -287,7 +306,7 @@ public class SobaService {
 		ArrayList<Soba> odgovarajuceSobe = new ArrayList<Soba>();
 		if(brojSoba == 1) { //ako se trazi jedna soba, neka lista sadrzi samo sobe sa tacnim kapacitetom ili sa vecim kapacitetom
 			for(Soba soba: slobodneSobe) {
-				if(soba.getKapacitet() >= brojGostiju) {
+				if(soba.getKapacitet() == brojGostiju) {
 					//System.out.println("STO NISAM OVDE?");
 					odgovarajuceSobe.add(soba);
 				}
@@ -313,4 +332,6 @@ public class SobaService {
 		return odgovarajuceSobe;
 	}
 
+	
+	
 }
