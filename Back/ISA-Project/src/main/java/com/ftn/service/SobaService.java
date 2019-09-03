@@ -2,6 +2,7 @@ package com.ftn.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -208,6 +209,10 @@ public class SobaService {
 		LocalDate d1 = LocalDate.parse(pdDTO.getStartDate(), europeanDateFormatter);
 		LocalDate d2 = LocalDate.parse(pdDTO.getEndDate(), europeanDateFormatter);
 		
+		System.out.println("Datumi: " + d1 + "  " + d2);
+		int brojNocenja =  (int) d1.until(d2, ChronoUnit.DAYS);
+		System.out.println("Broj nocenja: " + brojNocenja);
+		
 		//Provera datuma
 		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
 			return null;
@@ -259,12 +264,16 @@ public class SobaService {
 												if(stavkaCenovnika.getCena() >= minPrice)
 													if(maxPrice != null) {
 														if(stavkaCenovnika.getCena() <= maxPrice) {
+															//dodajem privremenu cenu soba na osnovu datuma zeljene rezervacije i cene po nocenju
+															soba.setCena(stavkaCenovnika.getCena() * brojNocenja);
 															slobodneSobe.add(soba);
 														}
 													} else {
+														soba.setCena(stavkaCenovnika.getCena() * brojNocenja);
 														slobodneSobe.add(soba);
 													}
 											} else {
+												soba.setCena(stavkaCenovnika.getCena() * brojNocenja);
 												slobodneSobe.add(soba);
 											}
 														
@@ -275,10 +284,10 @@ public class SobaService {
 		
 		//Lista 'slobodneSobe' sadrzi sobe koje su odgovarajuce po vremenskom periodu i po cenovnom rangu
 		
-		System.out.println("ISPIS LISTE PRE SORTIRANJA");
+		/*System.out.println("ISPIS LISTE PRE SORTIRANJA");
 		for(Soba slobodnaSoba: slobodneSobe) {
 			System.out.println("Soba " + slobodnaSoba.getTipSobe() + " " + slobodnaSoba.getKapacitet());
-		}
+		}*/
 		
 		//Sortiranje slobodnih soba po kapacitetu od najmanje do najvece
 		int n = slobodneSobe.size();
@@ -286,20 +295,27 @@ public class SobaService {
             for (int j = 0; j < n-i-1; j++) 
                 if (slobodneSobe.get(j).getKapacitet() > slobodneSobe.get(j+1).getKapacitet()) 
                 { 
-                    // swap arr[j+1] and arr[i] 
                     Soba temp = slobodneSobe.get(j);
                     slobodneSobe.set(j, slobodneSobe.get(j+1));
                     slobodneSobe.set(j+1, temp);
     
                 } 
+        
+        
     
-        System.out.println("ISPIS LISTE POSLE SORTIRANJA");
+        /*System.out.println("ISPIS LISTE POSLE SORTIRANJA");
 		for(Soba slobodnaSoba: slobodneSobe) {
 			System.out.println("Soba " + slobodnaSoba.getTipSobe() + " " + slobodnaSoba.getKapacitet());
-		}
+		}*/
+        
+        
+       
+        
 		
 		int brojGostiju = Integer.parseInt(pdDTO.getNumberOfGuests());
 		int brojSoba = Integer.parseInt(pdDTO.getNumberOfRooms());
+		int tempBrojGostiju = brojGostiju;
+		int tempBrojSoba = brojSoba;
 		//System.out.println("Gositju: " + brojGostiju + " Jedinica: " + brojSoba);
 		//int kapacitet = 0;
 		//int broj = 0;
@@ -313,7 +329,6 @@ public class SobaService {
 					
 			}
 		} else {
-			System.out.println("OCIGLEDNO SI OVDE");
 			for(Soba soba: slobodneSobe) {
 				odgovarajuceSobe.add(soba);
 				brojGostiju -= soba.getKapacitet();
@@ -322,7 +337,30 @@ public class SobaService {
 					if(brojGostiju <= 0) {
 						return odgovarajuceSobe;
 					} else {
-						return null;
+						
+						ArrayList<Soba> obrnutoSlobodneSobe = slobodneSobe;
+				        int m = obrnutoSlobodneSobe.size();
+				        for (int i = 0; i < m-1; i++) 
+				            for (int j = 0; j < m-i-1; j++) 
+				                if (obrnutoSlobodneSobe.get(j).getKapacitet() < obrnutoSlobodneSobe.get(j+1).getKapacitet()) 
+				                { 
+				                    Soba temp = obrnutoSlobodneSobe.get(j);
+				                    obrnutoSlobodneSobe.set(j, obrnutoSlobodneSobe.get(j+1));
+				                    obrnutoSlobodneSobe.set(j+1, temp);
+				    
+				                }
+				        
+						for(Soba soba2: obrnutoSlobodneSobe) {
+							odgovarajuceSobe.add(soba2);
+							tempBrojGostiju -= soba.getKapacitet();
+							tempBrojSoba -= 1;
+							if(tempBrojSoba == 0) {
+								if(tempBrojGostiju <= 0) {
+									return odgovarajuceSobe;
+								} else
+									return null;
+							}
+						}
 					}
 				}
 			}

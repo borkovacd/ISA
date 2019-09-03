@@ -27,6 +27,10 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
   nazivHotela: string;
   timePeriodConfirmed: boolean;
 
+  public check = false;
+  listSelectedRooms = [];
+  values = '';
+
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
@@ -51,6 +55,7 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
   ngOnInit() {
 
     this.timePeriodConfirmed = false;
+
 
     const idHotela = this.route.snapshot.params.idHotela;
 
@@ -95,4 +100,40 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     )
   }
 
+  addRoom(tipSobe: any, id: any) {
+    this.check = false;
+
+    if (this.listSelectedRooms.length === 0) {
+      this.listSelectedRooms.push(tipSobe+id);
+      this.values += tipSobe +  '(' + id +')' + '    ';
+    } else {
+      for (var i = 0; i < this.listSelectedRooms.length; i++) {
+        if (this.listSelectedRooms[i] == tipSobe+id) {
+          this.check = true;
+          break;
+        }
+      }
+      if (this.check == false) {
+        this.listSelectedRooms.push(tipSobe+id);
+        this.values += tipSobe +  '(' + id +')' + '    ';
+      }
+    }
+  }
+
+
+  removeRoom(tipSobe: any, id: any) {
+    this.check = false;
+
+    for (var i = 0; i < this.listSelectedRooms.length; i++) {
+
+      if (this.listSelectedRooms[i] == tipSobe+id) {
+        this.listSelectedRooms = this.listSelectedRooms.filter(item => item != tipSobe+id);
+        break;
+      }
+    }
+    this.values = '';
+    for (var i = 0; i < this.listSelectedRooms.length; i++) {
+      this.values += this.listSelectedRooms[i] + '    ';
+    }
+  }
 }

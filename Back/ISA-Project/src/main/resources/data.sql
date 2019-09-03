@@ -12,14 +12,14 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
 	values (6, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
 
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (1, 0, 4, 0, 2, "APARTMAN", 6);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (2, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (3, 1, 4, 0, 5, "DVOKREVETNA_SOBA", 6);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id) 
-	values (4, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena) 
+	values (1, 0, 4, 0, 2, "APARTMAN", 6, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena) 
+	values (2, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena) 
+	values (3, 1, 4, 0, 5, "DVOKREVETNA_SOBA", 6, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena) 
+	values (4, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6, 0);
 
 	
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id) 

@@ -105,7 +105,24 @@
       <p style="font-size: 20px">Balkon:
         {{room.imaBalkon}}
       </p>
+      <p style="font-size: 20px">Ukupna cena:
+        {{room.cena}}
+      </p>
+      <button
+        style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
+        (click)="addRoom(room.tipSobe, room.id)">Izaberi
+      </button>
+      <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white; margin-bottom: 2%"
+              (click)="removeRoom(room.tipSobe, room.id)">Ukloni
+      </button>
+
     </div>
+
+    <div style=" display: inline-block;width: 50%;height: 100%">
+      <label style="margin-top:20px">Izabrane sobe:</label>
+      <textarea style=" height: 110px;width: 100%" disabled="true">{{values}}</textarea>
+    </div>
+
 </div>
 
 
