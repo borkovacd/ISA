@@ -2,22 +2,30 @@ package com.ftn.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.dto.ProveriDostupnostRentDTO;
 import com.ftn.dto.VoziloDTO;
 import com.ftn.dto.VremenskiPeriodDTO;
-import com.ftn.enums.TipSobe;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
+
+import com.ftn.model.rentacar.CenovnikRentACar;
+import com.ftn.model.rentacar.Lokacija;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
+import com.ftn.model.rentacar.StavkaCenovnikaRent;
 import com.ftn.model.rentacar.Vozilo;
+import com.ftn.repository.CenovnikRentACarRepository;
+import com.ftn.repository.LokacijaRepository;
 import com.ftn.repository.RentCarRepository;
 import com.ftn.repository.RezervacijaVozilaRepository;
+import com.ftn.repository.StavkaCenovnikaRentRepository;
 import com.ftn.repository.UserRepository;
 import com.ftn.repository.VoziloRepository;
 
@@ -35,6 +43,15 @@ public class VoziloService
 	
 	@Autowired
 	private RezervacijaVozilaRepository rezVoziloRepository ;
+	
+	@Autowired
+	private CenovnikRentACarRepository cenRentRepository ;
+	
+	@Autowired
+	private StavkaCenovnikaRentRepository stavkaRentRepository ;
+	
+	@Autowired
+	private LokacijaRepository lokRepository ;
 	
 	
 	// Dodavanje vozila
@@ -342,6 +359,207 @@ public class VoziloService
 		
 		return vozila ;
 		
+	}
+	
+	public ArrayList<Vozilo> checkAvailability(ProveriDostupnostRentDTO pdDTO, Long idRent) 
+	{
+		ArrayList<Vozilo> slobodnaVozila = new ArrayList<Vozilo>();
+		
+		Double minPrice = null;
+		Double maxPrice = null;
+		if(pdDTO.getPriceRange() != "") {
+			if(pdDTO.getPriceRange().equals("RSD 0 - RSD 5.000")) {
+				minPrice = 0.0;
+				maxPrice = 5000.0;
+			} else if(pdDTO.getPriceRange().equals("RSD 5.000 - RSD 10.000")) {
+				minPrice = 5000.0;
+				maxPrice = 10000.0;
+			} else if(pdDTO.getPriceRange().equals("RSD 10.000 - RSD 20.000")) {
+				minPrice = 10000.0;
+				maxPrice = 20000.0;
+			} else if(pdDTO.getPriceRange().equals("RSD 20.000+")) {
+				minPrice = 20000.0;
+				maxPrice = null;
+			} 
+		}
+		
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(pdDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(pdDTO.getEndDate(), europeanDateFormatter);
+		
+		System.out.println("Datumi: " + d1 + "  " + d2);
+		int brojDana =  (int) d1.until(d2, ChronoUnit.DAYS);
+		System.out.println("Broj dana: " + brojDana);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		ArrayList<Vozilo> vozilaRent = new ArrayList<Vozilo>();
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		
+		RentACar rent = rentRepository.getOne(idRent);
+		ArrayList<Lokacija> lokacijeRent = new ArrayList<Lokacija>();
+		
+		if(rent == null)
+		{
+			return null ;
+		}
+		else
+		{
+			for (Lokacija l: lokRepository.findAll())
+			{
+				if (l.getRentACar().getRentACarId() == idRent)
+				{
+					lokacijeRent.add(l);
+				}
+			}
+		}
+		
+		Long idMestoPreuzimanja = Long.parseLong(pdDTO.getMestoPreuzimanja());
+		Long idMestoVracanja = Long.parseLong(pdDTO.getMestoVracanja());
+		
+		ArrayList<Lokacija> lokiOkej = new ArrayList<Lokacija>();
+		ArrayList<Lokacija> lokiOkej2 = new ArrayList<Lokacija>();
+
+		
+		for (Lokacija loki: lokacijeRent)
+		{
+			if (loki.getId() == idMestoPreuzimanja)
+			{
+				lokiOkej.add(loki);
+			}
+		}
+		
+		if (lokiOkej.size() == 0) // izabrana lokacija ne postoji u tom servisu
+		{
+			return null ;
+		}
+		else // uneo je okej mesto preuzimanja, da vidimo za vracanje
+		{
+			for (Lokacija loki : lokiOkej)
+			{
+				if (loki.getId() == idMestoVracanja)
+				{
+					lokiOkej2.add(loki);
+				}
+			}
+		}
+		
+		if (lokiOkej2.size() == 0) // nije uneo dobro mesto vracanja
+		{
+			return null ;
+		}
+		
+		if(rent == null) 
+		{
+			return null;
+		} else {
+			for(Vozilo v: svaVozila) {
+				if(v.getRentACar().getRentACarId() == idRent) {
+					vozilaRent.add(v);
+				}
+			}
+		}
+		
+		// sada radimo sa vozilima koja su iz tog rent-a-car servisa
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+		
+		for(Vozilo v: vozilaRent) 
+		{
+			boolean slobodno = true;
+			for(RezervacijaVozila rezervacija : rezervacije) 
+			{
+				if (rezervacija.getVozilo().getVoziloId() == v.getVoziloId()) // ukoliko se to vozilo nalazi medju rezervacijama
+				{
+					// provera slobodno TRUE - FALSE
+					if(d1.isBefore(rezervacija.getDatumPreuzimanja())) {
+						if(d2.isAfter(rezervacija.getDatumPreuzimanja())) {
+							slobodno = false;
+						}
+					} else if(d1.isAfter(rezervacija.getDatumVracanja())) {
+						if(d2.isBefore(rezervacija.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+				}
+					
+			}
+			if(slobodno == true) // utvrdjeno je da je vozilo slobodno
+			{
+				// utvrdjivanje vazeceg cenovnika
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == idRent)  //ako je cenovnik servisa u kojem je slobodno vozilo
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) // ukoliko je stavka iz tog cenovnika
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) { // ukoliko je se stavka cenovnika odnosi na bas to vozilo
+											if(pdDTO.getPriceRange() != "") {
+												if(stavkaCenovnika.getCena() >= minPrice)
+													if(maxPrice != null) { // ukoliko je korisnik definisao maksimalnu cenu
+														if(stavkaCenovnika.getCena() <= maxPrice) {
+															//dodajem privremenu cenu vozila na osnovu datuma zeljene rezervacije i cene po danu
+															v.setCena(stavkaCenovnika.getCena() * brojDana);
+															slobodnaVozila.add(v);
+														}
+													} else { // ukoliko je korisnik izabrao opciju 20 000+
+														v.setCena(stavkaCenovnika.getCena() * brojDana);
+														slobodnaVozila.add(v);
+													}
+											} else { // ukoliko korisnik uopste nije definisao cenovni rang
+												v.setCena(stavkaCenovnika.getCena() * brojDana);
+												slobodnaVozila.add(v);
+											}
+														
+															
+										}
+			}
+		}
+		
+		//Lista 'slobodnaVozila' sadrzi vozila koje su odgovarajuce po vremenskom periodu i po cenovnom rangu
+		
+		//Sortiranje slobodnih vozila po kapacitetu od najmanjeg do najveceg
+		int n = slobodnaVozila.size();
+		
+        for (int i = 0; i < n-1; i++) 
+            for (int j = 0; j < n-i-1; j++) 
+                if (slobodnaVozila.get(j).getBrojSedista() > slobodnaVozila.get(j+1).getBrojSedista()) 
+                { 
+                    Vozilo temp = slobodnaVozila.get(j);
+                    slobodnaVozila.set(j, slobodnaVozila.get(j+1));
+                    slobodnaVozila.set(j+1, temp);
+    
+                } 
+        
+		
+		int brojGostiju = Integer.parseInt(pdDTO.getNumberOfGuests());
+		int brojVozila = 1;
+		
+		int tempBrojGostiju = brojGostiju;
+		
+		ArrayList<Vozilo> odgovarajucaVozila = new ArrayList<Vozilo>();
+		if(brojVozila == 1) { //ako se trazi jedno vozilo, neka lista sadrzi samo vozila sa tacnim kapacitetom ili sa vecim kapacitetom
+			for(Vozilo voz: slobodnaVozila) 
+			{
+				if(voz.getBrojSedista() == brojGostiju) 
+				{
+					odgovarajucaVozila.add(voz);
+				}
+					
+			}
+		} else 
+		{
+			System.out.println("Ne bi trebao ovde da udje, jer se uvek trazi jedno vozilo!");
+		}
+		
+		return odgovarajucaVozila;
 	}
 	
 

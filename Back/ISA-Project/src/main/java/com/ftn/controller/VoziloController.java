@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.dto.ProveriDostupnostRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.dto.VoziloDTO;
 import com.ftn.dto.VremenskiPeriodDTO;
@@ -146,5 +147,13 @@ public class VoziloController
 		ArrayList<Vozilo> vozila = voziloService.getVozilaKorisnik(id);
 		return new ResponseEntity<List<Vozilo>>(vozila, HttpStatus.OK);
 	}
-
+	
+	// provera da li je vozilo dostupno
+	@PostMapping("/checkAvailabilityVozilo/{idRent}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Vozilo>> checkAvailabilityVozilo(@RequestBody ProveriDostupnostRentDTO pdDTO, @PathVariable Long idRent) 
+	{
+		ArrayList<Vozilo> vozila = voziloService.checkAvailability(pdDTO, idRent);
+		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
+	}
 }

@@ -32,10 +32,6 @@ public class Vozilo
 	@Enumerated(EnumType.STRING)
 	private TipVozila tip ;
 	
-	// za svako vozilo vezana je lista ocena
-	//private ArrayList<Integer> ocena;
-	
-	// rezervisano - DA / NE
 	private boolean rezervisano;
 	
 	// rentACar kom vozilo pripada
@@ -52,7 +48,7 @@ public class Vozilo
 	*/
 
 	public Vozilo() {
-		super();
+		cena = 0;
 		// TODO Auto-generated constructor stub
 	}
 

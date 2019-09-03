@@ -25,6 +25,9 @@ public class RezervacijaVozila
 	
 	private LocalDate datumPreuzimanja;
 	private LocalDate datumVracanja;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Vozilo vozilo;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Lokacija mestoPreuzimanja;
@@ -32,24 +35,15 @@ public class RezervacijaVozila
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Lokacija mestoVracanja;
 	
-	private String tipVozila;
-	private int brPutnika;
-	
-	// FALI
-	// opciono cenovni rang
-	
-	// private int minCena ;
-	// private int maxCena ;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Vozilo vozilo;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Korisnik korisnik;
+	
+	private double cena ;
 
 	public RezervacijaVozila() {
 		super();
 		// TODO Auto-generated constructor stub
+		vozilo = new Vozilo();
 	}
 
 	public RezervacijaVozila(LocalDate datumPreuzimanja, Lokacija mestoPreuzimanja, LocalDate datumVracanja,
@@ -59,11 +53,28 @@ public class RezervacijaVozila
 		this.mestoPreuzimanja = mestoPreuzimanja;
 		this.datumVracanja = datumVracanja;
 		this.mestoVracanja = mestoVracanja;
-		this.tipVozila = tipVozila;
-		this.brPutnika = brPutnika;
+	}
+	
+	
+	public RezervacijaVozila(LocalDate datumPreuzimanja, LocalDate datumVracanja, Vozilo vozilo,
+			Lokacija mestoPreuzimanja, Lokacija mestoVracanja, Korisnik korisnik, double cena) {
+		super();
+		this.datumPreuzimanja = datumPreuzimanja;
+		this.datumVracanja = datumVracanja;
+		this.vozilo = vozilo;
+		this.mestoPreuzimanja = mestoPreuzimanja;
+		this.mestoVracanja = mestoVracanja;
+		this.korisnik = korisnik;
+		this.cena = cena;
 	}
 
-	
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
 
 	public Lokacija getMestoPreuzimanja() {
 		return mestoPreuzimanja;
@@ -96,22 +107,6 @@ public class RezervacijaVozila
 
 	public void setMestoVracanja(Lokacija mestoVracanja) {
 		this.mestoVracanja = mestoVracanja;
-	}
-
-	public String getTipVozila() {
-		return tipVozila;
-	}
-
-	public void setTipVozila(String tipVozila) {
-		this.tipVozila = tipVozila;
-	}
-
-	public int getBrPutnika() {
-		return brPutnika;
-	}
-
-	public void setBrPutnika(int brPutnika) {
-		this.brPutnika = brPutnika;
 	}
 
 
