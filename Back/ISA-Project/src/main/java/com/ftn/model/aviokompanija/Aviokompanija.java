@@ -1,5 +1,5 @@
 package com.ftn.model.aviokompanija;
-
+//proba commit-a iz intelliJ-a
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
