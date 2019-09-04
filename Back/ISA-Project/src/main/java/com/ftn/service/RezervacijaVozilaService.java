@@ -73,12 +73,12 @@ public class RezervacijaVozilaService
 		Vozilo v = voziloRepository.getOne(idVozila);
 		rezervacija.setVozilo(v);
 		
-		Long idMestoPreuzimanja = Long.parseLong(rezervacijaDTO.getMestoPreuzimanja());
-		Lokacija mestoPreuzimanja = lokRepository.getOne(idMestoPreuzimanja);
+		String mestoP = rezervacijaDTO.getMestoPreuzimanja();
+		Lokacija mestoPreuzimanja = lokRepository.findOneByAdresa(mestoP);
 		rezervacija.setMestoPreuzimanja(mestoPreuzimanja);
 		
-		Long idMestoVracanja = Long.parseLong(rezervacijaDTO.getMestoVracanja());
-		Lokacija mestoVracanja = lokRepository.getOne(idMestoVracanja);
+		String mestoV = rezervacijaDTO.getMestoVracanja();
+		Lokacija mestoVracanja = lokRepository.findOneByAdresa(mestoV);
 		rezervacija.setMestoVracanja(mestoVracanja);
 
 		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();

@@ -402,58 +402,7 @@ public class VoziloService
 		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
 		
 		RentACar rent = rentRepository.getOne(idRent);
-		ArrayList<Lokacija> lokacijeRent = new ArrayList<Lokacija>();
-		
-		if(rent == null)
-		{
-			return null ;
-		}
-		else
-		{
-			for (Lokacija l: lokRepository.findAll())
-			{
-				if (l.getRentACar().getRentACarId() == idRent)
-				{
-					lokacijeRent.add(l);
-				}
-			}
-		}
-		
-		Long idMestoPreuzimanja = Long.parseLong(pdDTO.getMestoPreuzimanja());
-		Long idMestoVracanja = Long.parseLong(pdDTO.getMestoVracanja());
-		
-		ArrayList<Lokacija> lokiOkej = new ArrayList<Lokacija>();
-		ArrayList<Lokacija> lokiOkej2 = new ArrayList<Lokacija>();
-
-		
-		for (Lokacija loki: lokacijeRent)
-		{
-			if (loki.getId() == idMestoPreuzimanja)
-			{
-				lokiOkej.add(loki);
-			}
-		}
-		
-		if (lokiOkej.size() == 0) // izabrana lokacija ne postoji u tom servisu
-		{
-			return null ;
-		}
-		else // uneo je okej mesto preuzimanja, da vidimo za vracanje
-		{
-			for (Lokacija loki : lokiOkej)
-			{
-				if (loki.getId() == idMestoVracanja)
-				{
-					lokiOkej2.add(loki);
-				}
-			}
-		}
-		
-		if (lokiOkej2.size() == 0) // nije uneo dobro mesto vracanja
-		{
-			return null ;
-		}
-		
+				
 		if(rent == null) 
 		{
 			return null;
@@ -525,7 +474,7 @@ public class VoziloService
 		
 		//Lista 'slobodnaVozila' sadrzi vozila koje su odgovarajuce po vremenskom periodu i po cenovnom rangu
 		
-		//Sortiranje slobodnih vozila po kapacitetu od najmanjeg do najveceg
+		// Sortiranje slobodnih vozila po kapacitetu od najmanjeg do najveceg
 		int n = slobodnaVozila.size();
 		
         for (int i = 0; i < n-1; i++) 
