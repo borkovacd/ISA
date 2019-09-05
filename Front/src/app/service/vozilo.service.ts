@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {VoziloModel} from '../model/vozilo.model';
 import {TimePeriodModel} from '../model/timePeriod.model';
 import {KorisnikModel} from "../model/Korisnik.model";
+import {CheckAvailabilityModel} from "../model/checkAvailability.model";
+import {CheckAvailabilityRentModel} from "../model/checkAvailabilityRent.model";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -65,13 +67,18 @@ export class VoziloService {
     return this.http.put(`${this.BASE_URL}/izmeniVozilo/${idRent}/${idVozilo}`, body, {headers});
   }
 
-  // vraca sva vozila jednog korisnika
-
   // vraca slobodna vozila za dat vremenski period
   getAvailableVozila(object: TimePeriodModel, idRent: any): Observable<any> {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/getAvailableVozila/${idRent}`, body, {headers});
+  }
+
+  // proveri dostupnost
+  checkAvailabilityVozilo(object: CheckAvailabilityRentModel, idRent: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/checkAvailabilityVozilo/${idRent}`, body, {headers});
   }
 }
 

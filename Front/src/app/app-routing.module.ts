@@ -37,6 +37,7 @@ import {WelcomePageServisiComponent} from "./welcome-page/welcome-page-servisi/w
 import {WelcomePageServisiFilijaleComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-filijale/welcome-page-servisi-filijale.component";
 import {WelcomePageServisiCenovnikComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-cenovnik/welcome-page-servisi-cenovnik.component";
 import {WelcomePageServisiVozilaComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component";
+import {RegisteredUserServisiVozilaComponent} from "./users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component";
 
 
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
   {path: 'registeredUserPage', component: RegisteredUserComponent},
   {path: 'registeredUserPage/rooms/:idHotela', component: RegisteredUserHoteliSobeComponent},
   {path: 'registeredUserPage/additionalServices/:idHotela', component: RegisteredUserHoteliDodatneUslugeComponent},
+  {path: 'registeredUserPage/vozila/:idRent', component: RegisteredUserServisiVozilaComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},

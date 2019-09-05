@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.dto.PretragaHotelaDTO;
+import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.service.RentACarService;
 
@@ -89,6 +92,14 @@ public class RentCarController {
 		}
 		
 		return new ResponseEntity<RentACar>(rent, HttpStatus.OK);
+	}
+	
+	@PostMapping("/searchRents")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<RentACar>> searchRents(@RequestBody PretragaRentDTO phDTO) 
+	{
+		ArrayList<RentACar> servisi = rentCarService.searchRents(phDTO);
+		return new ResponseEntity<ArrayList<RentACar>>(servisi, HttpStatus.OK);
 	}
 	
 	

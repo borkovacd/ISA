@@ -2,6 +2,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {RentCarModel} from '../model/rentcar.model';
 import {Observable} from 'rxjs';
+import {SearchHotelsModel} from "../model/searchHotels.model";
+import {SearchRentsModel} from "../model/searchRents.model";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'text/plain'}),
@@ -51,6 +53,13 @@ export class RentCarService {
   checkIfReservedRent(id: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/checkIfReservedRent/${id}`, {headers});
+  }
+
+  // pretraga servisa na osnovu parametara
+  searchRents(object: SearchRentsModel): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/searchRents`, body, {headers});
   }
 
 
