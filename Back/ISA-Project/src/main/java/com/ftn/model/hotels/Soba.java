@@ -34,13 +34,13 @@ public class Soba {
 	
 	private double cena;
 	
-	//private boolean aktivna = false; //Ideja da soba bude aktivna tek kada se doda njena cena
+	private boolean naPopustu = false;
 	
 	public Soba() {
 		cena = 0;
 	}
 	
-	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, boolean rezervisana, double cena) {
+	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, boolean rezervisana, double cena, boolean naPopustu) {
 		super();
 		this.hotel = hotel;
 		this.kapacitet = kapacitet;
@@ -49,6 +49,7 @@ public class Soba {
 		this.imaBalkon = imaBalkon;
 		this.rezervisana = rezervisana;
 		this.cena = cena;
+		this.naPopustu = naPopustu;
 	}
 
 	public Long getId() {
@@ -114,6 +115,15 @@ public class Soba {
 	public void setCena(double cena) {
 		this.cena = cena;
 	}
+
+	public boolean isNaPopustu() {
+		return naPopustu;
+	}
+
+	public void setNaPopustu(boolean naPopustu) {
+		this.naPopustu = naPopustu;
+	}
+	
 	
 	
 	
