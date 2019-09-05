@@ -91,6 +91,7 @@ import { RegisteredUserMyHoteliComponent } from './users/registered-user/registe
 import { RegisteredUserServisiComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi.component';
 import { RegisteredUserServisiVozilaComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component';
 import {VoziloReservationService} from "./service/voziloReservation.service";
+import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance-graphs.component';
 
 
 @NgModule({
@@ -167,6 +168,8 @@ import {VoziloReservationService} from "./service/voziloReservation.service";
     RegisteredUserServisiComponent,
 
     RegisteredUserServisiVozilaComponent,
+
+    AttendanceGraphsComponent,
   ],
   imports: [
     BrowserModule,

@@ -144,5 +144,9 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   pregledDodatnihUsluga(idHotela: any) {
     this.router.navigateByUrl('hotelAdminPage/additionalServices/' + idHotela);
   }
+
+  pregledGrafika(idHotela: any) {
+    this.router.navigateByUrl('hotelAdminPage/attendanceGraphs/' + idHotela);
+  }
 }
 

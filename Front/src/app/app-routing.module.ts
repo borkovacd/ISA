@@ -38,6 +38,7 @@ import {WelcomePageServisiFilijaleComponent} from "./welcome-page/welcome-page-s
 import {WelcomePageServisiCenovnikComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-cenovnik/welcome-page-servisi-cenovnik.component";
 import {WelcomePageServisiVozilaComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component";
 import {RegisteredUserServisiVozilaComponent} from "./users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component";
+import {AttendanceGraphsComponent} from "./hotels/attendance-graphs/attendance-graphs.component";
 
 
 const routes: Routes = [
@@ -53,6 +54,8 @@ const routes: Routes = [
   {path: 'hotelAdminPage/pricelist/:idHotela/:mode/:idPriceList', component: AddEditPricelistComponent},
   {path: 'hotelAdminPage/price/:idHotela/:idPriceList/:mode/:idPrice', component: AddEditPriceComponent},
   {path: 'hotelAdminPage/additionalService/:idHotela', component: AddAdditionalServiceComponent},
+  {path: 'hotelAdminPage/attendanceGraphs/:idHotela', component: AttendanceGraphsComponent},
+
 
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
 
