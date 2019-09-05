@@ -41,14 +41,18 @@ public class RezervacijaHotela {
 	
 	private double cena;
 	
+	private int tipRezervacije; //0 -> obicna rezervacija 
+	 							//1 -> brza rezervacija
+	
 	public RezervacijaHotela() {
 		
 		sobe = new ArrayList<Soba>();
 		dodatneUsluge = new ArrayList<DodatnaUsluga>();
+		tipRezervacije = 0;
 	}
 
 	public RezervacijaHotela(LocalDate datumPocetka, LocalDate datumKraja, List<Soba> sobe, List<DodatnaUsluga> dodatneUsluge, Korisnik korisnik,
-			double cena) {
+			double cena, int tipRezervacije) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumKraja = datumKraja;
@@ -56,6 +60,7 @@ public class RezervacijaHotela {
 		this.dodatneUsluge = dodatneUsluge;
 		this.korisnik = korisnik;
 		this.cena = cena;
+		this.tipRezervacije = tipRezervacije;
 	}
 
 	public Long getId() {
@@ -113,6 +118,16 @@ public class RezervacijaHotela {
 	public void setDodatneUsluge(List<DodatnaUsluga> dodatneUsluge) {
 		this.dodatneUsluge = dodatneUsluge;
 	}
+
+	public int getTipRezervacije() {
+		return tipRezervacije;
+	}
+
+	public void setTipRezervacije(int tipRezervacije) {
+		this.tipRezervacije = tipRezervacije;
+	}
+	
+	
 	
 	
 

@@ -50,8 +50,8 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (23, 500, "TERETANA",null, 11);
 /**** REZERVACIJA HOTELA ****/
-insert into isa_project.rezervacija_hotela (id, cena, datum_kraja, datum_pocetka, korisnik_id)
-	values (1, 2450, DATE '2019-08-25', DATE '2019-09-01', 2);
+insert into isa_project.rezervacija_hotela (id, cena, datum_kraja, datum_pocetka, korisnik_id, tip_rezervacije)
+	values (1, 2450, DATE '2019-08-25', DATE '2019-09-01', 2, 0);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (1, 1);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
