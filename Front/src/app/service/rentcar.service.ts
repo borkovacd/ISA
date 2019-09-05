@@ -62,5 +62,11 @@ export class RentCarService {
     return this.http.post(`${this.BASE_URL}/searchRents`, body, {headers});
   }
 
+  // vraca tipove vozila u rent-a-caru
+  getVoziloTypesInRent(idRent: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getVoziloTypesInRent/${idRent}`, {headers});
+  }
+
 
 }

@@ -90,6 +90,7 @@ import { RegisteredUserMyVozilaComponent } from './users/registered-user/registe
 import { RegisteredUserMyHoteliComponent } from './users/registered-user/registered-user-my-hoteli/registered-user-my-hoteli.component';
 import { RegisteredUserServisiComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi.component';
 import { RegisteredUserServisiVozilaComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component';
+import {VoziloReservationService} from "./service/voziloReservation.service";
 
 
 @NgModule({
@@ -208,6 +209,7 @@ import { RegisteredUserServisiVozilaComponent } from './users/registered-user/re
     PriceRentService,
     PricelistRentService,
     HotelReservationService,
+    VoziloReservationService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.dto.PretragaHotelaDTO;
 import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
+import com.ftn.enums.TipVozila;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.service.RentACarService;
@@ -101,6 +102,15 @@ public class RentCarController {
 		ArrayList<RentACar> servisi = rentCarService.searchRents(phDTO);
 		return new ResponseEntity<ArrayList<RentACar>>(servisi, HttpStatus.OK);
 	}
+	
+	// vraca tipove vozila tog servisa
+		@GetMapping("/getVoziloTypesInRent/{idRent}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<ArrayList<TipVozila>> getRoomTypesInRent(@PathVariable Long idRent) 
+		{
+			ArrayList<TipVozila> tipoviVozila = rentCarService.getTipoviVozilaRent(idRent);
+			return new ResponseEntity<ArrayList<TipVozila>>(tipoviVozila, HttpStatus.OK);
+		}
 	
 	
 	/******************/

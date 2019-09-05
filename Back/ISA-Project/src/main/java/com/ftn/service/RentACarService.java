@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
+import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
 
 import com.ftn.model.rentacar.CenovnikRentACar;
@@ -271,6 +272,35 @@ public class RentACarService {
 		
 		return servisi;
 		
+	}
+	
+	// vraca listu tipova vozila za jedan rent-a-car servis
+	public ArrayList<TipVozila> getTipoviVozilaRent(Long idRent) 
+	{
+		ArrayList<TipVozila> tipoviVozila = new ArrayList<TipVozila>();
+		RentACar rent = rentCarRepository.getOne(idRent);
+		
+		if(rent == null)
+			return tipoviVozila;
+		
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		ArrayList<Vozilo> vozilaRent = new ArrayList<Vozilo>();
+		
+		// ukoliko je vozilo iz tog servisa
+		for(Vozilo v: svaVozila) 
+		{
+			if(v.getRentACar().getRentACarId() == rent.getRentACarId())
+				vozilaRent.add(v);
+		}
+		
+		
+		for(Vozilo v: vozilaRent) 
+		{
+			if(!tipoviVozila.contains(v.getTip())) // ukoliko taj tip nije vec dodat
+				tipoviVozila.add(v.getTip());
+		}
+		return tipoviVozila;
+
 	}
 
 	/********************/
