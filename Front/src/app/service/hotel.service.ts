@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import { HotelModel } from '../model/hotel.model';
 import {Observable} from 'rxjs';
@@ -53,6 +53,14 @@ export class HotelService {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/searchHotels`, body, {headers});
+  }
+
+
+  monthyGraph(idHotela: any, year: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('year', year);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/monthlyGraph/${idHotela}`, { params: params});
   }
 }
 

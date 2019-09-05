@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.stream.events.EndDocument;
+
+import org.hibernate.dialect.pagination.FirstLimitHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +44,61 @@ public class HotelService {
 
 	
 	/******** Borkovac *********/
+	
+	public ArrayList<Integer> getMonthyGraphData(Long id, String yearString) {
+		
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		
+		int year = Integer.parseInt(yearString);
+		//System.out.println("Godina je: " + year);
+		
+		Hotel hotel = hotelRepository.getOne(id);
+		if(hotel == null) 
+			return null;
+		
+		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		
+		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		
+		for(RezervacijaHotela rezervacija: sveRezervacije) {
+			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		//JANUAR
+		//LocalDate d1 = LocalDate.ofYearDay(year, 1);
+		//LocalDate d2 = LocalDate.of(year, 2, 1);
+		
+		//JANUAR-NOVEMBAR
+		int broj = 0;
+		for(int i=1; i<12; i++) {
+				LocalDate d1 = LocalDate.of(year, i, 1);
+				LocalDate d2 = LocalDate.of(year, i+1, 1);
+				broj = 0;
+				for(RezervacijaHotela r: rezervacije) {
+					LocalDate startDate = r.getDatumPocetka();
+					//System.out.println("Start " + startDate);
+					LocalDate endDate = r.getDatumKraja();
+					//System.out.println("End " + endDate);
+					while(!startDate.isAfter(endDate)) {
+						System.out.println("Trenutni datum: " + startDate);
+						if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
+							for(Soba soba: r.getSobe()) {
+								broj += soba.getKapacitet();
+							}
+						}
+				
+						startDate = startDate.plusDays(1);
+					}
+				}
+		
+			values.add(broj);
+		}
+		
+		return values;
+		
+	}
 	
 	public Hotel registerHotel(HotelDTO hotelDTO) {
 		Hotel hotel = new Hotel();
@@ -275,6 +333,8 @@ public class HotelService {
 			return hoteli;
 			
 		}
+
+		
 
 		
 
