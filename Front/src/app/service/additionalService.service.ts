@@ -32,4 +32,9 @@ export  class AdditionalServiceService {
     return this.http.post(`${this.BASE_URL}/createAdditionalService/${idHotela}`, body, {headers});
 
   }
+
+  getAvailableAdditionalServices(idHotela: any, idRezervacije: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAvailableAdditionalServices/${idHotela}/${idRezervacije}`, {headers});
+  }
 }

@@ -47,4 +47,11 @@ public class DodatnaUslugaController {
 		boolean response = dodatnaUslugaService.deleteAdditionalService(idAdditionalService);
 		return response;
 	}
+	
+	@GetMapping("/getAvailableAdditionalServices/{idHotela}/{idRezervacije}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<DodatnaUsluga>> getAvailableAdditionalServices(@PathVariable Long idHotela, @PathVariable Long idRezervacije) {
+		ArrayList<DodatnaUsluga> dodatneUsluge = dodatnaUslugaService.getAvailableAdditionalServices(idHotela, idRezervacije);
+		return new ResponseEntity<ArrayList<DodatnaUsluga>>(dodatneUsluge, HttpStatus.OK);
+	}
 }

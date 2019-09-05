@@ -69,7 +69,7 @@ const routes: Routes = [
 
   {path: 'registeredUserPage', component: RegisteredUserComponent},
   {path: 'registeredUserPage/rooms/:idHotela', component: RegisteredUserHoteliSobeComponent},
-  {path: 'registeredUserPage/additionalServices/:idHotela', component: RegisteredUserHoteliDodatneUslugeComponent},
+  {path: 'registeredUserPage/additionalServices/:idHotela/:idRezervacije', component: RegisteredUserHoteliDodatneUslugeComponent},
   {path: 'registeredUserPage/vozila/:idRent', component: RegisteredUserServisiVozilaComponent},
 
 

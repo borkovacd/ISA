@@ -171,7 +171,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
     const idHotela = this.route.snapshot.params.idHotela;
     this.hotelReservationService.createHotelReservation(roomReservation).subscribe(data => {
-      this.router.navigateByUrl('registeredUserPage/additionalServices/' + idHotela);
+      const idRezervacije = data.id;
+      this.router.navigateByUrl('registeredUserPage/additionalServices/' + idHotela + '/' + idRezervacije);
     });
   }
 }

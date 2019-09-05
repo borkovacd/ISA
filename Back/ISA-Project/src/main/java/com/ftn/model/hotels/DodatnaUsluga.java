@@ -1,5 +1,6 @@
 package com.ftn.model.hotels;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +24,9 @@ public class DodatnaUsluga {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Hotel hotel;
+	
+	@Column(nullable =  true)
+	private double cena;
 	
 	public DodatnaUsluga() {
 		
@@ -51,6 +55,20 @@ public class DodatnaUsluga {
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
+
+	public void setTipDodatneUsluge(TipDodatneUsluge tipDodatneUsluge) {
+		this.tipDodatneUsluge = tipDodatneUsluge;
+	}
+	
+	
 	
 	
 

@@ -4,4 +4,42 @@
     <button class="btn-primary" (click)="logout()">Odjavi se</button>
   </igx-navbar>
 </div>
-<p>registered-user-hoteli-dodatne-usluge works!</p>
+
+<div style="text-align: center">
+  <p  style="color: black;font-size:80px; font-family: 'Ink Free'; margin-bottom: 5%">'{{nazivHotela}}'</p>
+</div>
+
+<div style="text-align: center">
+  <form [formGroup]="form">
+    <div class="form-group">
+
+      <div style=" display: inline-block; width: 50%;margin-top: 20px">
+        <div *ngFor="let s of services ">
+          <br>
+          <label style="font-size: 18px">{{s.tipDodatneUsluge}}</label>
+          <div>
+            <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white;"
+              (click)="addService(s.tipDodatneUsluge)">Dodaj
+            </button>
+            <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white;"
+                (click)="removeService(s.tipDodatneUsluge)">Ukloni
+            </button>
+          </div>
+          <p style="font-size: 20px">Cena dodatne usluge:
+            {{s.cena}}
+          </p>
+          <br>
+        </div>
+
+        <div *ngIf="services != null" style=" display: inline-block;width: 50%;height: 100%">
+          <label style="margin-top:20px">Izabrane dodatne usluge:</label>
+          <textarea style=" height: 110px;width: 100%" disabled="true">{{values}}</textarea>
+        </div>
+      </div>
+
+      <div  style="text-align: center">
+        <button  class="btn btn-primary" style="margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="confirmClick()">Nastavi postupak rezervacije</button>
+      </div>
+    </div>
+  </form>
+</div>
