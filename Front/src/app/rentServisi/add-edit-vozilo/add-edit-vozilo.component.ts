@@ -13,7 +13,6 @@ export class AddEditVoziloComponent implements OnInit {
 
   public form: FormGroup;
 
-  public cena: AbstractControl;
   public naziv: AbstractControl;
   public marka: AbstractControl;
   public model: AbstractControl;
@@ -30,7 +29,6 @@ export class AddEditVoziloComponent implements OnInit {
               private voziloService: VoziloService,) {
 
     this.form = this.fb.group({
-      'cena': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,100}$')])],
       'brojSedista': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,3}$')])],
       'godinaProizvodnje': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,10}$')])],
       'naziv': ['', Validators.compose([Validators.required])],
@@ -38,7 +36,6 @@ export class AddEditVoziloComponent implements OnInit {
       'model': ['', Validators.compose([Validators.required])],
       'tip': ['', Validators.compose([Validators.required])]
     })
-    this.cena = this.form.controls['cena'];
     this.brojSedista = this.form.controls['brojSedista'];
     this.godinaProizvodnje = this.form.controls['godinaProizvodnje'];
     this.naziv = this.form.controls['naziv'];
@@ -85,7 +82,7 @@ export class AddEditVoziloComponent implements OnInit {
   createVozilo()
   {
     const idRent = this.route.snapshot.params.idRent ;
-    const vozilo = new VoziloModel(this.cena.value,
+    const vozilo = new VoziloModel(
       this.naziv.value,
       this.marka.value,
       this.model.value,
@@ -104,7 +101,7 @@ export class AddEditVoziloComponent implements OnInit {
     const idRent = this.route.snapshot.params.idRent ;
     const idVozilo = this.route.snapshot.params.idVozilo;
 
-    const vozilo = new VoziloModel(this.cena.value,
+    const vozilo = new VoziloModel(
                   this.naziv.value, this.marka.value, this.model.value, this.godinaProizvodnje.value,
       this.brojSedista.value, this.tip.value);
 

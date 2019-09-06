@@ -120,6 +120,15 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
       this.vozila = data;
     });
 
+    if(this.vozila.length == 0)
+    {
+      alert('Duzina liste vozila je 0!');
+    }
+    else
+    {
+      alert('Olga je kraljevic!');
+    }
+
   }
 
   logout() {

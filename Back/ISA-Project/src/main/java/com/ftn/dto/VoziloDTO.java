@@ -2,7 +2,6 @@ package com.ftn.dto;
 
 public class VoziloDTO 
 {
-	private double cena ;
 	private String naziv ;
 	private String marka;
 	private String model;
@@ -16,12 +15,21 @@ public class VoziloDTO
 		// TODO Auto-generated constructor stub
 	}
 	
-	public double getCena() {
-		return cena;
+	
+
+	public VoziloDTO(String naziv, String marka, String model, int godinaProizvodnje, int brojSedista, String tip) {
+		super();
+		this.naziv = naziv;
+		this.marka = marka;
+		this.model = model;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.brojSedista = brojSedista;
+		this.tip = tip;
 	}
-	public void setCena(double cena) {
-		this.cena = cena;
-	}
+
+
+
+
 	public String getNaziv() {
 		return naziv;
 	}

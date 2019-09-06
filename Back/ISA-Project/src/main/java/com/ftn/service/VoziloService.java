@@ -64,7 +64,7 @@ public class VoziloService
 		
 		v.setRentACar(rentACar);
 		v.setBrojSedista(dto.getBrojSedista());
-		v.setCena(dto.getCena());
+		v.setCena(0);
 		v.setGodinaProizvodnje(dto.getGodinaProizvodnje());
 		v.setMarka(dto.getMarka());
 		v.setModel(dto.getModel());
@@ -120,7 +120,7 @@ public class VoziloService
 		v.setRentACar(rentACar);
 		
 		v.setBrojSedista(dto.getBrojSedista());
-		v.setCena(dto.getCena());
+		v.setCena(0);
 		v.setGodinaProizvodnje(dto.getGodinaProizvodnje());
 		v.setMarka(dto.getMarka());
 		v.setModel(dto.getModel());
@@ -383,6 +383,8 @@ public class VoziloService
 			} 
 		}
 		
+		String tipic = pdDTO.getTipVozila().toString();
+		
 		
 		String europeanDatePattern = "yyyy-MM-dd";
 		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
@@ -413,6 +415,15 @@ public class VoziloService
 				}
 			}
 		}
+		ArrayList<Vozilo> vozilaRentTip = new ArrayList<Vozilo>();
+		
+		for (Vozilo v: vozilaRent)
+		{
+			if (v.getTip().toString().equals(pdDTO.getTipVozila()))
+			{
+				vozilaRentTip.add(v);
+			}
+		}
 		
 		// sada radimo sa vozilima koja su iz tog rent-a-car servisa
 		
@@ -420,7 +431,7 @@ public class VoziloService
 		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
 		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
 		
-		for(Vozilo v: vozilaRent) 
+		for(Vozilo v: vozilaRentTip) 
 		{
 			boolean slobodno = true;
 			for(RezervacijaVozila rezervacija : rezervacije) 
@@ -457,14 +468,20 @@ public class VoziloService
 															//dodajem privremenu cenu vozila na osnovu datuma zeljene rezervacije i cene po danu
 															v.setCena(stavkaCenovnika.getCena() * brojDana);
 															slobodnaVozila.add(v);
+															System.out.println("Cena je: " + v.getCena());		
+
 														}
 													} else { // ukoliko je korisnik izabrao opciju 20 000+
 														v.setCena(stavkaCenovnika.getCena() * brojDana);
 														slobodnaVozila.add(v);
+														System.out.println("Cena je: " + v.getCena());		
+
 													}
 											} else { // ukoliko korisnik uopste nije definisao cenovni rang
 												v.setCena(stavkaCenovnika.getCena() * brojDana);
 												slobodnaVozila.add(v);
+												System.out.println("Cena je: " + v.getCena());		
+
 											}
 														
 															
@@ -497,7 +514,7 @@ public class VoziloService
 		if(brojVozila == 1) { //ako se trazi jedno vozilo, neka lista sadrzi samo vozila sa tacnim kapacitetom ili sa vecim kapacitetom
 			for(Vozilo voz: slobodnaVozila) 
 			{
-				if(voz.getBrojSedista() == brojGostiju) 
+				if(voz.getBrojSedista() >= brojGostiju) 
 				{
 					odgovarajucaVozila.add(voz);
 				}

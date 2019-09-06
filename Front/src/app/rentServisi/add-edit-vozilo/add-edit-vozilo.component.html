@@ -35,12 +35,6 @@
         Naziv je obavezan!
       </small>
 
-      <label style="margin-top:20px">Cena:</label>
-      <input name="cena" class="form-control margin" [formControl]="cena" >
-      <small class="form-text error" *ngIf="cena.errors?.required && cena.touched" style="color: red">
-        Cena je obavezna!
-      </small>
-
       <label style="margin-top: 20px">Marka:</label>
       <input name="marka" class="form-control margin" [formControl]="marka">
       <small class="form-text error" *ngIf="marka.errors?.required && marka.touched" style="color: red">

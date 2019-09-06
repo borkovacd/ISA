@@ -1,5 +1,5 @@
 export class VoziloModel {
-  constructor(public cena: any,
+  constructor(
               public naziv: string,
               public marka: string,
               public model: string,
