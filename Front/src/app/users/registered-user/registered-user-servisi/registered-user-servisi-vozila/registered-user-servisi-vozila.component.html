@@ -136,10 +136,10 @@
       </p>
       <button
         style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
-        (click)="addVozilo(vozilo.tip, vozilo.idVozila)">Izaberi
+        (click)="addVozilo(vozilo.tip, vozilo.voziloId)">Izaberi
       </button>
       <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white; margin-bottom: 2%"
-              (click)="removeVozilo(vozilo.tip, vozilo.idVozila)">Ukloni
+              (click)="removeVozilo(vozilo.tip, vozilo.voziloId)">Ukloni
       </button>
 
     </div>
@@ -147,6 +147,10 @@
     <div *ngIf="slobodnaVozila != null" style=" display: inline-block;width: 50%;height: 100%">
       <label style="margin-top:20px">Izabrana vozila:</label>
       <textarea style=" height: 110px;width: 100%" disabled="true">{{value}}</textarea>
+    </div>
+
+    <div style="text-align: center">
+      <button  class="btn btn-primary" style="margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="nastaviRezervaciju()">Nastavi postupak rezervacije</button>
     </div>
 
   </div>
