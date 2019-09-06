@@ -31,7 +31,7 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
 
   d1: any;
   d2: any;
-  vozila = [];
+  slobodnaVozila = [];
   nazivRent: string;
   timePeriodConfirmed: boolean;
 
@@ -117,17 +117,8 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
     );
 
     this.voziloService.checkAvailabilityVozilo(checkAvailabilityRentModel, idRent).subscribe(data => {
-      this.vozila = data;
+      this.slobodnaVozila = data;
     });
-
-    if(this.vozila.length == 0)
-    {
-      alert('Duzina liste vozila je 0!');
-    }
-    else
-    {
-      alert('Olga je kraljevic!');
-    }
 
   }
 

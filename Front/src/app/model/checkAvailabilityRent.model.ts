@@ -6,7 +6,7 @@ export class CheckAvailabilityRentModel {
               public numberOfGuests: string,
               public tipVozila: string,
               public priceRange: string,
-  ) {}
+  )  {}
 }
 
 
