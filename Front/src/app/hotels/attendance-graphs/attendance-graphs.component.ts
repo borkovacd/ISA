@@ -14,9 +14,6 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 export class AttendanceGraphsComponent implements OnInit {
 
   public form: FormGroup;
-  public year: AbstractControl;
-  public year2: AbstractControl;
-  public month2: AbstractControl;
   public year3: AbstractControl;
   public month3: AbstractControl;
   public week3: AbstractControl;
@@ -34,9 +31,9 @@ export class AttendanceGraphsComponent implements OnInit {
               public fb: FormBuilder,
               private hotelService: HotelService) {
     this.form = this.fb.group({
-      'year3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
-      'month3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
-      'week3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
+      'year3': ['', Validators.compose([Validators.pattern('(19[789]\\d|20[01]\\d)')])],
+      'month3': ['', Validators.compose([Validators.pattern('^(1[012]|[1-9])$')])],
+      'week3': [''],
     });
     this.year3 = this.form.controls['year3'];
     this.month3 = this.form.controls['month3'];
@@ -68,39 +65,101 @@ export class AttendanceGraphsComponent implements OnInit {
   confirm() {
 
     const idHotela = this.route.snapshot.params.idHotela;
-    this.hotelService.monthyGraph(idHotela, this.year3.value).subscribe(data => {
-      this.monthlyValues = data;
+    if(this.chooseMonthy) {
+      if(this.year3.value == '') {
+        alert("Unos godine je obavezan!");
+        return;
+      }
+      this.hotelService.monthyGraph(idHotela, this.year3.value).subscribe(data => {
+        this.monthlyValues = data;
 
-
-      let chart = new CanvasJS.Chart("chartContainer1", {
-        animationEnabled: true,
-        exportEnabled: true,
-        title: {
-          text: "Grafik posecenosti na mesecnom nivou"
-        },
-        data: [{
-          type: "column",
-          dataPoints: [
-            {y: this.monthlyValues[0], label: "Januar"},
-            {y: this.monthlyValues[1], label: "Februar"},
-            {y: this.monthlyValues[2], label: "Mart"},
-            {y: this.monthlyValues[3], label: "April"},
-            {y: this.monthlyValues[4], label: "Maj"},
-            {y: this.monthlyValues[5], label: "Jun"},
-            {y: this.monthlyValues[6], label: "Jul"},
-            {y: this.monthlyValues[7], label: "Avgust"},
-            {y: this.monthlyValues[8], label: "Septembar"},
-            {y: this.monthlyValues[9], label: "Oktobar"},
-            {y: this.monthlyValues[10], label: "Novembar"},
-            {y: this.monthlyValues[11], label: "Decembar"}
-          ]
-        }]
+        let chart = new CanvasJS.Chart("chartContainer1", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "Grafik posecenosti na mesecnom nivou"
+          },
+          data: [{
+            type: "column",
+            dataPoints: [
+              {y: this.monthlyValues[0], label: "Januar"},
+              {y: this.monthlyValues[1], label: "Februar"},
+              {y: this.monthlyValues[2], label: "Mart"},
+              {y: this.monthlyValues[3], label: "April"},
+              {y: this.monthlyValues[4], label: "Maj"},
+              {y: this.monthlyValues[5], label: "Jun"},
+              {y: this.monthlyValues[6], label: "Jul"},
+              {y: this.monthlyValues[7], label: "Avgust"},
+              {y: this.monthlyValues[8], label: "Septembar"},
+              {y: this.monthlyValues[9], label: "Oktobar"},
+              {y: this.monthlyValues[10], label: "Novembar"},
+              {y: this.monthlyValues[11], label: "Decembar"}
+            ]
+          }]
+        });
+        chart.render();
       });
+    } else if(this.chooseWeekly) {
+      if(this.year3.value == '') {
+        alert("Unos godine je obavezan!");
+        return;
+      }
+      if(this.month3.value == '') {
+        alert("Unos meseca je obavezan!");
+        return;
+      }
+      this.hotelService.weeklyGraph(idHotela, this.year3.value, this.month3.value).subscribe(data => {
+        this.monthlyValues = data;
 
-      chart.render();
+        let chart = new CanvasJS.Chart("chartContainer1", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "Grafik posecenosti na nedeljnom nivou"
+          },
+          data: [{
+            type: "column",
+            dataPoints: [
+              {y: this.monthlyValues[0], label: "Nedelja 1"},
+              {y: this.monthlyValues[1], label: "Nedelja 2"},
+              {y: this.monthlyValues[2], label: "Nedelja 3"},
+              {y: this.monthlyValues[3], label: "Nedelja 4"},
+              {y: this.monthlyValues[4], label: "Nedelja 5"}
+            ]
+          }]
+        });
+        chart.render();
+      });
+    } else if(this.chooseDaily) {
+      if(this.week3.value == '') {
+        alert("Izbor datuma je obavezan!");
+        return;
+      }
+      this.hotelService.dailyGraph(idHotela, this.week3.value).subscribe(data => {
+        this.monthlyValues = data;
 
-    });
-
+        let chart = new CanvasJS.Chart("chartContainer1", {
+          animationEnabled: true,
+          exportEnabled: true,
+          title: {
+            text: "Grafik posecenosti na nedeljnom nivou"
+          },
+          data: [{
+            type: "column",
+            dataPoints: [
+              {y: this.monthlyValues[0], label: "Dan 1"},
+              {y: this.monthlyValues[1], label: "Dan 2"},
+              {y: this.monthlyValues[2], label: "Dan 3"},
+              {y: this.monthlyValues[3], label: "Dan 4"},
+              {y: this.monthlyValues[4], label: "Dan 5"},
+              {y: this.monthlyValues[5], label: "Dan 6"},
+              {y: this.monthlyValues[6], label: "Dan 7"}
+            ]
+          }]
+        });
+        chart.render();
+      });
+    }
     this.showGraph = true;
   }
 

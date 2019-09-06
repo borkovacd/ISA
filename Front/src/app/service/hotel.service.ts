@@ -59,8 +59,20 @@ export class HotelService {
   monthyGraph(idHotela: any, year: any): Observable<any> {
     let params = new HttpParams();
     params = params.append('year', year);
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/monthlyGraph/${idHotela}`, { params: params});
+  }
+
+  weeklyGraph(idHotela: any, year: any, month: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('year', year);
+    params = params.append('month', month);
+    return this.http.get(`${this.BASE_URL}/weeklyGraph/${idHotela}`, { params: params});
+  }
+
+  dailyGraph(idHotela: any, date: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('date', date);
+    return this.http.get(`${this.BASE_URL}/dailyGraph/${idHotela}`, { params: params});
   }
 }
 
