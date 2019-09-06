@@ -96,6 +96,20 @@ public class HotelController {
 		return new ResponseEntity<List<Integer>>(monthsData, HttpStatus.OK);
 	}
 	
+	@GetMapping("/weeklyGraph/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Integer>> getWeeklyGraphData(@PathVariable Long id, @RequestParam String year, @RequestParam String month) {
+		ArrayList<Integer> weeksData = hotelService.getWeeklyGraphData(id, year, month);
+		return new ResponseEntity<List<Integer>>(weeksData, HttpStatus.OK);
+	}
+	
+	@GetMapping("/dailyGraph/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Integer>> getDailyGraphData(@PathVariable Long id, @RequestParam String date) {
+		ArrayList<Integer> daysData = hotelService.getDailyGraphData(id, date);
+		return new ResponseEntity<List<Integer>>(daysData, HttpStatus.OK);
+	}
+	
 	/**********************/
 	/******* Olga *********/
 	

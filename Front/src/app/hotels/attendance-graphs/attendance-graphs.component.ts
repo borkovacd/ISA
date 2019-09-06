@@ -77,7 +77,7 @@ export class AttendanceGraphsComponent implements OnInit {
           animationEnabled: true,
           exportEnabled: true,
           title: {
-            text: "Grafik posecenosti na mesecnom nivou"
+            text: "Grafik posecenosti na godisnjem nivou"
           },
           data: [{
             type: "column",
@@ -115,7 +115,7 @@ export class AttendanceGraphsComponent implements OnInit {
           animationEnabled: true,
           exportEnabled: true,
           title: {
-            text: "Grafik posecenosti na nedeljnom nivou"
+            text: "Grafik posecenosti na mesecnom nivou"
           },
           data: [{
             type: "column",
