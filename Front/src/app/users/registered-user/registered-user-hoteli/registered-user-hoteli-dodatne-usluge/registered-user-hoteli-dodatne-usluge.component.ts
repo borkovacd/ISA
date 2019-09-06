@@ -6,6 +6,7 @@ import {AdditionalServiceService} from "../../../../service/additionalService.se
 import {HotelService} from "../../../../service/hotel.service";
 import {AdditionalServicesReservationModel} from "../../../../model/additionalServicesReservation.model";
 import {HotelReservationService} from "../../../../service/hotelReservation.service";
+import {AuthService} from "../../../../service/auth.service";
 
 @Component({
   selector: 'app-registered-user-hoteli-dodatne-usluge',
@@ -29,7 +30,8 @@ export class RegisteredUserHoteliDodatneUslugeComponent implements OnInit {
               private hotelReservationService: HotelReservationService,
               private router: Router,
               public fb: FormBuilder,
-              public route: ActivatedRoute,) {
+              public route: ActivatedRoute,
+              private authService: AuthService) {
     this.form = this.fb.group({
           'aditional': ['']
     })
@@ -120,11 +122,7 @@ export class RegisteredUserHoteliDodatneUslugeComponent implements OnInit {
 
   logout()
   {
-    this.userService.logOut().subscribe(
-      data => {
-        this.router.navigate(['/welcomepage']);
-      }
-    )
+    this.authService.logOutUser();
   }
 
 }

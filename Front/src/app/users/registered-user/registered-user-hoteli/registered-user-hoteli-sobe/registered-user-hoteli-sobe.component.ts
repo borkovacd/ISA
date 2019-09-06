@@ -9,6 +9,7 @@ import {CheckAvailabilityModel} from '../../../../model/checkAvailability.model'
 import {SearchHotelsModel} from "../../../../model/searchHotels.model";
 import {RoomReservationModel} from "../../../../model/roomReservation.model";
 import {HotelReservationService} from "../../../../service/hotelReservation.service";
+import {AuthService} from "../../../../service/auth.service";
 
 @Component({
   selector: 'app-registered-user-hoteli-sobe',
@@ -42,7 +43,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
               private roomService: RoomService,
               private hotelService: HotelService,
               private userService: UserService,
-              private hotelReservationService: HotelReservationService) {
+              private hotelReservationService: HotelReservationService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -101,11 +103,7 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
   logout()
   {
-    this.userService.logOut().subscribe(
-      data => {
-        this.router.navigate(['/welcomepage']);
-      }
-    )
+    this.authService.logOutUser();
   }
 
   addRoom(tipSobe: any, id: any) {

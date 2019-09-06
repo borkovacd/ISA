@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.HotelDTO;
@@ -180,6 +181,9 @@ public class UserService {
         return enkriptovana;
 	}
 	
+	// ne treba metoda za logovanje ako koristim Spring Security 
+	
+	/*
 	// logovanje
 	public String logIn(KorisnikDTO korisnik) 
 	{
@@ -233,6 +237,8 @@ public class UserService {
 		
 	}
 	
+	*/
+	
 	// vraca korisnika na osnovu email-a
 	/*
 	public Korisnik returnKorisnikByEmail(KorisnikDTO k) 
@@ -284,6 +290,13 @@ public class UserService {
 		}
 		
 		return pomLozinka ;
+	}
+	
+	// METODA DODER
+	
+	public Korisnik getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return userRepository.findOneByEmail(principal.toString());
 	}
 
 

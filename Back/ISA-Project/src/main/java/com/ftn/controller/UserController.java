@@ -134,6 +134,9 @@ public class UserController {
 		}
 	}
 	
+	
+	// NE TREBA METODA ZA LOGOVANJE, VEC PREKO SPRING SECURITY-JA
+	/*
 	// vrsi logovanje
 	@RequestMapping(value="/logIn", method = RequestMethod.POST, consumes="application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -169,6 +172,13 @@ public class UserController {
 			return new ResponseEntity<>(kDTO, HttpStatus.OK);
 		}
 		
+	}
+	*/
+	
+	// DODER 
+	@RequestMapping(value="/trenutniKorisnik",method = RequestMethod.GET)
+	public Korisnik trenutniKorisnik(@Context HttpServletRequest request){
+		return userService.getCurrentUser();
 	}
 	
 	// vrsi verifikaciju 
@@ -242,7 +252,7 @@ public class UserController {
 		}
 	}
 	
-	
+	/*
 	// vraca trenutno ulogovanog korisnika
 	@RequestMapping(value="/currentUser", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -252,6 +262,7 @@ public class UserController {
 		KorisnikDTO kd = new KorisnikDTO(k);
 		return new ResponseEntity<>(kd, HttpStatus.OK);
 	}
+	*/
 
 	
 

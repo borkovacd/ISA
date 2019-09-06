@@ -4,6 +4,7 @@ import {KorisnikModel} from '../model/Korisnik.model';
 import {UserService} from '../service/user.service';
 import {Router} from '@angular/router';
 import {FormGroup} from '@angular/forms';
+import {AuthService} from "../service/auth.service";
 import * as $ from 'jQuery' ;
 
 @Component({
@@ -15,10 +16,13 @@ export class PrijavaComponent implements OnInit {
 
   loginForm: FormGroup;
 
+  user : KorisnikModel = new KorisnikModel();
+  errorMessage : String;
+
   korisnik: KorisnikModel = new KorisnikModel();
   poruka = '';
 
-  constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
+  constructor(private authService : AuthService, private http: HttpClient, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -40,6 +44,7 @@ export class PrijavaComponent implements OnInit {
       $("#passValue").removeClass('border-danger');
     }
 
+    /*
     if (!provera) {
       this.userService.logIn(this.korisnik).subscribe(
         data => {
@@ -65,7 +70,43 @@ export class PrijavaComponent implements OnInit {
         }
       );
     }
+    */
 
+  }
+
+  clickLogIn(){
+
+    this.authService.login(this.user).subscribe(
+      success => {
+
+        if(!success) {
+          this.errorMessage = "Wrong email or password";
+        }else{
+          this.authService.getCurrentUser().subscribe(
+            data =>{
+              localStorage.setItem("ROLE", data.uloga);
+              localStorage.setItem("USERNAME", data.email);
+              if (localStorage.getItem("ROLE")=="ADMINISTRATOR_SISTEMA") {
+                this.router.navigate(["/systemAdminPage"]);
+              }else if (data.role=="ADMINISTRATOR_HOTELA"){
+                this.router.navigate(["/hotelAdminPage"])
+              }else if (data.role=="ADMINISTRATOR_RENT_A_CAR"){
+                this.router.navigate(["/rentAdminPage"])
+              }else if (data.role=="ADMINISTRATOR_AVIOKOMPANIJE"){
+                this.router.navigate(["/glavna"]);
+              }else if (data.role=="OBICAN_KORISNIK"){
+                this.router.navigate(["/registeredUserPage"]);
+              }else if (data.statusKorisnika == 'greska'){
+                this.poruka = 'Uneli ste neispravnu email adresu ili lozinku!';
+              }
+              else {
+                this.poruka = 'Neophodno je verifikovati nalog da biste mogli da se ulogujete!';
+              }
+            }
+          )
+        }
+      }
+    )
   }
 
 }

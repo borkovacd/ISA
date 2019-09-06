@@ -69,21 +69,32 @@ export class UserService {
     return this.http.get<KorisnikModel>(`${this.BASE_URL}/verifikujNalog/` + mail);
   }
 
+
+  /*
   logIn(k: KorisnikModel) {
     return this.http.post<KorisnikModel>('http://localhost:8080/api/user/logIn', k);
   }
 
   logOut() {
     return this.http.get<KorisnikModel>('http://localhost:8080/api/user/logOut');
+  }*/
+
+  login(user: KorisnikModel) {
+    return this.http.post<any>('api/login', { username: user.email, password: user.lozinka });
+  }
+  vratiTrenutnogKorisnika() {
+    return this.http.get<any>('api/user/trenutniKorisnik');
   }
 
   changePassword(k : KorisnikModel){
     return this.http.post<KorisnikModel>('http://localhost:8080/api/user/promenaLozinke', k);
   }
 
+  /*
   vratiTrenutnogKorisnika(){
     return this.http.get<KorisnikModel>('http://localhost:8080/api/user/currentUser');
   }
+   */
 
 
 
