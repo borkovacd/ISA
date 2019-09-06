@@ -60,6 +60,9 @@ public class RezervacijaHotelaService {
 		Korisnik korisnik = userRepository.getOne(id);
 		rezervacija.setKorisnik(korisnik);
 		
+		int brojGostiju = Integer.parseInt(rezervacijaDTO.getNumberOfGuests());
+		rezervacija.setBrojGostiju(brojGostiju);
+		
 		for(int i=0; i<rezervacijaDTO.getRoomList().size(); i++) {
 			Long idSobe = Long.parseLong(rezervacijaDTO.getRoomList().get(i));
 			System.out.println("Id sobe: " + idSobe);

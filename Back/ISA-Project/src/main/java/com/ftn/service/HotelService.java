@@ -66,35 +66,43 @@ public class HotelService {
 			}
 		}
 		
-		//JANUAR
-		//LocalDate d1 = LocalDate.ofYearDay(year, 1);
-		//LocalDate d2 = LocalDate.of(year, 2, 1);
-		
 		//JANUAR-NOVEMBAR
 		int broj = 0;
 		for(int i=1; i<12; i++) {
-				LocalDate d1 = LocalDate.of(year, i, 1);
-				LocalDate d2 = LocalDate.of(year, i+1, 1);
-				broj = 0;
-				for(RezervacijaHotela r: rezervacije) {
-					LocalDate startDate = r.getDatumPocetka();
-					//System.out.println("Start " + startDate);
-					LocalDate endDate = r.getDatumKraja();
-					//System.out.println("End " + endDate);
-					while(!startDate.isAfter(endDate)) {
-						System.out.println("Trenutni datum: " + startDate);
-						if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
-							for(Soba soba: r.getSobe()) {
-								broj += soba.getKapacitet();
-							}
-						}
-				
-						startDate = startDate.plusDays(1);
+			LocalDate d1 = LocalDate.of(year, i, 1);
+			LocalDate d2 = LocalDate.of(year, i+1, 1);
+			broj = 0;
+			for(RezervacijaHotela r: rezervacije) {
+				LocalDate startDate = r.getDatumPocetka();
+				LocalDate endDate = r.getDatumKraja();
+				while(!startDate.isAfter(endDate)) {
+					//System.out.println("Trenutni datum: " + startDate);
+					if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
+						broj += r.getBrojGostiju();
 					}
+					startDate = startDate.plusDays(1);
 				}
-		
+			}
 			values.add(broj);
 		}
+		
+		
+		//DECEMBAR-JANUAR
+		LocalDate d11 = LocalDate.of(year, 12, 1);
+		LocalDate d22 = LocalDate.of(year+1, 1, 1);
+		broj = 0;
+		for(RezervacijaHotela r: rezervacije) {
+			LocalDate startDate = r.getDatumPocetka();
+			LocalDate endDate = r.getDatumKraja();
+			while(!startDate.isAfter(endDate)) {
+				//System.out.println("Trenutni datum: " + startDate);
+				if((startDate.isAfter(d11) || startDate.isEqual(d11)) && (startDate.isBefore(d22))) {
+					broj += r.getBrojGostiju();
+				}
+				startDate = startDate.plusDays(1);
+			}
+		}
+		values.add(broj);
 		
 		return values;
 		

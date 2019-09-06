@@ -6,6 +6,7 @@ public class RezervacijaSobaDTO {
 	
 	private String startDate;
 	private String endDate;
+	private String numberOfGuests;
 	private ArrayList<String> roomList;
 	
 	public RezervacijaSobaDTO() {
@@ -35,6 +36,16 @@ public class RezervacijaSobaDTO {
 	public void setRoomList(ArrayList<String> roomList) {
 		this.roomList = roomList;
 	}
+
+	public String getNumberOfGuests() {
+		return numberOfGuests;
+	}
+
+	public void setNumberOfGuests(String numberOfGuests) {
+		this.numberOfGuests = numberOfGuests;
+	}
+	
+	
 	
 	
 

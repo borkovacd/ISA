@@ -166,6 +166,7 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
     const roomReservation = new RoomReservationModel(
       this.d1,
       this.d2,
+      this.numberOfGuests.value,
       this.listSelectedRoomsID
     );
 

@@ -28,7 +28,7 @@ export class AttendanceGraphsComponent implements OnInit {
               public fb: FormBuilder,
               private hotelService: HotelService) {
     this.formMonthly = this.fb.group({
-      'year': ['', Validators.compose([Validators.required])],
+      'year': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
     })
     this.year = this.formMonthly.controls['year'];
   }
@@ -79,7 +79,8 @@ export class AttendanceGraphsComponent implements OnInit {
             {y: this.monthlyValues[7], label: "Avgust"},
             {y: this.monthlyValues[8], label: "Septembar"},
             {y: this.monthlyValues[9], label: "Oktobar"},
-            {y: this.monthlyValues[10], label: "Novembar"}
+            {y: this.monthlyValues[10], label: "Novembar"},
+            {y: this.monthlyValues[11], label: "Decembar"}
           ]
         }]
       });

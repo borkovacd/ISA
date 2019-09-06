@@ -33,7 +33,7 @@
         </small>
       </div>
       <div>
-        <button class="btn btn-primary btn-block shadow" style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirmMonthly()">Potvrdi</button>
+        <button class="btn btn-primary btn-block shadow" [disabled]="!formMonthly.valid"  style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirmMonthly()">Potvrdi</button>
       </div>
     </form>
   </div>
