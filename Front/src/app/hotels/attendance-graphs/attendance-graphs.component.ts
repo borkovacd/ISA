@@ -13,10 +13,16 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 })
 export class AttendanceGraphsComponent implements OnInit {
 
-  public formMonthly: FormGroup;
+  public form: FormGroup;
   public year: AbstractControl;
+  public year2: AbstractControl;
+  public month2: AbstractControl;
+  public year3: AbstractControl;
+  public month3: AbstractControl;
+  public week3: AbstractControl;
   nazivHotela: string;
   showGraph: boolean;
+  choose: boolean;
   chooseMonthy: boolean;
   chooseDaily: boolean;
   chooseWeekly: boolean;
@@ -27,15 +33,21 @@ export class AttendanceGraphsComponent implements OnInit {
               private route: ActivatedRoute,
               public fb: FormBuilder,
               private hotelService: HotelService) {
-    this.formMonthly = this.fb.group({
-      'year': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
-    })
-    this.year = this.formMonthly.controls['year'];
+    this.form = this.fb.group({
+      'year3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
+      'month3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
+      'week3': ['', Validators.compose([Validators.required, Validators.pattern('(19[789]\\d|20[01]\\d)')])],
+    });
+    this.year3 = this.form.controls['year3'];
+    this.month3 = this.form.controls['month3'];
+    this.week3 = this.form.controls['week3'];
+
   }
 
   ngOnInit() {
 
     this.showGraph = false;
+    this.choose = false;
     this.chooseMonthy = false;
     this.chooseDaily = false;
     this.chooseWeekly = false;
@@ -53,10 +65,10 @@ export class AttendanceGraphsComponent implements OnInit {
 
   }
 
-  confirmMonthly() {
+  confirm() {
 
     const idHotela = this.route.snapshot.params.idHotela;
-    this.hotelService.monthyGraph(idHotela, this.year.value).subscribe(data => {
+    this.hotelService.monthyGraph(idHotela, this.year3.value).subscribe(data => {
       this.monthlyValues = data;
 
 
@@ -97,6 +109,7 @@ export class AttendanceGraphsComponent implements OnInit {
     this.chooseDaily = false;
     this.chooseWeekly = false;
     this.showGraph = false;
+    this.choose = true;
   }
 
   showWeeklyGraph() {
@@ -104,7 +117,7 @@ export class AttendanceGraphsComponent implements OnInit {
     this.chooseDaily = false;
     this.chooseWeekly = true;
     this.showGraph = false;
-
+    this.choose = true;
   }
 
   showDailyGraph() {
@@ -112,5 +125,6 @@ export class AttendanceGraphsComponent implements OnInit {
     this.chooseMonthy = false;
     this.chooseDaily = true;
     this.chooseWeekly = false;
+    this.choose = true;
   }
 }

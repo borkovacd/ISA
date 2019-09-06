@@ -23,17 +23,35 @@
     </div>
   </div>
 
-  <div *ngIf="chooseMonthy" style="text-align: justify-all">
-    <form [formGroup]="formMonthly" style="text-align: center">
+  <div *ngIf="choose" style="text-align: justify-all">
+    <form [formGroup]="form" style="text-align: center">
+      <div *ngIf="chooseDaily">
+      <label>Unesi nedelju:</label>
+      <div>
+        <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="week3">
+        <small class="form-text error" *ngIf="week3.errors?.required && week3.touched" style="color: red">
+          Unos nedelje je obavezan!
+        </small>
+      </div>
+      </div>
+      <div *ngIf="chooseWeekly || chooseDaily">
+      <label>Unesi mesec:</label>
+      <div>
+        <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="month3">
+        <small class="form-text error" *ngIf="month3.errors?.required && month3.touched" style="color: red">
+          Unos meseca je obavezan!
+        </small>
+      </div>
+      </div>
       <label>Unesi godinu:</label>
       <div>
-        <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="year">
-        <small class="form-text error" *ngIf="year.errors?.required && year.touched" style="color: red">
+        <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="year3">
+        <small class="form-text error" *ngIf="year3.errors?.required && year3.touched" style="color: red">
           Unos godine je obavezan!
         </small>
       </div>
       <div>
-        <button class="btn btn-primary btn-block shadow" [disabled]="!formMonthly.valid"  style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirmMonthly()">Potvrdi</button>
+        <button class="btn btn-primary btn-block shadow" [disabled]="!form.valid"  style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirm()">Potvrdi</button>
       </div>
     </form>
   </div>
