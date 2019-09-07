@@ -92,6 +92,7 @@ import { RegisteredUserServisiComponent } from './users/registered-user/register
 import { RegisteredUserServisiVozilaComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component';
 import {VoziloReservationService} from "./service/voziloReservation.service";
 import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance-graphs.component';
+import {AuthService} from "./service/auth.service";
 
 
 @NgModule({
@@ -212,7 +213,8 @@ import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance
     PriceRentService,
     PricelistRentService,
     HotelReservationService,
-    VoziloReservationService
+    VoziloReservationService,
+    AuthService
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

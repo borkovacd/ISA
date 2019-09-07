@@ -17,7 +17,6 @@ export class AuthService{
   constructor(private http : HttpClient, private router : Router){
   }
 
-
   login(user : KorisnikModel) : Observable<boolean>{
     return this.http.post<any>("api/login", {username: user.email, password: user.lozinka})
       .pipe(
@@ -28,7 +27,7 @@ export class AuthService{
         }));
   }
   getCurrentUser() {
-    return this.http.get<any>('api/user/getCurrentUser');
+    return this.http.get<any>('http://localhost:8080/api/user/getCurrentUser');
   }
   doLoginUser(response){
     localStorage.setItem("AGENT_JWT_TOKEN", response.jwt);
