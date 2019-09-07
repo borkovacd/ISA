@@ -1,1 +1,68 @@
-<p>attendance-graphs-rent works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'"  title="T R A V E L L A N D">
+    <i class="fa fa-user"> Ime Prezime </i>
+    <button class="btn-primary">Izloguj se</button>
+  </igx-navbar>
+</div>
+
+<div>
+  <div>
+    <button class="btn btn-primary" style="width: 10%;margin-top: 10px; font-size: 1em;margin-bottom: 10px" (click)="goBack()">
+      <i class="fa fa-arrow-left"> Nazad</i>
+    </button>
+  </div>
+  <div style="text-align: center">
+    <p  style="color: black;font-size:80px; font-family: 'Ink Free'; margin-bottom: 5%">'{{nazivRent}}'</p>
+    <p  style="color: black;font-size:40px; font-weight: bolder; font-family: 'Ink Free'; margin-bottom: 5%">Prikaz grafika posecenosti</p>
+  </div>
+  <div style="text-align: center;">
+    <div style="margin-left: 20%" class="row">
+      <button class="btn btn-outline-primary" style="margin-right:3.5%; width: 20%;margin-top: 20px; font-size: 1.5em;margin-bottom: 30px;" (click)="showDailyGraph()">Dnevno</button>
+      <button class="btn btn-outline-primary" style="margin-right:3.5%; width: 20%;margin-top: 20px; font-size: 1.5em;margin-bottom: 30px;" (click)="showWeeklyGraph()">Nedeljno</button>
+      <button class="btn btn-outline-primary" style="margin-right:3.5%; width: 20%;margin-top: 20px; font-size: 1.5em;margin-bottom: 30px;" (click)="showMonthlyGraph()">Mesecno</button>
+    </div>
+  </div>
+
+  <div *ngIf="choose" style="text-align: justify-all">
+    <form [formGroup]="form" style="text-align: center">
+      <div *ngIf="chooseDaily">
+        <label>Unesi datum:</label>
+        <div>
+          <input style="width: 25%; margin-left: 37.5%" type="date" class="form-control margin" [formControl]="week3">
+          <small class="form-text error" *ngIf="week3.errors?.required && week3.touched" style="color: red">
+            Unos nedelje je obavezan!
+          </small>
+        </div>
+      </div>
+      <div *ngIf="chooseWeekly">
+        <label>Unesi mesec:</label>
+        <div>
+          <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="month3">
+          <small class="form-text error" *ngIf="month3.errors?.required && month3.touched" style="color: red">
+            Unos meseca je obavezan!
+          </small>
+        </div>
+      </div>
+      <div *ngIf="chooseWeekly || chooseMonthy">
+        <label>Unesi godinu:</label>
+        <div>
+          <input style="width: 25%; margin-left: 37.5%" type="text" class="form-control margin" [formControl]="year3">
+          <small class="form-text error" *ngIf="year3.errors?.required && year3.touched" style="color: red">
+            Unos godine je obavezan!
+          </small>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-block shadow" [disabled]="!form.valid"  style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirm()">Potvrdi</button>
+      </div>
+    </form>
+  </div>
+
+  <div [hidden]="!showGraph" id="chartContainer1" style="margin-top: 5%; height: 400px; width: 100%;"></div>
+</div>
+
+
+
+
+
+
