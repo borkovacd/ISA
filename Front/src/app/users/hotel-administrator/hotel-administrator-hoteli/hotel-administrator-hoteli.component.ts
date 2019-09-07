@@ -148,5 +148,9 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   pregledGrafika(idHotela: any) {
     this.router.navigateByUrl('hotelAdminPage/attendanceGraphs/' + idHotela);
   }
+
+  pregledPrihoda(idHotela: any) {
+    this.router.navigateByUrl('hotelAdminPage/revenues/' + idHotela);
+  }
 }
 

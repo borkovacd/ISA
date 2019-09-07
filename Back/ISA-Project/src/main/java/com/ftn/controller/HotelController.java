@@ -117,6 +117,13 @@ public class HotelController {
 		return new ResponseEntity<List<Integer>>(daysData, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getRevenues/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Double> getRevenues(@PathVariable Long id, @RequestParam String d1, @RequestParam String d2) {
+		Double retVal = hotelService.getRevenues(id, d1, d2);
+		return new ResponseEntity<Double>(retVal, HttpStatus.OK);
+	}
+	
 	/**********************/
 	/******* Olga *********/
 	

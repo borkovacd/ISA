@@ -80,5 +80,11 @@ export class HotelService {
     return this.http.get(`${this.BASE_URL}/getAllHotelsByAddress/${idRezervacijeLeta}`, {headers});
   }
 
+  getRevenues(idHotela: any, d1: any, d2: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('d1', d1);
+    params = params.append('d2', d2);
+    return this.http.get(`${this.BASE_URL}/getRevenues/${idHotela}`, { params: params});
+  }
 }
 

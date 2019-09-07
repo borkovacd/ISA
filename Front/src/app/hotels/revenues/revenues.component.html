@@ -1,1 +1,50 @@
-<p>revenues works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'"  title="T R A V E L L A N D">
+    <i class="fa fa-user"> Ime Prezime </i>
+    <button class="btn-primary">Izloguj se</button>
+  </igx-navbar>
+</div>
+
+<div>
+  <div>
+    <button class="btn btn-primary" style="width: 10%;margin-top: 10px; font-size: 1em;margin-bottom: 10px" (click)="goBack()">
+      <i class="fa fa-arrow-left"> Nazad</i>
+    </button>
+  </div>
+  <div style="text-align: center">
+    <p  style="color: black;font-size:80px; font-family: 'Ink Free'; margin-bottom: 5%">'{{nazivHotela}}'</p>
+    <p  style="color: black;font-size:40px; font-weight: bolder; font-family: 'Ink Free'; margin-bottom: 5%">Pregled prihoda</p>
+  </div>
+
+  <div  style="text-align: justify-all">
+    <form [formGroup]="form" style="text-align: center">
+      <div >
+        <label>Unesi početni datum:</label>
+        <div>
+          <input style="width: 25%; margin-left: 37.5%" type="date" class="form-control margin" [formControl]="d1">
+          <small class="form-text error" *ngIf="d1.errors?.required && d1.touched" style="color: red">
+            Unos početnog datuma je obavezan!
+          </small>
+        </div>
+      </div>
+      <div >
+        <label>Unesi krajnji datum:</label>
+        <div>
+          <input style="width: 25%; margin-left: 37.5%" type="date" class="form-control margin" [formControl]="d2">
+          <small class="form-text error" *ngIf="d2.errors?.required && d2.touched" style="color: red">
+            Unos krajnjeg datuma je obavezan!
+          </small>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-block shadow" [disabled]="!form.valid"  style="width: 25%; margin-left: 37.5%; margin-top: 1%; border-color: white; background: #1a8cff;" (click)="confirm()">Potvrdi</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="revenueValue" style="margin-top: 5%">
+    <p style="font-size: 30px">
+      Prihod hotela u izabranom periodu iznosi: {{revenueValue}}
+    </p>
+  </div>
+</div>

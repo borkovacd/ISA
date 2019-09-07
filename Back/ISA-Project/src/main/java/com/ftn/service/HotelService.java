@@ -484,6 +484,45 @@ public class HotelService {
 		
 	}
 	
+	public Double getRevenues(Long id, String d1String, String d2String) {
+		
+		double revenues = 0;
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(d1String, europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(d2String, europeanDateFormatter);
+		System.out.println("Datumi: " + d1 + " - " + d2);
+		
+		Hotel hotel = hotelRepository.getOne(id);
+		if(hotel == null) 
+			return null;
+		
+		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		
+		for(RezervacijaHotela rezervacija: sveRezervacije) {
+			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		for(RezervacijaHotela r: rezervacije) {
+			LocalDate startDate = r.getDatumPocetka();
+			LocalDate endDate = r.getDatumKraja();
+			
+			while(!startDate.isAfter(endDate)) {
+				//System.out.println("Trenutni datum: " + startDate);
+				if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2)) || (startDate.isEqual(d2))) {
+					revenues += r.getCena();
+				}
+				startDate = startDate.plusDays(1);
+			}
+		}
+		
+		return revenues;
+	}
+	
 	/***********************/
 	/******* Olga **********/
 	
@@ -531,6 +570,8 @@ public class HotelService {
 			return hoteli;
 			
 		}
+
+		
 
 
 		
