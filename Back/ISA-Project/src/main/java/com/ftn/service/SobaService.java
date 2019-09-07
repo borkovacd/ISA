@@ -176,6 +176,10 @@ public class SobaService {
 							if(d2.isBefore(rezervacija.getDatumKraja())) {
 								slobodna = false;
 							}
+						} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
+							if(d2.isEqual(rezervacija.getDatumKraja())) {
+								slobodna = false;
+							}
 						}
 					}
 				}
@@ -252,6 +256,10 @@ public class SobaService {
 							}
 						} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
 							if(d2.isBefore(rezervacija.getDatumKraja())) {
+								slobodna = false;
+							}
+						} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
+							if(d2.isEqual(rezervacija.getDatumKraja())) {
 								slobodna = false;
 							}
 						}
@@ -383,6 +391,76 @@ public class SobaService {
 		return odgovarajuceSobe;
 	}
 
-	
-	
+	public ArrayList<Soba> getRoomsAtDiscount(Long idRezervacijeLeta, Long idHotela) {
+		ArrayList<Soba> odgovarajuceSobe = new ArrayList<Soba>();
+		
+		//Sve potrebne informacije za proveru dostupnosti soba treba izvuci iz podataka o rezervaciji leta 
+		//Privremeno podaci ce se izvlaciti na osnovu rezervacije hotela
+		//TO DO
+		
+		RezervacijaHotela rezervacijaLeta = rezervacijaHotelaRepository.getOne(idRezervacijeLeta); //ZAMENITI ZA REZERVACIJU LETA kada bude odradjeno!
+		LocalDate d1 = rezervacijaLeta.getDatumPocetka();
+		LocalDate d2 = rezervacijaLeta.getDatumKraja();
+		int brojGostiju = rezervacijaLeta.getBrojGostiju();
+		int brojNocenja =  (int) d1.until(d2, ChronoUnit.DAYS);
+		
+		ArrayList<Soba> sobeHotelaNaPopustu = new ArrayList<Soba>();
+		//PROVERA 1 -> Da li je soba u zeljenom hotelu
+		//PROVERA 2 -> Da li je u pitanju soba na popustu
+		ArrayList<Soba> sveSobe = (ArrayList<Soba>) sobaRepository.findAll();
+		Hotel hotel = hotelRepository.getOne(idHotela);
+		if(hotel == null) {
+			return null;
+		} else {
+			for(Soba soba : sveSobe) {
+				if(soba.getHotel().getId() == idHotela) {
+					if(soba.isNaPopustu() == true)
+						sobeHotelaNaPopustu.add(soba);
+				}
+			}
+		}
+		
+		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		List<CenovnikHotela> cenovnici = cenovnikHotelaRepository.findAll();
+		List<StavkaCenovnikaHotela> stavkeCenovnika = stavkaCenovnikaHotelaRepository.findAll();
+		
+		// PROVERA 3 -> Da li je soba slobodna u odgovarajucem periodu
+		for(Soba soba: sobeHotelaNaPopustu) {
+			boolean slobodna = true;
+			for(RezervacijaHotela rezervacija : rezervacije) {
+				for(Soba rezervisanaSoba: rezervacija.getSobe()) { 
+					if(rezervisanaSoba.getId() == soba.getId()) { //Da li se soba nalazi medju rezervacijama
+						if(d1.isBefore(rezervacija.getDatumPocetka())) {
+							if(d2.isAfter(rezervacija.getDatumPocetka())) {
+								slobodna = false;
+							}
+						} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
+							if(d2.isBefore(rezervacija.getDatumKraja())) {
+								slobodna = false;
+							}
+						} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
+							if(d2.isEqual(rezervacija.getDatumKraja())) {
+								slobodna = false;
+							}
+						}
+					}
+				}
+			}
+			// PROVERA 4 -> Da li je soba ima definisanu cenu (da li je aktivna u trazenom periodu)
+			if(slobodna == true) {
+				for(CenovnikHotela cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getHotel().getId() == idHotela)  //ako je cenovnik hotela u kojem je slobodna soba
+								for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
+											soba.setCena(stavkaCenovnika.getCena() * brojNocenja);
+													odgovarajuceSobe.add(soba);
+										}
+			}
+		}
+		
+		return odgovarajuceSobe;
+	}
 }

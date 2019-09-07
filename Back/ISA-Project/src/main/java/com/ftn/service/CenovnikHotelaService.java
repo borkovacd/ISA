@@ -154,18 +154,20 @@ public class CenovnikHotelaService {
 		
 		LocalDate currentDate = LocalDate.now();
 		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
-		for(CenovnikHotela cenovnik : cenovniciHotela) {
-			if(currentDate.isEqual(cenovnik.getPocetakVazenja())) { //ako je danasnji datum isti kao pocetak vazenja cenovnika
-				return cenovnik;
-			} else if(currentDate.isAfter(cenovnik.getPocetakVazenja())) { //ako je posle pocetka vazenja
-				if(currentDate.isBefore(cenovnik.getPrestanakVazenja())) { //a pre kraja vazenja
+		if(!cenovniciHotela.isEmpty()) {
+			for(CenovnikHotela cenovnik : cenovniciHotela) {
+				if(currentDate.isEqual(cenovnik.getPocetakVazenja())) { //ako je danasnji datum isti kao pocetak vazenja cenovnika
 					return cenovnik;
-				}
- 			} 
+				} else if(currentDate.isAfter(cenovnik.getPocetakVazenja())) { //ako je posle pocetka vazenja
+					if(currentDate.isBefore(cenovnik.getPrestanakVazenja())) { //a pre kraja vazenja
+						return cenovnik;
+					}
+				} 
+			}
 		}
 		
 		CenovnikHotela tempCenovnik = null;
-		if(cenovniciHotela != null) { 
+		if(!cenovniciHotela.isEmpty()) { 
 			tempCenovnik = cenovniciHotela.get(0); //uzima prvi cenovnik iz liste cenovnika hotela
 		}
 		//Uzima se cenovnik ciji datum prestanka je najkasniji

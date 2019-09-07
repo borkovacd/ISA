@@ -27,7 +27,7 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
   d1: any;
   d2: any;
-  rooms = []
+  rooms = [];
   nazivHotela: string;
   timePeriodConfirmed: boolean;
 

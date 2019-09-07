@@ -82,6 +82,13 @@ public class HotelController {
 		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getAllHotelsByAddress/{idRezervacijeLeta}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Hotel>> getAllHotelsByAddress(@PathVariable Long idRezervacijeLeta) {
+		ArrayList<Hotel> hotels = hotelService.getAllHotelsByAddress(idRezervacijeLeta);
+		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+	}
+	
 	@PostMapping("/searchHotels")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<Hotel>> searchHotels(@RequestBody PretragaHotelaDTO phDTO) {

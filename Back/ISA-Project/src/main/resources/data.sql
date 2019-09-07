@@ -30,6 +30,12 @@ insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_
 	values (3, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 0);
 insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
 	values (4, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (5, 0, 2, 3, "JEDNOKREVETNA_SOBA", 6, 0, 1);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (6, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 1);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (7, 1, 6, 1, "FAMILY_ROOM", 6, 0, 1);
 /**** DODATNE USLUGE ****/
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
 	values (31, "TERETANA", 6, 0);
@@ -50,7 +56,9 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (22, 3600, null,'DVOKREVETNA_SOBA', 11);
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
-	values (23, 500, "TERETANA",null, 11);
+	values (23, 8900, null,'FAMILY_ROOM', 11);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (24, 500, "TERETANA",null, 11);
 /**** REZERVACIJA HOTELA ****/
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (1, 2450, DATE '2019-09-01', DATE '2019-09-12', 2, 0, 4);

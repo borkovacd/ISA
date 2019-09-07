@@ -67,5 +67,8 @@ export  class RoomService {
     return this.http.put(`${this.BASE_URL}/staviNaPopust/${idRoom}`, {headers});
   }
 
-
+  getRoomsAtDiscount(idRezervacijeLeta: any, idHotela: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getRoomsAtDiscount/${idRezervacijeLeta}/${idHotela}`,{headers});
+  }
 }
