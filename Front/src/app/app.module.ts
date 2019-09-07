@@ -92,7 +92,9 @@ import { RegisteredUserServisiComponent } from './users/registered-user/register
 import { RegisteredUserServisiVozilaComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component';
 import {VoziloReservationService} from "./service/voziloReservation.service";
 import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance-graphs.component';
-
+import {BrzaRezervacijaHoteliComponent} from "./brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli.component";
+import {BrzaRezervacijaRentServisiComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi.component";
+import {BrzaRezervacijaHoteliIzborComponent} from "./brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli-izbor/brza-rezervacija-hoteli-izbor.component";
 
 @NgModule({
   declarations: [
@@ -170,6 +172,9 @@ import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance
     RegisteredUserServisiVozilaComponent,
 
     AttendanceGraphsComponent,
+    BrzaRezervacijaRentServisiComponent,
+    BrzaRezervacijaHoteliIzborComponent,
+    BrzaRezervacijaHoteliComponent
   ],
   imports: [
     BrowserModule,
