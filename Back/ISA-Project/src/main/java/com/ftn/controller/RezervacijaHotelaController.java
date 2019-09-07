@@ -1,5 +1,7 @@
 package com.ftn.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import com.ftn.dto.RezervacijaDodatnihUslugaDTO;
 import com.ftn.dto.RezervacijaSobaDTO;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
+import com.ftn.repository.RezervacijaHotelaRepository;
 import com.ftn.service.RezervacijaHotelaService;
 
 @RestController
@@ -23,6 +26,9 @@ public class RezervacijaHotelaController {
 	
 	@Autowired
 	private RezervacijaHotelaService rezervacijaHotelaService;
+	
+	@Autowired
+	private RezervacijaHotelaRepository rezHotelRepository ;
 	
 	@PostMapping("/create/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -54,6 +60,27 @@ public class RezervacijaHotelaController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(rez, HttpStatus.OK);
+	}
+	
+	@PostMapping("/otkaziRezervacijuHotela/{idRezervacije}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean otkaziRezervacijuHotela(@PathVariable Long idRezervacije) 
+	{
+		RezervacijaHotela rezervacija = rezHotelRepository.getOne(idRezervacije);
+		LocalDate date = LocalDate.now().plusDays(3);
+
+		if (date.isBefore(rezervacija.getDatumPocetka()) || date.equals(rezervacija.getDatumPocetka())) 
+		{
+			System.out.println("Uspesno otkazana rezervacija");
+			rezHotelRepository.deleteById(idRezervacije);
+			return true;
+		}
+
+		else {
+			System.out.println("Nije moguce otkazati rezervaciju!");
+			return false;
+
+		}
 	}
 
 }
