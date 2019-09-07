@@ -41,6 +41,13 @@ public class SobaController {
 		ArrayList<Soba> sobe = sobaService.getAllRooms(idHotela);
 		return new ResponseEntity<ArrayList<Soba>>(sobe, HttpStatus.OK);
 	}
+	
+	@GetMapping("/getRoomsAtDiscount/{idRezervacijeLeta}/{idHotela}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Soba>> getRoomsAtDiscount(@PathVariable Long idRezervacijeLeta, @PathVariable Long idHotela) {
+		ArrayList<Soba> sobe = sobaService.getRoomsAtDiscount(idRezervacijeLeta, idHotela);
+		return new ResponseEntity<ArrayList<Soba>>(sobe, HttpStatus.OK);
+	}
 
 	@GetMapping("/checkIfReservedRoom/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")

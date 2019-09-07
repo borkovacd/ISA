@@ -1,1 +1,47 @@
-<p>brza-rezervacija-sobe-izbor works!</p>
+<div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
+  <igx-navbar style="font-family: 'Ink Free'" title="T R A V E L L A N D">
+    <button class="btn-primary">Profil</button>
+    <button class="btn-primary" (click)="logout()">Odjavi se</button>
+  </igx-navbar>
+</div>
+
+<div>
+  <button class="btn btn-primary" style="width: 10%;margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="goBack()">
+    <i class="fa fa-arrow-left"> Nazad</i>
+  </button>
+</div>
+<div style="text-align: center">
+  <p  style="color: black;font-size:60px; font-family: 'Ink Free'; margin-bottom: 5%">Brza rezervacija hotelskog smestaja</p>
+</div>
+
+<div style="text-align: center; margin-left: 20%;margin-right: 20%">
+  <div *ngIf="rooms.length == 0">
+    <p style="font-size: 30px;">
+      U traženom periodu ne postoje sobe koje ispunjavaju potrebne uslove.
+    </p>
+  </div>
+
+  <div *ngFor="let room of rooms"
+       style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
+    <h2 style="margin-top: 20px">{{room.tipSobe}}</h2>
+    <p style="font-size: 20px">Kapacitet:  {{room.kapacitet}}</p>
+    <p style="font-size: 20px">Sprat:  {{room.sprat}}</p>
+    <p style="font-size: 20px">Balkon:
+      {{room.imaBalkon}}
+    </p>
+    <p style="font-size: 20px; text-decoration-line: line-through">Ukupna cena (bez popusta):
+      {{room.cena}}
+    </p>
+    <p style="font-size: 20px; color: red">Ukupna cena (sa popustom):
+      {{0.9*room.cena}}
+    </p>
+    <button
+      style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
+      (click)="rezervisi(room.id)">Rezervisi
+    </button>
+  </div>
+
+  <div style="text-align: center">
+    <button  class="btn btn-primary" style="margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="zavrsiRezervaciju()">Zavrsi rezervaciju hotelskog smeštaja"</button>
+  </div>
+</div>
