@@ -69,6 +69,14 @@ public class SobaController {
 		return new ResponseEntity<>(soba, HttpStatus.OK);
 
 	}
+	
+	@PutMapping("/staviNaPopust/{idRoom}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Soba> staviNaPopust(@PathVariable Long idRoom) {
+		Soba soba = sobaService.staviNaPopust(idRoom);
+		return new ResponseEntity<>(soba, HttpStatus.OK);
+
+	}
 
 	@DeleteMapping("/deleteRoom/{idRoom}")
 	@CrossOrigin(origins = "http://localhost:4200")

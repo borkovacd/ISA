@@ -35,6 +35,19 @@ export class RoomsComponent implements OnInit {
     this.router.navigateByUrl('hotelAdminPage/room/' +  idHotela  + '/add/');
   }
 
+  staviNaPopust(id: any) {
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.roomService.checkIfReservedRoom(id).subscribe(data => {
+      if (data == false) {
+        this.roomService.staviNaPopust(id).subscribe(data => {
+          location.reload();
+        })
+      } else {
+        alert('Soba je rezervisana!');
+      }
+    })
+  }
+
   editRoom(id: any){
     const idHotela = this.route.snapshot.params.idHotela;
     this.roomService.checkIfReservedRoom(id).subscribe(data => {
@@ -61,5 +74,4 @@ export class RoomsComponent implements OnInit {
     this.router.navigateByUrl('hotelAdminPage' );
 
   }
-
 }
