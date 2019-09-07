@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from "../../../service/vozilo.service";
+import {VoziloReservationService} from "../../../service/voziloReservation.service";
 
 @Component({
   selector: 'app-registered-user-my-vozila',
@@ -9,18 +10,19 @@ import {VoziloService} from "../../../service/vozilo.service";
 })
 export class RegisteredUserMyVozilaComponent implements OnInit {
 
-  vozila = [];
+  rezervacije = [];
   idVozilo: any;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private voziloService: VoziloService,
+              private rezervacijaService: VoziloReservationService
               ) { }
 
   ngOnInit() {
 
-    this.voziloService.vratiVozilaKorisnika().subscribe(data => {
-      this.vozila = data ;
+    this.rezervacijaService.listaRentRezervacijaKorisnik().subscribe(data => {
+      this.rezervacije = data ;
     });
 
   }

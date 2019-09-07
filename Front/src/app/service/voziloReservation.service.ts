@@ -22,5 +22,11 @@ export  class VoziloReservationService {
     return this.http.post(`${this.BASE_URL}/voziloReservation/4`, body, {headers});
   }
 
+  listaRentRezervacijaKorisnik(): Observable<any>
+  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/listaRentRezervacijaKorisnik`, {headers});
+  }
+
 
 }

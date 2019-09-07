@@ -40,4 +40,10 @@ export  class HotelReservationService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/createFast/4/${idRezervacijeLeta}/${idHotela}/${idRoom}`, {headers});
   }
+
+  listaHotelRezervacijaKorisnik(): Observable<any>
+  {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/listaHotelRezervacijaKorisnik`, {headers});
+  }
 }
