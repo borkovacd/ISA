@@ -11,7 +11,7 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-  private BASE_URL = 'http://localhost:8080/api/user';
+  private BASE_URL = 'api/user';
 
   constructor(private http: HttpClient) {
 

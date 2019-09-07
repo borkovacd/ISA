@@ -12,7 +12,8 @@ import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
-
+import com.ftn.model.hotels.Hotel;
+import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -115,6 +116,7 @@ public class RentACarService {
 		rentCarRepository.save(rent);
 		return rent;
 	}
+	
 	
 	// provera da li u rent servisu ima rezervisanih vozila, prosledjen id servisa
 	public boolean checkIfRentIsReserved(Long id) 
@@ -302,6 +304,246 @@ public class RentACarService {
 		return tipoviVozila;
 
 	}
+	
+	// GRAFIKONI
+	
+	/*
+	public ArrayList<Integer> getWeeklyGraphDataRent(Long id, String yearString, String monthString) {
+		
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		
+		int year = Integer.parseInt(yearString);
+		//System.out.println("Godina je: " + year);
+		
+		int month = Integer.parseInt(monthString);
+		//System.out.println("Mesec je:" + month);
+		
+		RentACar rent = rentCarRepository.getOne(id);
+		if(rent == null) 
+			return null;
+		
+		ArrayList<RezervacijaVozila> rezervacije = new ArrayList<RezervacijaVozila>();
+		
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezRentRepository.findAll();
+		
+		for(RezervacijaHotela rezervacija: sveRezervacije) {
+			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		int broj1 = 0;
+		int broj2 = 0;
+		int broj3 = 0;
+		int broj4 = 0;
+		int broj5 = 0;
+		
+		LocalDate d1;
+		LocalDate d2;
+		if(month != 12) {
+			d1 = LocalDate.of(year, month, 1);
+			d2 = LocalDate.of(year, month+1, 1);
+		} else {
+			d1 = LocalDate.of(year, month, 1);
+			d2 = LocalDate.of(year+1, 1, 1);
+		}
+		System.out.println("Pocetni datum:" + d1);
+		System.out.println("Krajnji datum:" + d2);		
+		for(RezervacijaHotela r: rezervacije) {
+			LocalDate startDate = r.getDatumPocetka();
+			LocalDate endDate = r.getDatumKraja();
+			
+			
+			//System.out.println("*********************");
+			LocalDate pocetakPrveNedelje = d1;
+			//System.out.println("Pocetak prve nedelje: " + pocetakPrveNedelje);
+			LocalDate pocetakDrugeNedelje = d1.plusDays(6);
+			//System.out.println("Pocetak druge nedelje: " + pocetakDrugeNedelje);
+			LocalDate pocetakTreceNedelje = pocetakDrugeNedelje.plusDays(6);
+			//System.out.println("Pocetak trece nedelje: " + pocetakTreceNedelje);
+			LocalDate pocetakCetvrteNedelje = pocetakTreceNedelje.plusDays(6);
+			//System.out.println("Pocetak cetvrte nedelje: " + pocetakCetvrteNedelje);
+			LocalDate pocetakPeteNedelje = pocetakCetvrteNedelje.plusDays(6);
+			//System.out.println("Pocetak pete nedelje: " + pocetakPeteNedelje);
+			LocalDate krajMeseca = d2.minusDays(1);
+			//System.out.println("Kraj meseca: " + krajMeseca);
+			
+			
+			while(!startDate.isAfter(endDate)) { //dok pocetni datum rezervacije ne dodje do posle krajnjeg datuma rezervacije
+				//System.out.println("Trenutni datum: " + startDate);
+				if((startDate.isAfter(pocetakPrveNedelje) || startDate.isEqual(pocetakPrveNedelje)) && (startDate.isBefore(pocetakDrugeNedelje) || startDate.isEqual(pocetakDrugeNedelje))) {
+					//System.out.println("1");
+					broj1 += r.getBrojGostiju();
+				}
+				else if((startDate.isAfter(pocetakDrugeNedelje)) && (startDate.isBefore(pocetakTreceNedelje) || startDate.isEqual(pocetakTreceNedelje))) {
+					//System.out.println("2");
+					broj2 += r.getBrojGostiju();
+				}
+				else if((startDate.isAfter(pocetakTreceNedelje)) && (startDate.isBefore(pocetakCetvrteNedelje) || startDate.isEqual(pocetakCetvrteNedelje))) {
+					//System.out.println("3");
+					broj3 += r.getBrojGostiju();
+				}
+				else if((startDate.isAfter(pocetakCetvrteNedelje)) && (startDate.isBefore(pocetakPeteNedelje) || startDate.isEqual(pocetakPeteNedelje))) {
+					//System.out.println("4");
+					broj4 += r.getBrojGostiju();
+				}
+				else if((startDate.isAfter(pocetakPeteNedelje)) && (startDate.isBefore(krajMeseca) || startDate.isEqual(krajMeseca))) {
+					//System.out.println("5");
+					broj5 += r.getBrojGostiju();
+				}
+				startDate = startDate.plusDays(1);
+			}
+		}
+		
+		values.add(broj1);
+		values.add(broj2);
+		values.add(broj3);
+		values.add(broj4);
+		values.add(broj5);
+		return values;
+	}
+
+	public ArrayList<Integer> getDailyGraphData(Long id, String date) {
+		
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d = LocalDate.parse(date, europeanDateFormatter);
+		System.out.println("Datum: " + d);
+		
+		Hotel hotel = hotelRepository.getOne(id);
+		if(hotel == null) 
+			return null;
+		
+		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		
+		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		
+		for(RezervacijaHotela rezervacija: sveRezervacije) {
+			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		int broj1 = 0;
+		int broj2 = 0;
+		int broj3 = 0;
+		int broj4 = 0;
+		int broj5 = 0;
+		int broj6 = 0;
+		int broj7 = 0;
+		
+		LocalDate dan1 = d;
+		LocalDate dan2 = d.plusDays(1);
+		LocalDate dan3 = dan2.plusDays(1);
+		LocalDate dan4 = dan3.plusDays(1);
+		LocalDate dan5 = dan4.plusDays(1);
+		LocalDate dan6 = dan5.plusDays(1);
+		LocalDate dan7 = dan6.plusDays(1);
+		System.out.println("Pocetni datum: " + dan1);
+		System.out.println("Krajnji datum: " + dan7);
+		
+		for(RezervacijaHotela r: rezervacije) {
+			LocalDate startDate = r.getDatumPocetka();
+			LocalDate endDate = r.getDatumKraja();
+			
+			while(!startDate.isAfter(endDate)) { //dok pocetni datum rezervacije ne dodje do posle krajnjeg datuma rezervacije
+				//System.out.println("Trenutni datum: " + startDate);
+				if(startDate.isEqual(dan1))
+					broj1 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan2))
+					broj2 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan3))
+					broj3 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan4))
+					broj4 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan5))
+					broj5 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan6))
+					broj6 += r.getBrojGostiju();
+				else if(startDate.isEqual(dan7))
+					broj7 += r.getBrojGostiju();
+				startDate = startDate.plusDays(1);
+			}
+		}
+		
+		values.add(broj1);
+		values.add(broj2);
+		values.add(broj3);
+		values.add(broj4);
+		values.add(broj5);
+		values.add(broj6);
+		values.add(broj7);
+		return values;
+		
+	}
+	
+	public ArrayList<Integer> getMonthyGraphData(Long id, String yearString) {
+		
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		
+		int year = Integer.parseInt(yearString);
+		//System.out.println("Godina je: " + year);
+		
+		Hotel hotel = hotelRepository.getOne(id);
+		if(hotel == null) 
+			return null;
+		
+		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		
+		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		
+		for(RezervacijaHotela rezervacija: sveRezervacije) {
+			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		//JANUAR-NOVEMBAR
+		int broj = 0;
+		for(int i=1; i<12; i++) {
+			LocalDate d1 = LocalDate.of(year, i, 1);
+			LocalDate d2 = LocalDate.of(year, i+1, 1);
+			broj = 0;
+			for(RezervacijaHotela r: rezervacije) {
+				LocalDate startDate = r.getDatumPocetka();
+				LocalDate endDate = r.getDatumKraja();
+				while(!startDate.isAfter(endDate)) {
+					//System.out.println("Trenutni datum: " + startDate);
+					if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
+						broj += r.getBrojGostiju();
+					}
+					startDate = startDate.plusDays(1);
+				}
+			}
+			values.add(broj);
+		}
+		
+		
+		//DECEMBAR-JANUAR
+		LocalDate d11 = LocalDate.of(year, 12, 1);
+		LocalDate d22 = LocalDate.of(year+1, 1, 1);
+		broj = 0;
+		for(RezervacijaHotela r: rezervacije) {
+			LocalDate startDate = r.getDatumPocetka();
+			LocalDate endDate = r.getDatumKraja();
+			while(!startDate.isAfter(endDate)) {
+				//System.out.println("Trenutni datum: " + startDate);
+				if((startDate.isAfter(d11) || startDate.isEqual(d11)) && (startDate.isBefore(d22))) {
+					broj += r.getBrojGostiju();
+				}
+				startDate = startDate.plusDays(1);
+			}
+		}
+		values.add(broj);
+		
+		return values;
+		
+	}
+	
+	*/
+
 
 	/********************/
 }

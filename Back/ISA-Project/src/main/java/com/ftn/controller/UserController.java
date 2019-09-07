@@ -27,7 +27,7 @@ import com.ftn.service.EmailService;
 import com.ftn.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "user")
 public class UserController {
 	
 	@Autowired

@@ -18,7 +18,10 @@ export class AuthService{
   }
 
   login(user : KorisnikModel) : Observable<boolean>{
-    return this.http.post<any>("api/login", {username: user.email, password: user.lozinka})
+
+
+
+    return this.http.post<any>("api/login", {username: user.korisnickoIme, password: user.lozinka})
       .pipe(
         tap(response => this.doLoginUser(response)),
         mapTo(true),
@@ -27,7 +30,7 @@ export class AuthService{
         }));
   }
   getCurrentUser() {
-    return this.http.get<any>('http://localhost:8080/api/user/getCurrentUser');
+    return this.http.get<any>('api/user/trenutniKorisnik');
   }
   doLoginUser(response){
     localStorage.setItem("AGENT_JWT_TOKEN", response.jwt);
@@ -38,7 +41,7 @@ export class AuthService{
     localStorage.removeItem("AGENT_JWT_TOKEN");
     localStorage.removeItem("ROLE");
     localStorage.removeItem("USERNAME");
-    this.router.navigateByUrl('/welcomepages')
+    this.router.navigateByUrl('/welcomepage')
   }
 
   isUserLogged() : boolean{

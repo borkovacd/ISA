@@ -23,9 +23,13 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Korisnik user = repository.findOneByEmail(username);
+		Korisnik user = repository.findOneByKorisnickoIme(username);
+		
+		System.out.println("Korisnicko ime je: " + user.getKorisnickoIme());
+		System.out.println("Lozinka je: " + user.getLozinka());
 		
 		if(user != null) {
+			System.out.println("User nije null!");
 				// Remember that Spring needs roles to be in this format: "ROLE_" + userRole (i.e. "ROLE_ADMIN")
 				// So, we need to set it to that format, so we can verify and compare roles (i.e. hasRole("ADMIN")).
 				List<GrantedAuthority> grantedAuthorities = AuthorityUtils
@@ -33,8 +37,9 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 				
 				// The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
 				// And used by auth manager to verify and check user authentication.
-				return new User(user.getEmail(), user.getLozinka(), grantedAuthorities);
+				return new User(user.getKorisnickoIme(), user.getLozinka(), grantedAuthorities);
 		}
+		System.out.println("User nije pronadjen!");
 		// If user not found. Throw this exception.
 		throw new UsernameNotFoundException("Username: " + username + " not found");
 	}

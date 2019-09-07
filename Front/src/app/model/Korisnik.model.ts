@@ -11,4 +11,5 @@ export class KorisnikModel
   telefon : string;
 
   statusKorisnika : string;
+  uloga: string ;
 }

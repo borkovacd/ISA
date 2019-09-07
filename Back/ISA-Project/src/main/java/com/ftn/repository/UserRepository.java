@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<Korisnik, Long>
 	
 	public Korisnik findOneByEmail(String email);
 	public Korisnik findOneById(Long id);
+	public Korisnik findOneByKorisnickoIme(String username);
 	public List<Korisnik> findAll();
 	public void deleteById(Long id);
 	public void deleteByEmail(String email);

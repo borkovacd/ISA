@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HotelReservationService } from "./service/hotelReservation.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {AuthInterceptor} from "./http-interceptor/AuthInterceptor";
 import {
   IgxTabsModule,
   IgxNavbarModule,
@@ -34,7 +36,6 @@ import { UserService} from './service/user.service';
 import { HotelService} from './service/hotel.service';
 import { RentCarService} from './service/rentcar.service';
 import { AviokompanijaService} from './service/aviokompanija.service';
-import {HttpClientModule} from '@angular/common/http';
 import {MatCheckboxModule, MatDatepickerModule, MatGridListModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
 import {PrijavaComponent} from './prijava/prijava.component';
@@ -222,7 +223,8 @@ import { BrzaRezervacijaSobeIzborComponent } from './brza-rezervacija/brza-rezer
     PricelistRentService,
     HotelReservationService,
     VoziloReservationService,
-    AuthService
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [],
   bootstrap: [AppComponent],

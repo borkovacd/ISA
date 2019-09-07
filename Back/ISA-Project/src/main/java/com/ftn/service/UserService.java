@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.HotelDTO;
@@ -22,6 +23,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 	
 	/************ Borkovac *************/
 	
@@ -151,6 +155,8 @@ public class UserService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			tempPassword = encoder.encode(korisnik.getLozinka());
 			Korisnik k = new Korisnik(korisnik.getIme(), korisnik.getPrezime(), korisnik.getKorisnickoIme(), tempPassword, korisnik.getEmail(), korisnik.getTelefon(), korisnik.getGrad());
 			k.setUloga(UlogaKorisnika.OBICAN_KORISNIK); // kad se registruje, postaje OBICAN KORISNIK
 			k.setVerifikovan(false); // inicijalno nije verifikovan, mora potvrditi
@@ -296,7 +302,9 @@ public class UserService {
 	
 	public Korisnik getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return userRepository.findOneByEmail(principal.toString());
+		Korisnik k = userRepository.findOneByKorisnickoIme(principal.toString());
+		String kIme = k.getKorisnickoIme();
+		return k;
 	}
 
 

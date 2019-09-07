@@ -16,7 +16,7 @@ public class KorisnikDTO
 	
 	private String statusKorisnika; // na osnovu ovoga redirekcija
 	
-	private UlogaKorisnika uloga ;
+	private String uloga ;
 
 	public KorisnikDTO() {
 		super();
@@ -24,7 +24,7 @@ public class KorisnikDTO
 	}
 
 	public KorisnikDTO(String ime, String prezime, String korisnickoIme, String lozinka, String email,
-			String telefon, String grad, UlogaKorisnika uloga) {
+			String telefon, String grad, String uloga) {
 		super();
 		
 		this.ime = ime;
@@ -46,7 +46,7 @@ public class KorisnikDTO
 		this.email = korisnik.getEmail();
 		this.telefon = korisnik.getTelefon();
 		this.grad = korisnik.getGrad();
-		this.uloga = korisnik.getUloga();
+		this.uloga = korisnik.getUloga().toString();
 		
 	}
 
@@ -107,11 +107,11 @@ public class KorisnikDTO
 		this.grad = grad;
 	}
 
-	public UlogaKorisnika getUloga() {
+	public String getUloga() {
 		return uloga;
 	}
 
-	public void setUloga(UlogaKorisnika uloga) {
+	public void setUloga(String uloga) {
 		this.uloga = uloga;
 	}
 
