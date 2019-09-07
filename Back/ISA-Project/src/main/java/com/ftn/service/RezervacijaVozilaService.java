@@ -69,6 +69,9 @@ public class RezervacijaVozilaService
 		Korisnik korisnik = userRepository.getOne(id);
 		rezervacija.setKorisnik(korisnik);
 		
+		int brojPutnika = Integer.parseInt(rezervacijaDTO.getNumberOfGuests());
+		rezervacija.setBrojPutnika(brojPutnika);
+		
 		Long idVozila = Long.parseLong(rezervacijaDTO.getVozilo()) ; // u bazu je u toj koloni upisan id vozila
 		Vozilo v = voziloRepository.getOne(idVozila);
 		rezervacija.setVozilo(v);

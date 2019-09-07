@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.dto.PretragaHotelaDTO;
@@ -110,6 +111,27 @@ public class RentCarController {
 		{
 			ArrayList<TipVozila> tipoviVozila = rentCarService.getTipoviVozilaRent(idRent);
 			return new ResponseEntity<ArrayList<TipVozila>>(tipoviVozila, HttpStatus.OK);
+		}
+		
+		@GetMapping("/monthlyGraphRent/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Integer>> monthlyGraphRent(@PathVariable Long id, @RequestParam String year) {
+			ArrayList<Integer> monthsData = rentCarService.getMonthyGraphDataRent(id, year);
+			return new ResponseEntity<List<Integer>>(monthsData, HttpStatus.OK);
+		}
+		
+		@GetMapping("/weeklyGraphRent/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Integer>> weeklyGraphRent(@PathVariable Long id, @RequestParam String year, @RequestParam String month) {
+			ArrayList<Integer> weeksData = rentCarService.getWeeklyGraphDataRent(id, year, month);
+			return new ResponseEntity<List<Integer>>(weeksData, HttpStatus.OK);
+		}
+		
+		@GetMapping("/dailyGraphRent/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Integer>> dailyGraphRent(@PathVariable Long id, @RequestParam String date) {
+			ArrayList<Integer> daysData = rentCarService.getDailyGraphDataRent(id, date);
+			return new ResponseEntity<List<Integer>>(daysData, HttpStatus.OK);
 		}
 	
 	

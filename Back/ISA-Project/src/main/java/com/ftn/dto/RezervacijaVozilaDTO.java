@@ -9,6 +9,8 @@ public class RezervacijaVozilaDTO
 	private String mestoPreuzimanja; 
 	private String mestoVracanja ;
 	
+	private String numberOfGuests;
+	
 	public RezervacijaVozilaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -24,6 +26,33 @@ public class RezervacijaVozilaDTO
 		this.vozilo = vozilo;
 		this.mestoPreuzimanja = mestoPreuzimanja;
 		this.mestoVracanja = mestoVracanja;
+	}
+
+
+	
+	
+
+	public RezervacijaVozilaDTO(String startDate, String endDate, String vozilo, String mestoPreuzimanja,
+			String mestoVracanja, String numberOfGuests) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.vozilo = vozilo;
+		this.mestoPreuzimanja = mestoPreuzimanja;
+		this.mestoVracanja = mestoVracanja;
+		this.numberOfGuests = numberOfGuests;
+	}
+
+
+
+	public String getNumberOfGuests() {
+		return numberOfGuests;
+	}
+
+
+
+	public void setNumberOfGuests(String numberOfGuests) {
+		this.numberOfGuests = numberOfGuests;
 	}
 
 

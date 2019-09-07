@@ -39,11 +39,17 @@ public class RezervacijaVozila
 	private Korisnik korisnik;
 	
 	private double cena ;
+	
+	private int brojPutnika;
+	
+	private int tipRezervacije; //0 -> obicna rezervacija 
+	 							//1 -> brza rezervacija
 
 	public RezervacijaVozila() {
 		super();
 		// TODO Auto-generated constructor stub
 		vozilo = new Vozilo();
+		tipRezervacije = 0;
 	}
 
 	public RezervacijaVozila(LocalDate datumPreuzimanja, Lokacija mestoPreuzimanja, LocalDate datumVracanja,
@@ -66,6 +72,41 @@ public class RezervacijaVozila
 		this.mestoVracanja = mestoVracanja;
 		this.korisnik = korisnik;
 		this.cena = cena;
+	}
+	
+	
+
+	public RezervacijaVozila(LocalDate datumPreuzimanja, LocalDate datumVracanja, Vozilo vozilo,
+			Lokacija mestoPreuzimanja, Lokacija mestoVracanja, Korisnik korisnik, double cena, int brojPutnika,
+			int tipRezervacije) {
+		super();
+		this.datumPreuzimanja = datumPreuzimanja;
+		this.datumVracanja = datumVracanja;
+		this.vozilo = vozilo;
+		this.mestoPreuzimanja = mestoPreuzimanja;
+		this.mestoVracanja = mestoVracanja;
+		this.korisnik = korisnik;
+		this.cena = cena;
+		this.brojPutnika = brojPutnika;
+		this.tipRezervacije = tipRezervacije;
+	}
+
+	
+	
+	public int getBrojPutnika() {
+		return brojPutnika;
+	}
+
+	public void setBrojPutnika(int brojPutnika) {
+		this.brojPutnika = brojPutnika;
+	}
+
+	public int getTipRezervacije() {
+		return tipRezervacije;
+	}
+
+	public void setTipRezervacije(int tipRezervacije) {
+		this.tipRezervacije = tipRezervacije;
 	}
 
 	public double getCena() {

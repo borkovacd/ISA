@@ -12,8 +12,7 @@ import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
-import com.ftn.model.hotels.Hotel;
-import com.ftn.model.hotels.RezervacijaHotela;
+
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -307,7 +306,7 @@ public class RentACarService {
 	
 	// GRAFIKONI
 	
-	/*
+	// prosledjen id rent-a-car servisa
 	public ArrayList<Integer> getWeeklyGraphDataRent(Long id, String yearString, String monthString) {
 		
 		ArrayList<Integer> values = new ArrayList<Integer>();
@@ -324,10 +323,10 @@ public class RentACarService {
 		
 		ArrayList<RezervacijaVozila> rezervacije = new ArrayList<RezervacijaVozila>();
 		
-		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezRentRepository.findAll();
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
 		
-		for(RezervacijaHotela rezervacija: sveRezervacije) {
-			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+		for(RezervacijaVozila rezervacija: sveRezervacije) {
+			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
 				rezervacije.add(rezervacija);
 			}
 		}
@@ -348,10 +347,11 @@ public class RentACarService {
 			d2 = LocalDate.of(year+1, 1, 1);
 		}
 		System.out.println("Pocetni datum:" + d1);
-		System.out.println("Krajnji datum:" + d2);		
-		for(RezervacijaHotela r: rezervacije) {
-			LocalDate startDate = r.getDatumPocetka();
-			LocalDate endDate = r.getDatumKraja();
+		System.out.println("Krajnji datum:" + d2);	
+		
+		for(RezervacijaVozila r : rezervacije) {
+			LocalDate startDate = r.getDatumPreuzimanja();
+			LocalDate endDate = r.getDatumVracanja();
 			
 			
 			//System.out.println("*********************");
@@ -373,23 +373,23 @@ public class RentACarService {
 				//System.out.println("Trenutni datum: " + startDate);
 				if((startDate.isAfter(pocetakPrveNedelje) || startDate.isEqual(pocetakPrveNedelje)) && (startDate.isBefore(pocetakDrugeNedelje) || startDate.isEqual(pocetakDrugeNedelje))) {
 					//System.out.println("1");
-					broj1 += r.getBrojGostiju();
+					broj1 += r.getBrojPutnika();
 				}
 				else if((startDate.isAfter(pocetakDrugeNedelje)) && (startDate.isBefore(pocetakTreceNedelje) || startDate.isEqual(pocetakTreceNedelje))) {
 					//System.out.println("2");
-					broj2 += r.getBrojGostiju();
+					broj2 += r.getBrojPutnika();
 				}
 				else if((startDate.isAfter(pocetakTreceNedelje)) && (startDate.isBefore(pocetakCetvrteNedelje) || startDate.isEqual(pocetakCetvrteNedelje))) {
 					//System.out.println("3");
-					broj3 += r.getBrojGostiju();
+					broj3 += r.getBrojPutnika();
 				}
 				else if((startDate.isAfter(pocetakCetvrteNedelje)) && (startDate.isBefore(pocetakPeteNedelje) || startDate.isEqual(pocetakPeteNedelje))) {
 					//System.out.println("4");
-					broj4 += r.getBrojGostiju();
+					broj4 += r.getBrojPutnika();
 				}
 				else if((startDate.isAfter(pocetakPeteNedelje)) && (startDate.isBefore(krajMeseca) || startDate.isEqual(krajMeseca))) {
 					//System.out.println("5");
-					broj5 += r.getBrojGostiju();
+					broj5 += r.getBrojPutnika();
 				}
 				startDate = startDate.plusDays(1);
 			}
@@ -403,7 +403,8 @@ public class RentACarService {
 		return values;
 	}
 
-	public ArrayList<Integer> getDailyGraphData(Long id, String date) {
+	// prosledjen id rent-a-car
+	public ArrayList<Integer> getDailyGraphDataRent(Long id, String date) {
 		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
@@ -412,16 +413,16 @@ public class RentACarService {
 		LocalDate d = LocalDate.parse(date, europeanDateFormatter);
 		System.out.println("Datum: " + d);
 		
-		Hotel hotel = hotelRepository.getOne(id);
-		if(hotel == null) 
+		RentACar rent = rentCarRepository.getOne(id);
+		if(rent == null) 
 			return null;
 		
-		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		ArrayList<RezervacijaVozila> rezervacije = new ArrayList<RezervacijaVozila>();
 		
-		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
 		
-		for(RezervacijaHotela rezervacija: sveRezervacije) {
-			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+		for(RezervacijaVozila rezervacija: sveRezervacije) {
+			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
 				rezervacije.add(rezervacija);
 			}
 		}
@@ -444,26 +445,26 @@ public class RentACarService {
 		System.out.println("Pocetni datum: " + dan1);
 		System.out.println("Krajnji datum: " + dan7);
 		
-		for(RezervacijaHotela r: rezervacije) {
-			LocalDate startDate = r.getDatumPocetka();
-			LocalDate endDate = r.getDatumKraja();
+		for(RezervacijaVozila r: rezervacije) {
+			LocalDate startDate = r.getDatumPreuzimanja();
+			LocalDate endDate = r.getDatumVracanja();
 			
 			while(!startDate.isAfter(endDate)) { //dok pocetni datum rezervacije ne dodje do posle krajnjeg datuma rezervacije
 				//System.out.println("Trenutni datum: " + startDate);
 				if(startDate.isEqual(dan1))
-					broj1 += r.getBrojGostiju();
+					broj1 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan2))
-					broj2 += r.getBrojGostiju();
+					broj2 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan3))
-					broj3 += r.getBrojGostiju();
+					broj3 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan4))
-					broj4 += r.getBrojGostiju();
+					broj4 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan5))
-					broj5 += r.getBrojGostiju();
+					broj5 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan6))
-					broj6 += r.getBrojGostiju();
+					broj6 += r.getBrojPutnika();
 				else if(startDate.isEqual(dan7))
-					broj7 += r.getBrojGostiju();
+					broj7 += r.getBrojPutnika();
 				startDate = startDate.plusDays(1);
 			}
 		}
@@ -479,23 +480,24 @@ public class RentACarService {
 		
 	}
 	
-	public ArrayList<Integer> getMonthyGraphData(Long id, String yearString) {
+	// prosledjen id rent-a-car
+	public ArrayList<Integer> getMonthyGraphDataRent(Long id, String yearString) {
 		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
 		int year = Integer.parseInt(yearString);
 		//System.out.println("Godina je: " + year);
 		
-		Hotel hotel = hotelRepository.getOne(id);
-		if(hotel == null) 
+		RentACar rent = rentCarRepository.getOne(id);
+		if(rent == null) 
 			return null;
 		
-		ArrayList<RezervacijaHotela> rezervacije = new ArrayList<RezervacijaHotela>();
+		ArrayList<RezervacijaVozila> rezervacije = new ArrayList<RezervacijaVozila>();
 		
-		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
 		
-		for(RezervacijaHotela rezervacija: sveRezervacije) {
-			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
+		for(RezervacijaVozila rezervacija: sveRezervacije) {
+			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
 				rezervacije.add(rezervacija);
 			}
 		}
@@ -506,13 +508,13 @@ public class RentACarService {
 			LocalDate d1 = LocalDate.of(year, i, 1);
 			LocalDate d2 = LocalDate.of(year, i+1, 1);
 			broj = 0;
-			for(RezervacijaHotela r: rezervacije) {
-				LocalDate startDate = r.getDatumPocetka();
-				LocalDate endDate = r.getDatumKraja();
+			for(RezervacijaVozila r: rezervacije) {
+				LocalDate startDate = r.getDatumPreuzimanja();
+				LocalDate endDate = r.getDatumVracanja();
 				while(!startDate.isAfter(endDate)) {
 					//System.out.println("Trenutni datum: " + startDate);
 					if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
-						broj += r.getBrojGostiju();
+						broj += r.getBrojPutnika(); 
 					}
 					startDate = startDate.plusDays(1);
 				}
@@ -525,13 +527,13 @@ public class RentACarService {
 		LocalDate d11 = LocalDate.of(year, 12, 1);
 		LocalDate d22 = LocalDate.of(year+1, 1, 1);
 		broj = 0;
-		for(RezervacijaHotela r: rezervacije) {
-			LocalDate startDate = r.getDatumPocetka();
-			LocalDate endDate = r.getDatumKraja();
+		for(RezervacijaVozila r: rezervacije) {
+			LocalDate startDate = r.getDatumPreuzimanja();
+			LocalDate endDate = r.getDatumVracanja();
 			while(!startDate.isAfter(endDate)) {
 				//System.out.println("Trenutni datum: " + startDate);
 				if((startDate.isAfter(d11) || startDate.isEqual(d11)) && (startDate.isBefore(d22))) {
-					broj += r.getBrojGostiju();
+					broj += r.getBrojPutnika(); 
 				}
 				startDate = startDate.plusDays(1);
 			}
@@ -542,7 +544,7 @@ public class RentACarService {
 		
 	}
 	
-	*/
+	
 
 
 	/********************/
