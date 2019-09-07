@@ -61,4 +61,11 @@ export  class RoomService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(`${this.BASE_URL}/checkAvailability/${idHotela}`, body, {headers});
   }
+
+  staviNaPopust(idRoom: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/staviNaPopust/${idRoom}`, {headers});
+  }
+
+
 }

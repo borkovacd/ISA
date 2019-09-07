@@ -22,14 +22,14 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
 	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 5);
 /**** SOBE ****/
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (1, 0, 4, 0, 2, "APARTMAN", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (2, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (3, 1, 4, 0, 5, "DVOKREVETNA_SOBA", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, rezervisana, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (4, 1, 1, 0, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (1, 0, 4, 2, "APARTMAN", 6, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (2, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (3, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (4, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
 /**** DODATNE USLUGE ****/
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
 	values (31, "TERETANA", 6, 0);

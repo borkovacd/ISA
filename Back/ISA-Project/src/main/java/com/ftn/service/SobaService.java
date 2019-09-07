@@ -118,7 +118,13 @@ public class SobaService {
 		else if(sobaDTO.getRoomType().equals("FAMILY_ROOM")) 
 			soba.setTipSobe(TipSobe.FAMILY_ROOM);
 		soba.setImaBalkon(sobaDTO.isHasBalcony());
-		soba.setRezervisana(false);
+		sobaRepository.save(soba);
+		return soba;
+	}
+	
+	public Soba staviNaPopust(Long idRoom) {
+		Soba soba = sobaRepository.getOne(idRoom);
+		soba.setNaPopustu(true);
 		sobaRepository.save(soba);
 		return soba;
 	}

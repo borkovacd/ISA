@@ -29,8 +29,6 @@ public class Soba {
 	private TipSobe tipSobe;
 
 	private boolean imaBalkon = false;
-
-	private boolean rezervisana = false;
 	
 	private double cena;
 	
@@ -40,14 +38,13 @@ public class Soba {
 		cena = 0;
 	}
 	
-	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, boolean rezervisana, double cena, boolean naPopustu) {
+	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, double cena, boolean naPopustu) {
 		super();
 		this.hotel = hotel;
 		this.kapacitet = kapacitet;
 		this.sprat = sprat;
 		this.tipSobe = tipSobe;
 		this.imaBalkon = imaBalkon;
-		this.rezervisana = rezervisana;
 		this.cena = cena;
 		this.naPopustu = naPopustu;
 	}
@@ -90,14 +87,6 @@ public class Soba {
 
 	public void setImaBalkon(boolean imaBalkon) {
 		this.imaBalkon = imaBalkon;
-	}
-
-	public boolean isRezervisana() {
-		return rezervisana;
-	}
-
-	public void setRezervisana(boolean rezervisana) {
-		this.rezervisana = rezervisana;
 	}
 
 	public TipSobe getTipSobe() {

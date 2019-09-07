@@ -92,8 +92,15 @@ import { RegisteredUserServisiComponent } from './users/registered-user/register
 import { RegisteredUserServisiVozilaComponent } from './users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component';
 import {VoziloReservationService} from "./service/voziloReservation.service";
 import { AttendanceGraphsComponent } from './hotels/attendance-graphs/attendance-graphs.component';
+<<<<<<< HEAD
 import {AuthService} from "./service/auth.service";
 
+=======
+import {BrzaRezervacijaHoteliComponent} from "./brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli.component";
+import {BrzaRezervacijaRentServisiComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi.component";
+import {BrzaRezervacijaHoteliIzborComponent} from "./brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli-izbor/brza-rezervacija-hoteli-izbor.component";
+import { BrzaRezervacijaSobeIzborComponent } from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
+>>>>>>> f356940c56ac42409220941eb2d5160803cac164
 
 @NgModule({
   declarations: [
@@ -171,6 +178,10 @@ import {AuthService} from "./service/auth.service";
     RegisteredUserServisiVozilaComponent,
 
     AttendanceGraphsComponent,
+    BrzaRezervacijaRentServisiComponent,
+    BrzaRezervacijaHoteliIzborComponent,
+    BrzaRezervacijaHoteliComponent,
+    BrzaRezervacijaSobeIzborComponent
   ],
   imports: [
     BrowserModule,

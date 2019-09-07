@@ -39,6 +39,10 @@ import {WelcomePageServisiCenovnikComponent} from "./welcome-page/welcome-page-s
 import {WelcomePageServisiVozilaComponent} from "./welcome-page/welcome-page-servisi/welcome-page-servisi-vozila/welcome-page-servisi-vozila.component";
 import {RegisteredUserServisiVozilaComponent} from "./users/registered-user/registered-user-servisi/registered-user-servisi-vozila/registered-user-servisi-vozila.component";
 import {AttendanceGraphsComponent} from "./hotels/attendance-graphs/attendance-graphs.component";
+import {BrzaRezervacijaHoteliComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli.component';
+import {BrzaRezervacijaRentServisiComponent} from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi.component';
+import {BrzaRezervacijaHoteliIzborComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli-izbor/brza-rezervacija-hoteli-izbor.component';
+import {BrzaRezervacijaSobeIzborComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
 
 
 const routes: Routes = [
@@ -74,6 +78,11 @@ const routes: Routes = [
   {path: 'registeredUserPage/rooms/:idHotela', component: RegisteredUserHoteliSobeComponent},
   {path: 'registeredUserPage/additionalServices/:idHotela/:idRezervacije', component: RegisteredUserHoteliDodatneUslugeComponent},
   {path: 'registeredUserPage/vozila/:idRent', component: RegisteredUserServisiVozilaComponent},
+
+  {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta', component: BrzaRezervacijaHoteliComponent},
+  {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta/izbor', component: BrzaRezervacijaHoteliIzborComponent},
+  {path: 'brzaRezervacija/sobe/:idRezervacijeLeta/:idHotela', component: BrzaRezervacijaSobeIzborComponent},
+  {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta', component: BrzaRezervacijaRentServisiComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},
