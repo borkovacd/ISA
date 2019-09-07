@@ -44,7 +44,8 @@ export class BrzaRezervacijaHoteliIzborComponent implements OnInit {
     this.showLocation = false;
     this.hideData = false;
 
-    this.hotelService.getAllHotels().subscribe(data => {
+    const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
+    this.hotelService.getAllHotelsByAddress(idRezervacijeLeta).subscribe(data => {
       this.hotels = data;
     });
 

@@ -32,13 +32,16 @@ export class WelcomePageHoteliCenovnikComponent implements OnInit {
     })
 
     this.pricelistService.getActivePricelist(idHotela).subscribe(data => {
-      this.activePricelist = data;
-      this.d1 = data.pocetakVazenja;
-      this.d2 = data.prestanakVazenja;
 
-      this.priceService.getAllPrices(this.activePricelist.id).subscribe(prices => {
-        this.prices = prices;
-      });
+      if(data != null) {
+        this.activePricelist = data;
+        this.d1 = data.pocetakVazenja;
+        this.d2 = data.prestanakVazenja;
+
+        this.priceService.getAllPrices(this.activePricelist.id).subscribe(prices => {
+          this.prices = prices;
+        });
+      }
     });
   }
 

@@ -45,7 +45,7 @@ public class CenovnikHotelaController {
 	public ResponseEntity<CenovnikHotela> getPricelist(@PathVariable Long idPriceList) {
 		CenovnikHotela cenovnik = cenovnikHotelaService.getPricelist(idPriceList);
 		if (cenovnik == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(cenovnik, HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class CenovnikHotelaController {
 	public ResponseEntity<CenovnikHotela> getActivePricelist(@PathVariable Long idHotela) {
 		CenovnikHotela cenovnik = cenovnikHotelaService.getActivePricelist(idHotela);
 		if (cenovnik == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(cenovnik, HttpStatus.OK);
 	}

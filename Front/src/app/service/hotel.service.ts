@@ -74,5 +74,11 @@ export class HotelService {
     params = params.append('date', date);
     return this.http.get(`${this.BASE_URL}/dailyGraph/${idHotela}`, { params: params});
   }
+
+  getAllHotelsByAddress(idRezervacijeLeta: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAllHotelsByAddress/${idRezervacijeLeta}`, {headers});
+  }
+
 }
 
