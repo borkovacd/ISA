@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class HotelService {
 	private CenovnikHotelaRepository cenovnikHotelaRepository;
 	@Autowired
 	private StavkaCenovnikaHotelaRepository stavkaCenovnikaHotelaRepository;
+	
+	private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 	
 	/******** Borkovac *********/
@@ -508,19 +512,35 @@ public class HotelService {
 		}
 		
 		for(RezervacijaHotela r: rezervacije) {
+			
+			LocalDate startDateTemp = r.getDatumPocetka();
+			LocalDate endDateTemp = r.getDatumKraja();
+			int n = 0;
+			double dnevnaCena = 0;
+			while(!startDateTemp.isAfter(endDateTemp)) {
+				n++;
+				startDateTemp = startDateTemp.plusDays(1);
+			}
+
+			dnevnaCena = ((double) r.getCena())/((double) n);
+			
 			LocalDate startDate = r.getDatumPocetka();
 			LocalDate endDate = r.getDatumKraja();
-			
+
 			while(!startDate.isAfter(endDate)) {
 				//System.out.println("Trenutni datum: " + startDate);
 				if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2)) || (startDate.isEqual(d2))) {
-					revenues += r.getCena();
+					revenues += dnevnaCena;
 				}
 				startDate = startDate.plusDays(1);
 			}
 		}
 		
-		return revenues;
+		df2.setRoundingMode(RoundingMode.DOWN);
+		String val = df2.format(revenues);
+		double retVal = Double.parseDouble(val);
+		
+		return retVal;
 	}
 	
 	/***********************/

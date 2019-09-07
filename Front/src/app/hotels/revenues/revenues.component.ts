@@ -43,6 +43,8 @@ export class RevenuesComponent implements OnInit {
 
     if(this.d1.value >= this.d2.value) {
       alert("Neispravan unos početnog i krajnjeg datuma. Pokušajte ponovo!");
+      this.revenueValue = 0;
+      this.showValue = false;
     } else {
       const idHotela = this.route.snapshot.params.idHotela;
       this.hotelService.getRevenues(idHotela, this.d1.value, this.d2.value).subscribe(data => {
