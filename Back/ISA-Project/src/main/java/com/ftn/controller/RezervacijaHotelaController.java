@@ -31,6 +31,13 @@ public class RezervacijaHotelaController {
 		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/createFast/{id}/{idRezervacijeLeta}/{idHotela}/{idRoom}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<RezervacijaHotela> createOrChangeFastHotelReservation(@PathVariable Long id, @PathVariable Long idRezervacijeLeta, @PathVariable Long idHotela, @PathVariable Long idRoom) {
+		RezervacijaHotela rezervacija = rezervacijaHotelaService.createOrChangeFastHotelReservation(id, idRezervacijeLeta, idHotela, idRoom);
+		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/addToRes/additional/{idRezervacije}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RezervacijaHotela> addToReservation(@RequestBody RezervacijaDodatnihUslugaDTO dodatnaRezervacijaDTO, @PathVariable Long idRezervacije) {

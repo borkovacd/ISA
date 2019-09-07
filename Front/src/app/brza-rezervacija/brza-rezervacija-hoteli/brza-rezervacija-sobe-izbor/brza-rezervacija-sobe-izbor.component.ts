@@ -6,6 +6,7 @@ import {FormBuilder} from '@angular/forms';
 import {MapsAPILoader} from '@agm/core';
 import {HotelService} from '../../../service/hotel.service';
 import {RoomService} from '../../../service/room.service';
+import {HotelReservationService} from '../../../service/hotelReservation.service';
 
 @Component({
   selector: 'app-brza-rezervacija-sobe-izbor',
@@ -21,7 +22,8 @@ export class BrzaRezervacijaSobeIzborComponent implements OnInit {
               private route: ActivatedRoute,
               private authService: AuthService,
               public fb: FormBuilder,
-              private roomService: RoomService) { }
+              private roomService: RoomService,
+              private hotelReservationService: HotelReservationService) { }
 
   ngOnInit() {
 
@@ -32,7 +34,7 @@ export class BrzaRezervacijaSobeIzborComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack() {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
     this.router.navigateByUrl('brzaRezervacija/hoteli/' + idRezervacijeLeta + '/izbor');
   }
@@ -43,7 +45,12 @@ export class BrzaRezervacijaSobeIzborComponent implements OnInit {
   }
 
   rezervisi(id: any) {
-
+    const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.hotelReservationService.createOrChangeFastHotelReservation(idRezervacijeLeta, idHotela, id).subscribe(data => {
+      alert('Uspesna rezervacija sobe!');
+      location.reload();
+    });
   }
 
   zavrsiRezervaciju() {

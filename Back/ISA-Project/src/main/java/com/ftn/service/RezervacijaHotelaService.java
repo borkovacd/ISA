@@ -3,6 +3,7 @@ package com.ftn.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,5 +162,113 @@ public class RezervacijaHotelaService {
 		RezervacijaHotela rez = rezervacijaHotelaRepository.getOne(idRezervacije);
 		return rez;
 	}
+
+	public RezervacijaHotela createOrChangeFastHotelReservation(Long id, Long idRezervacijeLeta, Long idHotela, Long idRoom) {
+		
+		//Potrebne informacije za rezervaciju izvuci iz rezervacije leta
+		//Privremeno iz rezervacije hotela, dok ne bude uradjena rezervacija leta
+		RezervacijaHotela rezervacijaLeta = rezervacijaHotelaRepository.getOne(idRezervacijeLeta);
+		if(rezervacijaLeta == null) {
+			return null;
+		}
+		LocalDate d1 = rezervacijaLeta.getDatumPocetka();
+		LocalDate d2 = rezervacijaLeta.getDatumKraja();
+		int brojGostiju = rezervacijaLeta.getBrojGostiju();
+		int brojNocenja =  (int) d1.until(d2, ChronoUnit.DAYS);
+		
+		Korisnik korisnik = userRepository.getOne(id);
+		if(korisnik == null) {
+			return null;
+		}
+		
+		//Provera da li treba samo dodati jos soba u brzu rezevaciju ili kreirati novu brzu rezervaciju
+		RezervacijaHotela rezervacijaZaIzmenu = null;
+		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		for(RezervacijaHotela rezervacijaHotela: rezervacije) {
+			if(rezervacijaHotela.getKorisnik().getId() == korisnik.getId()) 
+				if(rezervacijaHotela.getDatumPocetka().equals(d1) && rezervacijaHotela.getDatumKraja().equals(d2))
+					if(rezervacijaHotela.getTipRezervacije() == 1) 
+						rezervacijaZaIzmenu = rezervacijaHotela;
+		}
+		
+		if(rezervacijaZaIzmenu == null) { //Treba kreirati novu brzu rezervaciju
+			RezervacijaHotela novaRezervacija = new RezervacijaHotela();
+			novaRezervacija.setKorisnik(korisnik);
+			novaRezervacija.setBrojGostiju(brojGostiju);
+			novaRezervacija.setDatumPocetka(d1);
+			novaRezervacija.setDatumKraja(d2);
+			novaRezervacija.setTipRezervacije(1); //1 oznacava brzu rezervaciju
+			Soba room = sobaRepository.getOne(idRoom);
+			novaRezervacija.getSobe().add(room);
+			
+			List<CenovnikHotela> cenovnici = cenovnikHotelaRepository.findAll();
+			List<StavkaCenovnikaHotela> stavkeCenovnika = stavkaCenovnikaHotelaRepository.findAll();
+			Double cenaRezervacije = (double) 0;
+			for(Soba soba: novaRezervacija.getSobe())
+				for(CenovnikHotela cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getHotel().getId() == soba.getHotel().getId())  
+								for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) 
+											cenaRezervacije += stavkaCenovnika.getCena() * brojNocenja;
+			
+			novaRezervacija.setCena(cenaRezervacije);
+			
+			List<DodatnaUsluga> sveDodatneUsluge = dodatnaUslugaRepository.findAll();
+			List<DodatnaUsluga> dodatneUslugeHotela = new ArrayList<DodatnaUsluga>();
+			for(DodatnaUsluga dodatnaUsluga: sveDodatneUsluge) {
+				if(dodatnaUsluga.getHotel().getId() == idHotela) {
+					dodatneUslugeHotela.add(dodatnaUsluga);
+				}
+			}
+			Double cenaDodatnih = (double) 0;
+			for(DodatnaUsluga du: dodatneUslugeHotela)
+				for(CenovnikHotela cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getHotel().getId() == idHotela)  
+								for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipDodatneUsluge() == du.getTipDodatneUsluge()) {
+											cenaDodatnih += stavkaCenovnika.getCena() * brojNocenja;
+											novaRezervacija.getDodatneUsluge().add(du);
+										}
+			
+			Double staraCena = novaRezervacija.getCena();
+			novaRezervacija.setCena((staraCena+cenaDodatnih)*0.9);
+			rezervacijaHotelaRepository.save(novaRezervacija);
+			return novaRezervacija;
+			
+		} else { //Treba samo dodati sobu u postojecu brzu rezervaciju
+			Soba room = sobaRepository.getOne(idRoom);
+			rezervacijaZaIzmenu.getSobe().add(room);
+			List<CenovnikHotela> cenovnici = cenovnikHotelaRepository.findAll();
+			List<StavkaCenovnikaHotela> stavkeCenovnika = stavkaCenovnikaHotelaRepository.findAll();
+			Double dodatnaCena = (double) 0;
+			for(Soba soba: rezervacijaZaIzmenu.getSobe())
+				for(CenovnikHotela cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getHotel().getId() == soba.getHotel().getId())  
+								for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
+											if(soba.getId() == idRoom) {
+												dodatnaCena += stavkaCenovnika.getCena() * brojNocenja;
+											}
+											
+										}
+			Double staraCena = rezervacijaZaIzmenu.getCena();
+			rezervacijaZaIzmenu.setCena(staraCena+(dodatnaCena*0.9));
+			rezervacijaHotelaRepository.save(rezervacijaZaIzmenu);
+			return rezervacijaZaIzmenu;
+											
+		}
+		
+		
+	}
+	
 
 }
