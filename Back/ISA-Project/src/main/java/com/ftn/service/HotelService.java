@@ -359,6 +359,25 @@ public class HotelService {
 		return hotels;
 	}
 	
+	public ArrayList<Hotel> getAllHotelsByAddress(Long idRezervacijeLeta) {
+		
+		//TO DO
+		//Treba izvuci podatke od rezervaciji leta iz baze
+		//Konkretno informaciju o mestu na koje se leti
+		
+		String mesto = "Beograd"; //privremeno
+		
+		ArrayList<Hotel> hotelsByAddress = new ArrayList<Hotel>();
+		
+		ArrayList<Hotel> hotels = (ArrayList<Hotel>) hotelRepository.findAll();
+		for(Hotel hotel: hotels) {
+			if(hotel.getAdresa().contains(mesto))
+				hotelsByAddress.add(hotel);
+		}
+			
+		return hotelsByAddress;
+	}
+	
 	public ArrayList<Hotel> searchHotels(PretragaHotelaDTO phDTO) {
 		
 		ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
