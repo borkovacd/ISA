@@ -1,6 +1,8 @@
 package com.ftn.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +19,10 @@ import com.ftn.dto.RezervacijaDodatnihUslugaDTO;
 import com.ftn.dto.RezervacijaSobaDTO;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
+import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.repository.RezervacijaHotelaRepository;
 import com.ftn.service.RezervacijaHotelaService;
+import com.ftn.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/hotelReservation")
@@ -29,6 +33,9 @@ public class RezervacijaHotelaController {
 	
 	@Autowired
 	private RezervacijaHotelaRepository rezHotelRepository ;
+	
+	@Autowired 
+	private UserService userService ;
 	
 	@PostMapping("/create/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -82,5 +89,15 @@ public class RezervacijaHotelaController {
 
 		}
 	}
+	
+	// vraca listu rezervacija korisnika
+		@GetMapping("/listaHotelRezervacijaKorisnik")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<RezervacijaHotela>> listaHotelRezervacijaKorisnik()
+		{
+			ArrayList<RezervacijaHotela> reservations = rezervacijaHotelaService.listaHotelRezervacijaKorisnik(userService.getCurrentUser().getId());
+			return new ResponseEntity<List<RezervacijaHotela>>(reservations, HttpStatus.OK);
+			
+		}
 
 }

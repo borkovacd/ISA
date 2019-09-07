@@ -18,6 +18,7 @@ import com.ftn.model.hotels.DodatnaUsluga;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
 import com.ftn.model.hotels.StavkaCenovnikaHotela;
+import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.repository.CenovnikHotelaRepository;
 import com.ftn.repository.DodatnaUslugaRepository;
 import com.ftn.repository.RezervacijaHotelaRepository;
@@ -40,6 +41,29 @@ public class RezervacijaHotelaService {
 	private CenovnikHotelaRepository cenovnikHotelaRepository;
 	@Autowired
 	private DodatnaUslugaRepository dodatnaUslugaRepository;
+	
+	/**********Olga ***********/
+	public ArrayList<RezervacijaHotela> listaHotelRezervacijaKorisnik(Long idKorisnik)
+	{
+		ArrayList<RezervacijaHotela> rezervacijeKorisnik = new ArrayList<RezervacijaHotela>();
+		ArrayList<RezervacijaHotela> sveRezervacije = (ArrayList<RezervacijaHotela>) rezervacijaHotelaRepository.findAll();
+		
+		if (sveRezervacije == null)
+		{
+			return rezervacijeKorisnik ;
+		}
+		
+		for (RezervacijaHotela r: sveRezervacije)
+		{
+			if (r.getKorisnik().getId() == idKorisnik)
+			{
+				rezervacijeKorisnik.add(r);
+			}
+		}
+		
+		return rezervacijeKorisnik ;
+	}
+	/*************************/
 
 	public RezervacijaHotela createReservation(RezervacijaSobaDTO rezervacijaDTO, Long id) {
 		RezervacijaHotela rezervacija = new RezervacijaHotela();

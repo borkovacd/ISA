@@ -3,6 +3,7 @@ package com.ftn.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +104,27 @@ public class RezervacijaVozilaService
 		rezVozRepository.save(rezervacija);
 	
 		return rezervacija;
+	}
+	
+	public ArrayList<RezervacijaVozila> listaRezervacijaKorisnik(Long idKorisnik)
+	{
+		ArrayList<RezervacijaVozila> rezervacijeKorisnik = new ArrayList<RezervacijaVozila>();
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
+		
+		if (sveRezervacije == null)
+		{
+			return rezervacijeKorisnik ;
+		}
+		
+		for (RezervacijaVozila r: sveRezervacije)
+		{
+			if (r.getKorisnik().getId() == idKorisnik)
+			{
+				rezervacijeKorisnik.add(r);
+			}
+		}
+		
+		return rezervacijeKorisnik ;
 	}
 
 	
