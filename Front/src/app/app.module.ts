@@ -99,11 +99,8 @@ import {BrzaRezervacijaHoteliComponent} from "./brza-rezervacija/brza-rezervacij
 import {BrzaRezervacijaRentServisiComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi.component";
 import {BrzaRezervacijaHoteliIzborComponent} from "./brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli-izbor/brza-rezervacija-hoteli-izbor.component";
 import { BrzaRezervacijaSobeIzborComponent } from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
-<<<<<<< HEAD
 import { AttendanceGraphsRentComponent } from './rentServisi/attendance-graphs-rent/attendance-graphs-rent.component';
-=======
 import { RevenuesComponent } from './hotels/revenues/revenues.component';
->>>>>>> 80be856eb399e701858d7b9462b6153405743014
 
 @NgModule({
   declarations: [
@@ -185,11 +182,8 @@ import { RevenuesComponent } from './hotels/revenues/revenues.component';
     BrzaRezervacijaHoteliIzborComponent,
     BrzaRezervacijaHoteliComponent,
     BrzaRezervacijaSobeIzborComponent,
-<<<<<<< HEAD
-    AttendanceGraphsRentComponent
-=======
+    AttendanceGraphsRentComponent,
     RevenuesComponent
->>>>>>> 80be856eb399e701858d7b9462b6153405743014
   ],
   imports: [
     BrowserModule,
