@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../service/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from "../../service/auth.service";
 
 @Component({
@@ -12,6 +12,7 @@ export class BrzaRezervacijaHoteliComponent implements OnInit {
 
   constructor(private userService : UserService,
               private router: Router,
+              private route: ActivatedRoute,
               private authService: AuthService) { }
 
   ngOnInit() {
@@ -23,13 +24,13 @@ export class BrzaRezervacijaHoteliComponent implements OnInit {
   }
 
   rezervisi() {
-    const idRezervacije = 1; //koristice se prosledjen id rezervacije leta
-    this.router.navigateByUrl('brzaRezervacija/hoteli/1/izbor');
+    const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
+    this.router.navigateByUrl('brzaRezervacija/hoteli/' + idRezervacijeLeta + '/izbor');
 
   }
 
   preskoci() {
-    const idRezervacije = 1; //koristice se prosledjen id rezervacije leta
-    this.router.navigateByUrl('brzaRezervacija/rentServisi/1');
+    const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
+    this.router.navigateByUrl('brzaRezervacija/rentServisi/' + idRezervacijeLeta);
   }
 }

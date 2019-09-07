@@ -42,6 +42,7 @@ import {AttendanceGraphsComponent} from "./hotels/attendance-graphs/attendance-g
 import {BrzaRezervacijaHoteliComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli.component';
 import {BrzaRezervacijaRentServisiComponent} from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi.component';
 import {BrzaRezervacijaHoteliIzborComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-hoteli-izbor/brza-rezervacija-hoteli-izbor.component';
+import {BrzaRezervacijaSobeIzborComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
 
 
 const routes: Routes = [
@@ -80,6 +81,7 @@ const routes: Routes = [
 
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta', component: BrzaRezervacijaHoteliComponent},
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta/izbor', component: BrzaRezervacijaHoteliIzborComponent},
+  {path: 'brzaRezervacija/sobe/:idRezervacijeLeta/:idHotela', component: BrzaRezervacijaSobeIzborComponent},
   {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta', component: BrzaRezervacijaRentServisiComponent},
 
 
