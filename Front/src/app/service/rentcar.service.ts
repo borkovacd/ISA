@@ -1,8 +1,7 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {RentCarModel} from '../model/rentcar.model';
 import {Observable} from 'rxjs';
-import {SearchHotelsModel} from "../model/searchHotels.model";
 import {SearchRentsModel} from "../model/searchRents.model";
 
 const httpOptions = {
@@ -67,6 +66,27 @@ export class RentCarService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getVoziloTypesInRent/${idRent}`, {headers});
   }
+
+  // GRAFICI
+  monthlyGraphRent(idRent: any, year: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('year', year);
+    return this.http.get(`${this.BASE_URL}/monthlyGraphRent/${idRent}`, { params: params});
+  }
+
+  weeklyGraphRent(idRent: any, year: any, month: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('year', year);
+    params = params.append('month', month);
+    return this.http.get(`${this.BASE_URL}/weeklyGraphRent/${idRent}`, { params: params});
+  }
+
+  dailyGraphRent(idRent: any, date: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('date', date);
+    return this.http.get(`${this.BASE_URL}/dailyGraphRent/${idRent}`, { params: params});
+  }
+
 
 
 }
