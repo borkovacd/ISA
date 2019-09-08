@@ -53,4 +53,8 @@ export class RentAdministratorServisiComponent implements OnInit {
     this.router.navigateByUrl('rentAdminPage/attendanceGraphsRent/' + idRent);
   }
 
+  pregledPrihoda(idRent: any) {
+    this.router.navigateByUrl('rentAdminPage/revenuesRent/' + idRent);
+  }
+
 }

@@ -36,7 +36,7 @@ export class VoziloService {
   }
 
   // VRACA VOZILA KORISNIKA NEW
-  vratiVozilaKorisnika(idRent: any): Observable<any> {
+  vratiVozilaKorisnika(): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/vratiVozilaKorisnika`, {headers});
   }

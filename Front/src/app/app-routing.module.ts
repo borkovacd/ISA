@@ -45,6 +45,9 @@ import {BrzaRezervacijaHoteliIzborComponent} from './brza-rezervacija/brza-rezer
 import {BrzaRezervacijaSobeIzborComponent} from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
 import {RevenuesComponent} from './hotels/revenues/revenues.component';
 import {AttendanceGraphsRentComponent} from "./rentServisi/attendance-graphs-rent/attendance-graphs-rent.component";
+import {RevenuesRentComponent} from "./rentServisi/revenues-rent/revenues-rent.component";
+import {BrzaRezervacijaRentServisiIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component";
+import {BrzaRezervacijaVozilaIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component";
 
 
 const routes: Routes = [
@@ -62,8 +65,6 @@ const routes: Routes = [
   {path: 'hotelAdminPage/additionalService/:idHotela', component: AddAdditionalServiceComponent},
   {path: 'hotelAdminPage/attendanceGraphs/:idHotela', component: AttendanceGraphsComponent},
   {path: 'hotelAdminPage/revenues/:idHotela', component: RevenuesComponent},
-
-
 
   {path: 'systemAdminPage', component: SystemAdministratorComponent},
 
@@ -86,7 +87,10 @@ const routes: Routes = [
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta', component: BrzaRezervacijaHoteliComponent},
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta/izbor', component: BrzaRezervacijaHoteliIzborComponent},
   {path: 'brzaRezervacija/sobe/:idRezervacijeLeta/:idHotela', component: BrzaRezervacijaSobeIzborComponent},
+
   {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta', component: BrzaRezervacijaRentServisiComponent},
+  {path: 'brzaRezervacija/servisi/:idRezervacijeLeta/izbor', component: BrzaRezervacijaRentServisiIzborComponent},
+  {path: 'brzaRezervacija/vozila/:idRezervacijeLeta/:idRent', component: BrzaRezervacijaVozilaIzborComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},
@@ -100,7 +104,8 @@ const routes: Routes = [
   {path: 'rentAdminPage/pricesRent/:idRent/:idPriceList', component: PricesRentComponent },
   {path: 'rentAdminPage/pricelistRent/:idRent/:mode/:idPriceList', component: AddEditPricelistRentComponent },
   {path: 'rentAdminPage/priceRent/:idRent/:idPriceList/:mode/:idPrice', component: AddEditPriceRentComponent},
-  {path: 'rentAdminPage/attendanceGraphsRent/:idRent', component: AttendanceGraphsRentComponent}
+  {path: 'rentAdminPage/attendanceGraphsRent/:idRent', component: AttendanceGraphsRentComponent},
+  {path: 'rentAdminPage/revenuesRent/:idRent', component: RevenuesRentComponent}
 
 
 ];

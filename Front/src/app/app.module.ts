@@ -103,6 +103,9 @@ import { AttendanceGraphsRentComponent } from './rentServisi/attendance-graphs-r
 import { RevenuesComponent } from './hotels/revenues/revenues.component';
 import { RegisteredUserHoteliKorisnikComponent } from './users/registered-user/registered-user-hoteli-korisnik/registered-user-hoteli-korisnik.component';
 import { RegisteredUserVozilaKorisnikComponent } from './users/registered-user/registered-user-vozila-korisnik/registered-user-vozila-korisnik.component';
+import { RevenuesRentComponent } from './rentServisi/revenues-rent/revenues-rent.component';
+import { BrzaRezervacijaRentServisiIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component';
+import { BrzaRezervacijaVozilaIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component';
 
 @NgModule({
   declarations: [
@@ -187,7 +190,10 @@ import { RegisteredUserVozilaKorisnikComponent } from './users/registered-user/r
     AttendanceGraphsRentComponent,
     RevenuesComponent,
     RegisteredUserHoteliKorisnikComponent,
-    RegisteredUserVozilaKorisnikComponent
+    RegisteredUserVozilaKorisnikComponent,
+    RevenuesRentComponent,
+    BrzaRezervacijaRentServisiIzborComponent,
+    BrzaRezervacijaVozilaIzborComponent
   ],
   imports: [
     BrowserModule,
