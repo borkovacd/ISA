@@ -11,14 +11,15 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.dto.RezervacijaVozilaDTO;
 import com.ftn.model.Korisnik;
-
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.Lokacija;
+import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.model.rentacar.StavkaCenovnikaRent;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.CenovnikRentACarRepository;
 import com.ftn.repository.LokacijaRepository;
+import com.ftn.repository.RentCarRepository;
 import com.ftn.repository.RezervacijaVozilaRepository;
 
 import com.ftn.repository.StavkaCenovnikaRentRepository;
@@ -45,6 +46,9 @@ public class RezervacijaVozilaService
 	
 	@Autowired
 	private LokacijaRepository lokRepository ;
+	
+	@Autowired
+	private RentCarRepository rentRepository ;
 	
 	// formira se rezervacija za korisnika sa prosledjenim id-jem
 	public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) 
@@ -125,6 +129,67 @@ public class RezervacijaVozilaService
 		}
 		
 		return rezervacijeKorisnik ;
+	}
+	
+	// BRZA REZERVACIJA
+	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
+	{
+		
+		//Potrebne informacije za rezervaciju izvuci iz rezervacije leta
+		//Privremeno iz rezervacije vozila, dok ne bude uradjena rezervacija leta
+		RezervacijaVozila rezervacijaLeta = rezVozRepository.getOne(idRezervacijeLeta);
+		if(rezervacijaLeta == null) {
+			return null;
+		}
+		
+		LocalDate d1 = rezervacijaLeta.getDatumPreuzimanja();
+		LocalDate d2 = rezervacijaLeta.getDatumVracanja();
+		int brojGostiju = rezervacijaLeta.getBrojPutnika();
+		int brojDana =  (int) d1.until(d2, ChronoUnit.DAYS);
+		
+		Lokacija mestoPreuzimanja = rezervacijaLeta.getMestoPreuzimanja();
+		Lokacija mestoVracanja = rezervacijaLeta.getMestoVracanja();
+		
+		Korisnik korisnik = userRepository.getOne(id);
+		if(korisnik == null) {
+			return null;
+		}
+
+			RezervacijaVozila novaRezervacija = new RezervacijaVozila();
+			novaRezervacija.setKorisnik(korisnik);
+			novaRezervacija.setBrojPutnika(brojGostiju);
+			novaRezervacija.setDatumPreuzimanja(d1);
+			novaRezervacija.setDatumVracanja(d2);
+			novaRezervacija.setTipRezervacije(1); //1 oznacava brzu rezervaciju
+			Vozilo v = voziloRepository.getOne(idVozila);
+			novaRezervacija.setVozilo(v);
+			
+			RentACar rent = rentRepository.getOne(idRent);
+			novaRezervacija.setMestoPreuzimanja(mestoPreuzimanja);
+			novaRezervacija.setMestoVracanja(mestoVracanja);
+			
+			List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+			List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+			
+			Double cenaRezervacije = (double) 0;
+			
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == v.getRentACar().getRentACarId())  
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) 
+											cenaRezervacije += stavkaCenovnika.getCena() * brojDana;
+			
+			novaRezervacija.setCena(cenaRezervacije);
+			
+			Double staraCena = novaRezervacija.getCena();
+			novaRezervacija.setCena((staraCena)*0.9);
+			rezVozRepository.save(novaRezervacija);
+			return novaRezervacija; 
+		
+		
 	}
 
 	

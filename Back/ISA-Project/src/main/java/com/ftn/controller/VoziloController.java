@@ -128,10 +128,7 @@ public class VoziloController
 		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
 	}
 	
-	
-	
-	
-	
+
 	// vraca sva vozila - 2.7
 	// 2.7
 		@GetMapping("/vratiSvaVozila")
@@ -158,6 +155,25 @@ public class VoziloController
 	public ResponseEntity<ArrayList<Vozilo>> checkAvailabilityVozilo(@RequestBody ProveriDostupnostRentDTO pdDTO, @PathVariable Long idRent) 
 	{
 		ArrayList<Vozilo> vozila = voziloService.checkAvailability(pdDTO, idRent);
+		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
+	}
+	
+	// BRZA REZERVACIJA
+	
+	@PutMapping("/staviVoziloNaPopust/{idVozila}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Vozilo> staviVoziloNaPopust(@PathVariable Long idVozila) 
+	{
+		Vozilo v = voziloService.staviVoziloNaPopust(idVozila);
+		return new ResponseEntity<>(v, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/getVozilaAtDiscount/{idRezervacijeLeta}/{idRent}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Vozilo>> getVozilaAtDiscount(@PathVariable Long idRezervacijeLeta, @PathVariable Long idRent) 
+	{
+		ArrayList<Vozilo> vozila = voziloService.vratiVozilaNaPopustu(idRezervacijeLeta, idRent);
 		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
 	}
 }

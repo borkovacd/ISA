@@ -38,6 +38,8 @@ public class Vozilo
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="rentACarId", referencedColumnName="rentACarId")
 	private RentACar rentACar;
+	
+	private boolean naPopustu = false;
 
 	// Inspo
 	
@@ -65,6 +67,14 @@ public class Vozilo
 	}
 
 	
+
+	public boolean isNaPopustu() {
+		return naPopustu;
+	}
+
+	public void setNaPopustu(boolean naPopustu) {
+		this.naPopustu = naPopustu;
+	}
 
 	public Long getVoziloId() {
 		return voziloId;

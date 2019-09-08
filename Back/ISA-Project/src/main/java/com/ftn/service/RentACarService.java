@@ -14,8 +14,6 @@ import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
-import com.ftn.model.hotels.Hotel;
-import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -585,7 +583,7 @@ public class RentACarService {
 			int n = 0;
 			double dnevnaCena = 0;
 			
-			while(!startDateTemp.isAfter(endDateTemp)) 
+			while(!startDateTemp.isAfter(endDateTemp) || !startDateTemp.equals(endDateTemp)) 
 			{
 				n++;
 				startDateTemp = startDateTemp.plusDays(1);

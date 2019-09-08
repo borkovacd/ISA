@@ -528,5 +528,93 @@ public class VoziloService
 		return odgovarajucaVozila;
 	}
 	
+	
+	// BRZA REZERVACIJA
+	
+	public Vozilo staviVoziloNaPopust(Long idVozila) 
+	{
+		Vozilo v = voziloRepository.getOne(idVozila);
+		v.setNaPopustu(true);
+		voziloRepository.save(v);
+		return v;
+	}
+	
+	public ArrayList<Vozilo> vratiVozilaNaPopustu(Long idRezervacijeLeta, Long idRent) 
+	{
+		ArrayList<Vozilo> odgovarajucaVozila = new ArrayList<Vozilo>();
+		
+		//Sve potrebne informacije za proveru dostupnosti vozila treba izvuci iz podataka o rezervaciji leta 
+		//Privremeno podaci ce se izvlaciti na osnovu rezervacije vozila
+		//TO DO
+		
+		RezervacijaVozila rezervacijaLeta = rezVoziloRepository.getOne(idRezervacijeLeta); //ZAMENITI ZA REZERVACIJU LETA kada bude odradjeno!
+		LocalDate d1 = rezervacijaLeta.getDatumPreuzimanja();
+		LocalDate d2 = rezervacijaLeta.getDatumVracanja();
+		int brojGostiju = rezervacijaLeta.getBrojPutnika();
+		int brojDana =  (int) d1.until(d2, ChronoUnit.DAYS);
+		
+		System.out.println("Broj dana je: " + brojDana);
+		
+		ArrayList<Vozilo> vozilaRentNaPopustu = new ArrayList<Vozilo>();
+		//PROVERA 1 -> Da li je vozilo u zeljenom servisu
+		//PROVERA 2 -> Da li je u pitanju vozilo na popustu
+		
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		RentACar rent = rentRepository.getOne(idRent);
+		
+		if(rent == null) {
+			return null;
+		} else {
+			for(Vozilo v : svaVozila) {
+				if(v.getRentACar().getRentACarId() == idRent) {
+					if(v.isNaPopustu() == true)
+						vozilaRentNaPopustu.add(v);
+				}
+			}
+		}
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+		
+		// PROVERA 3 -> Da li je vozilo slobodno u odgovarajucem periodu
+		for(Vozilo v: vozilaRentNaPopustu) {
+			boolean slobodno = true;
+			for(RezervacijaVozila rezervacija : rezervacije) {
+					if(rezervacija.getVozilo().getVoziloId() == v.getVoziloId()) { //Da li se vozilo nalazi medju rezervacijama
+						if(d1.isBefore(rezervacija.getDatumPreuzimanja())) {
+							if(d2.isAfter(rezervacija.getDatumVracanja())) {
+								slobodno = false;
+							}
+						} else if(d1.isAfter(rezervacija.getDatumPreuzimanja())) {
+							if(d2.isBefore(rezervacija.getDatumVracanja())) {
+								slobodno = false;
+							}
+						} else if(d1.isEqual(rezervacija.getDatumPreuzimanja())) {
+							if(d2.isEqual(rezervacija.getDatumVracanja())) {
+								slobodno = false;
+							}
+						}
+					}
+				
+			}
+			// PROVERA 4 -> Da li je vozilo ima definisanu cenu (da li je aktivno u trazenom periodu)
+			if(slobodno == true) {
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == idRent)  //ako je cenovnik rent u kom je slobodno vozilo
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) {
+											v.setCena(stavkaCenovnika.getCena() * brojDana);
+													odgovarajucaVozila.add(v);
+										}
+			}
+		}
+		
+		return odgovarajucaVozila;
+	}
+
 
 }
