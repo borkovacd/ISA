@@ -37,10 +37,6 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
   timePeriodConfirmed: boolean;
 
   public check = false;
-  listSelectedVozila = [];
-  listSelectedVozilaID = [];
-
-  values = '';
 
   // moje
   // lista filijala tog servisa za combo box
@@ -49,6 +45,8 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
   selectedVoziloID: any ;
   value = '';
   tipoviVozila = [];
+
+  dobarBrojVozila : boolean = false ;
 
   constructor(protected  router: Router,
               public fb: FormBuilder,
@@ -60,21 +58,22 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
               private rentService: RentCarService,
               private authService: AuthService) {
     this.form = this.fb.group({
-    startDate: ['', Validators.compose([Validators.required])],
-    endDate: ['', Validators.compose([Validators.required])],
-    numberOfGuests: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,2}$')])],
-    tipVozila: ['', Validators.compose([Validators.required])],
-    mestoPreuzimanja: ['', Validators.compose([Validators.required])],
-    mestoVracanja: ['', Validators.compose([Validators.required])],
-    priceRange: [''],
+    'startDate': ['', Validators.compose([Validators.required])],
+    'endDate': ['', Validators.compose([Validators.required])],
+    'numberOfGuests': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,2}$')])],
+    'tipVozila': ['', Validators.compose([Validators.required])],
+    'mestoPreuzimanja': ['', Validators.compose([Validators.required])],
+    'mestoVracanja': ['', Validators.compose([Validators.required])],
+    'priceRange': [''],
   });
-    this.startDate = this.form.controls.startDate;
-    this.endDate = this.form.controls.endDate;
-    this.numberOfGuests = this.form.controls.numberOfGuests;
-    this.tipVozila = this.form.controls.tipVozila;
-    this.mestoPreuzimanja = this.form.controls.mestoPreuzimanja;
-    this.mestoVracanja = this.form.controls.mestoVracanja;
-    this.priceRange = this.form.controls.priceRange;
+    this.startDate = this.form.controls['startDate'];
+    this.endDate = this.form.controls['endDate'];
+    this.numberOfGuests = this.form.controls['numberOfGuests'];
+    this.tipVozila = this.form.controls['tipVozila'];
+    this.mestoPreuzimanja = this.form.controls['mestoPreuzimanja'];
+    this.mestoVracanja = this.form.controls['mestoVracanja'];
+    this.priceRange = this.form.controls['priceRange'];
+
   }
 
   ngOnInit() {
@@ -129,33 +128,55 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
   }
 
   addVozilo(tipVozila: any, id: any) {
+
+    this.check = false ;
+
     this.selectedVozilo = tipVozila + id ;
     this.selectedVoziloID = id ;
     this.value = tipVozila + '(' + id + ')' + '    ';
 
+    this.checkBrojVozila();
+
   }
 
   removeVozilo(tipVozila: any, id: any) {
+
+    this.check = false ;
+
     this.selectedVoziloID = '';
     this.selectedVoziloID = '';
     this.value = '';
 
+    this.checkBrojVozila();
+
+  }
+
+  checkBrojVozila()
+  {
+    if (this.value != '') {
+      this.dobarBrojVozila = true ;
+    } else {
+      this.dobarBrojVozila = false ;
+    }
   }
 
   nastaviRezervaciju() {
+
     this.d1 = this.startDate.value;
     this.d2 = this.endDate.value;
 
-    const voziloReservation = new VoziloReservationModel(
+    const voziloReservationM = new VoziloReservationModel(
       this.d1,
       this.d2,
+      this.numberOfGuests.value,
       this.selectedVoziloID,
-      this.mestoPreuzimanja,
-      this.mestoVracanja
+      this.mestoPreuzimanja.value,
+      this.mestoVracanja.value
     );
 
     const idRent = this.route.snapshot.params.idRent;
-    this.voziloReservationService.voziloReservation(voziloReservation).subscribe(data => {
+    this.voziloReservationService.voziloReservation(voziloReservationM).subscribe(data => {
+      const idRezervacije = data.id ;
       this.router.navigateByUrl('registeredUserPage');
     });
   }

@@ -439,12 +439,12 @@ public class VoziloService
 				if (rezervacija.getVozilo().getVoziloId() == v.getVoziloId()) // ukoliko se to vozilo nalazi medju rezervacijama
 				{
 					// provera slobodno TRUE - FALSE
-					if(d1.isBefore(rezervacija.getDatumPreuzimanja())) {
-						if(d2.isAfter(rezervacija.getDatumPreuzimanja())) {
+					if(d1.isBefore(rezervacija.getDatumPreuzimanja()) || d1.equals(rezervacija.getDatumPreuzimanja())) {
+						if(d2.isAfter(rezervacija.getDatumPreuzimanja()) || d2.equals(rezervacija.getDatumPreuzimanja())) {
 							slobodno = false;
 						}
-					} else if(d1.isAfter(rezervacija.getDatumVracanja())) {
-						if(d2.isBefore(rezervacija.getDatumVracanja())) {
+					} else if(d1.isAfter(rezervacija.getDatumPreuzimanja()) || d1.equals(rezervacija.getDatumVracanja())) {
+						if(d2.isBefore(rezervacija.getDatumVracanja()) || d2.equals(rezervacija.getDatumVracanja())) {
 							slobodno = false;
 						}
 					}

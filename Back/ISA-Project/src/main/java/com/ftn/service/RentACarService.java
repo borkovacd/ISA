@@ -129,8 +129,8 @@ public class RentACarService {
 			{
 				for(RezervacijaVozila rezervacija : rezervacije) // prolazak kroz sve rezervacije
 				{
-					// ukoliko se to vozilo nalazi medju rezervacijama i ukoliko je u tom momentu rezervisano
-					if(rezervacija.getVozilo().getVoziloId() == v.getVoziloId() && v.isRezervisano() == true) 
+					// ukoliko se to vozilo nalazi medju rezervacijama
+					if(rezervacija.getVozilo().getVoziloId() == v.getVoziloId()) 
 					{
 						taken = true;
 					}
