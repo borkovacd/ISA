@@ -101,6 +101,8 @@ import {BrzaRezervacijaHoteliIzborComponent} from "./brza-rezervacija/brza-rezer
 import { BrzaRezervacijaSobeIzborComponent } from './brza-rezervacija/brza-rezervacija-hoteli/brza-rezervacija-sobe-izbor/brza-rezervacija-sobe-izbor.component';
 import { AttendanceGraphsRentComponent } from './rentServisi/attendance-graphs-rent/attendance-graphs-rent.component';
 import { RevenuesComponent } from './hotels/revenues/revenues.component';
+import { RegisteredUserHoteliKorisnikComponent } from './users/registered-user/registered-user-hoteli-korisnik/registered-user-hoteli-korisnik.component';
+import { RegisteredUserVozilaKorisnikComponent } from './users/registered-user/registered-user-vozila-korisnik/registered-user-vozila-korisnik.component';
 
 @NgModule({
   declarations: [
@@ -183,7 +185,9 @@ import { RevenuesComponent } from './hotels/revenues/revenues.component';
     BrzaRezervacijaHoteliComponent,
     BrzaRezervacijaSobeIzborComponent,
     AttendanceGraphsRentComponent,
-    RevenuesComponent
+    RevenuesComponent,
+    RegisteredUserHoteliKorisnikComponent,
+    RegisteredUserVozilaKorisnikComponent
   ],
   imports: [
     BrowserModule,

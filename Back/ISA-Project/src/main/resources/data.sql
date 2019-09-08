@@ -102,6 +102,16 @@ values (1, '2019-06-01', '2019-08-01', 1);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
 values (2, '2020-06-01', '2020-08-01', 1);
 
+insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila) 
+	values (1, 500, 1,'LIMUZINA');
+insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (2, 600, 1,'KARAVAN');
+insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (3, 700, 1,'KUPE');
+insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (4, 800, 2,'PICKUP');
+
+
 insert into isa_project.rezervacija_vozila(id,  datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
 values (1, '2019-08-25', '2019-09-25', 4, 1, 1, 1, 500, 5, 0);
 insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
