@@ -28,21 +28,7 @@ export class PrijavaComponent implements OnInit {
   }
 
   onSubmit() {
-    let provera : boolean = false;
 
-    if(this.korisnik.email == ""){
-      $("#emailValue").addClass('border-danger');
-      provera = true;
-    } else {
-      $("#emailValue").removeClass('border-danger');
-    }
-
-    if(this.korisnik.lozinka == ""){
-      $("#passValue").addClass('border-danger');
-      provera = true;
-    } else {
-      $("#passValue").removeClass('border-danger');
-    }
 
     /*
     if (!provera) {
@@ -76,39 +62,55 @@ export class PrijavaComponent implements OnInit {
 
   clickLogIn(){
 
-    this.authService.login(this.user).subscribe(
-      success => {
-        alert(this.user.korisnickoIme);
-        alert(this.user.lozinka);
+    let provera : boolean = false;
 
-        if(!success) {
-          alert('Neispravno korisnicko ime ili lozinka!');
-          this.errorMessage = "Wrong email or password";
-        }else{
-          this.authService.getCurrentUser().subscribe(
-            data =>{
-              alert('Uloga korisnika je: ' + data.uloga);
+    if(this.korisnik.email == ""){
+      $("#emailValue").addClass('border-danger');
+      provera = true;
+    } else {
+      $("#emailValue").removeClass('border-danger');
+    }
 
-              localStorage.setItem("ROLE", data.uloga);
-              localStorage.setItem("USERNAME", data.korisnickoIme);
+    if(this.korisnik.lozinka == ""){
+      $("#passValue").addClass('border-danger');
+      provera = true;
+    } else {
+      $("#passValue").removeClass('border-danger');
+    }
 
-              if (localStorage.getItem("ROLE")=="ADMINISTRATOR_SISTEMA") {
-                this.router.navigate(["/systemAdminPage"]);
-              }else if (localStorage.getItem("ROLE")=="ADMINISTRATOR_HOTELA"){
-                this.router.navigate(["/hotelAdminPage"])
-              }else if (localStorage.getItem("ROLE")=="ADMINISTRATOR_RENT_A_CAR"){
-                this.router.navigate(["/rentAdminPage"])
-              }else if (localStorage.getItem("ROLE")=="ADMINISTRATOR_AVIOKOMPANIJE"){
-                this.router.navigate(["/glavna"]);
-              }else if (localStorage.getItem("ROLE")=="OBICAN_KORISNIK") {
-                this.router.navigate(["/registeredUserPage"]);
+    if(!provera) {
+      this.authService.login(this.user).subscribe(
+        success => {
+
+          if (!success) {
+            alert('Neispravno korisnicko ime ili lozinka!');
+            this.errorMessage = "Wrong email or password";
+          } else {
+            this.authService.getCurrentUser().subscribe(
+              data => {
+                alert('Vasa uloga je: ' + data.uloga);
+
+                localStorage.setItem("ROLE", data.uloga);
+                localStorage.setItem("USERNAME", data.korisnickoIme);
+
+                if (localStorage.getItem("ROLE") == "ADMINISTRATOR_SISTEMA") {
+                  this.router.navigate(["/systemAdminPage"]);
+                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_HOTELA") {
+                  this.router.navigate(["/hotelAdminPage"])
+                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_RENT_A_CAR") {
+                  this.router.navigate(["/rentAdminPage"])
+                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_AVIOKOMPANIJE") {
+                  this.router.navigate(["/glavna"]);
+                } else if (localStorage.getItem("ROLE") == "OBICAN_KORISNIK") {
+                  this.router.navigate(["/registeredUserPage"]);
+                }
+
               }
-
-            }
-          )
+            )
+          }
         }
-      }
       )
+    }
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {VoziloService} from "../../../service/vozilo.service";
 
 @Component({
   selector: 'app-registered-user-vozila-korisnik',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisteredUserVozilaKorisnikComponent implements OnInit {
 
-  constructor() { }
+  vozila = [];
+  idVozilo: any;
+
+  constructor(protected  router: Router,
+              private route: ActivatedRoute,
+              private voziloService: VoziloService,) { }
 
   ngOnInit() {
+    this.voziloService.vratiVozilaKorisnika().subscribe(data => {
+      this.vozila = data ;
+    });
   }
+
+  goBack() {
+    this.router.navigateByUrl('registeredUserPage' );
+
+  }
+
 
 }

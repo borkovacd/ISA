@@ -35,12 +35,11 @@ export class VoziloService {
     return this.http.get(`${this.BASE_URL}/getVozilaRentACar/${idRent}`, {headers});
   }
 
-  // vraca vozila korisnika
-  vratiVozilaKorisnika(): Observable<any> {
+  // VRACA VOZILA KORISNIKA NEW
+  vratiVozilaKorisnika(idRent: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get(`${this.BASE_URL}/vratiVozilaKorisnika/4`, {headers});
+    return this.http.get(`${this.BASE_URL}/vratiVozilaKorisnika`, {headers});
   }
-
 
   // provera da li je vozilo rezervisano
   checkIfReservedVozilo(id: any): Observable<any> {
