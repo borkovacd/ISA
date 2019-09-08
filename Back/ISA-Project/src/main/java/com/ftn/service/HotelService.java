@@ -21,6 +21,8 @@ import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.hotels.Soba;
 import com.ftn.model.hotels.StavkaCenovnikaHotela;
+import com.ftn.model.rentacar.RezervacijaVozila;
+import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.CenovnikHotelaRepository;
 import com.ftn.repository.HotelRepository;
 import com.ftn.repository.RezervacijaHotelaRepository;
@@ -553,7 +555,7 @@ public class HotelService {
 	}
 	
 	// vraca hotele izabranog korisnika
-		public ArrayList<Hotel> getHoteliKorisnik(Long idKorisnik) throws Exception 
+		public ArrayList<Hotel> getHoteliKorisnikStara(Long idKorisnik) throws Exception 
 		{
 			ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
 			Korisnik korisnik = userRepository.getOne(idKorisnik);
@@ -588,6 +590,45 @@ public class HotelService {
 			}
 			
 			return hoteli;
+			
+		}
+		
+		// vraca rezervisane hotele korisnika
+		public ArrayList<Hotel> getHoteliKorisnik(Long idKorisnik) throws Exception 
+		{
+			ArrayList<Hotel> hoteli = new ArrayList<Hotel>();
+			Korisnik korisnik = userRepository.getOne(idKorisnik);
+			
+			List<RezervacijaHotela> rezervacijeHotela = rezervacijaHotelaRepository.findAll();
+			List<Hotel> sviHoteli = hotelRepository.findAll();
+			
+			
+			// ukoliko ne postoji nijedan hotel
+			if (sviHoteli.size() == 0) // svaVozila == null
+			{
+				return hoteli ;
+			}
+			
+			// ukoliko ne postoji nijedna rezervacija
+			if (rezervacijeHotela.size() == 0) // rezervacijeVozila == null
+			{
+				return hoteli ;
+			}
+			
+			for (int i = 0; i < rezervacijeHotela.size(); i++) // prolazak kroz sve rezervacije
+			{
+				if (rezervacijeHotela.get(i).getKorisnik().getId() == idKorisnik) // Da li je to rezervacija ovog korisnika?
+				{
+					for (int a = 0; a < rezervacijeHotela.get(i).getSobe().size(); a++)
+					{
+						if (!hoteli.contains(rezervacijeHotela.get(i).getSobe().get(a).getHotel())) {
+							hoteli.add(rezervacijeHotela.get(i).getSobe().get(a).getHotel());
+						}
+					}
+				}
+			}
+			
+			return hoteli ;
 			
 		}
 

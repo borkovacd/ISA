@@ -133,6 +133,13 @@ public class RentCarController {
 			ArrayList<Integer> daysData = rentCarService.getDailyGraphDataRent(id, date);
 			return new ResponseEntity<List<Integer>>(daysData, HttpStatus.OK);
 		}
+		
+		@GetMapping("/getRevenuesRent/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<Double> getRevenuesRent(@PathVariable Long id, @RequestParam String d1, @RequestParam String d2) {
+			Double retVal = rentCarService.getRevenuesRent(id, d1, d2);
+			return new ResponseEntity<Double>(retVal, HttpStatus.OK);
+		}
 	
 	
 	/******************/

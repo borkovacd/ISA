@@ -8,13 +8,13 @@
     style="text-align: center; margin-left: 20%;margin-right: 20%">
     <div *ngFor="let rezervacija of rezervacije"
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
-      <p style="font-size: 20px">Tip vozila:  {{rezervacija.vozilo.tip}}</p>
-      <p style="font-size: 20px">Datum preuzimanja:  {{rezervacija.datumPreuzimanja}}</p>
-      <p style="font-size: 20px">Datum vracanja:  {{rezervacija.datumVracanja}}</p>
-      <p style="font-size: 20px">Mesto preuzimanja:  {{rezervacija.mestoPreuzimanja.adresa}}</p>
-      <p style="font-size: 20px">Mesto vracanja: {{rezervacija.mestoVracanja.adresa}} </p>
-      <p style="font-size: 20px">Cena:  {{rezervacija.cena}}</p>
-      <p style="font-size: 20px">Broj putnika:  {{rezervacija.brojPutnika}}</p>
+      <p style="font-size: 20px">Tip vozila: <b>{{rezervacija.vozilo.tip}}</b> </p>
+      <p style="font-size: 20px">Datum preuzimanja: <b> {{rezervacija.datumPreuzimanja}} </b></p>
+      <p style="font-size: 20px">Datum vracanja: <b> {{rezervacija.datumVracanja}} </b> </p>
+      <p style="font-size: 20px">Mesto preuzimanja: <b> {{rezervacija.mestoPreuzimanja.adresa}} </b> </p>
+      <p style="font-size: 20px">Mesto vracanja: <b> {{rezervacija.mestoVracanja.adresa}} </b></p>
+      <p style="font-size: 20px">Cena: <b> {{rezervacija.cena}}</b> </p>
+      <p style="font-size: 20px">Broj putnika: <b> {{rezervacija.brojPutnika}}</b></p>
 
       <div style="margin-bottom: 20px">
         <button

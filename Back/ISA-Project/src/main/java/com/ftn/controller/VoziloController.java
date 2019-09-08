@@ -23,6 +23,7 @@ import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.service.RentACarService;
+import com.ftn.service.UserService;
 import com.ftn.service.VoziloService;
 
 @RestController
@@ -34,6 +35,9 @@ public class VoziloController
 	
 	@Autowired
 	RentACarService rentService ;
+	
+	@Autowired
+	UserService userService ;
 
 	// Dodavanje vozila
 	@PostMapping("/dodajVozilo/{idRentACar}")
@@ -140,11 +144,11 @@ public class VoziloController
 
 	
 	// 2.7
-	@GetMapping("/vratiVozilaKorisnika/{id}")
+	@GetMapping("/vratiVozilaKorisnika")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Vozilo>> vratiVozilaKorisnika(@PathVariable Long id) throws Exception 
+	public ResponseEntity<List<Vozilo>> vratiVozilaKorisnika() throws Exception 
 	{
-		ArrayList<Vozilo> vozila = voziloService.getVozilaKorisnik(id);
+		ArrayList<Vozilo> vozila = voziloService.getVozilaKorisnik(userService.getCurrentUser().getId());
 		return new ResponseEntity<List<Vozilo>>(vozila, HttpStatus.OK);
 	}
 	

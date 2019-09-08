@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,7 +14,8 @@ import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
-
+import com.ftn.model.hotels.Hotel;
+import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -44,6 +47,8 @@ public class RentACarService {
 	
 	@Autowired
 	private StavkaCenovnikaRentRepository stavkaRentRepository ;
+	
+	private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 	/****** Borkovac *******/
 	
@@ -543,6 +548,70 @@ public class RentACarService {
 		return values;
 		
 	}
+	
+	// Prihodi rent-a-car servisa u izabranom periodu
+	public Double getRevenuesRent(Long idRent, String d1String, String d2String) 
+	{
+		
+		double revenues = 0;
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(d1String, europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(d2String, europeanDateFormatter);
+		System.out.println("Datumi: " + d1 + " - " + d2);
+		
+		RentACar rent = rentCarRepository.getOne(idRent);
+		
+		if(rent == null) 
+			return null;
+		
+		ArrayList<RezervacijaVozila> rezervacije = new ArrayList<RezervacijaVozila>();
+		ArrayList<RezervacijaVozila> sveRezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
+		
+		for(RezervacijaVozila rezervacija: sveRezervacije) 
+		{
+			if(rezervacija.getVozilo().getRentACar().getRentACarId() == idRent) 
+			{
+				rezervacije.add(rezervacija);
+			}
+		}
+		
+		for(RezervacijaVozila r: rezervacije) 
+		{
+			
+			LocalDate startDateTemp = r.getDatumPreuzimanja();
+			LocalDate endDateTemp = r.getDatumVracanja();
+			int n = 0;
+			double dnevnaCena = 0;
+			
+			while(!startDateTemp.isAfter(endDateTemp)) 
+			{
+				n++;
+				startDateTemp = startDateTemp.plusDays(1);
+			}
+
+			dnevnaCena = ((double) r.getCena())/((double) n);
+			
+			LocalDate startDate = r.getDatumPreuzimanja();
+			LocalDate endDate = r.getDatumVracanja();
+
+			while(!startDate.isAfter(endDate)) {
+				//System.out.println("Trenutni datum: " + startDate);
+				if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2)) || (startDate.isEqual(d2))) {
+					revenues += dnevnaCena;
+				}
+				startDate = startDate.plusDays(1);
+			}
+		}
+		
+		df2.setRoundingMode(RoundingMode.DOWN);
+		String val = df2.format(revenues);
+		double retVal = Double.parseDouble(val);
+		
+		return retVal;
+	}
+
 	
 	
 

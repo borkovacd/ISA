@@ -23,6 +23,7 @@ import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
 import com.ftn.service.HotelService;
+import com.ftn.service.UserService;
 
 
 @RestController
@@ -31,6 +32,9 @@ public class HotelController {
 	
 	@Autowired
 	private HotelService hotelService;
+	
+	@Autowired
+	private UserService userService ;
 	
 	
 	/************ Borkovac **********/
@@ -137,13 +141,22 @@ public class HotelController {
 	}
 	
 	// 2.7
-		@GetMapping("/vratiHoteleKorisnika/{id}")
+		@GetMapping("/vratiHoteleKorisnikaStara/{id}")
 		@CrossOrigin(origins = "http://localhost:4200")
-		public ResponseEntity<List<Hotel>> vratiHoteleKorisnika(@PathVariable Long id) throws Exception 
+		public ResponseEntity<List<Hotel>> vratiHoteleKorisnikaStara(@PathVariable Long id) throws Exception 
 		{
 			ArrayList<Hotel> hoteli = hotelService.getHoteliKorisnik(id);
 			return new ResponseEntity<List<Hotel>>(hoteli, HttpStatus.OK);
 		}
+		
+		// 2.7
+		@GetMapping("/vratiHoteleKorisnika")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<Hotel>> vratiHoteleKorisnika() throws Exception 
+		{
+			ArrayList<Hotel> hoteli = hotelService.getHoteliKorisnik(userService.getCurrentUser().getId());
+			return new ResponseEntity<List<Hotel>>(hoteli, HttpStatus.OK);
+		}		
 	/**********************/
 
 	
