@@ -46,4 +46,9 @@ export  class HotelReservationService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/listaHotelRezervacijaKorisnik`, {headers});
   }
+
+  otkaziRezervacijuHotela(id: number): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/otkaziRezervacijuHotela/${id}`,  {headers});
+  }
 }

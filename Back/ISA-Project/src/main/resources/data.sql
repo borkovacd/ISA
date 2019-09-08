@@ -61,9 +61,9 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 	values (24, 500, "TERETANA",null, 11);
 /**** REZERVACIJA HOTELA ****/
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
-	values (1, 2450, DATE '2019-09-01', DATE '2019-09-12', 2, 0, 4);
+	values (1, 2450, DATE '2019-09-01', DATE '2019-09-12', 4, 0, 4);
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
-	values (2, 18000, DATE '2019-12-20', DATE '2020-01-05', 2, 0, 1);
+	values (2, 18000, DATE '2019-12-20', DATE '2020-01-05', 4, 0, 1);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (1, 1);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
