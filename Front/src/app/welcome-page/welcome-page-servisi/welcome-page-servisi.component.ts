@@ -48,6 +48,10 @@ export class WelcomePageServisiComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigateByUrl('welcoomepage');
+  }
+
   pretraziRentServise()
   {
     this.pretraga = true ;

@@ -1,24 +1,84 @@
+<div>
+  <div [hidden]="pretraga"  style="text-align: center">
+    <button  class="btn btn-lg btn-outline-primary"  (click)="pretraziRentServise()">Pretraži rent servise</button>
+  </div>
+  <div>
+    <button [hidden]="!pretraga" class="btn btn-primary" style="width: 10%;margin-top: 10px; font-size: 1em;margin-bottom: 10px; border-color: white; background: #1a8cff;" (click)="goBack()">
+      <i class="fa fa-arrow-left"> Nazad</i>
+    </button>
+  </div>
+  <div [hidden]="!pretraga" style="text-align: center">
+    <p  style="color: black;font-size:40px; margin-top: 5%; font-family: 'Ink Free'">Pretraga servisa</p>
+    <form [formGroup]="form">
+      <div style="text-align: center" class="form-group">
 
-<div style="text-align: center; margin-left: 20%;margin-right: 20%">
-  <div *ngFor="let rent of rents"
-       style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
-    <h1 style="margin-top: 20px">{{rent.naziv}}</h1>
-    <p style="font-size: 20px">{{rent.adresa}}</p>
-    <p style="font-size: 20px">{{rent.opis}}</p>
-    <div style="margin-bottom: 20px">
+        <div style="margin-top: 5%">
+          <label style="font-size: 20px;">Naziv servisa:</label>
+          <input style="width: 50%; margin-left: 25%" type="text" class="form-control margin" [formControl]="rentName" name="rentName">
+        </div>
 
-      <button
-        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-        (click)="pregledVozila(rent.rentACarId)">Vozila
-      </button>
-      <button
-        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-        (click)="pregledFilijala(rent.rentACarId)">Filijale
-      </button>
-      <button
-        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-        (click)="pregledCenovnika(rent.rentACarId)">Cenovnik
-      </button>
-    </div>
+        <div style="margin-top: 2%">
+          <label style="font-size: 20px;">Lokacija servisa:</label>
+          <input style="width: 50%; margin-left: 25%" type="text" class="form-control margin" [formControl]="rentLocation" name="rentLocation">
+        </div>
+
+        <div style="margin-top: 2%">
+          <label style="font-size: 20px;">Početni datum:</label>
+          <input style="width: 50%; margin-left: 25%" type="date" class="form-control margin" [formControl]="startDate" name="checkInDate" id="input-checkIn">
+          <small class="form-text error" *ngIf="startDate.errors?.required && startDate.touched" style="color: red">
+            Izbor početnog datuma je obavezan!
+          </small>
+        </div>
+
+        <div style="margin-top: 2%">
+          <label style="font-size: 20px;">Krajnji datum:</label>
+          <input style="width: 50%; margin-left: 25%" type="date" class="form-control margin" [formControl]="endDate" name="checkInDate" id="input-checkOut">
+          <small class="form-text error" *ngIf="endDate.errors?.required && endDate.touched" style="color: red">
+            Izbor krajnjeg datuma je obavezan!
+          </small>
+        </div>
+
+        <div style="text-align: right; margin-right: 30%">
+          <button class="btn btn-primary" style="text-align: center; width: 15%;margin-top: 30px" (click)="confirmClick()"
+                  [disabled]="!form.valid"> Pretraži
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
+
+<div [hidden]="pretraga">
+  <div  style="text-align: center; margin-left: 20%;margin-right: 20%">
+    <div *ngFor="let rent of rents"
+         style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
+      <h1 style="margin-top: 20px">{{rent.naziv}}</h1>
+      <p style="font-size: 20px">{{rent.adresa}}</p>
+
+      <p style="font-size: 20px">{{rent.opis}}</p>
+      <div style="margin-bottom: 20px">
+        <button
+          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+          (click)="pregledVozila(rent.rentACarId)">Vozila
+        </button>
+        <button
+          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+          (click)="pregledFilijala(rent.rentACarId)">Filijale
+        </button>
+        <button
+          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+          (click)="pregledCenovnika(rent.rentACarId)">Cenovnik
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+

@@ -90,7 +90,7 @@ export class RegisteredUserServisiComponent implements OnInit {
   }
 
   goBack() {
-
+    this.router.navigateByUrl('registeredUserPage');
   }
 
 
