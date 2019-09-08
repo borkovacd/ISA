@@ -87,6 +87,14 @@ export class RentCarService {
     return this.http.get(`${this.BASE_URL}/dailyGraphRent/${idRent}`, { params: params});
   }
 
+  // pregled prihoda
+  getRevenuesRent(idRent: any, d1: any, d2: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('d1', d1);
+    params = params.append('d2', d2);
+    return this.http.get(`${this.BASE_URL}/getRevenuesRent/${idRent}`, { params: params});
+  }
+
 
 
 }
