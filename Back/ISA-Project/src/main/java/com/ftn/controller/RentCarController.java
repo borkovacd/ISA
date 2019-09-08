@@ -140,6 +140,15 @@ public class RentCarController {
 			Double retVal = rentCarService.getRevenuesRent(id, d1, d2);
 			return new ResponseEntity<Double>(retVal, HttpStatus.OK);
 		}
+		
+	// ZA BRZU REZERVACIJU, PRONALAZI SERVISE NA OSNOVU MESTA LETA
+		@GetMapping("/getAllRentsByAddress/{idRezervacijeLeta}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<List<RentACar>> getAllRentsByAddress(@PathVariable Long idRezervacijeLeta) 
+		{
+			ArrayList<RentACar> rents = rentCarService.getAllRentsByAddress(idRezervacijeLeta);
+			return new ResponseEntity<List<RentACar>>(rents, HttpStatus.OK);
+		}
 	
 	
 	/******************/

@@ -14,6 +14,7 @@ import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.model.rentacar.RezervacijaVozila;
@@ -608,6 +609,28 @@ public class RentACarService {
 		double retVal = Double.parseDouble(val);
 		
 		return retVal;
+	}
+	
+	// NA OSNOVU MESTA LETA SE FORMIRA BRZA REZERVACIJA
+	public ArrayList<RentACar> getAllRentsByAddress(Long idRezervacijeLeta) 
+	{
+		
+		//TO DO
+		//Treba izvuci podatke od rezervaciji leta iz baze
+		//Konkretno informaciju o mestu na koje se leti
+		
+		String mesto = "Beograd"; //privremeno
+		
+		ArrayList<RentACar> rentsByAddress = new ArrayList<RentACar>();
+		
+		ArrayList<RentACar> rents = (ArrayList<RentACar>) rentCarRepository.findAll();
+		
+		for(RentACar rent: rents) {
+			if(rent.getAdresa().contains(mesto))
+				rentsByAddress.add(rent);
+		}
+			
+		return rentsByAddress;
 	}
 
 	

@@ -70,6 +70,19 @@ export class VozilaComponent implements OnInit {
 
   }
 
+  staviNaPopust(id: any) {
+    const idRent = this.route.snapshot.params.idRent;
+    this.voziloService.checkIfReservedVozilo(id).subscribe(data => {
+      if (data == false) {
+        this.voziloService.staviVoziloNaPopust(id).subscribe(data => {
+          location.reload();
+        })
+      } else {
+        alert('Vozilo je rezervisano!');
+      }
+    })
+  }
+
   goBack() {
     this.router.navigateByUrl('rentAdminPage' );
 

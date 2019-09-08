@@ -76,10 +76,11 @@ public class RezervacijaVozilaController
 		
 	}
 	
-	@PostMapping("/createFastResRent/{id}/{idRezervacijeLeta}/{idRent}/{idVozila}")
+	@PostMapping("/createFastResRent/{idRezervacijeLeta}/{idRent}/{idVozila}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<RezervacijaVozila> createFastResRent(@PathVariable Long id, @PathVariable Long idRezervacijeLeta, @PathVariable Long idRent, @PathVariable Long idVozila) 
+	public ResponseEntity<RezervacijaVozila> createFastResRent(@PathVariable Long idRezervacijeLeta, @PathVariable Long idRent, @PathVariable Long idVozila) 
 	{
+		Long id = userService.getCurrentUser().getId();
 		RezervacijaVozila rezervacija = rezVozService.createOrChangeFastVoziloReservation(id, idRezervacijeLeta, idRent, idVozila);
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
 	}

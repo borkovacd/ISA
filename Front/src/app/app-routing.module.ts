@@ -89,7 +89,7 @@ const routes: Routes = [
   {path: 'brzaRezervacija/sobe/:idRezervacijeLeta/:idHotela', component: BrzaRezervacijaSobeIzborComponent},
 
   {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta', component: BrzaRezervacijaRentServisiComponent},
-  {path: 'brzaRezervacija/servisi/:idRezervacijeLeta/izbor', component: BrzaRezervacijaRentServisiIzborComponent},
+  {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta/izbor', component: BrzaRezervacijaRentServisiIzborComponent},
   {path: 'brzaRezervacija/vozila/:idRezervacijeLeta/:idRent', component: BrzaRezervacijaVozilaIzborComponent},
 
 

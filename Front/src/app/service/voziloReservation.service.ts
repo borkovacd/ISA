@@ -33,6 +33,10 @@ export  class VoziloReservationService {
     return this.http.post(`${this.BASE_URL}/otkaziRezervacijuVozila/${id}`,  {headers});
   }
 
-
+  // BRZA REZERVACIJA
+  createFastResRent(idRezervacijeLeta: any, idRent: any, idVozilo: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/createFastResRent/${idRezervacijeLeta}/${idRent}/${idVozilo}`, {headers});
+  }
 
 }

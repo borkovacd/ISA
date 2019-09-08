@@ -77,20 +77,20 @@ insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id
 
 
 insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(1, "Brace Dronjak 10", "Savic trans", "Vrlo kvalitetno i povoljno.", 3);
+	(1, "Brace Dronjak 10, Beograd", "Savic trans", "Vrlo kvalitetno i povoljno.", 3);
 insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(2, "Bulevar Oslobodjenja 46", "Vujovic trans", "Vrlo skupo.", 3);
+	(2, "Bulevar Oslobodjenja 46, Beograd", "Vujovic trans", "Vrlo skupo.", 3);
 insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(3, "Grobljanska 16", "Borkovac trans", "Ne ici ovde.", 3);
+	(3, "Grobljanska 16, Dobrinci", "Borkovac trans", "Ne ici ovde.", 3);
 insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
 	(4, "Zeleznicka 15", "Big Savic trans", "Najbolje.", 3);
 
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (1, 5, 1000, 2019, "BMW", "X5", "BMW X5", 0, "LIMUZINA", 1);
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (2, 5, 200, 2015, "Mercedes", "Jeep", "Mercedes dzip", 0, "KARAVAN", 1);
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id)
-	values (3, 5, 400, 2015, "Opel", "Astra", "Opel Astra", 0, "KABRIOLET", 2);
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (1, 5, 1000, 2019, "BMW", "X5", "BMW X5", 0, "LIMUZINA", 1, 0);
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (2, 5, 200, 2015, "Mercedes", "Jeep", "Mercedes dzip", 0, "KARAVAN", 1, 1);
+insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (3, 5, 400, 2015, "Opel", "Astra", "Opel Astra", 0, "KABRIOLET", 2, 1);
 	
 insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
 	values (1, "Brace Dronjak 10", "Srbija", "Novi Sad", 19, 46, 1);	

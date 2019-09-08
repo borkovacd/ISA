@@ -95,6 +95,12 @@ export class RentCarService {
     return this.http.get(`${this.BASE_URL}/getRevenuesRent/${idRent}`, { params: params});
   }
 
+  // ADRESA ZA BRZU REZERVACIJU
+  getAllRentsByAddress(idRezervacijeLeta: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getAllRentsByAddress/${idRezervacijeLeta}`, {headers});
+  }
+
 
 
 }

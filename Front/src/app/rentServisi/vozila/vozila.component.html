@@ -30,6 +30,12 @@
       <p style="font-size: 20px">Godina proizvodnje:  {{vozilo.godinaProizvodnje}}</p>
       <p style="font-size: 20px">Broj sedista:  {{vozilo.brojSedista}}</p>
       <div style="margin-bottom: 20px">
+        <div *ngIf="!vozilo.naPopustu">
+          <button
+            style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+            (click)="staviNaPopust(vozilo.voziloId)">Popust
+          </button>
+        </div>
         <button
           style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
           (click)="editVozilo(vozilo.voziloId)">Izmeni

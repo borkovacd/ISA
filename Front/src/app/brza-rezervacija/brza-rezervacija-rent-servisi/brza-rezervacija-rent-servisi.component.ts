@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../service/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
@@ -12,6 +12,7 @@ export class BrzaRezervacijaRentServisiComponent implements OnInit {
 
   constructor(private userService : UserService,
               private router: Router,
+              private route: ActivatedRoute,
               private authService: AuthService) { }
 
   ngOnInit() {
@@ -20,6 +21,16 @@ export class BrzaRezervacijaRentServisiComponent implements OnInit {
   logout()
   {
     this.authService.logOutUser();
+  }
+
+  rezervisi() {
+    const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
+    this.router.navigateByUrl('brzaRezervacija/rentServisi/' + idRezervacijeLeta + '/izbor');
+
+  }
+
+  preskoci() {
+    this.router.navigateByUrl('registeredUserPage');
   }
 
 }
