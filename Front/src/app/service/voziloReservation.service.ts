@@ -10,7 +10,7 @@ const httpOptions = {
 @Injectable()
 export  class VoziloReservationService {
 
-  private BASE_URL = 'http://localhost:8080/api/voziloReservation';
+  private BASE_URL = 'api/voziloReservation';
 
   constructor(private http: HttpClient) {
 
@@ -27,6 +27,12 @@ export  class VoziloReservationService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/listaRentRezervacijaKorisnik`, {headers});
   }
+
+  otkaziRezervacijuVozila(id: number): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/otkaziRezervacijuVozila/${id}`,  {headers});
+  }
+
 
 
 }

@@ -27,6 +27,20 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
 
   }
 
+  cancelReservation(id: any)
+  {
+    this.rezervacijaService.otkaziRezervacijuVozila(id).subscribe(data => {
+      if (data == true) {
+        alert('Uspesno otkazana rezervacija!');
+        //this.router.navigateByUrl('registeredUserPage' );
+        window.location.reload();
+      }
+      else {
+        alert('Nije moguce otkazati rezervaciju!');
+      }
+    })
+  }
+
   goBack() {
     this.router.navigateByUrl('registeredUserPage' );
 

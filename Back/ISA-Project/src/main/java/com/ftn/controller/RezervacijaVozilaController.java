@@ -23,7 +23,7 @@ import com.ftn.service.RezervacijaVozilaService;
 import com.ftn.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/voziloReservation")
+@RequestMapping(value = "voziloReservation")
 public class RezervacijaVozilaController 
 {
 	@Autowired
