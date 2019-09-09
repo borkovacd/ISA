@@ -35,7 +35,7 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
       this.regularUsers = data;
     });
 
-    this.userService.getAdministrators().subscribe(data => {
+    this.userService.getOtherAdministrators().subscribe(data => {
       this.administrators = data;
     });
 

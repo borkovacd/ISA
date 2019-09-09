@@ -42,6 +42,11 @@ export class UserService {
     return this.http.get(`${this.BASE_URL}/getAdministrators`, {headers});
   }
 
+  getOtherAdministrators(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getOtherAdministrators`, {headers});
+  }
+
   changeRole(id: any, novaUloga: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.put(`${this.BASE_URL}/changeRole/${id}`, novaUloga, {headers});

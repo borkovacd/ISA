@@ -53,6 +53,13 @@ public class UserController {
 		return new ResponseEntity<>(regularUsers, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getOtherAdministrators", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Korisnik>> getOtherAdministrators() {	
+		List<Korisnik> administrators = userService.getOtherAdministrators();
+		return new ResponseEntity<>(administrators, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/getAdministrators", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Korisnik>> getAdministrators() {	

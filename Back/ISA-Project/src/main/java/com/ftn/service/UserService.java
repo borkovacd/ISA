@@ -24,6 +24,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private UserService userService;
+	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	
@@ -38,6 +41,23 @@ public class UserService {
 			}
 		}
 		return regularUsers;
+	}
+	
+
+	public List<Korisnik> getOtherAdministrators() {
+		
+		Korisnik administrator = userService.getCurrentUser();
+		//System.out.println("Ulogovani admin: " + administrator.getEmail());
+		
+		List<Korisnik> allUsers = userRepository.findAll();
+		List<Korisnik> administrators = new ArrayList<Korisnik>();
+		for(int i = 0; i < allUsers.size(); i++) {
+			if(allUsers.get(i).getUloga() != UlogaKorisnika.OBICAN_KORISNIK) {
+				if(allUsers.get(i).getId() != administrator.getId())
+					administrators.add(allUsers.get(i));
+			}
+		}
+		return administrators;
 	}
 
 
