@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {TimePeriodModel} from '../../../model/timePeriod.model';
 import {VoziloService} from "../../../service/vozilo.service";
 import {RentCarService} from "../../../service/rentcar.service";
+import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 
 @Component({
   selector: 'app-welcome-page-servisi-vozila',
@@ -21,12 +22,15 @@ export class WelcomePageServisiVozilaComponent implements OnInit {
   nazivRent: string;
   timePeriodConfirmed: boolean;
 
+  rating: any ;
+
 
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private voziloService: VoziloService,
-              private rentService: RentCarService) {
+              private rentService: RentCarService,
+              private ocenaService: OcenaVoziloService) {
 
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
@@ -74,6 +78,14 @@ export class WelcomePageServisiVozilaComponent implements OnInit {
 
   registrujSe() {
     this.router.navigateByUrl('/registracija');
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaVozila(id).subscribe(data => {
+      this.rating = data;
+    })
+    alert('Prosecna ocena ovog vozila je: ' + this.rating);
   }
 
 }

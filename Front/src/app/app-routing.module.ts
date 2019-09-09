@@ -49,6 +49,7 @@ import {RevenuesRentComponent} from "./rentServisi/revenues-rent/revenues-rent.c
 import {BrzaRezervacijaRentServisiIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component";
 import {BrzaRezervacijaVozilaIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component";
 import {PromenaLozinkeComponent} from "./promena-lozinke/promena-lozinke.component";
+import {VoziloRatingComponent} from "./ratings/vozilo-rating/vozilo-rating.component";
 
 
 const routes: Routes = [
@@ -84,6 +85,8 @@ const routes: Routes = [
   {path: 'registeredUserPage/rooms/:idHotela', component: RegisteredUserHoteliSobeComponent},
   {path: 'registeredUserPage/additionalServices/:idHotela/:idRezervacije', component: RegisteredUserHoteliDodatneUslugeComponent},
   {path: 'registeredUserPage/vozila/:idRent', component: RegisteredUserServisiVozilaComponent},
+
+  {path: 'registeredUserPage/:id/rating', component: VoziloRatingComponent},
 
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta', component: BrzaRezervacijaHoteliComponent},
   {path: 'brzaRezervacija/hoteli/:idRezervacijeLeta/izbor', component: BrzaRezervacijaHoteliIzborComponent},

@@ -27,7 +27,7 @@ import com.ftn.model.rentacar.OcenaVozilo;
 import com.ftn.model.rentacar.RezervacijaVozila;
 
 @RestController
-@RequestMapping(value = "/api/ocenaVozilo")
+@RequestMapping(value = "ocenaVozilo")
 public class OcenaVoziloController {
 	
 	@Autowired

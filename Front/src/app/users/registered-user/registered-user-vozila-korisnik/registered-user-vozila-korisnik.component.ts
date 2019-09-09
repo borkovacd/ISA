@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from "../../../service/vozilo.service";
+import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 
 @Component({
   selector: 'app-registered-user-vozila-korisnik',
@@ -12,9 +13,13 @@ export class RegisteredUserVozilaKorisnikComponent implements OnInit {
   vozila = [];
   idVozilo: any;
 
+  rating : any ;
+
+
   constructor(protected  router: Router,
               private route: ActivatedRoute,
-              private voziloService: VoziloService,) { }
+              private voziloService: VoziloService,
+              private ocenaService: OcenaVoziloService) { }
 
   ngOnInit() {
     this.voziloService.vratiVozilaKorisnika().subscribe(data => {
@@ -25,6 +30,21 @@ export class RegisteredUserVozilaKorisnikComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('registeredUserPage' );
 
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaVozila(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovo vozilo nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ovog vozila je: ' + data);
+      }
+    })
   }
 
 

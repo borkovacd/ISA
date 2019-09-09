@@ -107,6 +107,11 @@ import { RevenuesRentComponent } from './rentServisi/revenues-rent/revenues-rent
 import { BrzaRezervacijaRentServisiIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component';
 import { BrzaRezervacijaVozilaIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component';
 import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+import { VoziloRatingComponent } from './ratings/vozilo-rating/vozilo-rating.component';
+import { RentCarRatingComponent } from './ratings/rent-car-rating/rent-car-rating.component';
+import { RoomRatingComponent } from './ratings/room-rating/room-rating.component';
+import { HotelRatingComponent } from './ratings/hotel-rating/hotel-rating.component';
+import {OcenaVoziloService} from "./service/ocenaVozilo.service";
 
 @NgModule({
   declarations: [
@@ -195,7 +200,11 @@ import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.compo
     RevenuesRentComponent,
     BrzaRezervacijaRentServisiIzborComponent,
     BrzaRezervacijaVozilaIzborComponent,
-    PromenaLozinkeComponent
+    PromenaLozinkeComponent,
+    VoziloRatingComponent,
+    RentCarRatingComponent,
+    RoomRatingComponent,
+    HotelRatingComponent
   ],
   imports: [
     BrowserModule,
@@ -240,6 +249,7 @@ import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.compo
     HotelReservationService,
     VoziloReservationService,
     AuthService,
+    OcenaVoziloService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [],

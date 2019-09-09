@@ -46,4 +46,17 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
 
   }
 
+  oceniVozilo(id: any, idVozilo: any){
+    this.rezervacijaService.dozvoljenoOcenjivanje(idVozilo).subscribe(data => {
+      if(data == true){
+        this.router.navigateByUrl('registeredUserPage/' + idVozilo + '/rating');
+      }else{
+        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+
+      }
+    })
+
+
+  }
+
 }
