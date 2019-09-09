@@ -1,6 +1,7 @@
 package com.ftn.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,14 +24,18 @@ import com.ftn.dto.RentCarDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
+import com.ftn.repository.RentCarRepository;
 import com.ftn.service.RentACarService;
 
 @RestController
-@RequestMapping(value = "/api/rentCar")
+@RequestMapping(value = "rentCar")
 public class RentCarController {
 	
 	@Autowired
 	private RentACarService rentCarService;
+	
+	@Autowired 
+	private RentCarRepository rentRepository ;
 	
 	/**** Borkovac ******/
 	
@@ -149,7 +155,47 @@ public class RentCarController {
 			ArrayList<RentACar> rents = rentCarService.getAllRentsByAddress(idRezervacijeLeta);
 			return new ResponseEntity<List<RentACar>>(rents, HttpStatus.OK);
 		}
-	
+		
+	// SORTIRANJE
+		// vraca rent servise sortirane po nekom kriterijumu
+		@RequestMapping(value = "/sort/{uslov}", method = RequestMethod.GET)
+		public List<RentACar> getSortedRents(@PathVariable String uslov) {
+			System.out.println("Uslov je " + uslov);
+			
+			List<RentACar> svi = rentRepository.findAll();
+			List<RentACar> sortiranaLista = new ArrayList<RentACar>();
+
+			if (uslov.equals("NameA")) {
+				// sortiraj po nazivu od A-Z
+				Collections.sort(svi, RentACar.RentNameComparator);
+				for (RentACar R : svi) {
+					sortiranaLista.add(R);
+				}
+
+			} else if (uslov.equals("NameD")) {
+				// sortiraj po nazivu od Z-A
+				Collections.sort(svi, RentACar.RentNameComparator);
+				for (int i = svi.size() - 1; i >= 0; i--) {
+					sortiranaLista.add(svi.get(i));
+				}
+
+			} else if (uslov.equals("CityA")) {
+				// sortiraj po gradu od A-Z
+				Collections.sort(svi, RentACar.RentCityComparator);
+				for (RentACar R : svi) {
+					sortiranaLista.add(R);
+				}
+			} else {
+				// sortiraj po gradu od Z-A
+				Collections.sort(svi, RentACar.RentCityComparator);
+				for (int i = svi.size() - 1; i >= 0; i--) {
+					sortiranaLista.add(svi.get(i));
+				}
+			}
+
+			return sortiranaLista;
+		}
+
 	
 	/******************/
 

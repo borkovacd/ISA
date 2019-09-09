@@ -24,6 +24,8 @@ export class RegisteredUserServisiComponent implements OnInit {
   d1: any;
   d2: any;
 
+  public tipSort: AbstractControl;
+
   constructor(protected router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
@@ -36,12 +38,15 @@ export class RegisteredUserServisiComponent implements OnInit {
       'endDate': ['', Validators.compose([Validators.required])],
       'rentName': [''],
       'rentLocation': [''],
+      'tipSort': [''],
+
     })
 
     this.startDate = this.form.controls['startDate'];
     this.endDate = this.form.controls['endDate'];
     this.rentName = this.form.controls['rentName'];
     this.rentLocation = this.form.controls['rentLocation'];
+    this.tipSort = this.form.controls['tipSort'];
 
   }
 
@@ -92,6 +97,20 @@ export class RegisteredUserServisiComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('registeredUserPage');
   }
+
+  // sortiranje
+  sortirajRent(){
+    let sort : string = this.tipSort.value;
+    this.rentService.sortRent(sort).subscribe(
+      data => {
+        this.rents = data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
 
 
 

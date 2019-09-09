@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class RentCarService {
 
-  private BASE_URL = 'http://localhost:8080/api/rentCar';
+  private BASE_URL = 'api/rentCar';
 
   constructor(private http: HttpClient) {
 
@@ -99,6 +99,11 @@ export class RentCarService {
   getAllRentsByAddress(idRezervacijeLeta: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getAllRentsByAddress/${idRezervacijeLeta}`, {headers});
+  }
+
+  // SORTIRANJE
+  sortRent(sort : string){
+    return this.http.get<any>("api/rentCar/sort/" + sort);
   }
 
 
