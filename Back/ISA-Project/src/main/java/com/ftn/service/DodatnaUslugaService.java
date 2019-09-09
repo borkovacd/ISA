@@ -95,7 +95,8 @@ public class DodatnaUslugaService {
 	}
 
 	public boolean deleteAdditionalService(Long idAdditionalService) {
-		dodatnaUslugaRepository.deleteById(idAdditionalService);
+		DodatnaUsluga du = dodatnaUslugaRepository.getOne(idAdditionalService);
+		dodatnaUslugaRepository.delete(du);
 		return true;
 	}
 
@@ -144,6 +145,28 @@ public class DodatnaUslugaService {
 		}
 
 		return odgovarajuceDodatneUsluge;
+	}
+	
+	public boolean checkIfReservedService(Long id) {
+		boolean taken = false;
+		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		for(RezervacijaHotela rezervacija : rezervacije) {
+			for(DodatnaUsluga du: rezervacija.getDodatneUsluge()) {
+				
+				System.out.println("soba: " + rezervacija.getSobe().size());
+				System.out.println("rezesda" + rezervacija.getDodatneUsluge().size());
+				
+				System.out.println(du.getTipDodatneUsluge());
+				System.out.println("du  "+ du.getId());
+				System.out.println("saddsasad" + id);
+				if(du.getId() == id) {
+					System.out.println("kes" + du.getTipDodatneUsluge());
+					taken = true;
+					return taken;
+				}
+			}
+		}
+		return taken;
 	}
 	
 

@@ -38,4 +38,9 @@ export  class AdditionalServiceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getAvailableAdditionalServices/${idHotela}/${idRezervacije}`, {headers});
   }
+
+  checkIfReservedService(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedService/${id}`, {headers});
+  }
 }

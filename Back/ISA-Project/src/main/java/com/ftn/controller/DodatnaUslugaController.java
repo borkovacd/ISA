@@ -27,6 +27,15 @@ public class DodatnaUslugaController {
 	@Autowired
 	private DodatnaUslugaService dodatnaUslugaService;
 	
+	@GetMapping("/checkIfReservedService/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkIfReservedService(@PathVariable Long id) {
+		//Ako dodatna usluga nije rezervisana, taken je FALSE
+		//u suprotnom taken ima vrednost TRUE
+		boolean taken = dodatnaUslugaService.checkIfReservedService(id);
+		return taken;
+	}
+	
 	@GetMapping("/getAllAdditionalServices/{idHotela}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<DodatnaUsluga>> getAllAdditionalServices(@PathVariable Long idHotela) {

@@ -44,10 +44,15 @@ export class AdditionalServicesComponent implements OnInit {
 
   deleteAdditionalService(id: any) {
     const idHotela = this.route.snapshot.params.idHotela;
-    this.additionalServiceService.deleteAdditionalService(id).subscribe(data => {
-      location.reload();
+    this.additionalServiceService.checkIfReservedService(id).subscribe(data => {
+      if (data == false) {
+        this.additionalServiceService.deleteAdditionalService(id).subscribe(data => {
+          location.reload();
+        });
+      } else {
+        alert('Nije moguće obrisati dodatnu uslugu koja je rezervisna!');
+      }
     })
-
   }
 }
 
