@@ -56,7 +56,6 @@ export class AddEditVoziloComponent implements OnInit {
       this.naslovStranice = 'Izmena vozila';
 
       this.voziloService.vratiJednoVozilo(idRent, idVozilo).subscribe(data => {
-        this.form.controls['cena'].setValue(data.cena);
         this.form.controls['brojSedista'].setValue(data.brojSedista);
         this.form.controls['godinaProizvodnje'].setValue(data.godinaProizvodnje);
         this.form.controls['tip'].setValue(data.tip);
