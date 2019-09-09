@@ -57,10 +57,21 @@ export class UserService {
     return this.http.get(`${this.BASE_URL}/getKorisnikData/2`, {headers});
   }
 
+  getCurrentUser(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/getCurrentUser`, {headers});
+  }
+
   editUser(object: KorisnikProfilModel): Observable<any> {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.put(`${this.BASE_URL}/editUser/2`, body, {headers});
+  }
+
+  editCurrentUser(object: KorisnikProfilModel): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/editCurrentUser`, body, {headers});
   }
 
   checkIfFreeUser(id: any): Observable<any> {

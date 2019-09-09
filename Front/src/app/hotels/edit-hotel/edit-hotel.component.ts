@@ -38,8 +38,6 @@ export class EditHotelComponent implements OnInit {
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
 
-    alert('Id hotela je: ' + idHotela);
-
     this.hotelService.getHotel(idHotela).subscribe(data => {
       this.form.controls['name'].setValue(data.naziv);
       this.form.controls['address'].setValue(data.adresa);

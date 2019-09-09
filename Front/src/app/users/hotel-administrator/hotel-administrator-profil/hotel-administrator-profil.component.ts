@@ -14,7 +14,7 @@ export class HotelAdministratorProfilComponent implements  OnInit {
   korisnik: any = null;
 
   public ngOnInit() {
-    this.userService.getKorisnikData().subscribe(data => {
+    this.userService.getCurrentUser().subscribe(data => {
       this.korisnik = data;
     });
   }

@@ -125,10 +125,10 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
   izmeniHotel(id: any) {
     this.hotelService.checkIfReservedHotel(id).subscribe(data => {
-      if (data == false){
+      if (data == false) {
         this.router.navigateByUrl('hotelAdminPage/editHotel/' + id);
       } else {
-        alert('Soba u tom smestaju je rezervisana!');
+        alert('Nije moguće izmeniti hotel u kojem postoje rezervisane sobe!');
       }
     })
   }

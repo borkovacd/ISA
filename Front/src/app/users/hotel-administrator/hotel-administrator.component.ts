@@ -12,12 +12,18 @@ import {AuthService} from "../../service/auth.service";
 })
 export class HotelAdministratorComponent implements  OnInit {
 
-  constructor(private  userService: UserService, protected router: Router, private authService: AuthService) { }
+  administrator : any = null;
+
+  constructor(private  userService: UserService,
+              protected router: Router,
+              private authService: AuthService) { }
 
   public ngOnInit() {
 
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
   }
-
   logout()
   {
     this.authService.logOutUser();

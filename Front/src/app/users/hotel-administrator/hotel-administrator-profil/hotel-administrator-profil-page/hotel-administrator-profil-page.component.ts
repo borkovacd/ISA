@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../../../service/user.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../../../../service/auth.service';
 
 @Component({
   selector: 'app-hotel-administrator-profil-page',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HotelAdministratorProfilPageComponent implements OnInit {
 
-  constructor() { }
+  administrator: any = null;
 
-  ngOnInit() {
+  constructor(private  userService: UserService,
+              protected router: Router,
+              private authService: AuthService) { }
+
+  public ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
   }
+
 
 }

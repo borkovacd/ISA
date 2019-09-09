@@ -79,7 +79,7 @@ export class HotelAdministratorProfilEditComponent implements OnInit {
       this.grad.value,
     );
 
-    this.userService.editUser(user).subscribe(data => {
+    this.userService.editCurrentUser(user).subscribe(data => {
       this.redirectTo('/hotelAdminPage');
     });
   }

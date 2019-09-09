@@ -57,6 +57,14 @@ public class UserController {
 		return taken;
 	}
 	
+	@GetMapping("/getCurrentUser")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Korisnik> getCurrentUser() {
+		Korisnik korisnik = userService.getCurrentUser();
+		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value = "/getRegularUsers", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Korisnik>> getRegularUsers() {	
@@ -132,6 +140,13 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Korisnik> editUser( @PathVariable Long id, @RequestBody KorisnikProfilDTO korisnikProfilDTO) throws NoSuchAlgorithmException {
 		Korisnik korisnik = userService.editUser(id, korisnikProfilDTO);
+		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
+	}
+	
+	@PutMapping("/editCurrentUser")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Korisnik> editCurrentUser( @RequestBody KorisnikProfilDTO korisnikProfilDTO) {
+		Korisnik korisnik = userService.editCurrentUser(korisnikProfilDTO);
 		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
 	}
 	

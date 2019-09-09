@@ -195,6 +195,33 @@ public class UserService {
 		
 	}
 	
+	public Korisnik editCurrentUser(KorisnikProfilDTO korisnikProfilDTO) {
+		Korisnik currentUser = getCurrentUser();
+		Korisnik korisnik = userRepository.getOne(currentUser.getId());
+		System.out.println("Trenutni korisnik: " + korisnik.getIme() + " " + korisnik.getPrezime());
+		korisnik.setIme(korisnikProfilDTO.getIme());
+		korisnik.setPrezime(korisnikProfilDTO.getPrezime());
+		korisnik.setGrad(korisnikProfilDTO.getGrad());
+		korisnik.setTelefon(korisnikProfilDTO.getTelefon());
+		//Provera da li se lozinke poklapaju + hesovanje lozinke
+		if(korisnikProfilDTO.getLozinka().equals(korisnikProfilDTO.getPonovljenaLozinka())) {
+			String encriptedPass = "";
+			try {
+				encriptedPass = encriptPassword(korisnikProfilDTO.getLozinka());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			encriptedPass = encoder.encode(korisnikProfilDTO.getLozinka());
+			korisnik.setLozinka(encriptedPass);
+		} else {
+			return null;
+		}
+		userRepository.save(korisnik);
+		return korisnik;
+		
+	}
+	
 	/************ *********** *************/
 	
 	
