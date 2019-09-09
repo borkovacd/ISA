@@ -68,10 +68,7 @@ export class AddEditPriceComponent implements OnInit {
 
     if (mode == 'edit') {
       this.method_name = 'IZMENI';
-      /*this.priceService.getPrice(idHotela).subscribe(data => {
-        this.form.controls['startDate'].setValue(data.pocetakVazenja);
-        this.form.controls['endDate'].setValue(data.prestanakVazenja);
-      })*/
+
     } else if (mode == 'add') {
       this.method_name = 'DODAJ';
 

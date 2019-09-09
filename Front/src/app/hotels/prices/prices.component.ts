@@ -12,6 +12,7 @@ import {PriceService} from '../../service/price.service';
 export class PricesComponent implements OnInit {
 
   prices = []
+  nazivHotela : string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
@@ -24,6 +25,11 @@ export class PricesComponent implements OnInit {
 
     this.priceService.getAllPrices(idPriceList).subscribe(data => {
       this.prices = data;
+    })
+
+    const idHotela = this.route.snapshot.params.idHotela;
+    this.hotelService.getHotel(idHotela).subscribe(data => {
+      this.nazivHotela = data.naziv;
     })
 
   }
