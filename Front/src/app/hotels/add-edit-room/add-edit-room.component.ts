@@ -48,7 +48,7 @@ export class AddEditRoomComponent implements OnInit {
       this.roomService.getRoom(idRoom).subscribe(data => {
         this.form.controls['capacity'].setValue(data.kapacitet);
         this.form.controls['floor'].setValue(data.sprat);
-        this.form.controls['hasBalcony'].setValue(data.imaBalkan);
+        this.form.controls['hasBalcony'].setValue(data.imaBalkon);
         this.form.controls['roomType'].setValue(data.tipSobe);
       })
     } else if (mode == 'add') {

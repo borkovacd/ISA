@@ -63,11 +63,15 @@ export class RoomsComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     this.roomService.checkIfReservedRoom(id).subscribe(data => {
       if (data == false) {
+        this.roomService.deleteRoom(idHotela, id).subscribe(data => {
+          this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
+        })
         location.reload();
       } else {
-        alert('Soba je rezervisana!');
+        alert('Nije moguće obrisati sobu koja je rezervisna!');
+
       }
-    })
+    });
   }
 
   goBack(){
