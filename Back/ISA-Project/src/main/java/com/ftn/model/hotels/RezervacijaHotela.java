@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import com.ftn.model.Korisnik;
@@ -25,6 +26,9 @@ public class RezervacijaHotela {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Version
+    private Long version;
 
 	private LocalDate datumPocetka;
 
@@ -137,6 +141,16 @@ public class RezervacijaHotela {
 	public void setBrojGostiju(int brojGostiju) {
 		this.brojGostiju = brojGostiju;
 	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+	
+	
 	
 	
 	

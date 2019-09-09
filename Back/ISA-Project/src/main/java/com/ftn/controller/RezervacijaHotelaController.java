@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import com.ftn.service.RezervacijaHotelaService;
 import com.ftn.service.UserService;
 
 @RestController
+@Transactional
 @RequestMapping(value = "/api/hotelReservation")
 public class RezervacijaHotelaController {
 	
