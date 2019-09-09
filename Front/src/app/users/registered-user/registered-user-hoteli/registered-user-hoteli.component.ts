@@ -21,7 +21,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
   hotels = [];
 
-  showMap: boolean;
+  //showMap: boolean;
   showLocation: boolean;
   hideData: boolean;
   tempAdresa: any;
@@ -59,7 +59,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
   public ngOnInit() {
 
-    this.showMap = false;
+    //this.showMap = false;
     this.pretraga = false;
     this.showLocation = false;
     this.hideData = false;
@@ -94,7 +94,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
             return;
           }
 
-          this.showMap = true;
+          //this.showMap = true;
 
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
@@ -107,7 +107,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
   closeMap() {
     this.hideData = false;
-    this.showMap = false;
+    //this.showMap = false;
     this.showLocation = false;
   }
 

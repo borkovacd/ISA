@@ -20,7 +20,6 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   hotels = [];
 
-  showMap: boolean;
   showLocation: boolean;
   hideData: boolean;
   tempAdresa: any;
@@ -60,7 +59,6 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   public ngOnInit() {
 
-    this.showMap = false;
     this.pretraga = false;
     this.showLocation = false;
     this.hideData = false;
@@ -95,8 +93,6 @@ export class WelcomePageHoteliComponent implements OnInit {
             return;
           }
 
-          this.showMap = true;
-
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -111,7 +107,6 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   closeMap() {
     this.hideData = false;
-    this.showMap = false;
     this.showLocation = false;
   }
 

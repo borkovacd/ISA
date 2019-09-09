@@ -70,7 +70,8 @@
 <div class="form-group" [hidden]="!showLocation">
   <input value="{{tempAdresa}}" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
 </div>
-<div [hidden]="!showMap">
+<!--<div [hidden]="!showMap">-->
+  <div [hidden]="!showLocation" >
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker [latitude]="latitude" [longitude]="longitude" ></agm-marker>
   </agm-map>
