@@ -7,13 +7,12 @@
   <div class="row">
     <div class="col" style="width: 33%">
       <div style="display: inline-block; margin-left: 10%">
-        <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Korisnici</p>
+        <p style="color: black;font-size:30px; text-align: center; background: yellow; ">Korisnici</p>
         <div *ngFor="let u of regularUsers" style="margin-top: -30px;">
           <br>
-          <label style="font-size: 20px;">{{u.korisnickoIme}}</label>
+          <label style="font-size: 22px;">{{u.korisnickoIme}}</label>
           <div>
             <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #1a8cff;color: white;" (click)="promeniUlogu(u)">Promeni ulogu</button>
-            <button style="height: 60px;width: 80px;border-radius: 12px;background-color: #ff6666;color: white;" (click)="ukloniKorisnika(u.korisnickoIme)">Ukloni kornisnika</button>
           </div>
           <br>
         </div>
@@ -43,14 +42,14 @@
     </div>
     <div class="col" style="width: 33%">
       <div style=" display: inline-block;">
-        <p style="color: black;font-size:20px; text-align: center; background: yellow; ">Administratori</p>
+        <p style="color: black;font-size:30px; text-align: center; background: yellow; ">Administratori</p>
         <div *ngFor="let admin of administrators" style="margin-top: -30px">
           <br>
-          <label style="font-size: 20px;">{{admin.korisnickoIme}}&nbsp;</label>
-          <label style="font-size: 20px; color: #1a8cff">{{admin.uloga}}</label>
           <div>
-            <button style="height: 60px;width: 120px;border-radius: 12px;background-color: #ff6666;color: white;" (click)="ukloniKorisnika(admin.korisnickoIme)">Ukloni administratora
-            </button>
+          <label style="font-size: 22px;">{{admin.korisnickoIme}}&nbsp;</label>
+          </div>
+          <div>
+          <label style="font-size: 22px; color: #1a8cff"><i>{{admin.uloga}}</i></label>
           </div>
           <br>
         </div>

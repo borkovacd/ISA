@@ -43,11 +43,14 @@ export class SystemAdministratorAdministratoriComponent implements  OnInit {
   }
 
   promeniUlogu(u: any) {
-    this.promenaUloge = true;
-    this.pu = u;
-  }
-
-  ukloniKorisnika(korisnickoIme: any) {
+    this.userService.checkIfFreeUser(u.id).subscribe(data => {
+      if (data == false) {
+        this.promenaUloge = true;
+        this.pu = u;
+      } else {
+        alert('Nije moguće promeniti ulogu korisnika koji poseduje rezervacije!');
+      }
+    })
 
   }
 

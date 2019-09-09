@@ -63,6 +63,11 @@ export class UserService {
     return this.http.put(`${this.BASE_URL}/editUser/2`, body, {headers});
   }
 
+  checkIfFreeUser(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfFreeUser/${id}`, {headers});
+  }
+
 
   // Olga
 

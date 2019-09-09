@@ -13,7 +13,7 @@ public class RentACar
 {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rentACarId;
 	
 	private String naziv;

@@ -9,7 +9,9 @@ insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka,
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
 	values (5, "petrovic.petar@gmail.com", "Beograd", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Petrovic", false, "0604561231", true, "ADMINISTRATOR_HOTELA", "ok");
 insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
-	values (6, "savic.petar@gmail.com", "Novi Sad", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Savic", false, "0668811810", true, "ADMINISTRATOR_RENT_A_CAR", "ok");
+	values (6, "pekic.peki@gmail.com", "Novi Sad", "Peki",  "peki", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Pekic", false, "0668811810", true, "ADMINISTRATOR_RENT_A_CAR", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (7, "anic.ana@gmai.com", "Sremska Mitrovica", "Ana",  "ana", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Anic", false, "0604561231", true, "OBICAN_KORISNIK", "ok");
 
 
 

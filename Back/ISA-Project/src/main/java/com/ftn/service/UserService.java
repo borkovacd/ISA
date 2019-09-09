@@ -16,6 +16,11 @@ import com.ftn.dto.KorisnikProfilDTO;
 import com.ftn.enums.UlogaKorisnika;
 import com.ftn.model.Korisnik;
 import com.ftn.model.hotels.Hotel;
+import com.ftn.model.hotels.RezervacijaHotela;
+import com.ftn.model.hotels.Soba;
+import com.ftn.model.rentacar.RezervacijaVozila;
+import com.ftn.repository.RezervacijaHotelaRepository;
+import com.ftn.repository.RezervacijaVozilaRepository;
 import com.ftn.repository.UserRepository;
 
 @Service
@@ -23,14 +28,41 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private RezervacijaHotelaRepository rezervacijaHotelaRepository;
+	@Autowired
+	private RezervacijaVozilaRepository rezervacijaVozilaRepository;
 	
 	@Autowired
 	private UserService userService;
 	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	
+
 
 	
 	/************ Borkovac *************/
+	
+	public boolean checkIfFreeUser(Long id) {
+		boolean taken = false;
+		
+		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		for(RezervacijaHotela rezervacija : rezervacije) {
+			if(rezervacija.getKorisnik().getId() == id) {
+				taken = true;
+				return taken;
+			}
+		}
+		 
+		List<RezervacijaVozila> rezervacije2 = rezervacijaVozilaRepository.findAll();
+		for(RezervacijaVozila rezervacija2 :  rezervacije2) {
+			if(rezervacija2.getKorisnik().getId() == id) {
+				taken = true;
+				return taken;
+			}
+		}
+		return taken;
+	}
 	
 	public List<Korisnik> getAllRegularUsers() {
 		List<Korisnik> allUsers = userRepository.findAll();
