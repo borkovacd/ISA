@@ -88,21 +88,34 @@ export class PrijavaComponent implements OnInit {
           } else {
             this.authService.getCurrentUser().subscribe(
               data => {
-                alert('Vasa uloga je: ' + data.uloga);
 
-                localStorage.setItem("ROLE", data.uloga);
-                localStorage.setItem("USERNAME", data.korisnickoIme);
+                if (data.statusKorisnika == "prvo") {
+                  alert("Nakon prvog logovanja morate promeniti lozinku!");
+                  this.router.navigateByUrl('/promenaLozinke');
+                }
+                else if (data.statusKorisnika == "nijeVerifikovan") {
+                  this.poruka = 'Neophodno je verifikovati nalog da biste mogli da se ulogujete!';
+                }
 
-                if (localStorage.getItem("ROLE") == "ADMINISTRATOR_SISTEMA") {
-                  this.router.navigate(["/systemAdminPage"]);
-                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_HOTELA") {
-                  this.router.navigate(["/hotelAdminPage"])
-                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_RENT_A_CAR") {
-                  this.router.navigate(["/rentAdminPage"])
-                } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_AVIOKOMPANIJE") {
-                  this.router.navigate(["/glavna"]);
-                } else if (localStorage.getItem("ROLE") == "OBICAN_KORISNIK") {
-                  this.router.navigate(["/registeredUserPage"]);
+
+                else {
+                  alert('Vasa uloga je: ' + data.uloga);
+
+
+                  localStorage.setItem("ROLE", data.uloga);
+                  localStorage.setItem("USERNAME", data.korisnickoIme);
+
+                  if (localStorage.getItem("ROLE") == "ADMINISTRATOR_SISTEMA") {
+                    this.router.navigate(["/systemAdminPage"]);
+                  } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_HOTELA") {
+                    this.router.navigate(["/hotelAdminPage"])
+                  } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_RENT_A_CAR") {
+                    this.router.navigate(["/rentAdminPage"])
+                  } else if (localStorage.getItem("ROLE") == "ADMINISTRATOR_AVIOKOMPANIJE") {
+                    this.router.navigate(["/glavna"]);
+                  } else if (localStorage.getItem("ROLE") == "OBICAN_KORISNIK") {
+                    this.router.navigate(["/registeredUserPage"]);
+                  }
                 }
 
               }

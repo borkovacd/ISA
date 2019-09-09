@@ -90,6 +90,12 @@ export class UserService {
     return this.http.post<KorisnikModel>('http://localhost:8080/api/user/promenaLozinke', k);
   }
 
+  promeniLozinku(k: KorisnikModel)
+  {
+    return this.http.post<KorisnikModel>('api/user/promenaLozinke', k);
+
+  }
+
   /*
   vratiTrenutnogKorisnika(){
     return this.http.get<KorisnikModel>('http://localhost:8080/api/user/currentUser');

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.dto.KorisnikDTO;
 import com.ftn.dto.KorisnikProfilDTO;
 import com.ftn.model.Korisnik;
+import com.ftn.repository.UserRepository;
 import com.ftn.service.EmailService;
 import com.ftn.service.UserService;
 
@@ -36,6 +37,9 @@ public class UserController {
 	// Dodato zbog slanja mejla za verifikaciju naloga
 	@Autowired
 	EmailService emailService ;
+	
+	@Autowired
+	UserRepository userRepository ;
 	
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -232,13 +236,15 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<KorisnikDTO> promenaLozinke(@RequestBody KorisnikDTO kdto)
 	{
-		Korisnik k = userService.returnKorisnikByEmail(kdto.getEmail());
+		Korisnik k = userRepository.findOneByKorisnickoIme(kdto.getKorisnickoIme());
+		System.out.println("Korisnicko ime je: " + k.getKorisnickoIme());
 		String s = userService.promeniLozinku(kdto);
 		
 		if (!k.getLozinka().equals(s))
 		{
 			k.setLozinka(s);
-			k.setPrvoLogovanje(true);
+			k.setPrvoLogovanje(false);
+			k.setStatusKorisnika("ok");
 			userService.save(k);
 			
 			KorisnikDTO kd = new KorisnikDTO(k);

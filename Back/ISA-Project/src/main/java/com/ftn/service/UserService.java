@@ -57,14 +57,26 @@ public class UserService {
 			Korisnik korisnik = userRepository.getOne(id);
 			//System.out.println("Korisnicnko ime: " + korisnik.getKorisnickoIme());
 			//System.out.println("Nova uloga: " + novaUloga);
-			if(novaUloga.equals("ADMINISTRATOR_SISTEMA")) 
+			if(novaUloga.equals("ADMINISTRATOR_SISTEMA")) {
 				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_SISTEMA);
-			else if(novaUloga.equals("ADMINISTRATOR_AVIOKOMPANIJE")) 
+				korisnik.setPrvoLogovanje(true);
+				korisnik.setStatusKorisnika("prvo");
+			}
+			else if(novaUloga.equals("ADMINISTRATOR_AVIOKOMPANIJE")) {
 				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE);
-			else if(novaUloga.equals("ADMINISTRATOR_HOTELA")) 
+				korisnik.setPrvoLogovanje(true);
+				korisnik.setStatusKorisnika("prvo");
+			}
+			else if(novaUloga.equals("ADMINISTRATOR_HOTELA")) {
 				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_HOTELA);
-			else if(novaUloga.equals("ADMINISTRATOR_RENT_A_CAR")) 
+				korisnik.setPrvoLogovanje(true);
+				korisnik.setStatusKorisnika("prvo");
+			}
+			else if(novaUloga.equals("ADMINISTRATOR_RENT_A_CAR")) {
 				korisnik.setUloga(UlogaKorisnika.ADMINISTRATOR_RENT_A_CAR);
+				korisnik.setPrvoLogovanje(true);
+				korisnik.setStatusKorisnika("prvo");
+			}
 			userRepository.save(korisnik);
 			//System.out.println("Uloga je sada: " + korisnik.getUloga());
 			return true;
@@ -160,6 +172,8 @@ public class UserService {
 			Korisnik k = new Korisnik(korisnik.getIme(), korisnik.getPrezime(), korisnik.getKorisnickoIme(), tempPassword, korisnik.getEmail(), korisnik.getTelefon(), korisnik.getGrad());
 			k.setUloga(UlogaKorisnika.OBICAN_KORISNIK); // kad se registruje, postaje OBICAN KORISNIK
 			k.setVerifikovan(false); // inicijalno nije verifikovan, mora potvrditi
+			k.setPrvoLogovanje(true);
+			k.setStatusKorisnika("nijeVerifikovan");
 			
 			// cuvanje u bazu
 			userRepository.save(k);
@@ -272,6 +286,7 @@ public class UserService {
 		// salje se email
 		
 		k.setVerifikovan(true);	
+		k.setStatusKorisnika("prvo");
 		k.setUloga(UlogaKorisnika.OBICAN_KORISNIK);
     	
     	userRepository.save(k);
@@ -287,14 +302,8 @@ public class UserService {
 	public String promeniLozinku(KorisnikDTO dto)
 	{
 		String pomLozinka = "";
-		
-		try {
-				pomLozinka = encriptPassword(dto.getLozinka());
-		} catch (NoSuchAlgorithmException e)
-		{
-			e.printStackTrace();
-		}
-		
+		pomLozinka = encoder.encode(dto.getLozinka());
+		dto.setStatusKorisnika("ok");
 		return pomLozinka ;
 	}
 	

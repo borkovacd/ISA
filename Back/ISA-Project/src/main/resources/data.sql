@@ -1,15 +1,15 @@
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (1, "admin@gmail.com", "Novi Sad", "Admin",  "admin", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Admin", false, "0600000000", true, "ADMINISTRATOR_SISTEMA");
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (2, "borkovac.dragan@gmail.com", "Novi Sad", "Dragan",  "dragan", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Borkovac", false, "0605959769", true, "ADMINISTRATOR_HOTELA");
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (3, "savic.olga@gmail.com", "Novi Sad", "Olga",  "olga", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Savic", false, "06345624543", true, "ADMINISTRATOR_RENT_A_CAR");
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (4, "djurkovic.masa@gmail.com", "Novi Sad", "Masa",  "masa", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Djurkovic", false, "0604561231", true, "OBICAN_KORISNIK");
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (5, "petrovic.petar@gmail.com", "Beograd", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Petrovic", false, "0604561231", true, "ADMINISTRATOR_HOTELA");
-insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga) 
-	values (6, "savic.petar@gmail.com", "Novi Sad", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Savic", false, "0668811810", true, "ADMINISTRATOR_RENT_A_CAR");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (1, "admin@gmail.com", "Novi Sad", "Admin",  "admin", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Admin", false, "0600000000", true, "ADMINISTRATOR_SISTEMA", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (2, "borkovac.dragan@gmail.com", "Novi Sad", "Dragan",  "dragan", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Borkovac", false, "0605959769", true, "ADMINISTRATOR_HOTELA", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (3, "savic.olga@gmail.com", "Novi Sad", "Olga",  "olga", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Savic", false, "06345624543", true, "ADMINISTRATOR_RENT_A_CAR", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (4, "djurkovic.masa@gmail.com", "Novi Sad", "Masa",  "masa", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Djurkovic", false, "0604561231", true, "OBICAN_KORISNIK", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (5, "petrovic.petar@gmail.com", "Beograd", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Petrovic", false, "0604561231", true, "ADMINISTRATOR_HOTELA", "ok");
+insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, prvo_logovanje, telefon, verifikovan, uloga, status_korisnika) 
+	values (6, "savic.petar@gmail.com", "Novi Sad", "Petar",  "petar", "$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae", "Savic", false, "0668811810", true, "ADMINISTRATOR_RENT_A_CAR", "ok");
 
 
 

@@ -106,6 +106,7 @@ import { RegisteredUserVozilaKorisnikComponent } from './users/registered-user/r
 import { RevenuesRentComponent } from './rentServisi/revenues-rent/revenues-rent.component';
 import { BrzaRezervacijaRentServisiIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component';
 import { BrzaRezervacijaVozilaIzborComponent } from './brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component';
+import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
 
 @NgModule({
   declarations: [
@@ -193,7 +194,8 @@ import { BrzaRezervacijaVozilaIzborComponent } from './brza-rezervacija/brza-rez
     RegisteredUserVozilaKorisnikComponent,
     RevenuesRentComponent,
     BrzaRezervacijaRentServisiIzborComponent,
-    BrzaRezervacijaVozilaIzborComponent
+    BrzaRezervacijaVozilaIzborComponent,
+    PromenaLozinkeComponent
   ],
   imports: [
     BrowserModule,

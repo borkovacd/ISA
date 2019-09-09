@@ -24,6 +24,7 @@ public class Korisnik {
 	
 	private boolean prvoLogovanje = true;
 	private boolean verifikovan;
+	private String statusKorisnika ;
 	
 	/*@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="IdRentACar", referencedColumnName="rentACarId")
@@ -33,6 +34,20 @@ public class Korisnik {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public String getStatusKorisnika() {
+		return statusKorisnika;
+	}
+
+
+
+	public void setStatusKorisnika(String statusKorisnika) {
+		this.statusKorisnika = statusKorisnika;
+	}
+
+
 
 	public Korisnik(String ime, String prezime, String korisnickoIme, String lozinka, String email, String telefon,
 			String grad) {

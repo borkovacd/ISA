@@ -48,6 +48,7 @@ import {AttendanceGraphsRentComponent} from "./rentServisi/attendance-graphs-ren
 import {RevenuesRentComponent} from "./rentServisi/revenues-rent/revenues-rent.component";
 import {BrzaRezervacijaRentServisiIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-rent-servisi-izbor/brza-rezervacija-rent-servisi-izbor.component";
 import {BrzaRezervacijaVozilaIzborComponent} from "./brza-rezervacija/brza-rezervacija-rent-servisi/brza-rezervacija-vozila-izbor/brza-rezervacija-vozila-izbor.component";
+import {PromenaLozinkeComponent} from "./promena-lozinke/promena-lozinke.component";
 
 
 const routes: Routes = [
@@ -91,6 +92,8 @@ const routes: Routes = [
   {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta', component: BrzaRezervacijaRentServisiComponent},
   {path: 'brzaRezervacija/rentServisi/:idRezervacijeLeta/izbor', component: BrzaRezervacijaRentServisiIzborComponent},
   {path: 'brzaRezervacija/vozila/:idRezervacijeLeta/:idRent', component: BrzaRezervacijaVozilaIzborComponent},
+
+  {path: 'promenaLozinke', component: PromenaLozinkeComponent},
 
 
   {path: 'rentAdminPage', component: RentAdministratorComponent},
