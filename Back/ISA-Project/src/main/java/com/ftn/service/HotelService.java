@@ -421,7 +421,11 @@ public class HotelService {
 									slobodna = false;
 								}
 							} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
-								if(d2.isBefore(rezervacija.getDatumKraja())) {
+								if(d1.isBefore(rezervacija.getDatumKraja())) {
+									slobodna = false;
+								}
+							} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
+								if(d2.isEqual(rezervacija.getDatumKraja())) {
 									slobodna = false;
 								}
 							}

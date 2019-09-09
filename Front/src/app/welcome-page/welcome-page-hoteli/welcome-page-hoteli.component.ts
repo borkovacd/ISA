@@ -1,7 +1,9 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
 import {MapsAPILoader} from '@agm/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SearchHotelsModel} from '../../model/searchHotels.model';
 
 @Component({
   selector: 'app-welcome-page-hoteli',
@@ -23,20 +25,43 @@ export class WelcomePageHoteliComponent implements OnInit {
   hideData: boolean;
   tempAdresa: any;
 
+  pretraga: boolean;
+
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
+
+  public form: FormGroup;
+  public startDate: AbstractControl;
+  public endDate: AbstractControl;
+  public hotelName: AbstractControl;
+  public hotelLocation: AbstractControl;
+  d1: any;
+  d2: any;
 
 
 
   constructor(protected router: Router,
+              public fb: FormBuilder,
+              private route: ActivatedRoute,
               private hotelService: HotelService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone) {
+    this.form = this.fb.group({
+      'startDate': ['', Validators.compose([Validators.required])],
+      'endDate': ['', Validators.compose([Validators.required])],
+      'hotelName': [''],
+      'hotelLocation': [''],
+    })
+    this.startDate = this.form.controls['startDate'];
+    this.endDate = this.form.controls['endDate'];
+    this.hotelName = this.form.controls['hotelName'];
+    this.hotelLocation = this.form.controls['hotelLocation'];
   }
 
   public ngOnInit() {
 
     this.showMap = false;
+    this.pretraga = false;
     this.showLocation = false;
     this.hideData = false;
 
@@ -100,6 +125,39 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   pregledDodatnihUsluga(idHotela: any) {
     this.router.navigateByUrl('welcomepage/additionalServices/' + idHotela);
+  }
+
+  pretraziHotele() {
+    this.pretraga = true;
+  }
+
+  confirmClick() {
+    if (this.startDate.value > this.endDate.value ) {
+      alert('Uneti datum nije validan. Pokušajte ponovo.');
+      this.startDate.reset();
+      this.endDate.reset();
+      return;
+    }
+
+    this.d1 = this.startDate.value;
+    this.d2 = this.endDate.value;
+
+    const searchHotels = new SearchHotelsModel (
+      this.hotelName.value,
+      this.hotelLocation.value,
+      this.d1,
+      this.d2
+    );
+
+    this.hotelService.searchHotels(searchHotels).subscribe(data => {
+      this.hotels = data;
+      this.pretraga = false;
+    });
+  }
+
+
+  goBack(){
+    location.reload();
   }
 
 }

@@ -156,12 +156,16 @@ public class SobaService {
 		} else {
 			for(Soba soba : sveSobe) {
 				if(soba.getHotel().getId() == idHotela) {
-					sobeHotela.add(soba);
+					if(soba.isNaPopustu() == false) {
+						sobeHotela.add(soba);
+					}
 				}
 			}
 		}
 		
 		List<RezervacijaHotela> rezervacije = rezervacijaHotelaRepository.findAll();
+		List<CenovnikHotela> cenovnici = cenovnikHotelaRepository.findAll();
+		List<StavkaCenovnikaHotela> stavkeCenovnika = stavkaCenovnikaHotelaRepository.findAll();
 		
 		for(Soba soba: sobeHotela) {
 			boolean slobodna = true;
@@ -173,7 +177,7 @@ public class SobaService {
 								slobodna = false;
 							}
 						} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
-							if(d2.isBefore(rezervacija.getDatumKraja())) {
+							if(d1.isBefore(rezervacija.getDatumKraja())) {
 								slobodna = false;
 							}
 						} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
@@ -185,7 +189,17 @@ public class SobaService {
 				}
 			}
 			if(slobodna == true) {
-				slobodneSobe.add(soba);
+				for(CenovnikHotela cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getHotel().getId() == idHotela)  //ako je cenovnik hotela u kojem je slobodna soba
+								for(StavkaCenovnikaHotela stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipSobe() == soba.getTipSobe()) {
+											slobodneSobe.add(soba);
+											
+										
+										}
 			}
 		}
 		
@@ -236,7 +250,9 @@ public class SobaService {
 		} else {
 			for(Soba soba : sveSobe) {
 				if(soba.getHotel().getId() == idHotela) {
-					sobeHotela.add(soba);
+					if(soba.isNaPopustu() == false) {
+						sobeHotela.add(soba);
+					}
 				}
 			}
 		}
@@ -255,7 +271,7 @@ public class SobaService {
 								slobodna = false;
 							}
 						} else if(d1.isAfter(rezervacija.getDatumPocetka())) {
-							if(d2.isBefore(rezervacija.getDatumKraja())) {
+							if(d1.isBefore(rezervacija.getDatumKraja())) {
 								slobodna = false;
 							}
 						} else if(d1.isEqual(rezervacija.getDatumPocetka())) {
