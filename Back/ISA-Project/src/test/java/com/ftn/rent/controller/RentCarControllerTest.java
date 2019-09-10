@@ -28,12 +28,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-/*
 @RunWith(SpringRunner.class)
 @SpringBootTest
-*/
 public class RentCarControllerTest {
-	/*
+	
 private static final String URL_PREFIX = "/rentCar";
 	
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
@@ -60,8 +58,7 @@ private static final String URL_PREFIX = "/rentCar";
 	@After
 	public void tearDown() throws Exception {
 	}
-	*/
-	/*
+	
 	// METODA VRACA SVE RENT-A-CAR SERVISE
 	// U BAZI POSTOJE 3
 	@Test
@@ -73,19 +70,18 @@ private static final String URL_PREFIX = "/rentCar";
 		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(12)))
 		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(13)));
 	}
-	*/
 	
-	/*
+	
 	// METODA VRACA RENT-A-CAR NA OSNOVU ID-JA
 	// U BAZI POSTOJI 1
 	@Test
 	public void testGetRent() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/getRent/7" )).andExpect(status().isOk())
+		mockMvc.perform(get(URL_PREFIX + "/getRent/11" )).andExpect(status().isOk())
 		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.rentACarId").value(3));
+		.andExpect(jsonPath("$.rentACarId").value(11));
 	}
 	
-	*/
+	
 	
 	
 	/*
@@ -128,7 +124,5 @@ private static final String URL_PREFIX = "/rentCar";
 		.andExpect(jsonPath("$.[*].id").value(hasItem(1)));
 	}
 	*/
-	
-	
 
 }
