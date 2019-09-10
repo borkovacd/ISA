@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.dto.HotelDTO;
 import com.ftn.dto.PretragaHotelaDTO;
 import com.ftn.dto.VremenskiPeriodDTO;
+import com.ftn.model.Korisnik;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
 import com.ftn.service.HotelService;
@@ -50,6 +51,14 @@ public class HotelController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Hotel>> getHotelsByAdministrator(@PathVariable Long id) {
 		ArrayList<Hotel> hotels = hotelService.getHotelsByAdministrator(id);
+		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getHotelsByAdministrator")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<List<Hotel>> getHotelsByAdministrator() {
+		Korisnik administrator = userService.getCurrentUser();
+		ArrayList<Hotel> hotels = hotelService.getHotelsByAdministrator(administrator.getId());
 		return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
 	}
 	

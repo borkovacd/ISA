@@ -25,7 +25,7 @@ export class HotelService {
 
   getHotelsByAdministrator(): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get(`${this.BASE_URL}/getHotelsByAdministrator/2`, {headers});
+    return this.http.get(`${this.BASE_URL}/getHotelsByAdministrator`, {headers});
   }
 
   checkIfReservedHotel(id: any): Observable<any> {
