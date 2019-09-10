@@ -6,4 +6,6 @@ import com.ftn.model.hotels.Hotel;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long>{
 
+	Hotel findByNaziv(String naziv);
+
 }

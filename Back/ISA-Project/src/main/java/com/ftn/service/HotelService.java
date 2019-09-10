@@ -636,6 +636,10 @@ public class HotelService {
 			
 		}
 
+		public Hotel getHotelByNaziv(String naziv) {
+			return hotelRepository.findByNaziv(naziv);
+		}
+
 		
 
 
