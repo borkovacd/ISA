@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from '../../../service/vozilo.service';
 import {VoziloReservationService} from '../../../service/voziloReservation.service';
 import {HotelReservationService} from '../../../service/hotelReservation.service';
+import {OcenaHotelService} from "../../../service/ocenaHotel.service";
+import {OcenaSobaService} from "../../../service/ocenaSoba.service";
 
 @Component({
   selector: 'app-registered-user-my-hoteli',
@@ -16,6 +18,8 @@ export class RegisteredUserMyHoteliComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private rezervacijaHotelaService: HotelReservationService,
+              private ocenaHotelService: OcenaHotelService,
+              private ocenaSobaService: OcenaSobaService
   ) {
   }
 
@@ -41,5 +45,28 @@ export class RegisteredUserMyHoteliComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('registeredUserPage');
 
+  }
+
+  oceniSobu(id: any, idSoba: any){
+    this.ocenaSobaService.dozvoljenoOcenjivanjeSoba(idSoba).subscribe(data => {
+      if(data == true){
+        this.router.navigateByUrl('registeredUserPage/soba/' + idSoba + '/rating');
+      }else{
+        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+
+      }
+    })
+
+  }
+
+  oceniHotel(id: any, idHotel: any) {
+    this.ocenaHotelService.dozvoljenoOcenjivanjeHotel(idHotel).subscribe(data => {
+      if (data == true) {
+        this.router.navigateByUrl('registeredUserPage/hotel/' + idHotel + '/rating');
+      } else {
+        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+
+      }
+    })
   }
 }

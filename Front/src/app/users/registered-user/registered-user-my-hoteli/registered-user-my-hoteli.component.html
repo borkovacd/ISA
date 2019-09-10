@@ -10,10 +10,7 @@
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
       <p style="font-size: 20px">Hotel:  &nbsp;</p>
       <p style="font-size: 20px; margin-top: -3%;"><b>{{rezervacija.sobe[0].hotel.naziv}}</b></p>
-      <p style="font-size: 20px">Sobe: &nbsp;</p>
-      <div *ngFor="let room of rezervacija.sobe">
-        <p style="font-size: 20px; margin-top: -3%"><b>{{room.tipSobe}}</b></p>
-      </div>
+
       <p style="font-size: 20px">Dodatne usluge:</p>
       <div *ngIf="rezervacija.dodatneUsluge.length == 0">
         <p style="font-size: 20px; margin-top: -3%; font-weight: bold">Dodatne usluge nisu uključene u rezervaciju.</p>
@@ -26,14 +23,22 @@
       <p style="font-size: 20px">Cena:  <b>{{rezervacija.cena}}</b></p>
       <p style="font-size: 20px">Broj gostiju:  <b>{{rezervacija.brojGostiju}}</b></p>
 
-      <div style="margin-bottom: 20px">
+      <p style="font-size: 20px">Sobe: &nbsp;</p>
+      <div *ngFor="let room of rezervacija.sobe">
+        <p style="font-size: 20px; margin-top: -3%"><b>{{room.tipSobe}}</b></p>
         <button
           style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px" (click) = "cancelReservation(rezervacija.id)">Otkazi
         </button>
         <button
-          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px">Oceni
+          (click)="oceniSobu(rezervacija.id, room.id)"
+          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px">OceniS
+        </button>
+        <button
+          (click)="oceniHotel(rezervacija.id,room.hotel.id)"
+          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px">OceniH
         </button>
       </div>
+
       <div style="margin-bottom: 20px">
       </div>
     </div>

@@ -4,6 +4,7 @@ import {RoomService} from '../../../service/room.service';
 import {HotelService} from '../../../service/hotel.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TimePeriodModel} from '../../../model/timePeriod.model';
+import {OcenaSobaService} from "../../../service/ocenaSoba.service";
 
 @Component({
   selector: 'app-welcome-page-hoteli-sobe',
@@ -21,11 +22,14 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
   nazivHotela: string;
   timePeriodConfirmed: boolean;
 
+  rating : any ;
+
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private roomService: RoomService,
-              private hotelService: HotelService) {
+              private hotelService: HotelService,
+              private ocenaService: OcenaSobaService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -74,6 +78,21 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
 
   registrujSe() {
     this.router.navigateByUrl('/registracija');
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaSoba(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovu sobu nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ove sobe je: ' + data);
+      }
+    })
   }
 
 }

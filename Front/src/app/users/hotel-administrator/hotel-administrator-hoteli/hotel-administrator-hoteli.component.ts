@@ -3,6 +3,7 @@ import {HotelService} from '../../../service/hotel.service';
 import {Router} from '@angular/router';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import {Observable} from 'rxjs';
+import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 
 @Component({
   selector : 'hotel-administrator-hoteli',
@@ -24,6 +25,8 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   hideData: boolean;
   tempAdresa: any;
 
+  rating : any ;
+
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
 
@@ -32,7 +35,8 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
   constructor(protected router: Router,
               private hotelService: HotelService,
               private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private ocenaService: OcenaHotelService) {
   }
 
   public ngOnInit() {
@@ -151,6 +155,21 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
   pregledPrihoda(idHotela: any) {
     this.router.navigateByUrl('hotelAdminPage/revenues/' + idHotela);
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaHotel(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovaj hotel nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ovog hotela je: ' + data);
+      }
+    })
   }
 }
 

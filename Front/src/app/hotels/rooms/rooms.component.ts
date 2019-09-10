@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
 import {HotelService} from '../../service/hotel.service';
+import {OcenaSobaService} from "../../service/ocenaSoba.service";
 
 @Component({
   selector: 'app-rooms',
@@ -14,10 +15,13 @@ export class RoomsComponent implements OnInit {
   idRoom: any;
   nazivHotela: string;
 
+  rating: any ;
+
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private roomService: RoomService,
-              private hotelService: HotelService) {}
+              private hotelService: HotelService,
+              private ocenaService: OcenaSobaService) {}
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
 
@@ -77,5 +81,20 @@ export class RoomsComponent implements OnInit {
   goBack(){
     this.router.navigateByUrl('hotelAdminPage' );
 
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaSoba(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovu sobu nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ove sobe je: ' + data);
+      }
+    })
   }
 }
