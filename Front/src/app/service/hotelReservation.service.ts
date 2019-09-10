@@ -21,7 +21,7 @@ export  class HotelReservationService {
   createHotelReservation(object: RoomReservationModel): Observable<any> {
     const body = JSON.stringify(object);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(`${this.BASE_URL}/create/4`, body, {headers});
+    return this.http.post(`${this.BASE_URL}/create`, body, {headers});
   }
 
 
@@ -38,7 +38,7 @@ export  class HotelReservationService {
 
   createOrChangeFastHotelReservation(idRezervacijeLeta: any, idHotela: any, idRoom: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(`${this.BASE_URL}/createFast/4/${idRezervacijeLeta}/${idHotela}/${idRoom}`, {headers});
+    return this.http.post(`${this.BASE_URL}/createFast/${idRezervacijeLeta}/${idHotela}/${idRoom}`, {headers});
   }
 
   listaHotelRezervacijaKorisnik(): Observable<any>

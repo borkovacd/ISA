@@ -77,6 +77,14 @@ private static final String URL_PREFIX = "/api/hotel";
 	}
 	
 	@Test
+	public void testGetHotelsByAdministrator() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/getHotelsByAdministrator/11" )).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
+	}
+	
+	@Test
 	public void testGetHotel() throws Exception {
 		mockMvc.perform(get(URL_PREFIX + "/getHotel/11" )).andExpect(status().isOk())
 		.andExpect(content().contentType(contentType))

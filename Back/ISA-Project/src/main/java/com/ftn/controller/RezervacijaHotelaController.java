@@ -47,10 +47,24 @@ public class RezervacijaHotelaController {
 		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/create")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<RezervacijaHotela> createReservation(@RequestBody RezervacijaSobaDTO rezervacijaDTO) {
+		RezervacijaHotela rezervacija = rezervacijaHotelaService.createReservation(rezervacijaDTO, userService.getCurrentUser().getId());
+		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/createFast/{id}/{idRezervacijeLeta}/{idHotela}/{idRoom}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RezervacijaHotela> createOrChangeFastHotelReservation(@PathVariable Long id, @PathVariable Long idRezervacijeLeta, @PathVariable Long idHotela, @PathVariable Long idRoom) {
 		RezervacijaHotela rezervacija = rezervacijaHotelaService.createOrChangeFastHotelReservation(id, idRezervacijeLeta, idHotela, idRoom);
+		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/createFast/{idRezervacijeLeta}/{idHotela}/{idRoom}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<RezervacijaHotela> createOrChangeFastHotelReservation(@PathVariable Long idRezervacijeLeta, @PathVariable Long idHotela, @PathVariable Long idRoom) {
+		RezervacijaHotela rezervacija = rezervacijaHotelaService.createOrChangeFastHotelReservation(userService.getCurrentUser().getId(), idRezervacijeLeta, idHotela, idRoom);
 		return new ResponseEntity<RezervacijaHotela>(rezervacija, HttpStatus.CREATED);
 	}
 	
