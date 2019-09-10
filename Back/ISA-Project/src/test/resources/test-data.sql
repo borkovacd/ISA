@@ -70,3 +70,5 @@ insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (11, 14);
 	
+
+	

@@ -49,6 +49,8 @@ public class RentCarController {
 	/******************/
 	
 	/***** Olga *******/
+	
+	// TEST 1
 	@GetMapping("/getAllRents")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<RentACar>> getAllRents()
@@ -89,6 +91,8 @@ public class RentCarController {
 	}
 	
 	// vraca servis na osnovu id-ja
+	
+	// TEST 2
 	@GetMapping("/getRent/{idRent}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RentACar> getRent(@PathVariable Long idRent) 
@@ -140,6 +144,7 @@ public class RentCarController {
 			return new ResponseEntity<List<Integer>>(daysData, HttpStatus.OK);
 		}
 		
+		// TEST 3
 		@GetMapping("/getRevenuesRent/{id}")
 		@CrossOrigin(origins = "http://localhost:4200")
 		public ResponseEntity<Double> getRevenuesRent(@PathVariable Long id, @RequestParam String d1, @RequestParam String d2) {
