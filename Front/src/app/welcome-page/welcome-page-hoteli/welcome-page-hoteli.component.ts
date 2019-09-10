@@ -68,6 +68,7 @@ export class WelcomePageHoteliComponent implements OnInit {
     this.showMap = false;
     this.showLocation = false;
     this.hideData = false;
+    this.pretraga = false;
 
     this.hotelService.getAllHotels().subscribe(data => {
       this.hotels = data;
@@ -80,7 +81,7 @@ export class WelcomePageHoteliComponent implements OnInit {
     this.hideData = true;
     this.showLocation = true;
     this.tempAdresa = adresa;
-    this.showMap = true; //proba
+    this.showMap = true;
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
