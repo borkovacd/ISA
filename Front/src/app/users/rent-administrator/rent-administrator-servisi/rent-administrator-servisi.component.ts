@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import {RentCarService} from "../../../service/rentcar.service";
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {OcenaRentService} from "../../../service/ocenaRent.service";
 
 @Component({
   selector: 'app-rent-administrator-servisi',
@@ -10,9 +11,10 @@ import {Observable} from 'rxjs';
 })
 export class RentAdministratorServisiComponent implements OnInit {
 
-  rents = []
+  rents = [];
+  rating : any ;
 
-  constructor(protected router: Router, private rentService: RentCarService) { }
+  constructor(protected router: Router, private rentService: RentCarService, private ocenaService: OcenaRentService) { }
 
   ngOnInit() {
 
@@ -55,6 +57,21 @@ export class RentAdministratorServisiComponent implements OnInit {
 
   pregledPrihoda(idRent: any) {
     this.router.navigateByUrl('rentAdminPage/revenuesRent/' + idRent);
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaRent(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovaj rent-a-car nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ovog rent-a-car servisa je: ' + data);
+      }
+    })
   }
 
 }

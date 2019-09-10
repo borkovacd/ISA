@@ -12,6 +12,7 @@ export  class VoziloReservationService {
 
   private BASE_URL = 'api/voziloReservation';
   private BASE_URL2 = 'api/ocenaVozilo';
+  private BASE_URL3 = 'api/ocenaRent';
 
   constructor(private http: HttpClient) {
 
@@ -44,6 +45,12 @@ export  class VoziloReservationService {
   dozvoljenoOcenjivanje(idVozilo: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL2}/dozvoljenoOcenjivanje/${idVozilo}`,  {headers});
+  }
+
+  // DA LI KORISNIK IMA MOGUCNOST DA KOMENTARISE
+  dozvoljenoOcenjivanjeRent(idRent: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL3}/dozvoljenoOcenjivanje/${idRent}`,  {headers});
   }
 
 }

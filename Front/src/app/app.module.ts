@@ -112,6 +112,7 @@ import { RentCarRatingComponent } from './ratings/rent-car-rating/rent-car-ratin
 import { RoomRatingComponent } from './ratings/room-rating/room-rating.component';
 import { HotelRatingComponent } from './ratings/hotel-rating/hotel-rating.component';
 import {OcenaVoziloService} from "./service/ocenaVozilo.service";
+import {OcenaRentService} from "./service/ocenaRent.service";
 
 @NgModule({
   declarations: [
@@ -250,6 +251,7 @@ import {OcenaVoziloService} from "./service/ocenaVozilo.service";
     VoziloReservationService,
     AuthService,
     OcenaVoziloService,
+    OcenaRentService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [],

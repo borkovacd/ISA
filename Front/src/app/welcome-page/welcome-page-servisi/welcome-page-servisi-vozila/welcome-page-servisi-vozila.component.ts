@@ -84,8 +84,15 @@ export class WelcomePageServisiVozilaComponent implements OnInit {
   {
     this.ocenaService.getProsecnaOcenaVozila(id).subscribe(data => {
       this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovo vozilo nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ovog vozila je: ' + data);
+      }
     })
-    alert('Prosecna ocena ovog vozila je: ' + this.rating);
   }
 
 }

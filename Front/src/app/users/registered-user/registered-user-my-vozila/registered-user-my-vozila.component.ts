@@ -49,14 +49,24 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
   oceniVozilo(id: any, idVozilo: any){
     this.rezervacijaService.dozvoljenoOcenjivanje(idVozilo).subscribe(data => {
       if(data == true){
-        this.router.navigateByUrl('registeredUserPage/' + idVozilo + '/rating');
+        this.router.navigateByUrl('registeredUserPage/vozilo/' + idVozilo + '/rating');
       }else{
         alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
 
       }
     })
 
+  }
 
+  oceniRent(id: any, idRent: any) {
+    this.rezervacijaService.dozvoljenoOcenjivanjeRent(idRent).subscribe(data => {
+      if (data == true) {
+        this.router.navigateByUrl('registeredUserPage/rent/' + idRent + '/rating');
+      } else {
+        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+
+      }
+    })
   }
 
 }

@@ -5,6 +5,7 @@ import {VoziloService} from "../../../service/vozilo.service";
 import {TimePeriodModel} from "../../../model/timePeriod.model";
 import {SearchRentsModel} from "../../../model/searchRents.model";
 import {RentCarService} from "../../../service/rentcar.service";
+import {OcenaRentService} from "../../../service/ocenaRent.service";
 
 @Component({
   selector: 'app-registered-user-servisi',
@@ -24,12 +25,15 @@ export class RegisteredUserServisiComponent implements OnInit {
   d1: any;
   d2: any;
 
+  rating : any ;
+
   public tipSort: AbstractControl;
 
   constructor(protected router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private rentService: RentCarService) {
+              private rentService: RentCarService,
+              private ocenaService: OcenaRentService) {
 
     // pretraga rent servisa
 
@@ -109,6 +113,20 @@ export class RegisteredUserServisiComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  vratiProsecnuOcenu(id: any) {
+    this.ocenaService.getProsecnaOcenaRent(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovaj rent-a-car nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ovog rent-a-car servisa je: ' + data);
+      }
+    })
   }
 
 

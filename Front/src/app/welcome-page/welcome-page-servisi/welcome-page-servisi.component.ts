@@ -4,6 +4,7 @@ import {RentCarService} from "../../service/rentcar.service";
 import {Observable} from 'rxjs';
 import {AbstractControl, FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {SearchRentsModel} from "../../model/searchRents.model";
+import {OcenaRentService} from "../../service/ocenaRent.service";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class WelcomePageServisiComponent implements OnInit {
   rents = [];
   pretraga: boolean;
 
+  rating: any;
+
   public form: FormGroup;
   public startDate: AbstractControl;
   public endDate: AbstractControl;
@@ -25,7 +28,8 @@ export class WelcomePageServisiComponent implements OnInit {
   d2: any;
 
   constructor(protected router: Router, public fb: FormBuilder,
-              private route: ActivatedRoute, private rentService: RentCarService) {
+              private route: ActivatedRoute, private rentService: RentCarService,
+              private ocenaService: OcenaRentService) {
     // pretraga rent servisa
 
     this.form = this.fb.group({
@@ -95,6 +99,21 @@ export class WelcomePageServisiComponent implements OnInit {
       this.rents = data;
       this.pretraga = false;
     });
+  }
+
+  vratiProsecnuOcenu(id: any)
+  {
+    this.ocenaService.getProsecnaOcenaRent(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovaj rent-a-car servis nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ocena ovog rent-a-car servisa je: ' + data);
+      }
+    })
   }
 
 }

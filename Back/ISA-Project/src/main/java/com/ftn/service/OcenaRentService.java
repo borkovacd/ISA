@@ -41,7 +41,7 @@ public class OcenaRentService
 	
 	
 	// Korisnik moze da salje poruku agentu jedino ukoliko vec ima kreiranu rezervaciju
-		public boolean dozvoljenoOcenjivanje(Long idVozila, Long idUser)
+		public boolean dozvoljenoOcenjivanje(Long idRent, Long idUser)
 		{
 			List<RezervacijaVozila> sveRezervacije = rezVozRepository.findAll();
 			
@@ -60,6 +60,7 @@ public class OcenaRentService
 				}
 			}
 			
+			// ovde sam izvukla moje rezervacije
 			List<RezervacijaVozila> reservations = new ArrayList<RezervacijaVozila>();
 
 			
@@ -81,6 +82,8 @@ public class OcenaRentService
 				
 			}
 			
+			// sad ima moje rezervacije koje mogu da se ocenjuju
+			
 			if (reservations.size() == 0)
 			{
 				return false ;
@@ -89,7 +92,7 @@ public class OcenaRentService
 			// pronadje rezervacije za to vozilo			
 			for (RezervacijaVozila rez: reservations)
 			{
-				if (rez.getVozilo().getVoziloId() == idVozila)
+				if (rez.getVozilo().getRentACar().getRentACarId() == idRent)
 				{
 					return true ;
 				}

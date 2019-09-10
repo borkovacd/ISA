@@ -27,7 +27,7 @@ export class VoziloRatingComponent implements OnInit {
   ngOnInit() {
   }
 
-  confirmClick(id: any) {
+  confirmClick() {
     const idVozilo = this.route.snapshot.params.id;
     const object = new OcenaVoziloModel(
       this.rating.value
