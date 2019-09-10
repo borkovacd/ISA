@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.ftn.dto.HotelDTO;
+import com.ftn.dto.PretragaHotelaDTO;
+import com.ftn.dto.PretragaRentDTO;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -117,12 +119,17 @@ private static final String URL_PREFIX = "/api/hotel";
 		this.mockMvc.perform(put(URL_PREFIX + "/izmeniHotel/10").contentType(contentType).content(json)).andExpect(status().isOk());
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void testSearchHotels() throws Exception {
+		PretragaHotelaDTO p = new PretragaHotelaDTO();
+		p.setStartDate("2019-10-01");
+		p.setEndDate("2019-10-05");
+		p.setHotelName("Hotel Centar");
+		p.setHotelLocation("");
+		String json = com.ftn.utils.TestUtil.json(p);
+		this.mockMvc.perform(post(URL_PREFIX + "/searchHotels").contentType(contentType).content(json)).andExpect(status().isOk())
+		.andExpect(jsonPath("$.[*].id").value(hasItem(10)));
+	}
 	
 
 }

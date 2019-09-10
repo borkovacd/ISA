@@ -40,7 +40,7 @@ public class UserController {
 	EmailService emailService ;
 	
 	@Autowired
-	UserRepository userRepository ;
+	UserRepository userRepository;
 	
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -63,7 +63,6 @@ public class UserController {
 		Korisnik korisnik = userService.getCurrentUser();
 		return new ResponseEntity<Korisnik>(korisnik, HttpStatus.OK);
 	}
-	
 	
 	@RequestMapping(value = "/getRegularUsers", method = RequestMethod.GET)
 	@CrossOrigin(origins = "http://localhost:4200")
