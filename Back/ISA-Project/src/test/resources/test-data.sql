@@ -14,7 +14,7 @@ insert into hotel (id, adresa, naziv, opis, administrator_id)
 insert into hotel (id, adresa, naziv, opis, administrator_id) 
 	values (11, 'Svetog Save 9, Beograd', 'Hotel Slavija', 'Najbolji hotel u gradu', 11);
 	
-**** SOBE ****/
+/**** SOBE ****/
 insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
 	values (10, 0, 4, 2, 'APARTMAN', 10, 0, 0);
 insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
@@ -66,9 +66,9 @@ insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (12, 14);
 insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
-	values (10, 13);
+	values (10, 10);
 insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
-	values (11, 14);
+	values (11, 11);
 	
 	
 /**** RENT-CAR SERVISI ****/
