@@ -113,8 +113,13 @@ insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)
 
 /**** REZERVACIJA ****/
 insert into rezervacija_vozila(id,  datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-values (10, '2019-08-25', '2019-09-25', 13, 10, 10, 10, 500, 5, 0);
+	values (10, '2019-08-25', '2019-09-25', 13, 10, 10, 10, 500, 5, 0);
 insert into rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-values (11, '2020-08-25', '2020-09-25', 13, 10, 10, 11, 200, 5, 0);
-	
+	values (11, '2020-08-25', '2020-09-25', 13, 10, 10, 11, 200, 5, 0);
+
+/**** OCENE ****/
+insert into ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (10, 5, 13, 10);
+insert into ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (11, 3, 13, 10);	
 	

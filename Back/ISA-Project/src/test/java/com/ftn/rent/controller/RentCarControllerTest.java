@@ -1,5 +1,6 @@
 package com.ftn.rent.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,6 +26,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -124,6 +126,18 @@ private static final String URL_PREFIX = "/rentCar";
 		s.setAddress("Brace Dronjak 10");
 		String json = com.ftn.utils.TestUtil.json(s);
 		this.mockMvc.perform(put(URL_PREFIX + "/izmeniRent/10").contentType(contentType).content(json)).andExpect(status().isOk());
+	}
+	
+	// METODA KOJA VRACA PRIHODE RENT-A-CAR SERVISA ZA IZABRANI PERIOD
+	@Test
+	public void testGetRevenuesRent() throws Exception {
+		MvcResult result = this.mockMvc.perform(get(URL_PREFIX + "/getRevenuesRent/10?d1=2019-01-01&d2=2019-02-02")).andExpect(status().isOk())
+		.andReturn();
+		String resultAsString = result.getResponse().getContentAsString();
+		double retVal = Double.parseDouble(resultAsString);
+		//System.out.println(retVal);
+		assertThat(retVal)
+	      .isEqualTo(0.00);
 	}
 
 
