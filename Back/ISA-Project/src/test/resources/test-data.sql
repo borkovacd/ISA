@@ -72,7 +72,6 @@ insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_us
 	
 	
 /**** RENT-CAR SERVISI ****/
-
 insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
 	(10, 'Adresa 10', 'Rent trans 1', 'Vrlo kvalitetno i povoljno.', 12);
 insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
@@ -81,5 +80,41 @@ insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values
 	(12, 'Adresa 16, Dobrinci', 'Rent trans 15', 'Uvek ici ovde.', 12);
 insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
 	(13, 'Zeleznicka 28', 'Very good trans', 'Najbolje.', 12);
+	
+/**** VOZILA ****/	
+insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (10, 5, 1000, 2019, 'BMW', 'X5', 'BMW X5', 0, 'LIMUZINA', 10, 0);
+insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (11, 5, 200, 2015, 'Mercedes', 'Jeep', 'Mercedes dzip', 0, 'KARAVAN', 10, 1);
+insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (12, 5, 400, 2015, 'Opel', 'Astra', 'Opel Astra', 0, 'KABRIOLET', 11, 1);
+
+/**** LOKACIJA ****/	
+insert into lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
+	values (10, 'Brace Dronjak 10', 'Srbija', 'Novi Sad', 19, 46, 10);	
+insert into lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
+	values (11, 'Brace Dronjak 12', 'Srbija', 'Novi Sad', 19, 46, 10);	
+	
+/**** CENOVNIK ****/	
+insert into cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
+values (10, '2019-06-01', '2019-08-01', 10);
+insert into cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
+values (11, '2020-06-01', '2020-08-01', 10);
+
+/**** STAVKA CENOVNIKA ****/
+insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila) 
+	values (10, 500, 10,'LIMUZINA');
+insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (11, 600, 10,'KARAVAN');
+insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (12, 700, 10,'KUPE');
+insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)  
+	values (13, 800, 11,'PICKUP');
+
+/**** REZERVACIJA ****/
+insert into rezervacija_vozila(id,  datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+values (10, '2019-08-25', '2019-09-25', 13, 10, 10, 10, 500, 5, 0);
+insert into rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+values (11, '2020-08-25', '2020-09-25', 13, 10, 10, 11, 200, 5, 0);
 	
 	

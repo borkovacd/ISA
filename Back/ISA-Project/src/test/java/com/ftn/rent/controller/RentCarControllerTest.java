@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,6 +28,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.ftn.dto.PretragaRentDTO;
+import com.ftn.dto.RentCarDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -81,48 +85,46 @@ private static final String URL_PREFIX = "/rentCar";
 		.andExpect(jsonPath("$.rentACarId").value(11));
 	}
 	
-	
-	
-	
-	/*
-	 * @Test
-	public void testVratiPrihod() throws Exception {
-		DatumskiOpsegDTO dt = new DatumskiOpsegDTO();
-		dt.setDatum1(new GregorianCalendar(2019, Calendar.SEPTEMBER, 4).getTime());
-		dt.setDatum2(new GregorianCalendar(2019, Calendar.SEPTEMBER, 9).getTime());
-		String json = ISA.project.utils.TestUtil.json(dt);
-		this.mockMvc.perform(post(URL_PREFIX + "/vratiPrihod/7").contentType(contentType).content(json)).andExpect(status().isOk())
-		.andExpect(jsonPath("$.iznos").value(14));
-	}
-	 */
-	
-	/*
-	
-	// METODA VRACA PRIHOD NA OSNOVU ID-JA RENT-A-CAR-A
-	// U BAZI POSTOJI 1
+	// METODA ZA DODAVANJE NOVOG RENT SERVISA
+	@Transactional
+	@Rollback(true)
 	@Test
-	public void testGetRevenuesRent() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/getRevenuesRent/3" )).andExpect(status().isOk())
-		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.rentACarId").value(3));
-	}	
+	public void testRegisterRentCar() throws Exception {
+		RentCarDTO dto = new RentCarDTO();
+		dto.setName("RentCar 1");
+		//dto.setAdministratorRentCar(12);
+		dto.setDescription("Opis");
+		dto.setAddress("Adresa");
+		String json = com.ftn.utils.TestUtil.json(dto);
+		this.mockMvc.perform(post(URL_PREFIX + "/registerRentCar").contentType(contentType).content(json)).andExpect(status().isOk());
 	
-	*/
-	// METODA VRSI PRETRAGU RENT-A-CAR SERVISA
-	/*@Test
-	public void testPretraziLet() throws Exception {
-		PretragaLetDTO l = new PretragaLetDTO();
-		l.setBrOsoba(2);
-		l.setKlasa("PRVA");
-		l.setTip("ONE_WAY");
-		l.setMestoPoletanja("Nis");
-		l.setMestoSletanja("Beograd");
-		l.setVremePovratka(null);
-		l.setVremePoletanja(new GregorianCalendar(2019, Calendar.SEPTEMBER, 2).getTime());
-		String json = ISA.project.utils.TestUtil.json(l);
-		this.mockMvc.perform(post(URL_PREFIX + "/pretraziLet").contentType(contentType).content(json)).andExpect(status().isOk())
-		.andExpect(jsonPath("$.[*].id").value(hasItem(1)));
 	}
-	*/
+	
+	// METODA KOJA VRSI PRETRAGU RENT-A-CAR SERVISA
+	@Test
+	public void testSearchRents() throws Exception {
+		PretragaRentDTO p = new PretragaRentDTO();
+		p.setEndDate("2019-07-25");
+		p.setStartDate("2019-07-01");
+		p.setRentName("Rent trans 1");
+		p.setRentLocation("Adresa 10");
+		String json = com.ftn.utils.TestUtil.json(p);
+		this.mockMvc.perform(post(URL_PREFIX + "/searchRents").contentType(contentType).content(json)).andExpect(status().isOk())
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(10)));
+	}
+	
+	// METODA KOJA VRSI IZMENU RENT-A-CAR SERVISA
+	@Transactional
+	@Rollback(true)
+	@Test
+	public void testIzmeniRent() throws Exception {
+		RentCarDTO s = new RentCarDTO();
+		s.setName("Novo Naselje");
+		s.setDescription("Moja adresa");
+		s.setAddress("Brace Dronjak 10");
+		String json = com.ftn.utils.TestUtil.json(s);
+		this.mockMvc.perform(put(URL_PREFIX + "/izmeniRent/10").contentType(contentType).content(json)).andExpect(status().isOk());
+	}
+
 
 }
