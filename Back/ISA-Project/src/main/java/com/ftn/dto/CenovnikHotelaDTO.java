@@ -7,7 +7,7 @@ public class CenovnikHotelaDTO {
 	
 	private String endDate;
 	
-	CenovnikHotelaDTO() {
+	public CenovnikHotelaDTO() {
 		
 	}
 
