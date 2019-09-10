@@ -39,36 +39,48 @@ insert into cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id)
 	values (11, DATE '2019-12-01', DATE '2020-02-28', 10);
 
 /**** STAVKE CENOVNIKA ****/	
-insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+insert into stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (10, 1250, null,'JEDNOKREVETNA_SOBA', 10);
-insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+insert into stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (11, 5500, null,'APARTMAN', 10);
-insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+insert into stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (12, 2500, null,'DVOKREVETNA_SOBA', 10);
-insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+insert into stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (13, 500, "TRANSFER",null, 10);
-insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+insert into stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (14, 750, "PARKING",null, 10);
 	
 /**** REZERVACIJA HOTELA ****/
-insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
+insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (10, 25000, DATE '2019-09-01', DATE '2019-09-10', 13, 0, 4);
-insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
+insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (11, 18000, DATE '2019-12-25', DATE '2019-12-28', 13, 0, 2);
-insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
+insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (12, 10000, DATE '2019-09-15', DATE '2019-09-20', 13, 1, 2);
-insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
+insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (10, 11);
-insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
+insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (10, 12);
-insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
+insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (11, 10);
-insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
+insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (12, 14);
-insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
+insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (10, 13);
-insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
+insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (11, 14);
+	
+	
+/**** RENT-CAR SERVISI ****/
+
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(10, "Adresa 10", "Rent trans 1", "Vrlo kvalitetno i povoljno.", 12);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(11, "Adresa 11", "Rent trans 2", "Vrlo skupo.", 12);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(12, "Adresa 16, Dobrinci", "Rent trans 15", "Ne ici ovde.", 12);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
+	(13, "Zeleznicka 28", "Very good trans", "Najbolje.", 12);
 	
 
 	
