@@ -10,6 +10,8 @@ import {SearchHotelsModel} from "../../../../model/searchHotels.model";
 import {RoomReservationModel} from "../../../../model/roomReservation.model";
 import {HotelReservationService} from "../../../../service/hotelReservation.service";
 import {AuthService} from "../../../../service/auth.service";
+import {OcenaHotelService} from "../../../../service/ocenaHotel.service";
+import {OcenaSobaService} from "../../../../service/ocenaSoba.service";
 
 @Component({
   selector: 'app-registered-user-hoteli-sobe',
@@ -37,6 +39,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
   values = '';
   dobarBrojSoba: boolean = false;
 
+  rating : any ;
+
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
@@ -44,7 +48,8 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
               private hotelService: HotelService,
               private userService: UserService,
               private hotelReservationService: HotelReservationService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private ocenaService: OcenaSobaService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -173,5 +178,19 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
       const idRezervacije = data.id;
       this.router.navigateByUrl('registeredUserPage/additionalServices/' + idHotela + '/' + idRezervacije);
     });
+  }
+
+  vratiProsecnuOcenu(id: any) {
+    this.ocenaService.getProsecnaOcenaSoba(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovu sobu nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ove sobe je: ' + data);
+      }
+    })
   }
 }

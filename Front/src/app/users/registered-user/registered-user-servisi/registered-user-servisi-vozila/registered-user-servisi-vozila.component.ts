@@ -13,6 +13,7 @@ import {LokacijaService} from '../../../../service/lokacija.service';
 import {CheckAvailabilityModel} from '../../../../model/checkAvailability.model';
 import {PricelistRentService} from "../../../../service/pricelistRent.service";
 import {AuthService} from "../../../../service/auth.service";
+import {OcenaVoziloService} from "../../../../service/ocenaVozilo.service";
 
 @Component({
   selector: 'app-registered-user-servisi-vozila',
@@ -48,6 +49,8 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
 
   dobarBrojVozila : boolean = false ;
 
+  rating: any ;
+
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
@@ -56,7 +59,8 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
               private voziloReservationService: VoziloReservationService,
               private lokacijaService: LokacijaService,
               private rentService: RentCarService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private ocenaService: OcenaVoziloService) {
     this.form = this.fb.group({
     'startDate': ['', Validators.compose([Validators.required])],
     'endDate': ['', Validators.compose([Validators.required])],
@@ -179,6 +183,20 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
       const idRezervacije = data.id ;
       this.router.navigateByUrl('registeredUserPage');
     });
+  }
+
+  vratiProsecnuOcenu(id: any) {
+    this.ocenaService.getProsecnaOcenaVozila(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovo vozilo nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ovog vozila je: ' + data);
+      }
+    })
   }
 
 

@@ -132,6 +132,10 @@
         {{vozilo.cena}}
       </p>
       <button
+        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
+        (click)="vratiProsecnuOcenu(vozilo.voziloId)">Ocena
+      </button>
+      <button
         style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
         (click)="addVozilo(vozilo.tip, vozilo.voziloId)">Izaberi
       </button>

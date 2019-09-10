@@ -5,6 +5,7 @@ import {MapsAPILoader} from '@agm/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TimePeriodModel} from '../../../model/timePeriod.model';
 import {SearchHotelsModel} from '../../../model/searchHotels.model';
+import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 
 @Component({
   selector: 'app-registered-user-hoteli',
@@ -35,6 +36,8 @@ export class RegisteredUserHoteliComponent implements OnInit {
   d1: any;
   d2: any;
 
+  rating : any ;
+
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
 
@@ -44,7 +47,8 @@ export class RegisteredUserHoteliComponent implements OnInit {
               private route: ActivatedRoute,
               private hotelService: HotelService,
               private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private ocenaService: OcenaHotelService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -146,6 +150,20 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
   goBack(){
     location.reload();
+  }
+
+  vratiProsecnuOcenu(id: any) {
+    this.ocenaService.getProsecnaOcenaHotel(id).subscribe(data => {
+      this.rating = data;
+      if (data == 0 || data == undefined)
+      {
+        alert('Za ovaj hotel nije moguce prikazati prosecnu ocenu!')
+      }
+      else
+      {
+        alert('Prosecna ovog hotela je: ' + data);
+      }
+    })
   }
 }
 
