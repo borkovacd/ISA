@@ -377,23 +377,23 @@ public class RentACarService {
 				//System.out.println("Trenutni datum: " + startDate);
 				if((startDate.isAfter(pocetakPrveNedelje) || startDate.isEqual(pocetakPrveNedelje)) && (startDate.isBefore(pocetakDrugeNedelje) || startDate.isEqual(pocetakDrugeNedelje))) {
 					//System.out.println("1");
-					broj1 += r.getBrojPutnika();
+					broj1 += 1;
 				}
 				else if((startDate.isAfter(pocetakDrugeNedelje)) && (startDate.isBefore(pocetakTreceNedelje) || startDate.isEqual(pocetakTreceNedelje))) {
 					//System.out.println("2");
-					broj2 += r.getBrojPutnika();
+					broj2 += 1;
 				}
 				else if((startDate.isAfter(pocetakTreceNedelje)) && (startDate.isBefore(pocetakCetvrteNedelje) || startDate.isEqual(pocetakCetvrteNedelje))) {
 					//System.out.println("3");
-					broj3 += r.getBrojPutnika();
+					broj3 += 1;
 				}
 				else if((startDate.isAfter(pocetakCetvrteNedelje)) && (startDate.isBefore(pocetakPeteNedelje) || startDate.isEqual(pocetakPeteNedelje))) {
 					//System.out.println("4");
-					broj4 += r.getBrojPutnika();
+					broj4 += 1;
 				}
 				else if((startDate.isAfter(pocetakPeteNedelje)) && (startDate.isBefore(krajMeseca) || startDate.isEqual(krajMeseca))) {
 					//System.out.println("5");
-					broj5 += r.getBrojPutnika();
+					broj5 += 1;
 				}
 				startDate = startDate.plusDays(1);
 			}
@@ -456,19 +456,19 @@ public class RentACarService {
 			while(!startDate.isAfter(endDate)) { //dok pocetni datum rezervacije ne dodje do posle krajnjeg datuma rezervacije
 				//System.out.println("Trenutni datum: " + startDate);
 				if(startDate.isEqual(dan1))
-					broj1 += r.getBrojPutnika();
+					broj1 += 1;
 				else if(startDate.isEqual(dan2))
-					broj2 += r.getBrojPutnika();
+					broj2 += 1;
 				else if(startDate.isEqual(dan3))
-					broj3 += r.getBrojPutnika();
+					broj3 += 1;
 				else if(startDate.isEqual(dan4))
-					broj4 += r.getBrojPutnika();
+					broj4 += 1;
 				else if(startDate.isEqual(dan5))
-					broj5 += r.getBrojPutnika();
+					broj5 += 1;
 				else if(startDate.isEqual(dan6))
-					broj6 += r.getBrojPutnika();
+					broj6 += 1;
 				else if(startDate.isEqual(dan7))
-					broj7 += r.getBrojPutnika();
+					broj7 += 1;
 				startDate = startDate.plusDays(1);
 			}
 		}
@@ -537,7 +537,7 @@ public class RentACarService {
 			while(!startDate.isAfter(endDate)) {
 				//System.out.println("Trenutni datum: " + startDate);
 				if((startDate.isAfter(d11) || startDate.isEqual(d11)) && (startDate.isBefore(d22))) {
-					broj += r.getBrojPutnika(); 
+					broj += 1; 
 				}
 				startDate = startDate.plusDays(1);
 			}
@@ -584,7 +584,7 @@ public class RentACarService {
 			int n = 0;
 			double dnevnaCena = 0;
 			
-			while(!startDateTemp.isAfter(endDateTemp) || !startDateTemp.equals(endDateTemp)) 
+			while(!startDateTemp.isAfter(endDateTemp)) 
 			{
 				n++;
 				startDateTemp = startDateTemp.plusDays(1);
