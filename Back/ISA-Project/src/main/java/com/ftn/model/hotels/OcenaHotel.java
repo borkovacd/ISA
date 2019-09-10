@@ -1,4 +1,4 @@
-package com.ftn.model.rentacar;
+package com.ftn.model.hotels;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import com.ftn.model.Korisnik;
 import com.ftn.model.rentacar.RentACar;
 
 @Entity
-public class OcenaRentACar {
+public class OcenaHotel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +25,18 @@ public class OcenaRentACar {
 	private Korisnik user;
 	
 	@ManyToOne
-	private RentACar rent ;
+	private Hotel hotel ;
 
-	public OcenaRentACar() {
+	public OcenaHotel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OcenaRentACar(@NotNull int ocena, @NotNull Korisnik user, RentACar rent) {
+	public OcenaHotel(@NotNull int ocena, @NotNull Korisnik user, Hotel hotel) {
 		super();
 		this.ocena = ocena;
 		this.user = user;
-		this.rent = rent;
+		this.hotel = hotel;
 	}
 
 	public Long getId() {
@@ -63,14 +63,13 @@ public class OcenaRentACar {
 		this.user = user;
 	}
 
-	public RentACar getRent() {
-		return rent;
+	public Hotel getHotel() {
+		return hotel;
 	}
 
-	public void setRent(RentACar rent) {
-		this.rent = rent;
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
-	
 	
 	
 

@@ -26,9 +26,6 @@ public class Korisnik {
 	private boolean verifikovan;
 	private String statusKorisnika ;
 	
-	/*@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="IdRentACar", referencedColumnName="rentACarId")
-	private RentACar rentACar = null;*/
 
 	public Korisnik() {
 		super();
@@ -149,14 +146,6 @@ public class Korisnik {
 		this.verifikovan = verifikovan;
 	}
 
-	/*public RentACar getRentACar() {
-		return rentACar;
-	}
-
-	public void setRentACar(RentACar rentACar) {
-		this.rentACar = rentACar;
-	}*/
-	
 	
 
 }

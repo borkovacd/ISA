@@ -1,42 +1,38 @@
-package com.ftn.model.rentacar;
+package com.ftn.model.hotels;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import com.ftn.model.Korisnik;
-import com.ftn.model.rentacar.RentACar;
 
 @Entity
-public class OcenaRentACar {
-	
+public class OcenaSoba {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	private int ocena;
-	
-	@NotNull
-	@ManyToOne
-	private Korisnik user;
+	private int ocena;;
 	
 	@ManyToOne
-	private RentACar rent ;
+	private Korisnik user; //korisnik koji je ocenio
+	
+	@ManyToOne
+	private Soba soba;
 
-	public OcenaRentACar() {
+	public OcenaSoba() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OcenaRentACar(@NotNull int ocena, @NotNull Korisnik user, RentACar rent) {
+	public OcenaSoba(int ocena, Korisnik user, Soba soba) {
 		super();
 		this.ocena = ocena;
 		this.user = user;
-		this.rent = rent;
+		this.soba = soba;
 	}
 
 	public Long getId() {
@@ -63,15 +59,14 @@ public class OcenaRentACar {
 		this.user = user;
 	}
 
-	public RentACar getRent() {
-		return rent;
+	public Soba getSoba() {
+		return soba;
 	}
 
-	public void setRent(RentACar rent) {
-		this.rent = rent;
+	public void setSoba(Soba soba) {
+		this.soba = soba;
 	}
 	
 	
 	
-
 }
