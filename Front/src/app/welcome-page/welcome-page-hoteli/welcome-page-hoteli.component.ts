@@ -21,9 +21,11 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   hotels = [];
 
+  showMap: boolean;
   showLocation: boolean;
   hideData: boolean;
   tempAdresa: any;
+
 
   pretraga: boolean;
 
@@ -63,7 +65,7 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   public ngOnInit() {
 
-    this.pretraga = false;
+    this.showMap = false;
     this.showLocation = false;
     this.hideData = false;
 
@@ -78,6 +80,7 @@ export class WelcomePageHoteliComponent implements OnInit {
     this.hideData = true;
     this.showLocation = true;
     this.tempAdresa = adresa;
+    this.showMap = true; //proba
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -111,6 +114,7 @@ export class WelcomePageHoteliComponent implements OnInit {
 
   closeMap() {
     this.hideData = false;
+    this.showMap = false;
     this.showLocation = false;
   }
 

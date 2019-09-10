@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,7 @@ public class RezervacijaHotelaService {
 	}
 	/*************************/
 
+	
 	public RezervacijaHotela createReservation(RezervacijaSobaDTO rezervacijaDTO, Long id) {
 		RezervacijaHotela rezervacija = new RezervacijaHotela();
 		
@@ -112,6 +114,7 @@ public class RezervacijaHotelaService {
 										cenaRezervacije += stavkaCenovnika.getCena() * brojNocenja;
 		
 		rezervacija.setCena(cenaRezervacije);
+		
 		rezervacijaHotelaRepository.save(rezervacija);
 	
 		return rezervacija;
@@ -131,7 +134,9 @@ public class RezervacijaHotelaService {
 		
 		int brojNocenja =  (int) d1.until(d2, ChronoUnit.DAYS);
 		
-		RezervacijaHotela rezervacija = rezervacijaHotelaRepository.getOne(idRezervacije);
+		
+		RezervacijaHotela rezervacija= rezervacijaHotelaRepository.getOne(idRezervacije);
+		
 		DodatnaUsluga dodatnaUslugaT = null;
 		if(rezervacija != null) {
 			for(int i=0; i<dodatnaRezervacijaDTO.getAdditionalServicesList().size(); i++) {
