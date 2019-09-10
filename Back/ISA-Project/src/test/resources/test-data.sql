@@ -82,5 +82,4 @@ insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values
 insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
 	(13, 'Zeleznicka 28', 'Very good trans', 'Najbolje.', 12);
 	
-
 	
