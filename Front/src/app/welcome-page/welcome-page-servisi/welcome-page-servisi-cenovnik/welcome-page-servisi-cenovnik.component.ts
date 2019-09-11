@@ -46,7 +46,7 @@ export class WelcomePageServisiCenovnikComponent implements OnInit {
   }
 
   goBack(){
-    this.router.navigateByUrl('welcomepage' );
+    this.router.navigateByUrl('/welcomepage' );
   }
 
   ulogujSe() {

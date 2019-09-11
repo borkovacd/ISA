@@ -24,14 +24,10 @@
     <div *ngFor="let price of prices"
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
       <div *ngIf="price.tipVozila != null">
-        <p style="margin-top: 20px">Tip vozila:{{price.tipVozila}}</p>
+        <p style="margin-top: 20px">Tip vozila: <b>{{price.tipVozila}} </b></p>
       </div>
-      <p style="font-size: 20px">Cena:  {{price.cena}}</p>
+      <p style="font-size: 20px">Cena: <b>  {{price.cena}} </b></p>
       <div style="margin-bottom: 20px">
-        <button
-          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-          (click)="editPrice(price.id)">Izmeni
-        </button>
         <button
           style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px"
           (click)="deletePrice(price.id)">Obrisi

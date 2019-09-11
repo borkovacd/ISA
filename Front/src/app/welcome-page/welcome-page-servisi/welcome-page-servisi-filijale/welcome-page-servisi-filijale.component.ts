@@ -31,7 +31,7 @@ export class WelcomePageServisiFilijaleComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('welcomepage' );
+    this.router.navigateByUrl('/welcomepage' );
 
   }
 

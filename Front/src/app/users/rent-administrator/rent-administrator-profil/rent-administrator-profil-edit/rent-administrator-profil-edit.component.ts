@@ -44,7 +44,7 @@ export class RentAdministratorProfilEditComponent implements OnInit {
 
   ngOnInit()
   {
-    this.userService.getKorisnikData().subscribe(data => {
+    this.userService.getCurrentUser().subscribe(data => {
       this.form.controls['ime'].setValue(data.ime);
       this.form.controls['prezime'].setValue(data.prezime);
       this.form.controls['grad'].setValue(data.grad);
@@ -81,7 +81,7 @@ export class RentAdministratorProfilEditComponent implements OnInit {
       this.grad.value,
     );
 
-    this.userService.editUser(user).subscribe(data => {
+    this.userService.editCurrentUser(user).subscribe(data => {
       this.redirectTo('/rentAdminPage');
     });
   }

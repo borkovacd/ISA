@@ -3,6 +3,7 @@ package com.ftn.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.ftn.enums.TipVozila;
 
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.RentACar;
+import com.ftn.model.rentacar.StavkaCenovnikaRent;
 import com.ftn.model.rentacar.Vozilo;
 import com.ftn.repository.CenovnikRentACarRepository;
 import com.ftn.repository.RentCarRepository;
@@ -214,6 +216,7 @@ public class CenovnikRentACarService
 	// brise cenovnik
 	public boolean obrisiCenovnik(Long idRentACar, Long idCenovnik)
 	{
+		
 		for (CenovnikRentACar cenovnik: cenRentRepository.findAll())
 		{
 			if (cenovnik.getRentACar().getRentACarId() == idRentACar)

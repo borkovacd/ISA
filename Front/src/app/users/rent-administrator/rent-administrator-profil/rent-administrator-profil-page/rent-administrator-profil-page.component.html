@@ -1,1 +1,67 @@
-<p>rent-administrator-profil-page works!</p>
+<div *ngIf="administrator!=null">
+  <div >
+    <h5 class="mb-3" style="font-weight: bolder; font-size: 40px; color: #1a8cff;">{{administrator.ime}} {{administrator.prezime}}</h5>
+  </div>
+  <div class="row">
+    <br>
+    <div class="col-md-12">
+      <h5 class="mt-2"> <i>Podaci</i></h5>
+      <br>
+      <table class="table table-sm table-hover table-striped">
+        <tbody>
+        <tr>
+          <td>
+            Uloga:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{administrator.uloga}}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Email:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{administrator.email}}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Korisnicko ime:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{administrator.korisnickoIme}}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Grad
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{administrator.grad}}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Telefon
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{administrator.telefon}}</strong>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

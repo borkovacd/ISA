@@ -1,6 +1,7 @@
 <div class="container" *ngIf="korisnik!=null">
   <div class="row my-2">
     <div class="col-lg-8 order-lg-2">
+
       <igx-tabs tabsType="fixed" >
         <igx-tabs-group icon="person" label="Profil">
           <app-rent-administrator-profil-page></app-rent-administrator-profil-page>
@@ -9,15 +10,6 @@
           <app-rent-administrator-profil-edit></app-rent-administrator-profil-edit>
         </igx-tabs-group>
       </igx-tabs>
-    </div>
-
-    <div class="col-lg-4 order-lg-1 text-center">
-      <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/cef31105-8a6e-4211-a74b-2f0bbd9791fb-profile_image-150x150.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-      <h6 class="mt-2">Upload a different photo</h6>
-      <label class="custom-file">
-        <input type="file" id="file" class="custom-file-input">
-        <span class="custom-file-control">Choose file</span>
-      </label>
     </div>
 
   </div>

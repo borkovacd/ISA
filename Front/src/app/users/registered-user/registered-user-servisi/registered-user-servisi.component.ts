@@ -28,6 +28,7 @@ export class RegisteredUserServisiComponent implements OnInit {
   rating : any ;
 
   public tipSort: AbstractControl;
+  nemaViseSortiranja: boolean;
 
   constructor(protected router: Router,
               public fb: FormBuilder,
@@ -57,6 +58,7 @@ export class RegisteredUserServisiComponent implements OnInit {
   ngOnInit() {
 
     this.pretraga = false ;
+    this.nemaViseSortiranja = false;
     this.rentService.getAllRents().subscribe(data => {
       this.rents = data ;
     })
@@ -95,11 +97,12 @@ export class RegisteredUserServisiComponent implements OnInit {
     this.rentService.searchRents(searchRents).subscribe(data => {
       this.rents = data;
       this.pretraga = false;
+      this.nemaViseSortiranja = true;
     });
   }
 
-  goBack() {
-    this.router.navigateByUrl('registeredUserPage');
+  goBack(){
+    location.reload();
   }
 
   // sortiranje

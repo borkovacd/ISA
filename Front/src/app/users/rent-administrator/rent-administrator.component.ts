@@ -10,10 +10,14 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RentAdministratorComponent implements OnInit {
 
+  administrator : any = null;
+
   constructor(private userService : UserService, private router: Router, private authService:AuthService) { }
 
   ngOnInit() {
-    //alert(localStorage.getItem('loggedUser'));
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
   }
 
   logout()

@@ -24,18 +24,15 @@
     <div *ngFor="let pricelist of pricelists"
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray; margin-top: 20px;">
       <p style="font-size: 20px">Pocetak vazenja:</p>
-      <h3 style="margin-top: 5px; color: forestgreen"> {{pricelist.pocetakVazenja}}</h3>
+      <h3 style="margin-top: 5px; color: forestgreen"><b> {{pricelist.pocetakVazenja}} </b></h3>
       <p style="font-size: 20px">Prestanak vazenja:</p>
-      <h3 style="margin-top: 5px; color: forestgreen"> {{pricelist.prestanakVazenja}}</h3>
+      <h3 style="margin-top: 5px; color: forestgreen"><b> {{pricelist.prestanakVazenja}} </b></h3>
       <div style="margin-bottom: 10px; margin-top: 10px">
         <button
           style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
           (click)="showPricelistRent(pricelist.id)">Prikaži
         </button>
-        <button
-          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 30px"
-          (click)="deletePricelistRent(pricelist.id)">Obrisi
-        </button>
+
       </div>
     </div>
   </div>

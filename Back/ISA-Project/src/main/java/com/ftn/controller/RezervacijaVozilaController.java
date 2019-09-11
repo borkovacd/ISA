@@ -35,11 +35,21 @@ public class RezervacijaVozilaController
 	@Autowired 
 	private UserService userService ;
 	
+	// ZA TESTIRANJE
 	@PostMapping("/voziloReservation/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RezervacijaVozila> voziloReservation(@RequestBody RezervacijaVozilaDTO rezervacijaDTO, @PathVariable Long id) 
 	{
 		RezervacijaVozila rezervacija = rezVozService.createReservationRent(rezervacijaDTO, id);
+		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
+	}
+	
+	// PRAVA REZERVACIJA
+	@PostMapping("/rezervisiVozilo")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<RezervacijaVozila> rezervisiVozilo(@RequestBody RezervacijaVozilaDTO rezervacijaDTO) 
+	{
+		RezervacijaVozila rezervacija = rezVozService.createReservationRent(rezervacijaDTO, userService.getCurrentUser().getId());
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
 	}
 	

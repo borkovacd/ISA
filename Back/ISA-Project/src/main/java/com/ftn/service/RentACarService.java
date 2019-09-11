@@ -518,7 +518,7 @@ public class RentACarService {
 				while(!startDate.isAfter(endDate)) {
 					//System.out.println("Trenutni datum: " + startDate);
 					if((startDate.isAfter(d1) || startDate.isEqual(d1)) && (startDate.isBefore(d2))) {
-						broj += r.getBrojPutnika(); 
+						broj += 1; 
 					}
 					startDate = startDate.plusDays(1);
 				}

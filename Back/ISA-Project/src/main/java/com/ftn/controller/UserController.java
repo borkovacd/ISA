@@ -171,45 +171,6 @@ public class UserController {
 	}
 	
 	
-	// NE TREBA METODA ZA LOGOVANJE, VEC PREKO SPRING SECURITY-JA
-	/*
-	// vrsi logovanje
-	@RequestMapping(value="/logIn", method = RequestMethod.POST, consumes="application/json")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<KorisnikDTO> logIn(@RequestBody KorisnikDTO korisnik, @Context HttpServletRequest request) 
-	{
-		
-		String povVrFunkc = userService.logIn(korisnik);
-		Korisnik k1 = userService.returnKorisnikByEmail(korisnik.getEmail());
-		
-		if(k1 != null) // ukoliko postoji registrovan korisnik, sa aktiviranim nalogom
-		{
-			HttpSession session = request.getSession();
-			System.out.println("Sesija LOGIN: " + session);
-			
-			session.setAttribute("ulogovan", k1);
-			session.setAttribute("borkovac.dragan@gmail.com", k1.getEmail());
-			KorisnikDTO kDTO = new KorisnikDTO(k1);
-			System.out.println("Log korisnik email: " + k1.getEmail());
-			System.out.println("Log korisnikDTO email: " + kDTO.getEmail());
-			
-			
-			
-			Korisnik mica = (Korisnik) session.getAttribute("ulogovan");
-			String email = (String) session.getAttribute("borkovac.dragan@gmail.com");
-			System.out.println("Email ulogovanog je: " + email); 
-			kDTO.setStatusKorisnika(povVrFunkc);
-			return new ResponseEntity<>(kDTO, HttpStatus.OK);
-		} else // ne postoji registrovan takav korisnik
-		{
-			System.out.println("Javlja da ne postoji ulogovan, a postoji!");
-			KorisnikDTO kDTO = new KorisnikDTO();
-			kDTO.setStatusKorisnika(povVrFunkc);
-			return new ResponseEntity<>(kDTO, HttpStatus.OK);
-		}
-		
-	}
-	*/
 	
 	// DODER 
 	@RequestMapping(value="/trenutniKorisnik",method = RequestMethod.GET)
@@ -247,21 +208,6 @@ public class UserController {
 		
 	}
 	
-	// odjava korisnika
-	@RequestMapping(value="/logOut", method = RequestMethod.GET)
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<KorisnikDTO> logOut(@Context HttpServletRequest request) 
-	{
-
-		Korisnik k = (Korisnik) request.getSession().getAttribute("ulogovan");
-		System.out.println("LogOUT korisnik email: " + k.getEmail());
-		//request.getSession().invalidate();
-		KorisnikDTO kDTO = new KorisnikDTO();
-		return new ResponseEntity<>(kDTO, HttpStatus.OK);
-	
-		
-	}
-	
 	// promena lozinke
 	// ukoliko je uneo vec postojecu lozinku, vratice BAD_REQUEST
 	@RequestMapping(value="/promenaLozinke", method = RequestMethod.POST)
@@ -289,18 +235,7 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	/*
-	// vraca trenutno ulogovanog korisnika
-	@RequestMapping(value="/currentUser", method = RequestMethod.GET)
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<KorisnikDTO> currentUser(@Context HttpServletRequest request)
-	{
-		Korisnik k = (Korisnik) request.getSession().getAttribute("ulogovan");
-		KorisnikDTO kd = new KorisnikDTO(k);
-		return new ResponseEntity<>(kd, HttpStatus.OK);
-	}
-	*/
+
 
 	
 

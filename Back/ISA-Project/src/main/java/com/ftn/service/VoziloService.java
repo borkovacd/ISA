@@ -14,7 +14,8 @@ import com.ftn.dto.VoziloDTO;
 import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.enums.TipVozila;
 import com.ftn.model.Korisnik;
-
+import com.ftn.model.hotels.CenovnikHotela;
+import com.ftn.model.hotels.StavkaCenovnikaHotela;
 import com.ftn.model.rentacar.CenovnikRentACar;
 import com.ftn.model.rentacar.Lokacija;
 import com.ftn.model.rentacar.RentACar;
@@ -165,6 +166,7 @@ public class VoziloService
 	// metoda za brisanje vozila
 	public boolean obrisiVozilo(Long idRentACar, Long idVozila)
 	{
+		List<StavkaCenovnikaRent> stavke = stavkaRentRepository.findAll();
 		for (Vozilo vozilo: voziloRepository.findAll())
 		{
 			if (vozilo.getRentACar().getRentACarId() == idRentACar) // ukoliko je vozilo iz tog rent-a-car
@@ -228,26 +230,20 @@ public class VoziloService
 	
 	// provera da li je neko vozilo rezervisano
 	public boolean checkIfVoziloIsReserved(Long idVozila) 
-	{
-		
+	{	
 		boolean taken = false;
-	
-		List<Vozilo> vozila = voziloRepository.findAll();
+		
 		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
-		
-		Vozilo vozilo = voziloRepository.findOneByVoziloId(idVozila);
-		
-		
+
 		// prolazi kroz sve rezervacije i gleda da li se to vozilo nalazi u rezervacijama
 		// i da li je status tog vozila da je rezervisano
 		for (RezervacijaVozila rez : rezervacije)
 		{
-			if (rez.getVozilo().getVoziloId() == idVozila && vozilo.isRezervisano() == true)
+			if (rez.getVozilo().getVoziloId() == idVozila)
 			{
 				taken = true ; 
 			}
-		}
-			
+		}			
 		return taken;
 	}
 	
@@ -282,12 +278,16 @@ public class VoziloService
 			{
 				if (v.getRentACar().getRentACarId() == idRent)
 				{
-					vozilaRent.add(v);
+					if (v.isNaPopustu() == false) { 
+						vozilaRent.add(v);
+					}
 				}
 			}
 		}
 		
 		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
 		
 		for (Vozilo v: vozilaRent)
 		{
@@ -310,13 +310,28 @@ public class VoziloService
 								slobodno = false ;
 							}
 						}
+						else if(d1.isEqual(rez.getDatumPreuzimanja())) {
+							if(d2.isEqual(rez.getDatumVracanja())) {
+								slobodno = false;
+							}
+						}
 					}
 				}
 			}
 			
 			if (slobodno == true)
 			{
-				slobodnaVozila.add(v);
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == idRent)  //ako je cenovnik hotela u kojem je slobodna soba
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) {
+											slobodnaVozila.add(v);
+											
+										
+										}
 			}
 			
 		}
@@ -411,7 +426,9 @@ public class VoziloService
 		} else {
 			for(Vozilo v: svaVozila) {
 				if(v.getRentACar().getRentACarId() == idRent) {
-					vozilaRent.add(v);
+					if (v.isNaPopustu() == false) {
+						vozilaRent.add(v);
+					}
 				}
 			}
 		}

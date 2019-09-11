@@ -32,7 +32,7 @@ export class RentCarService {
   getRentsByAdministrator(): Observable<any>
   {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get(`${this.BASE_URL}/getRentsByAdministrator/3`, {headers});
+    return this.http.get(`${this.BASE_URL}/getRentsByAdministrator`, {headers});
   }
 
   izmeniRent(object: RentCarModel, id: any) : Observable<any>

@@ -93,7 +93,7 @@ public class CenovnikRentACarController
 	public boolean obrisiCenovnik(@PathVariable Long idRentACar, @PathVariable Long idCenovnik) throws Exception 
 	{
 		boolean response = cenovnikRentService.obrisiCenovnik(idRentACar, idCenovnik);
-		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
+		return response; // TRUE - uspesno obrisano, FALSE - nije obrisano
 	}
 	
 	

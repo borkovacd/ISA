@@ -26,6 +26,7 @@ import com.ftn.model.hotels.Hotel;
 import com.ftn.model.rentacar.RentACar;
 import com.ftn.repository.RentCarRepository;
 import com.ftn.service.RentACarService;
+import com.ftn.service.UserService;
 
 @RestController
 @RequestMapping(value = "rentCar")
@@ -36,6 +37,9 @@ public class RentCarController {
 	
 	@Autowired 
 	private RentCarRepository rentRepository ;
+	
+	@Autowired
+	private UserService userService ;
 	
 	/**** Borkovac ******/
 	
@@ -81,18 +85,17 @@ public class RentCarController {
 	}
 	
 	// vraca rent-a-car servise administratora
-	@GetMapping("/getRentsByAdministrator/{id}")
+	@GetMapping("/getRentsByAdministrator")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<RentACar>> getRentsByAdministrator(@PathVariable Long id)
+	public ResponseEntity<List<RentACar>> getRentsByAdministrator()
 	{
-		ArrayList<RentACar> rents = rentCarService.getRentsByAdministrator(id);
+		ArrayList<RentACar> rents = rentCarService.getRentsByAdministrator(userService.getCurrentUser().getId());
 		return new ResponseEntity<List<RentACar>>(rents, HttpStatus.OK);
 		
 	}
 	
 	// vraca servis na osnovu id-ja
 	
-	// TEST 2
 	@GetMapping("/getRent/{idRent}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<RentACar> getRent(@PathVariable Long idRent) 

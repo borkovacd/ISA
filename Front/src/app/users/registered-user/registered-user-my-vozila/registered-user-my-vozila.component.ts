@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from "../../../service/vozilo.service";
 import {VoziloReservationService} from "../../../service/voziloReservation.service";
+import {AuthService} from "../../../service/auth.service";
 
 @Component({
   selector: 'app-registered-user-my-vozila',
@@ -16,7 +17,8 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private voziloService: VoziloService,
-              private rezervacijaService: VoziloReservationService
+              private rezervacijaService: VoziloReservationService,
+              private authService: AuthService
               ) { }
 
   ngOnInit() {
@@ -25,6 +27,11 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
       this.rezervacije = data ;
     });
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   cancelReservation(id: any)
