@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +69,8 @@ public class RezervacijaHotelaService {
 	/*************************/
 
 	
-	public RezervacijaHotela createReservation(RezervacijaSobaDTO rezervacijaDTO, Long id) {
+	@Transactional
+	synchronized public RezervacijaHotela createReservation(RezervacijaSobaDTO rezervacijaDTO, Long id) {
 		RezervacijaHotela rezervacija = new RezervacijaHotela();
 		
 		String europeanDatePattern = "yyyy-MM-dd";
@@ -120,7 +123,8 @@ public class RezervacijaHotelaService {
 		return rezervacija;
 	}
 
-	public RezervacijaHotela addToReservation(RezervacijaDodatnihUslugaDTO dodatnaRezervacijaDTO, Long idRezervacije) {
+	@Transactional
+	synchronized public RezervacijaHotela addToReservation(RezervacijaDodatnihUslugaDTO dodatnaRezervacijaDTO, Long idRezervacije) {
 		
 		String europeanDatePattern = "yyyy-MM-dd";
 		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
@@ -192,7 +196,8 @@ public class RezervacijaHotelaService {
 		return rez;
 	}
 
-	public RezervacijaHotela createOrChangeFastHotelReservation(Long id, Long idRezervacijeLeta, Long idHotela, Long idRoom) {
+	@Transactional
+	synchronized public RezervacijaHotela createOrChangeFastHotelReservation(Long id, Long idRezervacijeLeta, Long idHotela, Long idRoom) {
 		
 		//Potrebne informacije za rezervaciju izvuci iz rezervacije leta
 		//Privremeno iz rezervacije hotela, dok ne bude uradjena rezervacija leta

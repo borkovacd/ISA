@@ -27,8 +27,8 @@ public class RezervacijaHotela {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Version
-    private Long version;
+	/*@Version
+    private Long version;*/
 
 	private LocalDate datumPocetka;
 
@@ -140,14 +140,6 @@ public class RezervacijaHotela {
 
 	public void setBrojGostiju(int brojGostiju) {
 		this.brojGostiju = brojGostiju;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 	
 	

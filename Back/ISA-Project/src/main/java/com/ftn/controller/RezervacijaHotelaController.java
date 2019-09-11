@@ -27,7 +27,6 @@ import com.ftn.service.RezervacijaHotelaService;
 import com.ftn.service.UserService;
 
 @RestController
-@Transactional
 @RequestMapping(value = "/api/hotelReservation")
 public class RezervacijaHotelaController {
 	

@@ -6,6 +6,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,7 +101,8 @@ public class SobaService {
 		return soba;
 	}
 
-	public Soba editRoom(Long idRoom, SobaDTO sobaDTO) {
+	@Transactional
+	synchronized public Soba editRoom(Long idRoom, SobaDTO sobaDTO) {
 		Soba soba = sobaRepository.getOne(idRoom);
 		soba.setKapacitet(sobaDTO.getCapacity());
 		soba.setSprat(sobaDTO.getFloor());
