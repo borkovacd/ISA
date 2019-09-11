@@ -151,7 +151,7 @@ insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, 
 	
 /**** CENOVNICI ****/	
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (1, '2019-06-01', '2019-12-01', 1);
+	values (1, '2019-01-01', '2019-12-01', 1);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
 	values (2, '2020-01-01', '2020-05-31', 1);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)

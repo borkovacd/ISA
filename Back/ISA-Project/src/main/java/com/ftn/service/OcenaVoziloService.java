@@ -36,7 +36,17 @@ public class OcenaVoziloService
 		{
 			List<RezervacijaVozila> sveRezervacije = rezVozRepository.findAll();
 			List<RezervacijaVozila> reservations = new ArrayList<RezervacijaVozila>();
-
+			List<OcenaVozilo> ocene = ocenaRepository.findAll();
+			
+			// ukoliko je taj korisnik vec ocenjivao to vozilo
+			for (OcenaVozilo o: ocene)
+			{
+				if (o.getUser().getId() == idUser && o.getVozilo().getVoziloId() == idVozila)
+				{
+					return false ;
+				}
+			}
+			
 			// pronadje rezervacije za to vozilo			
 			for (RezervacijaVozila rez: sveRezervacije)
 			{
@@ -45,6 +55,8 @@ public class OcenaVoziloService
 					reservations.add(rez);
 				}
 			}
+			
+			
 			
 			List<RezervacijaVozila> myReservations = new ArrayList<RezervacijaVozila>();
 			

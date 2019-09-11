@@ -24,6 +24,7 @@ import com.ftn.dto.OcenaHotelDTO;
 import com.ftn.dto.OcenaSobaDTO;
 import com.ftn.dto.OcenaVoziloDTO;
 import com.ftn.model.rentacar.Vozilo;
+import com.ftn.model.rentacar.OcenaRentACar;
 import com.ftn.model.rentacar.OcenaVozilo;
 import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.model.hotels.Hotel;
@@ -61,6 +62,17 @@ public class OcenaHotelService
 			List<RezervacijaHotela> sveRezervacije = rezHotelRepository.findAll();
 			
 			List<RezervacijaHotela> myReservations = new ArrayList<RezervacijaHotela>();
+			
+			List<OcenaHotel> ocene = ocenaRepository.findAll();
+			
+			// ukoliko je korisnik vec ocenjivao taj hotel
+			for (OcenaHotel o: ocene)
+			{
+				if (o.getUser().getId() == idUser && o.getHotel().getId() == idHotel)
+				{
+					return false ;
+				}
+			}				
 			
 			if (sveRezervacije.size() == 0)
 			{

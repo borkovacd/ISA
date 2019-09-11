@@ -180,7 +180,8 @@ public class CenovnikRentACarService
 		
 		LocalDate currentDate = LocalDate.now();
 		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
-		
+
+		if(!cenovniciRent.isEmpty()) {
 		for(CenovnikRentACar cenovnik : cenovniciRent) 
 		{
 			if(currentDate.isEqual(cenovnik.getPocetakVazenja())) { //ako je danasnji datum isti kao pocetak vazenja cenovnika
@@ -191,12 +192,14 @@ public class CenovnikRentACarService
 				}
  			} 
 		}
+		}
 		
 		CenovnikRentACar tempCenovnik = null;
-		
-		if(cenovniciRent != null) { 
+		if(!cenovniciRent.isEmpty()) {
 			tempCenovnik = cenovniciRent.get(0); //uzima prvi cenovnik iz liste cenovnika servisa
 		}
+		
+
 		
 		//Uzima se cenovnik ciji datum prestanka je najkasniji
 		if(cenovniciRent.size() > 1) 

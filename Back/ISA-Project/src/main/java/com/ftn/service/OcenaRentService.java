@@ -15,6 +15,7 @@ import com.ftn.repository.RezervacijaVozilaRepository;
 import com.ftn.repository.VoziloRepository;
 import com.ftn.repository.UserRepository;
 import com.ftn.model.Korisnik;
+import com.ftn.model.hotels.OcenaSoba;
 import com.ftn.dto.OcenaRentDTO;
 import com.ftn.dto.OcenaVoziloDTO;
 import com.ftn.model.rentacar.Vozilo;
@@ -46,6 +47,17 @@ public class OcenaRentService
 			List<RezervacijaVozila> sveRezervacije = rezVozRepository.findAll();
 			
 			List<RezervacijaVozila> myReservations = new ArrayList<RezervacijaVozila>();
+			
+			List<OcenaRentACar> ocene = ocenaRepository.findAll();
+			
+			// ukoliko je korisnik vec ocenjivao taj rent-a-car
+			for (OcenaRentACar o: ocene)
+			{
+				if (o.getUser().getId() == idUser && o.getRent().getRentACarId() == idRent)
+				{
+					return false ;
+				}
+			}		
 			
 			if (sveRezervacije.size() == 0)
 			{

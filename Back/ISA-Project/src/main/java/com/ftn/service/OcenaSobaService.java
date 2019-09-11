@@ -58,6 +58,17 @@ public class OcenaSobaService
 			
 			List<RezervacijaHotela> myReservations = new ArrayList<RezervacijaHotela>();
 			
+			List<OcenaSoba> ocene = ocenaRepository.findAll();
+			
+			// ukoliko je taj korisnik vec ocenjivao tu sobu
+						for (OcenaSoba o: ocene)
+						{
+							if (o.getUser().getId() == idUser && o.getSoba().getId() == idSobe)
+							{
+								return false ;
+							}
+						}
+			
 			if (sveRezervacije.size() == 0)
 			{
 				return false ;
