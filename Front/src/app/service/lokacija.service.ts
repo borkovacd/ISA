@@ -50,4 +50,9 @@ export class LokacijaService{
     return this.http.put(`${this.BASE_URL}/izmeniFilijalu/${idRent}/${idLok}`, body, {headers});
   }
 
+  checkIfReservedLokacija(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedLokacija/${id}`, {headers});
+  }
+
 }

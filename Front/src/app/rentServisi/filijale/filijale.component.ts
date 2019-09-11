@@ -40,15 +40,32 @@ export class FilijaleComponent implements OnInit {
 
   editFilijala(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
-    this.router.navigateByUrl('rentAdminPage/filijala/' + idRent + '/edit/' + id);
+    this.lokService.checkIfReservedLokacija(id).subscribe(data => {
+      if (data == false)
+      {
+        this.router.navigateByUrl('rentAdminPage/filijala/' + idRent + '/edit/' + id);
+      }
+      else
+      {
+        alert('Lokacija postoji u rezervaciji, pa se ne moze vrsiti izmena!');
+      }
+    })
   }
 
   deleteFilijala(id: any) {
     const idRent = this.route.snapshot.params.idRent ;
 
-    this.lokService.obrisiFilijalu(idRent, id).subscribe(data => {
-      this.router.navigateByUrl('rentAdminPage');
-    });
+    this.lokService.checkIfReservedLokacija(id).subscribe(data => {
+      if (data == false)
+      {
+        this.lokService.obrisiFilijalu(idRent, id).subscribe(data => {
+          this.router.navigateByUrl('rentAdminPage');
+        }) ;
+      } else
+      {
+        alert('Lokacija se pojavljuje u rezervaciji, pa se ne moze vrsiti brisanje!');
+      }
+    })
   }
 
   goBack() {

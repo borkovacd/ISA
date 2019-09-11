@@ -106,6 +106,15 @@ public class LokacijaController
 			boolean response = lokService.obrisiFilijalu(idRentACar, idLok);
 			return response; // TRUE - uspesno obrisano, FALSE - nije obrisano (nije pronadjeno)
 		}
+		
+		@GetMapping("/checkIfReservedLokacija/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public boolean checkIfReservedLokacija(@PathVariable Long id) {
+			//Ako lokacija nije rezervisana, taken je FALSE
+			//u suprotnom taken ima vrednost TRUE
+			boolean taken = lokService.checkIfLokacijaIsReserved(id);
+			return taken;
+		}
 
 	
 }

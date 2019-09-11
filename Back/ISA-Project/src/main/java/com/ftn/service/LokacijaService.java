@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.dto.LokacijaDTO;
+import com.ftn.model.hotels.RezervacijaHotela;
 import com.ftn.model.rentacar.Lokacija;
 import com.ftn.model.rentacar.RentACar;
+import com.ftn.model.rentacar.RezervacijaVozila;
 import com.ftn.repository.LokacijaRepository;
 import com.ftn.repository.RentCarRepository;
+import com.ftn.repository.RezervacijaVozilaRepository;
 
 @Service
 public class LokacijaService 
@@ -20,6 +23,9 @@ public class LokacijaService
 	
 	@Autowired
 	private RentCarRepository rentRepository ;
+	
+	@Autowired
+	private RezervacijaVozilaRepository rezVozRepository ;
 	
 	// Dodavanje filijale
 		public void dodajFilijalu(LokacijaDTO dto, Long idRentACar) throws Exception 
@@ -129,5 +135,26 @@ public class LokacijaService
 			return lokRepository.findOneById(id);
 		}
 		
+		// provera da li je neko vozilo rezervisano
+		public boolean checkIfLokacijaIsReserved(Long idLokacije) 
+		{	
+			boolean taken = false;
+			
+			List<Lokacija> lokacije = lokRepository.findAll();
+			List<Lokacija> lokacijeRent = new ArrayList<Lokacija>();
+			
+			ArrayList<RezervacijaVozila> rezervacije = (ArrayList<RezervacijaVozila>) rezVozRepository.findAll();
+
+			// prolazi kroz sve rezervacije i gleda da li se to vozilo nalazi u rezervacijama
+			// i da li je status tog vozila da je rezervisano
+			for (RezervacijaVozila rez : rezervacije)
+			{
+				if (rez.getMestoPreuzimanja().getId() == idLokacije || rez.getMestoVracanja().getId() == idLokacije)
+				{
+					taken = true ; 
+				}
+			}			
+			return taken;
+		}	
 		
 }
