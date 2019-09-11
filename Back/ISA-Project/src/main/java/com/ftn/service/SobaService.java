@@ -132,7 +132,8 @@ public class SobaService {
 		return soba;
 	}
 
-	public boolean deleteRoom(Long idRoom) {
+	@Transactional
+	synchronized public boolean deleteRoom(Long idRoom) {
 		sobaRepository.deleteById(idRoom);
 		return true;
 	}
