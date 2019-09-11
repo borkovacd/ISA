@@ -66,6 +66,7 @@ export class AttendanceGraphsRentComponent implements OnInit {
   }
 
   confirm() {
+    
 
     const idRent = this.route.snapshot.params.idRent;
     if(this.chooseMonthy) {
@@ -80,7 +81,7 @@ export class AttendanceGraphsRentComponent implements OnInit {
           animationEnabled: true,
           exportEnabled: true,
           title: {
-            text: "Grafik posecenosti na godisnjem nivou"
+            text: "Grafik rezervisanosti na godisnjem nivou"
           },
           data: [{
             type: "column",
@@ -118,7 +119,7 @@ export class AttendanceGraphsRentComponent implements OnInit {
           animationEnabled: true,
           exportEnabled: true,
           title: {
-            text: "Grafik posecenosti na mesecnom nivou"
+            text: "Grafik rezervisanosti na mesecnom nivou"
           },
           data: [{
             type: "column",
@@ -145,7 +146,7 @@ export class AttendanceGraphsRentComponent implements OnInit {
           animationEnabled: true,
           exportEnabled: true,
           title: {
-            text: "Grafik posecenosti na nedeljnom nivou"
+            text: "Grafik rezervisanosti na nedeljnom nivou"
           },
           data: [{
             type: "column",

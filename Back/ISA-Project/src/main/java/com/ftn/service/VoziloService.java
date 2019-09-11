@@ -167,7 +167,8 @@ public class VoziloService
 	}
 
 	// metoda za brisanje vozila
-	public boolean obrisiVozilo(Long idRentACar, Long idVozila)
+	@Transactional
+	synchronized public boolean obrisiVozilo(Long idRentACar, Long idVozila)
 	{
 		List<StavkaCenovnikaRent> stavke = stavkaRentRepository.findAll();
 		for (Vozilo vozilo: voziloRepository.findAll())
