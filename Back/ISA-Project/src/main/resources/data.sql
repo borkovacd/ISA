@@ -35,21 +35,33 @@ insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_
 insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
 	values (5, 0, 2, 3, "JEDNOKREVETNA_SOBA", 6, 0, 1);
 insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (6, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 1);
+	values (6, 1, 3, 5, "DVOKREVETNA_SOBA", 6, 0, 1);
 insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
 	values (7, 1, 6, 1, "FAMILY_ROOM", 6, 0, 1);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (8, 1, 1, 5, "JEDNOKREVETNA_SOBA", 5, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (9, 1, 3, 5, "DVOKREVETNA_SOBA", 5, 0, 0);
+insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (10, 1, 6, 1, "FAMILY_ROOM", 5, 0, 1);
 	
 /**** DODATNE USLUGE ****/
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
 	values (31, "TERETANA", 6, 0);
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
 	values (32, "PARKING", 6, 0);
+insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
+	values (33, "BAZEN", 5, 0);
+insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
+	values (34, "SOBNI_SERVIS", 5, 0);
 	
 /**** CENOVNICI ****/
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
 	values (10, DATE '2019-05-01', DATE '2019-07-31', 6);
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
 	values (11, DATE '2019-08-01', DATE '2019-10-31', 6);
+insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
+	values (12, DATE '2019-07-01', DATE '2019-09-30', 5);
 	
 /**** STAVKE CENOVNIKA ****/	
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
@@ -62,22 +74,41 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 	values (23, 8900, null,'FAMILY_ROOM', 11);
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
 	values (24, 500, "TERETANA",null, 11);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (25, 750, "PARKING",null, 11);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (26, 3000, null,'JEDNOKREVETNA_SOBA', 12);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (27, 5200, null,'DVOKREVETNA_SOBA', 12);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (28, 11000, null,'FAMILY_ROOM', 12);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (29, 300, "BAZEN",null, 12);
+insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
+	values (30, 900, "SOBNI_SERVIS",null, 12);
+
 	
 /**** REZERVACIJA HOTELA ****/
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (1, 12500, DATE '2019-08-01', DATE '2019-08-12', 4, 0, 4);
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (2, 18000, DATE '2019-12-20', DATE '2019-12-25', 4, 0, 1);
+insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
+	values (3, 9000, DATE '2019-07-05', DATE '2019-07-15', 4, 0, 2);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (1, 1);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (1, 2);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (2, 2);
+insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
+	values (3, 8);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (1, 31);
 insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
 	values (1, 32);
+insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_usluge_id)
+	values (3, 34);
 	
 /**** RENT-A-CAR ****/
 insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
