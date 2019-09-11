@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PricelistRentService} from "../../service/pricelistRent.service";
 import {PricelistRentModel} from "../../model/pricelistRent.model";
 import {PricelistModel} from "../../model/pricelist.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-add-edit-pricelist-rent',
@@ -26,7 +27,8 @@ export class AddEditPricelistRentComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private pricelistRentService: PricelistRentService,) {
+              private pricelistRentService: PricelistRentService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -59,6 +61,11 @@ export class AddEditPricelistRentComponent implements OnInit {
     } else {
       this.editPricelistRent();
     }
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   exit() {

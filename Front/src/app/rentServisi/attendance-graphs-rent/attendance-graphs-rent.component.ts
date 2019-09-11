@@ -3,6 +3,7 @@ import * as CanvasJS from 'src/app/canvasjs.min';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RentCarService} from "../../service/rentcar.service";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-attendance-graphs-rent',
@@ -27,7 +28,8 @@ export class AttendanceGraphsRentComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               public fb: FormBuilder,
-              private rentService: RentCarService) {
+              private rentService: RentCarService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'year3': ['', Validators.compose([Validators.pattern('(19[789]\\d|20[01]\\d)')])],
       'month3': ['', Validators.compose([Validators.pattern('^(1[012]|[1-9])$')])],
@@ -56,6 +58,11 @@ export class AttendanceGraphsRentComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('rentAdminPage' );
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   confirm() {

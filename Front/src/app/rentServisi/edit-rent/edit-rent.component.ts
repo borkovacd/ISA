@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RentCarService} from '../../service/rentcar.service';
 import {UserService} from '../../service/user.service';
 import {RentCarModel} from '../../model/rentcar.model';
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-edit-rent',
@@ -22,7 +23,8 @@ export class EditRentComponent implements OnInit {
               public fb: FormBuilder,
               public route: ActivatedRoute,
               public rentService: RentCarService,
-              public userService: UserService) {
+              public userService: UserService,
+              private authService: AuthService) {
 
     this.form = this.fb.group({
       'name': ['', Validators.compose([Validators.required])],
@@ -53,6 +55,11 @@ export class EditRentComponent implements OnInit {
 
   confirmClick() {
     this.editRent();
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   editRent() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RentCarService} from "../../service/rentcar.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-revenues-rent',
@@ -20,7 +21,8 @@ export class RevenuesRentComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               public fb: FormBuilder,
-              private rentService: RentCarService) {
+              private rentService: RentCarService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'd1': ['', Validators.required],
       'd2': ['', Validators.required],
@@ -52,6 +54,11 @@ export class RevenuesRentComponent implements OnInit {
         this.showValue = true;
       });
     }
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   goBack() {

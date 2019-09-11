@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RentCarService} from "../../service/rentcar.service";
 import {PricelistRentService} from "../../service/pricelistRent.service";
 import {PriceRentService} from "../../service/priceRent.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-prices-rent',
@@ -16,7 +17,8 @@ export class PricesRentComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private rentService: RentCarService,
-              private priceRentService: PriceRentService) { }
+              private priceRentService: PriceRentService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     const idPriceList = this.route.snapshot.params.idPriceList;
@@ -36,6 +38,11 @@ export class PricesRentComponent implements OnInit {
     const idRent = this.route.snapshot.params.idRent;
     this.router.navigateByUrl('rentAdminPage/pricelistsRent/' + idRent);
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   editPrice(id: any) {

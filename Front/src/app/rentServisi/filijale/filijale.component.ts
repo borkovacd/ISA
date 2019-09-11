@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LokacijaService} from "../../service/lokacija.service";
 import {RentCarService} from "../../service/rentcar.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-filijale',
@@ -17,7 +18,8 @@ export class FilijaleComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private lokService: LokacijaService,
-              private rentService: RentCarService) { }
+              private rentService: RentCarService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     const idRent = this.route.snapshot.params.idRent ;
@@ -71,6 +73,11 @@ export class FilijaleComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('rentAdminPage' );
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 

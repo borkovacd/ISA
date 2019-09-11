@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LokacijaService} from "../../service/lokacija.service";
 import {LokacijaModel} from "../../model/lokacija.model";
 import {RoomModel} from "../../model/room.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-add-edit-filijala',
@@ -27,7 +28,8 @@ export class AddEditFilijalaComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private lokacijaService: LokacijaService) {
+              private lokacijaService: LokacijaService,
+              private authService: AuthService) {
 
     this.form = this.fb.group({
       'adresa': ['', Validators.compose([Validators.required])],
@@ -73,6 +75,11 @@ export class AddEditFilijalaComponent implements OnInit {
     } else {
       this.editFilijala();
     }
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   createFilijala()

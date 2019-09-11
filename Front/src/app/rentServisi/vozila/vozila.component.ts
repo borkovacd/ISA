@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from '../../service/vozilo.service';
 import {RentCarService} from '../../service/rentcar.service';
 import {OcenaVoziloService} from "../../service/ocenaVozilo.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-vozila',
@@ -22,7 +23,8 @@ export class VozilaComponent implements OnInit {
               private route: ActivatedRoute,
               private voziloService: VoziloService,
               private rentService: RentCarService,
-              private ocenaService: OcenaVoziloService) { }
+              private ocenaService: OcenaVoziloService,
+              private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -36,6 +38,11 @@ export class VozilaComponent implements OnInit {
       this.vozila = data;
     });
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   vratiProsecnuOcenu(id: any)

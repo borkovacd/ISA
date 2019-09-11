@@ -115,6 +115,8 @@ import {OcenaVoziloService} from "./service/ocenaVozilo.service";
 import {OcenaRentService} from "./service/ocenaRent.service";
 import {OcenaSobaService} from "./service/ocenaSoba.service";
 import {OcenaHotelService} from "./service/ocenaHotel.service";
+import {AuthGuard} from "./guards/AuthGuard";
+import {RandomGuard} from "./guards/RandomGuard";
 
 @NgModule({
   declarations: [
@@ -256,6 +258,8 @@ import {OcenaHotelService} from "./service/ocenaHotel.service";
     OcenaRentService,
     OcenaSobaService,
     OcenaHotelService,
+    AuthGuard,
+    RandomGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [],

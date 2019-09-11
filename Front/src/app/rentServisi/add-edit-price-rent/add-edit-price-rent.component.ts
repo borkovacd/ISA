@@ -7,6 +7,7 @@ import {PriceRentService} from "../../service/priceRent.service";
 import {VoziloModel} from "../../model/vozilo.model";
 import{PriceRentModel} from "../../model/priceRent.model";
 import {PriceModel} from "../../model/price.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-add-edit-price-rent',
@@ -34,7 +35,8 @@ export class AddEditPriceRentComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private priceRentService: PriceRentService,
-              private pricelistRentService: PricelistRentService) {
+              private pricelistRentService: PricelistRentService,
+              private authService: AuthService) {
 
     this.form = this.fb.group({
       'tipStavke': ['', Validators.compose([Validators.required])],
@@ -69,6 +71,11 @@ export class AddEditPriceRentComponent implements OnInit {
       this.method_name = 'DODAJ';
 
     }
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   confirmClick() {

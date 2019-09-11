@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from "../../service/vozilo.service";
 import {VoziloModel} from "../../model/vozilo.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-add-edit-vozilo',
@@ -26,7 +27,8 @@ export class AddEditVoziloComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private voziloService: VoziloService,) {
+              private voziloService: VoziloService,
+              private authService: AuthService) {
 
     this.form = this.fb.group({
       'brojSedista': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,3}$')])],
@@ -76,6 +78,11 @@ export class AddEditVoziloComponent implements OnInit {
     } else {
       this.editVozilo();
     }
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   createVozilo()

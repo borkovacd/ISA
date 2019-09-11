@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router } from '@angular/router';
+import { AuthService} from "../service/auth.service";
 
-/*
-import { AuthService } from '../service/AuthService';
-*/
 
 @Injectable({
   providedIn: 'root'
 })
-export class RandomGuard /* implements  CanActivate , CanLoad  */
-{
-  /*
+export class RandomGuard  implements  CanActivate , CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate() {
@@ -20,9 +16,9 @@ export class RandomGuard /* implements  CanActivate , CanLoad  */
   canLoad() {
 
     if (!this.authService.isUserLogged()) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/prijava']);
     }
     return this.authService.isUserLogged();
   }
-  */
+
 }
