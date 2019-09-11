@@ -357,7 +357,6 @@ public class SobaService {
 		if(brojSoba == 1) { //ako se trazi jedna soba, neka lista sadrzi samo sobe sa tacnim kapacitetom ili sa vecim kapacitetom
 			for(Soba soba: slobodneSobe) {
 				if(soba.getKapacitet() == brojGostiju) {
-					//System.out.println("STO NISAM OVDE?");
 					odgovarajuceSobe.add(soba);
 				}
 					
@@ -400,9 +399,13 @@ public class SobaService {
 									return odgovarajuceSobe;
 								} else
 									return null;
+							} else {
+								return null;
 							}
 						}
 					}
+				} else {
+					return null;
 				}
 			}
 			
