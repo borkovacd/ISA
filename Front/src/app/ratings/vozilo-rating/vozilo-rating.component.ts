@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OcenaVoziloService} from "../../service/ocenaVozilo.service";
 import {OcenaVoziloModel} from "../../model/ocenaVozilo.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-vozilo-rating',
@@ -17,7 +18,8 @@ export class VoziloRatingComponent implements OnInit {
   constructor(protected router: Router,
               public fb: FormBuilder,
               public route: ActivatedRoute,
-              private ocenaService: OcenaVoziloService) {
+              private ocenaService: OcenaVoziloService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })
@@ -40,6 +42,11 @@ export class VoziloRatingComponent implements OnInit {
   }
   exit(){
     this.router.navigateByUrl('registeredUserPage');
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 }

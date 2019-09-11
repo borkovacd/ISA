@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {OcenaRentService} from "../../service/ocenaRent.service";
 import {OcenaVoziloModel} from "../../model/ocenaVozilo.model";
 import {OcenaRentModel} from "../../model/ocenaRent.model";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-rent-car-rating',
@@ -17,7 +18,8 @@ export class RentCarRatingComponent implements OnInit {
   constructor(protected router: Router,
               public fb: FormBuilder,
               public route: ActivatedRoute,
-              private ocenaService: OcenaRentService) {
+              private ocenaService: OcenaRentService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })
@@ -39,6 +41,11 @@ export class RentCarRatingComponent implements OnInit {
   }
   exit(){
     this.router.navigateByUrl('registeredUserPage');
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 }

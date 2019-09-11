@@ -22,10 +22,10 @@
     <div *ngFor="let price of prices"
          style="text-align: center;border-style: solid;border-width: 2px;border-color: darkgray;margin-top: 20px;">
       <div *ngIf="price.tipVozila != null">
-        <p style="margin-top: 20px">Tip vozila:{{price.tipVozila}}</p>
+        <p style="margin-top: 20px">Tip vozila: <b>{{price.tipVozila}} </b></p>
       </div>
 
-      <p style="font-size: 20px">Cena:  {{price.cena}}</p>
+      <p style="font-size: 20px">Cena: <b> {{price.cena}} </b></p>
     </div>
   </div>
 

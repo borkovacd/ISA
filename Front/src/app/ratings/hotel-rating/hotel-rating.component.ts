@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OcenaVoziloService} from "../../service/ocenaVozilo.service";
 import {OcenaHotelService} from "../../service/ocenaHotel.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-hotel-rating',
@@ -19,7 +20,8 @@ export class HotelRatingComponent implements OnInit {
   constructor(protected router: Router,
               public fb: FormBuilder,
               public route: ActivatedRoute,
-              private ocenaService: OcenaHotelService) {
+              private ocenaService: OcenaHotelService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })
@@ -27,6 +29,11 @@ export class HotelRatingComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
   confirmClick() {

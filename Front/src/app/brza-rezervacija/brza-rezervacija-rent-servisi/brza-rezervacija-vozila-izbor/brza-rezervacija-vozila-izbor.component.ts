@@ -46,13 +46,13 @@ export class BrzaRezervacijaVozilaIzborComponent implements OnInit {
     const idRent = this.route.snapshot.params.idRent;
     this.reservationService.createFastResRent(idRezervacijeLeta, idRent, id).subscribe(data => {
       alert('Uspesna rezervacija vozila!');
-      location.reload();
+      this.router.navigateByUrl('registeredUserPage');
     });
   }
 
   zavrsiRezervaciju() {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
-    this.router.navigateByUrl('welcomepage');
+    this.router.navigateByUrl('registeredUserPage');
   }
 
 }

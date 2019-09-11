@@ -34,6 +34,7 @@ export class AuthService{
   }
   doLoginUser(response){
     localStorage.setItem("AGENT_JWT_TOKEN", response.jwt);
+    /*
     this.http.get('/api/syncAll').subscribe(data => {
       console.log(data);
     },
@@ -41,6 +42,7 @@ export class AuthService{
       console.log(error);
       }
       )
+     */
   }
 
   logOutUser(){

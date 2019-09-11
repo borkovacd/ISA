@@ -58,7 +58,7 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
       if(data == true){
         this.router.navigateByUrl('registeredUserPage/vozilo/' + idVozilo + '/rating');
       }else{
-        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+        alert('Nije Vam dozvoljeno ocenjivanje!');
 
       }
     })
@@ -70,7 +70,7 @@ export class RegisteredUserMyVozilaComponent implements OnInit {
       if (data == true) {
         this.router.navigateByUrl('registeredUserPage/rent/' + idRent + '/rating');
       } else {
-        alert('Nije Vam dozvoljeno ocenjivanje, jer nije prosla rezervacija!');
+        alert('Nije Vam dozvoljeno ocenjivanje!');
 
       }
     })
