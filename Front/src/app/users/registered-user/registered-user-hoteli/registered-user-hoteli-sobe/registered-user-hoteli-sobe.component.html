@@ -89,7 +89,7 @@
           </form>
         </div>
         <div class="col-md-6 col-lg-3" style="margin-top: 5%; text-align: right; margin-left: 60%">
-          <button class="btn btn-primary btn-block shadow" style="width: 125%; height: 50px; border-color: white; background: #1a8cff;" (click)="confirmClick()">Proveri dostupnost</button>
+          <button [disabled]="!form.valid" class="btn btn-primary btn-block shadow" style="width: 125%; height: 50px; border-color: white; background: #1a8cff;" (click)="confirmClick()">Proveri dostupnost</button>
         </div>
       </div>
     </div>
