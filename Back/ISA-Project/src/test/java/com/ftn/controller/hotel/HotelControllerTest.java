@@ -99,7 +99,7 @@ private static final String URL_PREFIX = "/api/hotel";
 		double retVal = Double.parseDouble(resultAsString);
 		//System.out.println(retVal);
 		assertThat(retVal)
-	      .isEqualTo(35000.00);
+	      .isEqualTo(25000.00);
 	}
 	
 	@Transactional

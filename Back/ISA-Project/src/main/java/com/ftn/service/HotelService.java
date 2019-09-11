@@ -508,6 +508,9 @@ public class HotelService {
 	
 	public Double getRevenues(Long id, String d1String, String d2String) {
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		double revenues = 0;
 		
 		String europeanDatePattern = "yyyy-MM-dd";
@@ -525,7 +528,8 @@ public class HotelService {
 		
 		for(RezervacijaHotela rezervacija: sveRezervacije) {
 			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumKraja().isBefore(currentDate) || rezervacija.getDatumKraja().isEqual(currentDate))
+					rezervacije.add(rezervacija);
 			}
 		}
 		
