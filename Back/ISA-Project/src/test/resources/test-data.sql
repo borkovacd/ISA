@@ -85,9 +85,9 @@ insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values
 insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
 	values (10, 5, 1000, 2019, 'BMW', 'X5', 'BMW X5', 0, 'LIMUZINA', 10, 0);
 insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (11, 5, 200, 2015, 'Mercedes', 'Jeep', 'Mercedes dzip', 0, 'KARAVAN', 10, 1);
+	values (11, 5, 200, 2015, 'Mercedes', 'Jeep', 'Mercedes dzip', 0, 'KARAVAN', 10, 0);
 insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (12, 5, 400, 2015, 'Opel', 'Astra', 'Opel Astra', 0, 'KABRIOLET', 11, 1);
+	values (12, 5, 400, 2015, 'Opel', 'Astra', 'Opel Astra', 0, 'KABRIOLET', 11, 0);
 
 /**** LOKACIJA ****/	
 insert into lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)

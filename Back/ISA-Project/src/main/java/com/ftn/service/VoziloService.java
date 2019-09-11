@@ -6,6 +6,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,7 +109,8 @@ public class VoziloService
 	}
 	
 	// Izmena vozila
-	public Vozilo izmeniVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
+	@Transactional
+	synchronized public Vozilo izmeniVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
 	{
 		Vozilo v = voziloRepository.findOneByVoziloId(idVozila);
 		

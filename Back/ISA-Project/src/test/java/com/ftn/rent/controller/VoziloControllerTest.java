@@ -128,8 +128,8 @@ private static final String URL_PREFIX = "/api/vozilo";
 	@Test
 	public void testGetAvailableVozila() throws Exception {
 		VremenskiPeriodDTO vp = new VremenskiPeriodDTO();
-		vp.setStartDate("2019-10-01");
-		vp.setEndDate("2019-10-05");
+		vp.setStartDate("2019-07-07");
+		vp.setEndDate("2019-07-10");
 		String json = com.ftn.utils.TestUtil.json(vp);
 		this.mockMvc.perform(post(URL_PREFIX + "/getAvailableVozila/10").contentType(contentType).content(json)).andExpect(status().isOk())
 		.andExpect(jsonPath("$.[*].voziloId").value(hasItem(10)))
@@ -150,7 +150,7 @@ private static final String URL_PREFIX = "/api/vozilo";
 		boolean retVal = Boolean.parseBoolean(resultAsString);
 		//System.out.println(retVal);
 		assertThat(retVal)
-	      .isEqualTo(false);
+	      .isEqualTo(true);
 	}
 
 	

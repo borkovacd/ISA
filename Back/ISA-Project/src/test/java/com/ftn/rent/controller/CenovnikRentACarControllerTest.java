@@ -96,13 +96,7 @@ private static final String URL_PREFIX = "/api/pricelistRent";
 		.andExpect(content().contentType(contentType))
 		.andExpect(jsonPath("$.id").value(11));
 	}
-	
-	@Transactional
-	@Rollback(true)
-	@Test
-	public void testObrisiCenovnik() throws Exception {
-		mockMvc.perform(delete(URL_PREFIX + "/obrisiCenovnik/10/10" )).andExpect(status().isOk());
-	}
+
 
 	
 	

@@ -315,6 +315,9 @@ public class RentACarService {
 		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		int year = Integer.parseInt(yearString);
 		//System.out.println("Godina je: " + year);
 		
@@ -331,7 +334,10 @@ public class RentACarService {
 		
 		for(RezervacijaVozila rezervacija: sveRezervacije) {
 			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumVracanja().isBefore(currentDate) || rezervacija.getDatumVracanja().isEqual(currentDate)) 
+				{
+					rezervacije.add(rezervacija);
+				}
 			}
 		}
 		
@@ -410,6 +416,9 @@ public class RentACarService {
 	// prosledjen id rent-a-car
 	public ArrayList<Integer> getDailyGraphDataRent(Long id, String date) {
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
 		String europeanDatePattern = "yyyy-MM-dd";
@@ -427,7 +436,10 @@ public class RentACarService {
 		
 		for(RezervacijaVozila rezervacija: sveRezervacije) {
 			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumVracanja().isBefore(currentDate) || rezervacija.getDatumVracanja().isEqual(currentDate)) 
+				{
+					rezervacije.add(rezervacija);
+				}
 			}
 		}
 		
@@ -487,6 +499,10 @@ public class RentACarService {
 	// prosledjen id rent-a-car
 	public ArrayList<Integer> getMonthyGraphDataRent(Long id, String yearString) {
 		
+		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
 		int year = Integer.parseInt(yearString);
@@ -502,7 +518,10 @@ public class RentACarService {
 		
 		for(RezervacijaVozila rezervacija: sveRezervacije) {
 			if(rezervacija.getVozilo().getRentACar().getRentACarId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumVracanja().isBefore(currentDate) || rezervacija.getDatumVracanja().isEqual(currentDate)) 
+				{
+					rezervacije.add(rezervacija);
+				}
 			}
 		}
 		
@@ -551,6 +570,9 @@ public class RentACarService {
 	// Prihodi rent-a-car servisa u izabranom periodu
 	public Double getRevenuesRent(Long idRent, String d1String, String d2String) 
 	{
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		
 		double revenues = 0;
 		
@@ -572,7 +594,8 @@ public class RentACarService {
 		{
 			if(rezervacija.getVozilo().getRentACar().getRentACarId() == idRent) 
 			{
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumVracanja().isBefore(currentDate) || rezervacija.getDatumVracanja().isEqual(currentDate))
+					rezervacije.add(rezervacija);
 			}
 		}
 		
