@@ -350,6 +350,9 @@ public class SobaService {
 		int brojSoba = Integer.parseInt(pdDTO.getNumberOfRooms());
 		int tempBrojGostiju = brojGostiju;
 		int tempBrojSoba = brojSoba;
+		
+		int brojSobaFinal = brojSoba;
+	
 		//System.out.println("Gositju: " + brojGostiju + " Jedinica: " + brojSoba);
 		//int kapacitet = 0;
 		//int broj = 0;
@@ -399,16 +402,16 @@ public class SobaService {
 									return odgovarajuceSobe;
 								} else
 									return null;
-							} else {
-								return null;
 							}
 						}
 					}
-				} else {
-					return null;
-				}
+				} 
 			}
 			
+		}
+		
+		if(odgovarajuceSobe.size() < brojSobaFinal) {
+			return null;
 		}
 		
 		return odgovarajuceSobe;

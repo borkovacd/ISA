@@ -22,7 +22,7 @@ insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id)
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
 	values (6, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
 insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 5);
+	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 2);
 /**** SOBE ****/
 insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
 	values (1, 0, 4, 2, "APARTMAN", 6, 0, 0);

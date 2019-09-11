@@ -56,7 +56,7 @@ insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_i
 insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
 	values (11, 18000, DATE '2019-12-25', DATE '2019-12-28', 13, 0, 2);
 insert into rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
-	values (12, 10000, DATE '2019-09-21', DATE '2019-09-26', 13, 1, 2);
+	values (12, 10000, DATE '2019-09-26', DATE '2019-09-29', 13, 1, 2);
 insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (10, 11);
 insert into rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
