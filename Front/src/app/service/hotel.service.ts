@@ -86,5 +86,10 @@ export class HotelService {
     params = params.append('d2', d2);
     return this.http.get(`${this.BASE_URL}/getRevenues/${idHotela}`, { params: params});
   }
+
+  vratiHoteleKorisnika(): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/vratiHoteleKorisnika`, {headers});
+  }
 }
 
