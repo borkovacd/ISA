@@ -41,7 +41,7 @@ export class HotelAdministratorProfilEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getKorisnikData().subscribe(data => {
+    this.userService.getCurrentUser().subscribe(data => {
       this.form.controls['ime'].setValue(data.ime);
       this.form.controls['prezime'].setValue(data.prezime);
       this.form.controls['grad'].setValue(data.grad);
