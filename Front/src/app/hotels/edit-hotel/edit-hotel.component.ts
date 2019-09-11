@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
 import {UserService} from '../../service/user.service';
 import {HotelModel} from '../../model/hotel.model';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-edit-hotel',
@@ -11,6 +12,8 @@ import {HotelModel} from '../../model/hotel.model';
   styleUrls: ['./edit-hotel.component.css']
 })
 export class EditHotelComponent implements OnInit {
+
+  administrator : any = null;
 
   public form: FormGroup;
   public name: AbstractControl;
@@ -23,7 +26,8 @@ export class EditHotelComponent implements OnInit {
               public fb: FormBuilder,
               public route: ActivatedRoute,
               public hotelService: HotelService,
-              public userService: UserService) {
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'name': ['', Validators.compose([Validators.required])],
       'address': ['', Validators.compose([Validators.required])],
@@ -37,6 +41,10 @@ export class EditHotelComponent implements OnInit {
 
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     this.hotelService.getHotel(idHotela).subscribe(data => {
       this.form.controls['name'].setValue(data.naziv);
@@ -66,6 +74,11 @@ export class EditHotelComponent implements OnInit {
     this.hotelService.izmeniHotel(hotel, idHotela).subscribe(data => {
       this.router.navigateByUrl('hotelAdminPage');
     })
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 }

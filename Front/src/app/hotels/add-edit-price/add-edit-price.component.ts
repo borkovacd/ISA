@@ -6,6 +6,8 @@ import {PricelistModel} from '../../model/pricelist.model';
 import {PriceService} from '../../service/price.service';
 import {RoomModel} from '../../model/room.model';
 import {PriceModel} from '../../model/price.model';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-add-edit-price',
@@ -13,6 +15,8 @@ import {PriceModel} from '../../model/price.model';
   styleUrls: ['./add-edit-price.component.css']
 })
 export class AddEditPriceComponent implements OnInit {
+
+  administrator : any = null;
 
   public form: FormGroup;
   public priceType: AbstractControl;
@@ -34,7 +38,9 @@ export class AddEditPriceComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private priceService: PriceService,
-              private pricelistService: PricelistService) {
+              private pricelistService: PricelistService,
+              private userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'priceType': ['', Validators.compose([Validators.required])],
       'tipStavke': ['', Validators.compose([Validators.required])],
@@ -48,6 +54,11 @@ export class AddEditPriceComponent implements OnInit {
   ngOnInit() {
 
     this.showAlert = false;
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
+
 
     const mode = this.route.snapshot.params.mode;
     const idPriceList = this.route.snapshot.params.idPriceList;
@@ -115,6 +126,11 @@ export class AddEditPriceComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     const idPriceList = this.route.snapshot.params.idPriceList;
     this.router.navigateByUrl('hotelAdminPage/prices/' +  idHotela + '/' + idPriceList);
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 

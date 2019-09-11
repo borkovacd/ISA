@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
 import {PricelistService} from '../../service/pricelist.service';
 import {PriceService} from '../../service/price.service';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-prices',
@@ -11,15 +13,23 @@ import {PriceService} from '../../service/price.service';
 })
 export class PricesComponent implements OnInit {
 
+  administrator : any = null;
+
   prices = []
   nazivHotela : string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private hotelService: HotelService,
-              private priceService: PriceService) {}
+              private priceService: PriceService,
+              private  userService: UserService,
+              private authService: AuthService) {}
 
   ngOnInit() {
+
+      this.userService.getCurrentUser().subscribe(data => {
+        this.administrator = data;
+      });
 
     const idPriceList = this.route.snapshot.params.idPriceList;
 
@@ -52,5 +62,10 @@ export class PricesComponent implements OnInit {
 
   deleteRoom(id: any) {
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 }

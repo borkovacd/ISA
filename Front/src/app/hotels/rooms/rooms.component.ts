@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
 import {HotelService} from '../../service/hotel.service';
 import {OcenaSobaService} from "../../service/ocenaSoba.service";
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-rooms',
@@ -10,6 +12,8 @@ import {OcenaSobaService} from "../../service/ocenaSoba.service";
   styleUrls: ['./rooms.component.css']
 })
 export class RoomsComponent implements OnInit {
+
+  administrator : any = null;
 
   rooms = []
   idRoom: any;
@@ -21,9 +25,16 @@ export class RoomsComponent implements OnInit {
               private route: ActivatedRoute,
               private roomService: RoomService,
               private hotelService: HotelService,
-              private ocenaService: OcenaSobaService) {}
+              private ocenaService: OcenaSobaService,
+              private  userService: UserService,
+              private authService: AuthService) {}
+
   ngOnInit() {
     const idHotela = this.route.snapshot.params.idHotela;
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     this.hotelService.getHotel(idHotela).subscribe(data => {
       this.nazivHotela = data.naziv;
@@ -96,5 +107,10 @@ export class RoomsComponent implements OnInit {
         alert('Prosecna ocena ove sobe je: ' + data);
       }
     })
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 }

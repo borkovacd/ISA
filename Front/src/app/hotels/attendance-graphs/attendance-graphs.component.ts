@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HotelService} from "../../service/hotel.service";
 import {AdditionalServiceService} from "../../service/additionalService.service";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 
 @Component({
@@ -26,10 +28,14 @@ export class AttendanceGraphsComponent implements OnInit {
 
   monthlyValues = [];
 
+  administrator : any = null;
+
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               public fb: FormBuilder,
-              private hotelService: HotelService) {
+              private hotelService: HotelService,
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'year3': ['', Validators.compose([Validators.pattern('(19[789]\\d|20[01]\\d)')])],
       'month3': ['', Validators.compose([Validators.pattern('^(1[012]|[1-9])$')])],
@@ -42,6 +48,10 @@ export class AttendanceGraphsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     this.showGraph = false;
     this.choose = false;
@@ -186,4 +196,10 @@ export class AttendanceGraphsComponent implements OnInit {
     this.chooseWeekly = false;
     this.choose = true;
   }
+
+  logout()
+  {
+    this.authService.logOutUser();
+  }
+
 }

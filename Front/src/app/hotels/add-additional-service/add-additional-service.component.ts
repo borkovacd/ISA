@@ -5,6 +5,8 @@ import {RoomService} from '../../service/room.service';
 import {RoomModel} from '../../model/room.model';
 import {AdditionalServiceModel} from '../../model/additionalService.model';
 import {AdditionalServiceService} from '../../service/additionalService.service';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-add-additional-service',
@@ -13,6 +15,8 @@ import {AdditionalServiceService} from '../../service/additionalService.service'
 })
 export class AddAdditionalServiceComponent implements OnInit {
 
+  administrator : any = null;
+
   public form: FormGroup;
   public tipDodatneUsluge: AbstractControl;
   naslovStranice: string;
@@ -20,7 +24,9 @@ export class AddAdditionalServiceComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private additionalServiceService: AdditionalServiceService){
+              private additionalServiceService: AdditionalServiceService,
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'tipDodatneUsluge': ['', Validators.compose([Validators.required])],
     })
@@ -28,7 +34,9 @@ export class AddAdditionalServiceComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
   }
 
   confirmClick() {
@@ -50,5 +58,11 @@ export class AddAdditionalServiceComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     this.router.navigateByUrl('hotelAdminPage/additionalServices/' +  idHotela);
   }
+
+  logout()
+  {
+    this.authService.logOutUser();
+  }
+
 }
 

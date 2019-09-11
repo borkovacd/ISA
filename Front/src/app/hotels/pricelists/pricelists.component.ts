@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
 import {HotelService} from '../../service/hotel.service';
 import {PricelistService} from '../../service/pricelist.service';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-pricelists',
@@ -11,14 +13,22 @@ import {PricelistService} from '../../service/pricelist.service';
 })
 export class PricelistsComponent implements OnInit {
 
+  administrator : any = null;
+
   pricelists = []
   nazivHotela: string;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private hotelService: HotelService,
-              private pricelistService: PricelistService) {}
+              private pricelistService: PricelistService,
+              private  userService: UserService,
+              private authService: AuthService) {}
   ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     const idHotela = this.route.snapshot.params.idHotela;
 
@@ -77,5 +87,10 @@ export class PricelistsComponent implements OnInit {
   showPricelist(idPriceList: any) {
     const idHotela = this.route.snapshot.params.idHotela;
     this.router.navigateByUrl('hotelAdminPage/prices/' + idHotela + '/' + idPriceList);
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
 import {AdditionalServiceService} from '../../service/additionalService.service';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-additional-services',
@@ -12,13 +14,20 @@ export class AdditionalServicesComponent implements OnInit {
 
   additionalServices = [];
   nazivHotela: string;
+  administrator : any = null;
 
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               private hotelService: HotelService,
-              private additionalServiceService: AdditionalServiceService) {}
+              private additionalServiceService: AdditionalServiceService,
+              private  userService: UserService,
+              private authService: AuthService) {}
 
   ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     const idHotela = this.route.snapshot.params.idHotela;
 
@@ -54,5 +63,12 @@ export class AdditionalServicesComponent implements OnInit {
       }
     })
   }
+
+  logout()
+  {
+    this.authService.logOutUser();
+  }
+
+
 }
 

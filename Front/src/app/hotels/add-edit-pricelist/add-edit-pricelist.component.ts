@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {PricelistService} from '../../service/pricelist.service';
 import {PricelistModel} from '../../model/pricelist.model';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-add-edit-pricelist',
@@ -10,6 +12,8 @@ import {PricelistModel} from '../../model/pricelist.model';
   styleUrls: ['./add-edit-pricelist.component.css']
 })
 export class AddEditPricelistComponent implements OnInit {
+
+  administrator : any = null;
 
   public form: FormGroup;
   public startDate: AbstractControl;
@@ -23,7 +27,9 @@ export class AddEditPricelistComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private pricelistService: PricelistService,) {
+              private pricelistService: PricelistService,
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],
@@ -33,6 +39,10 @@ export class AddEditPricelistComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     const mode = this.route.snapshot.params.mode;
     const idHotela = this.route.snapshot.params.idHotela;
@@ -57,34 +67,6 @@ export class AddEditPricelistComponent implements OnInit {
       this.editPricelist();
     }
   }
-  /*
-  createRoom(){
-    const idHotela = this.route.snapshot.params.idHotela;
-
-    const room = new RoomModel(
-      this.capacity.value,
-      this.floor.value,
-      this.hasBalcony.value,
-      this.roomType.value
-    );
-    this.roomService.createRoom(room, idHotela).subscribe(data => {
-      this.router.navigateByUrl('hotelAdminPage/rooms/' +  idHotela);
-    })
-  }
-  editRoom() {
-    const idHotela = this.route.snapshot.params.idHotela;
-    const idRoom = this.route.snapshot.params.idPriceList;
-
-    const room = new RoomModel(
-      this.capacity.value,
-      this.floor.value,
-      this.hasBalcony.value,
-      this.roomType.value
-    );
-    this.roomService.editRoom(room, idRoom).subscribe(data => {
-      this.router.navigateByUrl('hotelAdminPage/rooms/' + idHotela);
-    })
-  }*/
 
   exit() {
     const idHotela = this.route.snapshot.params.idHotela;
@@ -109,6 +91,11 @@ export class AddEditPricelistComponent implements OnInit {
 
   private editPricelist() {
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 }
 

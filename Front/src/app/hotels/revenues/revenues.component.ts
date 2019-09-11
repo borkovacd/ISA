@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HotelService} from '../../service/hotel.service';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-revenues',
@@ -9,6 +11,8 @@ import {HotelService} from '../../service/hotel.service';
   styleUrls: ['./revenues.component.css']
 })
 export class RevenuesComponent implements OnInit {
+
+  administrator : any = null;
 
   public form: FormGroup;
   d1: AbstractControl;
@@ -20,7 +24,9 @@ export class RevenuesComponent implements OnInit {
   constructor(protected  router: Router,
               private route: ActivatedRoute,
               public fb: FormBuilder,
-              private hotelService: HotelService) {
+              private hotelService: HotelService,
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'd1': ['', Validators.required],
       'd2': ['', Validators.required],
@@ -31,6 +37,10 @@ export class RevenuesComponent implements OnInit {
 
   ngOnInit() {
     this.showValue = false;
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
 
     const idHotela = this.route.snapshot.params.idHotela;
 
@@ -57,6 +67,11 @@ export class RevenuesComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl('hotelAdminPage' );
 
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 
 }

@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {RoomService} from '../../service/room.service';
 import {RoomModel} from '../../model/room.model';
+import {UserService} from '../../service/user.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-add-edit-room',
@@ -10,6 +12,8 @@ import {RoomModel} from '../../model/room.model';
   styleUrls: ['./add-edit-room.component.css']
 })
 export class AddEditRoomComponent implements OnInit {
+
+  administrator : any = null;
 
   public form: FormGroup;
   public capacity: AbstractControl;
@@ -23,7 +27,9 @@ export class AddEditRoomComponent implements OnInit {
   constructor(protected  router: Router,
               public fb: FormBuilder,
               private route: ActivatedRoute,
-              private roomService: RoomService,){
+              private roomService: RoomService,
+              private  userService: UserService,
+              private authService: AuthService) {
     this.form = this.fb.group({
       'capacity': ['', Validators.compose([Validators.required, Validators.pattern('[1-9]{1,2}$')])],
       'floor': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,3}$')])],
@@ -37,6 +43,11 @@ export class AddEditRoomComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.administrator = data;
+    });
+
 
     const mode = this.route.snapshot.params.mode;
     const idRoom = this.route.snapshot.params.idRoom;
@@ -96,6 +107,11 @@ export class AddEditRoomComponent implements OnInit {
   exit() {
     const idHotela = this.route.snapshot.params.idHotela;
     this.router.navigateByUrl('hotelAdminPage/rooms/' +  idHotela);
+  }
+
+  logout()
+  {
+    this.authService.logOutUser();
   }
 }
 
