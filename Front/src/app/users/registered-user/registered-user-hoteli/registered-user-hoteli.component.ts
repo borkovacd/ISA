@@ -14,13 +14,15 @@ import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 })
 export class RegisteredUserHoteliComponent implements OnInit {
 
+  public tipSort: AbstractControl;
+
   latitude: number;
   longitude: number;
   zoom: number;
   address: string;
   private geoCoder;
 
-  hotels = [];
+  hotels : any = [];
 
   //showMap: boolean;
   showLocation: boolean;
@@ -40,6 +42,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
+  nemaViseSortiranja: boolean;
 
 
   constructor(protected router: Router,
@@ -54,11 +57,13 @@ export class RegisteredUserHoteliComponent implements OnInit {
       'endDate': ['', Validators.compose([Validators.required])],
       'hotelName': [''],
       'hotelLocation': [''],
+      'tipSort': [''],
     })
     this.startDate = this.form.controls['startDate'];
     this.endDate = this.form.controls['endDate'];
     this.hotelName = this.form.controls['hotelName'];
     this.hotelLocation = this.form.controls['hotelLocation'];
+    this.tipSort = this.form.controls['tipSort'];
   }
 
   public ngOnInit() {
@@ -67,6 +72,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
     this.pretraga = false;
     this.showLocation = false;
     this.hideData = false;
+    this.nemaViseSortiranja = false;
 
     this.hotelService.getAllHotels().subscribe(data => {
       this.hotels = data;
@@ -145,6 +151,7 @@ export class RegisteredUserHoteliComponent implements OnInit {
     this.hotelService.searchHotels(searchHotels).subscribe(data => {
       this.hotels = data;
       this.pretraga = false;
+      this.nemaViseSortiranja = true;
     });
   }
 
@@ -164,6 +171,19 @@ export class RegisteredUserHoteliComponent implements OnInit {
         alert('Prosecna ovog hotela je: ' + data);
       }
     })
+  }
+
+  // sortiranje
+  sortirajHotele(){
+    let sort : string = this.tipSort.value;
+    this.hotelService.sortHotele(sort).subscribe(
+      data => {
+        this.hotels = data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 }
 

@@ -1,5 +1,6 @@
 package com.ftn.model.hotels;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.ftn.model.Korisnik;
+import com.ftn.model.rentacar.RentACar;
 
 @Entity
 public class Hotel {
@@ -79,6 +81,30 @@ public class Hotel {
 	public void setAdministrator(Korisnik administrator) {
 		this.administrator = administrator;
 	}
+	
+	public static Comparator<Hotel> HotelNameComparator = new Comparator<Hotel>() {
+
+		public int compare(Hotel u1, Hotel u2) {
+			String name1 = u1.getNaziv().toUpperCase();
+			String name2 = u2.getNaziv().toUpperCase();
+
+			// sortiranje od A-Z
+			return name1.compareTo(name2);
+
+		}
+	};
+
+	public static Comparator<Hotel> HotelCityComparator = new Comparator<Hotel>() {
+
+		public int compare(Hotel u1, Hotel u2) {
+			String city1 = u1.getAdresa().toUpperCase();
+			String city2 = u2.getAdresa().toUpperCase();
+
+			// sortiranje od A-Z
+			return city1.compareTo(city2);
+
+		}
+	};
 	
 	
 	

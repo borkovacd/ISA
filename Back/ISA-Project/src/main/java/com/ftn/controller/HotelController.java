@@ -1,6 +1,7 @@
 package com.ftn.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,8 @@ import com.ftn.dto.VremenskiPeriodDTO;
 import com.ftn.model.Korisnik;
 import com.ftn.model.hotels.Hotel;
 import com.ftn.model.hotels.Soba;
+import com.ftn.model.rentacar.RentACar;
+import com.ftn.repository.HotelRepository;
 import com.ftn.service.HotelService;
 import com.ftn.service.UserService;
 
@@ -33,6 +37,9 @@ public class HotelController {
 	
 	@Autowired
 	private HotelService hotelService;
+	
+	@Autowired
+	private HotelRepository hotelRepository;
 	
 	@Autowired
 	private UserService userService ;
@@ -135,6 +142,45 @@ public class HotelController {
 	public ResponseEntity<Double> getRevenues(@PathVariable Long id, @RequestParam String d1, @RequestParam String d2) {
 		Double retVal = hotelService.getRevenues(id, d1, d2);
 		return new ResponseEntity<Double>(retVal, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/sort/{uslov}", method = RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Hotel> getSortedHotels(@PathVariable String uslov) {
+		System.out.println("Uslov je " + uslov);
+		
+		List<Hotel> svi = hotelRepository.findAll();
+		List<Hotel> sortiranaLista = new ArrayList<Hotel>();
+
+		if (uslov.equals("NameA")) {
+			// sortiraj po nazivu od A-Z
+			Collections.sort(svi, Hotel.HotelNameComparator);
+			for (Hotel R : svi) {
+				sortiranaLista.add(R);
+			}
+
+		} else if (uslov.equals("NameD")) {
+			// sortiraj po nazivu od Z-A
+			Collections.sort(svi, Hotel.HotelNameComparator);
+			for (int i = svi.size() - 1; i >= 0; i--) {
+				sortiranaLista.add(svi.get(i));
+			}
+
+		} else if (uslov.equals("CityA")) {
+			// sortiraj po gradu od A-Z
+			Collections.sort(svi, Hotel.HotelCityComparator);
+			for (Hotel R : svi) {
+				sortiranaLista.add(R);
+			}
+		} else {
+			// sortiraj po gradu od Z-A
+			Collections.sort(svi, Hotel.HotelCityComparator);
+			for (int i = svi.size() - 1; i >= 0; i--) {
+				sortiranaLista.add(svi.get(i));
+			}
+		}
+
+		return sortiranaLista;
 	}
 	
 	/**********************/

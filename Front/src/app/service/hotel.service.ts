@@ -91,5 +91,10 @@ export class HotelService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/vratiHoteleKorisnika`, {headers});
   }
+
+  sortHotele(sort : string){
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/sort/`+sort, {headers});
+  }
 }
 

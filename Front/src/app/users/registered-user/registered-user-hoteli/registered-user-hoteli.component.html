@@ -7,6 +7,23 @@
       <i class="fa fa-arrow-left"> Nazad</i>
     </button>
   </div>
+
+  <div [hidden]="pretraga">
+  <div [hidden]="nemaViseSortiranja" class="form-group row">
+    <div class="col-md-10"></div>
+    <div  style="margin-right: 4%">
+      <label>Sortiraj hotele po:</label>
+      <select class="form-control margin" [formControl]="tipSort" (change)="sortirajHotele()">
+        <option hidden disabled selected value="none"></option>
+        <option value="NameA">Ime [A-Z]</option>
+        <option value="NameD">Ime [Z-A]</option>
+        <option value="CityA">Adresa [A-Z]</option>
+        <option value="CityD">Adresa [Z-A]</option>
+      </select>
+    </div>
+  </div>
+  </div>
+
   <div [hidden]="!pretraga" style="text-align: center">
     <p  style="color: black;font-size:40px; margin-top: 5%; font-family: 'Ink Free'">Pretraga hotela</p>
     <form [formGroup]="form">
@@ -74,7 +91,7 @@
 <div class="form-group" [hidden]="!showLocation">
   <input value="{{tempAdresa}}" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
 </div>
-<!--<div [hidden]="!showMap">-->
+
   <div [hidden]="!showLocation" >
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker [latitude]="latitude" [longitude]="longitude" ></agm-marker>
