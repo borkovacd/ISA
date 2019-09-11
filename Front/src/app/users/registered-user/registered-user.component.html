@@ -4,7 +4,17 @@
     <button class="btn-primary" (click)="logout()">Odjavi se</button>
   </igx-navbar>
   <igx-tabs tabsType="fixed">
-    <igx-tabs-group label="Aviokompanije">Pregled aviokompanija.</igx-tabs-group>
+    <igx-tabs-group label="Aviokompanije">
+      <div style="text-align: center; margin-top: 15%">
+        <p  style="color: #1a8cff;font-size:45px; font-width: bolder;font-family: 'Ink Free'; margin-bottom: 3%">
+          Za demonstraciju brze rezervaciju kliknite
+        </p>
+        <button class="btn btn-lg btn-outline-primary" (click)="brzaRezervacija()">
+          OVDE
+        </button>
+      </div>
+
+    </igx-tabs-group>
 
     <igx-tabs-group label="Hoteli">
       <app-registered-user-hoteli></app-registered-user-hoteli>

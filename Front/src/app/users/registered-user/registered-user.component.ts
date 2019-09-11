@@ -10,7 +10,9 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RegisteredUserComponent implements OnInit {
 
-  constructor(private userService : UserService, private router: Router, private authService: AuthService) { }
+  constructor(private userService : UserService,
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -20,4 +22,7 @@ export class RegisteredUserComponent implements OnInit {
     this.authService.logOutUser();
   }
 
+  brzaRezervacija() {
+    this.router.navigateByUrl('/brzaRezervacija/hoteli/1')
+  }
 }

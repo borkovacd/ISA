@@ -47,11 +47,9 @@ insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena)
 	
 /**** CENOVNICI ****/
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (9, DATE '2019-06-01', DATE '2019-08-31', 6);
+	values (10, DATE '2019-05-01', DATE '2019-07-31', 6);
 insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (10, DATE '2019-03-01', DATE '2019-05-31', 6);
-insert into isa_project.cenovnik_hotela (id, pocetak_vazenja, prestanak_vazenja, hotel_id) 
-	values (11, DATE '2019-09-01', DATE '2019-11-30', 6);
+	values (11, DATE '2019-08-01', DATE '2019-10-31', 6);
 	
 /**** STAVKE CENOVNIKA ****/	
 insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, tip_sobe, cenovnik_id) 
@@ -67,9 +65,9 @@ insert into isa_project.stavka_cenovnika_hotela (id, cena, tip_dodatne_usluge, t
 	
 /**** REZERVACIJA HOTELA ****/
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
-	values (1, 12500, DATE '2019-09-01', DATE '2019-09-12', 4, 0, 4);
+	values (1, 12500, DATE '2019-08-01', DATE '2019-08-12', 4, 0, 4);
 insert into isa_project.rezervacija_hotela (id, cena, datum_pocetka, datum_kraja, korisnik_id, tip_rezervacije, broj_gostiju)
-	values (2, 18000, DATE '2019-12-20', DATE '2020-01-05', 4, 0, 1);
+	values (2, 18000, DATE '2019-12-20', DATE '2019-12-25', 4, 0, 1);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)
 	values (1, 1);
 insert into isa_project.rezervacija_hotela_sobe (rezervacija_hotela_id, sobe_id)

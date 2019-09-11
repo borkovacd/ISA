@@ -55,6 +55,9 @@ public class HotelService {
 		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		int year = Integer.parseInt(yearString);
 		//System.out.println("Godina je: " + year);
 		
@@ -71,7 +74,8 @@ public class HotelService {
 		
 		for(RezervacijaHotela rezervacija: sveRezervacije) {
 			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumKraja().isBefore(currentDate) || rezervacija.getDatumKraja().isEqual(currentDate))
+					rezervacije.add(rezervacija);
 			}
 		}
 		
@@ -148,6 +152,9 @@ public class HotelService {
 
 	public ArrayList<Integer> getDailyGraphData(Long id, String date) {
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
 		String europeanDatePattern = "yyyy-MM-dd";
@@ -165,7 +172,8 @@ public class HotelService {
 		
 		for(RezervacijaHotela rezervacija: sveRezervacije) {
 			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumKraja().isBefore(currentDate) || rezervacija.getDatumKraja().isEqual(currentDate))
+					rezervacije.add(rezervacija);
 			}
 		}
 		
@@ -224,6 +232,9 @@ public class HotelService {
 	
 	public ArrayList<Integer> getMonthyGraphData(Long id, String yearString) {
 		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
 		ArrayList<Integer> values = new ArrayList<Integer>();
 		
 		int year = Integer.parseInt(yearString);
@@ -239,7 +250,8 @@ public class HotelService {
 		
 		for(RezervacijaHotela rezervacija: sveRezervacije) {
 			if(rezervacija.getSobe().get(0).getHotel().getId() == id) {
-				rezervacije.add(rezervacija);
+				if(rezervacija.getDatumKraja().isBefore(currentDate) || rezervacija.getDatumKraja().isEqual(currentDate))
+					rezervacije.add(rezervacija);
 			}
 		}
 		
