@@ -53,7 +53,7 @@ export class WelcomePageServisiComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('welcoomepage');
+    location.reload();
   }
 
   pretraziRentServise()

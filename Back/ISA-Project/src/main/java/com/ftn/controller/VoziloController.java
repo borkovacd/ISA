@@ -169,6 +169,15 @@ public class VoziloController
 
 	}
 	
+	@PutMapping("/skiniVoziloSaPopusta/{idVozila}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Vozilo> skiniVoziloSaPopusta(@PathVariable Long idVozila) 
+	{
+		Vozilo v = voziloService.skiniVoziloSaPopusta(idVozila);
+		return new ResponseEntity<>(v, HttpStatus.OK);
+
+	}
+	
 	@GetMapping("/getVozilaAtDiscount/{idRezervacijeLeta}/{idRent}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<Vozilo>> getVozilaAtDiscount(@PathVariable Long idRezervacijeLeta, @PathVariable Long idRent) 

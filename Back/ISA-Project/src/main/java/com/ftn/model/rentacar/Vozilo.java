@@ -48,6 +48,9 @@ public class Vozilo
 	private double brojOcena ;
 	private double sumaOcena ;
 	*/
+	
+	/*@Version
+    private Long version;*/
 
 	public Vozilo() {
 		cena = 0;

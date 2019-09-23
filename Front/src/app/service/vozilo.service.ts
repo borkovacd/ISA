@@ -86,6 +86,11 @@ export class VoziloService {
     return this.http.put(`${this.BASE_URL}/staviVoziloNaPopust/${idVozilo}`, {headers});
   }
 
+  skiniVoziloSaPopusta(idVozilo: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put(`${this.BASE_URL}/skiniVoziloSaPopusta/${idVozilo}`, {headers});
+  }
+
   getVozilaAtDiscount(idRezervacijeLeta: any, idRent: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.get(`${this.BASE_URL}/getVozilaAtDiscount/${idRezervacijeLeta}/${idRent}`,{headers});

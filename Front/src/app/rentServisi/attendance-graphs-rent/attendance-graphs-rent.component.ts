@@ -66,7 +66,7 @@ export class AttendanceGraphsRentComponent implements OnInit {
   }
 
   confirm() {
-    
+
 
     const idRent = this.route.snapshot.params.idRent;
     if(this.chooseMonthy) {

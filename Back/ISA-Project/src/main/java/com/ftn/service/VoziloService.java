@@ -110,7 +110,7 @@ public class VoziloService
 	
 	// Izmena vozila
 	@Transactional
-	synchronized public Vozilo izmeniVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
+	public Vozilo izmeniVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
 	{
 		Vozilo v = voziloRepository.findOneByVoziloId(idVozila);
 		
@@ -168,7 +168,7 @@ public class VoziloService
 
 	// metoda za brisanje vozila
 	@Transactional
-	synchronized public boolean obrisiVozilo(Long idRentACar, Long idVozila)
+	public boolean obrisiVozilo(Long idRentACar, Long idVozila)
 	{
 		List<StavkaCenovnikaRent> stavke = stavkaRentRepository.findAll();
 		for (Vozilo vozilo: voziloRepository.findAll())
@@ -300,24 +300,18 @@ public class VoziloService
 			{
 				if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
 				{
-					if (d1.isBefore(rez.getDatumPreuzimanja()))
-					{
-						if (d2.isAfter(rez.getDatumPreuzimanja()))
-						{
-							slobodno = false ;
+					if(d1.isBefore(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumPreuzimanja())) {
+						if(d2.isAfter(rez.getDatumPreuzimanja()) || d2.equals(rez.getDatumPreuzimanja())) {
+							slobodno = false;
 						}
-						
-						else if(d1.isAfter(rez.getDatumPreuzimanja()))
-						{
-							if (d2.isBefore(rez.getDatumVracanja()))
-							{
-								slobodno = false ;
-							}
+					} else if(d1.isAfter(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumVracanja())) {
+						if(d1.isBefore(rez.getDatumVracanja()) || d1.equals(rez.getDatumVracanja())) {
+							slobodno = false;
 						}
-						else if(d1.isEqual(rez.getDatumPreuzimanja())) {
-							if(d2.isEqual(rez.getDatumVracanja())) {
-								slobodno = false;
-							}
+					}
+					else if (d1.isEqual(rez.getDatumPreuzimanja())) {
+						if(d2.isEqual(rez.getDatumVracanja())) {
+							slobodno = false;
 						}
 					}
 				}
@@ -465,7 +459,12 @@ public class VoziloService
 							slobodno = false;
 						}
 					} else if(d1.isAfter(rezervacija.getDatumPreuzimanja()) || d1.equals(rezervacija.getDatumVracanja())) {
-						if(d2.isBefore(rezervacija.getDatumVracanja()) || d2.equals(rezervacija.getDatumVracanja())) {
+						if(d1.isBefore(rezervacija.getDatumVracanja()) || d1.equals(rezervacija.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+					else if (d1.isEqual(rezervacija.getDatumPreuzimanja())) {
+						if(d2.isEqual(rezervacija.getDatumVracanja())) {
 							slobodno = false;
 						}
 					}
@@ -560,6 +559,14 @@ public class VoziloService
 		return v;
 	}
 	
+	public Vozilo skiniVoziloSaPopusta(Long idVozila)
+	{
+		Vozilo v = voziloRepository.getOne(idVozila);
+		v.setNaPopustu(false);
+		voziloRepository.save(v);
+		return v;
+	}
+	
 	public ArrayList<Vozilo> vratiVozilaNaPopustu(Long idRezervacijeLeta, Long idRent) 
 	{
 		ArrayList<Vozilo> odgovarajucaVozila = new ArrayList<Vozilo>();
@@ -603,15 +610,16 @@ public class VoziloService
 			boolean slobodno = true;
 			for(RezervacijaVozila rezervacija : rezervacije) {
 					if(rezervacija.getVozilo().getVoziloId() == v.getVoziloId()) { //Da li se vozilo nalazi medju rezervacijama
-						if(d1.isBefore(rezervacija.getDatumPreuzimanja())) {
-							if(d2.isAfter(rezervacija.getDatumVracanja())) {
+						if(d1.isBefore(rezervacija.getDatumPreuzimanja()) || d1.equals(rezervacija.getDatumPreuzimanja())) {
+							if(d2.isAfter(rezervacija.getDatumPreuzimanja()) || d2.equals(rezervacija.getDatumPreuzimanja())) {
 								slobodno = false;
 							}
-						} else if(d1.isAfter(rezervacija.getDatumPreuzimanja())) {
-							if(d2.isBefore(rezervacija.getDatumVracanja())) {
+						} else if(d1.isAfter(rezervacija.getDatumPreuzimanja()) || d1.equals(rezervacija.getDatumVracanja())) {
+							if(d1.isBefore(rezervacija.getDatumVracanja()) || d1.equals(rezervacija.getDatumVracanja())) {
 								slobodno = false;
 							}
-						} else if(d1.isEqual(rezervacija.getDatumPreuzimanja())) {
+						}
+						else if (d1.isEqual(rezervacija.getDatumPreuzimanja())) {
 							if(d2.isEqual(rezervacija.getDatumVracanja())) {
 								slobodno = false;
 							}
