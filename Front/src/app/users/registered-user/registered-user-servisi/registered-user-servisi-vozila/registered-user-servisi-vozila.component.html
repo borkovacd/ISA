@@ -1,6 +1,5 @@
 <div class="items-wrapper__item items-wrapper__item-small items-wrapper__item--blue">
   <igx-navbar style="font-family: 'Ink Free'" title="T R A V E L L A N D">
-    <button class="btn-primary" style="border-color: #1a8cff; background: #1a8cff;">Profil</button>
     <button class="btn-primary"  style="border-color: #1a8cff; background: #1a8cff;" (click)="logout()">Odjavi se</button>
   </igx-navbar>
 </div>
@@ -135,11 +134,12 @@
         style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
         (click)="vratiProsecnuOcenu(vozilo.voziloId)">Ocena
       </button>
+      <div>&nbsp;</div>
       <button
-        style="height: 30px;width: 70px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
+        style="height: 45px;width: 110px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"
         (click)="addVozilo(vozilo.tip, vozilo.voziloId)">Izaberi
       </button>
-      <button style="height: 30px;width: 70px;border-radius: 12px;background-color: #ff6666;color: white; margin-bottom: 2%"
+      <button style="height: 45px;width: 110px;border-radius: 12px;background-color: #ff6666;color: white; margin-bottom: 2%"
               (click)="removeVozilo(vozilo.tip, vozilo.voziloId)">Ukloni
       </button>
 

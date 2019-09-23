@@ -21,19 +21,19 @@
     <div class="form-group">
 
       <label style="margin-top: 20px">Ocena:</label>
-      <select class="form-control" [formControl]="rating">
+      <select class="form-control " [formControl]="rating">
         <option>1</option>
         <option>2</option>
         <option>3</option>
         <option>4</option>
         <option>5</option>
       </select>
-
-      <button class="btn btn-success" style="width: 100%;margin-top: 30px" (click)="confirmClick()"
+      <div>&nbsp;</div>
+      <button style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px" (click)="confirmClick()"
               [disabled]="!form.valid">
         Potvrdi
       </button>
-      <button class="btn btn-success" style="width: 100% ; margin-top: 20px" (click)="exit()">Zatvori</button>
+      <button style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px" (click)="exit()">Zatvori</button>
     </div>
   </form>
 </div>
