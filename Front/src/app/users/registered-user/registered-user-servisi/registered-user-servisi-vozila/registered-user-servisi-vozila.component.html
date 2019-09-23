@@ -32,6 +32,7 @@
                   </small>
                 </div>
               </div>
+
               <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                 <label>Datum vracanja:</label>
                 <div class="field-icon-wrap">
@@ -42,6 +43,36 @@
                   </small>
                 </div>
               </div>
+
+              <div>
+                <label style="font-size: 20px; margin-top: 5%">Mesto preuzimanja:</label>
+                <select class="form-control margin" [formControl]="mestoPreuzimanja">
+                  <option></option>
+                  <option *ngFor="let mestoPreuzimanja of filijale ">{{mestoPreuzimanja.adresa}}</option>
+                </select>
+                <small class="form-text error" *ngIf="mestoPreuzimanja.errors?.required && mestoPreuzimanja.touched" style="color: red">
+                  Izbor mesta preuzimanja je obavezan!
+                </small>
+              </div>
+
+              &nbsp; &nbsp; &nbsp; &nbsp;
+                  <div>
+                    <label style="font-size: 20px; margin-top: 5%">Mesto vracanja:</label>
+                    <select class="form-control margin" [formControl]="mestoVracanja">
+                      <option></option>
+                      <option *ngFor="let mestoVracanja of filijale ">{{mestoVracanja.adresa}}</option>
+                    </select>
+                    <small class="form-text error" *ngIf="mestoVracanja.errors?.required && mestoVracanja.touched" style="color: red">
+                      Izbor mesta vracanja je obavezan!
+                    </small>
+                  </div>
+
+              <div>&nbsp;</div>
+              <div>&nbsp;</div>
+              <div>&nbsp;</div>
+              <br>
+              <br>
+
               <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
                 <div class="row">
                   <div class="col-md-6 mb-3 mb-md-0">
@@ -54,27 +85,8 @@
                       </small>
                     </div>
                   </div>
-                  <div>
-                    <label style="font-size: 20px; margin-top: 5%">Mesto preuzimanja:</label>
-                    <select class="form-control margin" [formControl]="mestoPreuzimanja">
-                      <option></option>
-                      <option *ngFor="let mestoPreuzimanja of filijale ">{{mestoPreuzimanja.adresa}}</option>
-                    </select>
-                    <small class="form-text error" *ngIf="mestoPreuzimanja.errors?.required && mestoPreuzimanja.touched" style="color: red">
-                      Izbor mesta preuzimanja je obavezan!
-                    </small>
-                  </div>
 
-                  <div>
-                    <label style="font-size: 20px; margin-top: 5%">Mesto vracanja:</label>
-                    <select class="form-control margin" [formControl]="mestoVracanja">
-                      <option></option>
-                      <option *ngFor="let mestoVracanja of filijale ">{{mestoVracanja.adresa}}</option>
-                    </select>
-                    <small class="form-text error" *ngIf="mestoVracanja.errors?.required && mestoVracanja.touched" style="color: red">
-                      Izbor mesta vracanja je obavezan!
-                    </small>
-                  </div>
+
 
                   <div>
                     <label style="font-size: 20px; margin-top: 5%">Tip vozila:</label>
