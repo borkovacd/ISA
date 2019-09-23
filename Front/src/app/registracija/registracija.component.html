@@ -1,109 +1,67 @@
-<h2>Registracija</h2>
-<form class="form-horizontal">
-  <div class="form-group col-md-3">
-    <label style="font-family: 'Verdana'">Ime:</label>
-    <input type="text" name="name" id = "nameValue" class="form-control" placeholder="Ime.." required autofocus [(ngModel)]="korisnik.ime" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
+<body>
+<div id="login">
+  <h3 class="text-center text-white pt-5">Forma za registraciju</h3>
+  <div class="container">
+    <div id="login-row" class="row justify-content-center align-items-center">
+      <div id="login-column" class="col-md-6">
+        <div id="login-box" class="col-md-16">
+          <form id="login-form" class="form" action="" method="post">
+            <h3 class="text-center text-info">Registracija</h3>
+            <div class="form-group">
+              <label class="text-info">Ime:</label><br>
+              <input type="text" name="name" placeholder="Ime.." id="nameValue" class="form-control" required autofocus [(ngModel)] = "korisnik.ime" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <label class="text-info">Prezime:</label><br>
+              <input type="text" name="surname" placeholder="Prezime..." id="surname" class="form-control" required autofocus [(ngModel)] = "korisnik.prezime" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <label class="text-info">Korisnicko ime:</label><br>
+              <input type="text" name="surname" placeholder="Korisnicko ime..." id="username" class="form-control" required autofocus [(ngModel)] = "korisnik.korisnickoIme" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <label class="text-info">Lozinka:</label><br>
+              <input type="password" name="passValue" placeholder="******" id="passValue" class="form-control" required autofocus [(ngModel)] = "korisnik.lozinka" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <label class="text-info">Ponovite lozinku:</label><br>
+              <input type="password" name="passValue1" placeholder="******" id="passValue1" class="form-control" required autofocus [(ngModel)] = "ponovljenaLozinka" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <p class="text-danger">{{lozinke}}</p>
+
+            <div class="form-group">
+              <label class="text-info">Email:</label><br>
+              <input type="text" name="email" placeholder="Email adresa..." id="email" class="form-control" required autofocus [(ngModel)] = "korisnik.email" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <label class="text-info">Broj telefona:</label><br>
+              <input type="text" name="brTel" placeholder="Broj telefona..." id="brTel" class="form-control" required autofocus [(ngModel)] = "korisnik.telefon" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <p class="text-danger">{{porukaTelefon}}</p>
+
+            <div class="form-group">
+              <label class="text-info">Grad:</label><br>
+              <input type="text" name="grad" placeholder="Grad..." id="grad" class="form-control" required autofocus [(ngModel)] = "korisnik.grad" [ngModelOptions] = "{standalone:true}">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" name="submit" class="btn btn-info btn-md" value="Registruj se" (click)="submit()">
+              &nbsp;
+                <a [routerLink]="['/welcomepage']" class="text-info">Odustani</a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+</body>
 
-  <div class="form-group col-md-3">
-    <label for="surname" style="font-family: 'Verdana'">Prezime</label>
-    <input type="text" name="surname" id = "surname" class="form-control"  placeholder="Prezime.." required autofocus [(ngModel)]="korisnik.prezime" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <div class="form-group col-md-3">
-    <label for="username" style="font-family: 'Verdana'">Korisnicko ime:</label>
-    <input type="text" name="username" id = "username" class="form-control"  placeholder="Korisnicko ime.." required autofocus [(ngModel)]="korisnik.korisnickoIme" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <div class="form-group col-md-3">
-    <label style="font-family: 'Verdana'">Lozinka:</label>
-    <input type="password" name="passValue" id = "passValue" class="form-control"  placeholder="Lozinka.." required autofocus [(ngModel)]="korisnik.lozinka" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <div class="form-group col-md-3">
-    <label style="font-family: 'Verdana'">Ponovite lozinku:</label>
-    <input type="password" name="passValue1" id = "passValue1" class="form-control"  placeholder="Ponovljena lozinka.." required autofocus [(ngModel)]="ponovljenaLozinka" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <p class="text-danger">{{lozinke}}</p>
-
-  <div class="form-group col-md-3">
-    <label for="email" style="font-family: 'Verdana'">Email:</label>
-    <input type="text" name="email" id = "email" class="form-control" placeholder="Email.." required autofocus [(ngModel)]="korisnik.email" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <div class="form-group col-md-3">
-    <label for="brTel" style="font-family: 'Verdana'">Broj telefona:</label>
-    <input type="text" name="brTel" id = "brTel" class="form-control" placeholder="Broj telefona.." required autofocus [(ngModel)]="korisnik.telefon" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-  <p class="text-danger">{{porukaTelefon}}</p>
-
-  <div class="form-group col-md-3">
-    <label for="grad" style="font-family: 'Verdana'">Grad:</label>
-    <input type="text" name="grad" id = "grad" class="form-control" placeholder="Grad.." required autofocus [(ngModel)]="korisnik.grad" [ngModelOptions] = "{standalone:true}" />
-  </div>
-  <div class="col-md-3">
-    <div class="form-control-feedback">
-      <span class="text-danger align-middle">
-        <!-- Put name validation error messages here -->
-      </span>
-    </div>
-  </div>
-
-
-  <div class="form-group">
-    <button  class="btn btn-primary" (click)="submit()" style="font-family: 'Verdana'">Registruj se</button>
-    <a [routerLink]="['/welcomepage']" class="btn btn-link">Odustani</a>
-  </div>
-</form>
 

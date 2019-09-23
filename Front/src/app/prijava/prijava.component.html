@@ -1,22 +1,38 @@
-<h2>Prijava</h2>
-<form class="form-horizontal" >
+<body>
+<div id="login">
+  <h3 class="text-center text-white pt-5">Forma za prijavu</h3>
+  <div class="container">
+    <div id="login-row" class="row justify-content-center align-items-center">
+      <div id="login-column" class="col-md-6">
+        <div id="login-box" class="col-md-16">
+          <form id="login-form" class="form" action="" method="post">
+            <h3 class="text-center text-info">Prijava</h3>
+            <div class="form-group">
+              <label class="text-info">Korisnicko ime:</label><br>
+              <input type="text" name="email" placeholder="Korisnicko ime.." id="emailValue" class="form-control"  [(ngModel)] = "user.korisnickoIme" [ngModelOptions] = "{standalone:true}">
+            </div>
 
-  <p class="text-center text-danger">{{poruka}}</p>
+            <div class="form-group">
+              <label class="text-info">Lozinka:</label><br>
+              <input type="password" name="password" placeholder="******" id="passValue" class="form-control" [(ngModel)] = "user.lozinka" [ngModelOptions] = "{standalone:true}">
+            </div>
+            <div class="form-group">
+              <input type="submit" name="submit" class="btn btn-info btn-md" value="Prijavi se" (click)="clickLogIn()">
+            </div>
+            <div>&nbsp;</div>
+            <div id="register-link" class="text-right">
+              <a [routerLink]="['/registracija']" class="text-info">Registruj se</a>
+            </div>
 
-  <div class="form-group col-md-3">
-    <label style="font-family: 'Verdana'">Korisnicko ime: </label>
-    <input type="text" name="email" class="form-control" placeholder="Korisnicko ime.." type="text" id="emailValue" [(ngModel)] = "user.korisnickoIme" [ngModelOptions] = "{standalone:true}" />
+            <div id="welcome-link" class="text-right">
+              <a [routerLink]="['/welcomepage']" class="text-info">Odustani</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+</body>
 
-
-  <div class="form-group col-md-3">
-    <label style="font-family: 'Verdana'">Lozinka: </label>
-    <input type="password" name="password" class="form-control" placeholder="******" type="password" id="passValue" [(ngModel)] = "user.lozinka" [ngModelOptions] = "{standalone:true}" />
-  </div>
-
-  <div class="form-group">
-    <button style="font-family: 'Verdana'" class="btn btn-primary" (click)="clickLogIn()">Prijavi se</button>
-    <a [routerLink]="['/registracija']" class="btn btn-link">Registruj se</a>
-    <a [routerLink]="['/welcomepage']" class="btn btn-link">Odustani</a>
-  </div>
-</form>

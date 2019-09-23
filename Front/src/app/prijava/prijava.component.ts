@@ -27,51 +27,20 @@ export class PrijavaComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-
-
-    /*
-    if (!provera) {
-      this.userService.logIn(this.korisnik).subscribe(
-        data => {
-          if (data.statusKorisnika == 'obican') {
-            this.router.navigate(['/registeredUserPage']);
-          } else if (data.statusKorisnika == 'avio') {
-            this.router.navigate(['/glavna']);
-          }
-          else if (data.statusKorisnika == 'hotel') {
-            this.router.navigate(['/hotelAdminPage']);
-          }
-          else if (data.statusKorisnika == 'prvo') {
-            this.router.navigate(['/promenaLozinke']);
-          } else if (data.statusKorisnika == 'rent') {
-            this.router.navigate(['/rentAdminPage']);
-          } else if (data.statusKorisnika == 'sistem') {
-            this.router.navigate(['/systemAdminPage']);
-          } else if (data.statusKorisnika == 'greska') {
-            this.poruka = 'Uneli ste neispravnu email adresu ili lozinku!';
-          } else {
-            this.poruka = 'Neophodno je verifikovati nalog da biste mogli da se ulogujete!';
-          }
-        }
-      );
-    }
-    */
-
-  }
 
   clickLogIn(){
 
     let provera : boolean = false;
 
-    if(this.korisnik.email == ""){
+
+    if(this.user.korisnickoIme == "" || this.user.korisnickoIme == undefined){
       $("#emailValue").addClass('border-danger');
       provera = true;
     } else {
       $("#emailValue").removeClass('border-danger');
     }
 
-    if(this.korisnik.lozinka == ""){
+    if(this.user.lozinka == "" || this.user.lozinka == undefined){
       $("#passValue").addClass('border-danger');
       provera = true;
     } else {
@@ -84,7 +53,7 @@ export class PrijavaComponent implements OnInit {
 
           if (!success) {
             alert('Neispravno korisnicko ime ili lozinka!');
-            this.errorMessage = "Wrong email or password";
+            this.poruka = "Neispravno korisnicko ime ili lozinka!";
           } else {
             this.authService.getCurrentUser().subscribe(
               data => {
