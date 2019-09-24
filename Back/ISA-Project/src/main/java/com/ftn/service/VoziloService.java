@@ -73,6 +73,7 @@ public class VoziloService
 		v.setModel(dto.getModel());
 		v.setNaziv(dto.getNaziv());
 		v.setRezervisano(false);
+		v.setOcena(0);
 		
 		if (dto.getTip().equals("LIMUZINA"))
 		{
@@ -130,6 +131,7 @@ public class VoziloService
 		v.setModel(dto.getModel());
 		v.setNaziv(dto.getNaziv());
 		v.setRezervisano(false);
+		v.setOcena(0);
 		
 		if (dto.getTip().equals("LIMUZINA"))
 		{

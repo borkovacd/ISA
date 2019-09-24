@@ -7,6 +7,7 @@ import {MapsAPILoader} from '@agm/core';
 import {HotelService} from '../../../service/hotel.service';
 import {RoomService} from '../../../service/room.service';
 import {HotelReservationService} from '../../../service/hotelReservation.service';
+import {OcenaSobaService} from "../../../service/ocenaSoba.service";
 
 @Component({
   selector: 'app-brza-rezervacija-sobe-izbor',
@@ -23,7 +24,8 @@ export class BrzaRezervacijaSobeIzborComponent implements OnInit {
               private authService: AuthService,
               public fb: FormBuilder,
               private roomService: RoomService,
-              private hotelReservationService: HotelReservationService) { }
+              private hotelReservationService: HotelReservationService,
+              private ocenaService: OcenaSobaService) { }
 
   ngOnInit() {
 
@@ -31,6 +33,13 @@ export class BrzaRezervacijaSobeIzborComponent implements OnInit {
     const idHotela = this.route.snapshot.params.idHotela;
     this.roomService.getRoomsAtDiscount(idRezervacijeLeta, idHotela).subscribe(data => {
       this.rooms = data;
+
+      for (let room of this.rooms)
+      {
+        this.ocenaService.getProsecnaOcenaSoba(room.id).subscribe(data => {
+          room.ocena = data ;
+        })
+      }
     });
   }
 

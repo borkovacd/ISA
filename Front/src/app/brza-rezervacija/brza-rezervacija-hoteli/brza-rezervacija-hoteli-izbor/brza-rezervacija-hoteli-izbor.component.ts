@@ -5,6 +5,7 @@ import {AuthService} from '../../../service/auth.service';
 import {FormBuilder} from '@angular/forms';
 import {MapsAPILoader} from '@agm/core';
 import {HotelService} from '../../../service/hotel.service';
+import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 
 @Component({
   selector: 'app-brza-rezervacija-hoteli-izbor',
@@ -36,7 +37,8 @@ export class BrzaRezervacijaHoteliIzborComponent implements OnInit {
               public fb: FormBuilder,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
-              private hotelService: HotelService) { }
+              private hotelService: HotelService,
+              private ocenaService: OcenaHotelService) { }
 
   ngOnInit() {
 
@@ -47,6 +49,13 @@ export class BrzaRezervacijaHoteliIzborComponent implements OnInit {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
     this.hotelService.getAllHotelsByAddress(idRezervacijeLeta).subscribe(data => {
       this.hotels = data;
+
+      for (let hotel of this.hotels)
+      {
+        this.ocenaService.getProsecnaOcenaHotel(hotel.id).subscribe(data => {
+          hotel.ocena = data ;
+        })
+      }
     });
 
   }

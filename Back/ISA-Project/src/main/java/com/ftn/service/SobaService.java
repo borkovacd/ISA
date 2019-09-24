@@ -59,6 +59,7 @@ public class SobaService {
 		else if(sobaDTO.getRoomType().equals("FAMILY_ROOM")) 
 			soba.setTipSobe(TipSobe.FAMILY_ROOM);
 		soba.setImaBalkon(sobaDTO.isHasBalcony());
+		soba.setOcena(0);
 		Hotel hotel = hotelRepository.getOne(idHotela);
 		soba.setHotel(hotel);
 		sobaRepository.save(soba);
@@ -121,6 +122,7 @@ public class SobaService {
 		else if(sobaDTO.getRoomType().equals("FAMILY_ROOM")) 
 			soba.setTipSobe(TipSobe.FAMILY_ROOM);
 		soba.setImaBalkon(sobaDTO.isHasBalcony());
+		soba.setOcena(0);
 		sobaRepository.save(soba);
 		return soba;
 	}

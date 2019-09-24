@@ -14,11 +14,9 @@
       <p style="font-size: 20px">Model: <b> {{vozilo.model}} </b> </p>
       <p style="font-size: 20px">Godina proizvodnje: <b> {{vozilo.godinaProizvodnje}} </b> </p>
       <p style="font-size: 20px">Broj sedista: <b> {{vozilo.brojSedista}} </b> </p>
+      <p *ngIf = "vozilo.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{vozilo.ocena}}</b></p>
       <div style="margin-bottom: 20px">
-        <button
-          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-          (click)="vratiProsecnuOcenu(vozilo.voziloId)">Ocena
-        </button>
+
       </div>
     </div>
   </div>

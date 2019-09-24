@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../service/auth.service';
 import {FormBuilder} from '@angular/forms';
 import {RentCarService} from "../../../service/rentcar.service";
+import {OcenaRentService} from "../../../service/ocenaRent.service";
 
 @Component({
   selector: 'app-brza-rezervacija-rent-servisi-izbor',
@@ -19,12 +20,20 @@ export class BrzaRezervacijaRentServisiIzborComponent implements OnInit {
               private route: ActivatedRoute,
               private authService: AuthService,
               public fb: FormBuilder,
-              private rentService: RentCarService) { }
+              private rentService: RentCarService,
+              private ocenaService: OcenaRentService) { }
 
   ngOnInit() {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
     this.rentService.getAllRentsByAddress(idRezervacijeLeta).subscribe(data => {
       this.rents = data;
+
+      for (let rent of this.rents)
+      {
+        this.ocenaService.getProsecnaOcenaRent(rent.rentACarId).subscribe(data => {
+          rent.ocena = data ;
+        })
+      }
     });
   }
 

@@ -301,6 +301,7 @@ public class HotelService {
 		Hotel hotel = new Hotel();
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
+		hotel.setOcena(0);
 		
 		//Provera da li vec postoji hotel sa istim nazivom i adresom
 		ArrayList<Hotel> existingHotels = (ArrayList<Hotel>) hotelRepository.findAll();
@@ -336,6 +337,7 @@ public class HotelService {
 		System.out.println(hotel.getNaziv());
 		hotel.setNaziv(hotelDTO.getName());
 		hotel.setAdresa(hotelDTO.getAddress());
+		hotel.setOcena(0);
 		//Provera da li vec postoji hotel sa istim nazivom i adresom
 		ArrayList<Hotel> existingHotels = (ArrayList<Hotel>) hotelRepository.findAll();
 		for(Hotel existingHotel: existingHotels) {

@@ -69,6 +69,13 @@ export class WelcomePageHoteliSobeComponent implements OnInit {
 
     this.roomService.getAvailableRooms(timePeriod, idHotela).subscribe(data => {
       this.rooms = data;
+
+      for (let room of this.rooms)
+      {
+        this.ocenaService.getProsecnaOcenaSoba(room.id).subscribe(data => {
+          room.ocena = data ;
+        })
+      }
     });
   }
 

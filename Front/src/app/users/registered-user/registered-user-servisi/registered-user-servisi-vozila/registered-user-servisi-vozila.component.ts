@@ -123,6 +123,13 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
 
     this.voziloService.checkAvailabilityVozilo(checkAvailabilityRentModel, idRent).subscribe(data => {
       this.slobodnaVozila = data;
+
+      for (let vozilo of this.slobodnaVozila)
+      {
+        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
+          vozilo.ocena = data ;
+        })
+      }
     });
 
   }

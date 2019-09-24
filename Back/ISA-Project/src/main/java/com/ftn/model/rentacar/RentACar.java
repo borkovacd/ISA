@@ -30,9 +30,11 @@ public class RentACar
 	private double brojOcena ;
 	private double sumaOcena ;
 	*/
+	private double ocena ;
 
 	public RentACar() {
 		super();
+		ocena = 0 ;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,6 +65,14 @@ public class RentACar
 
 	public Long getRentACarId() {
 		return rentACarId;
+	}
+
+	public double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(double ocena) {
+		this.ocena = ocena;
 	}
 
 	public void setRentACarId(Long rentACarId) {

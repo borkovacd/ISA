@@ -29,6 +29,7 @@
     <p style="font-size: 20px">Balkon:
       {{room.imaBalkon}}
     </p>
+    <p *ngIf = "room.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{room.ocena}}</b></p>
     <p style="font-size: 20px; text-decoration-line: line-through">Ukupna cena (bez popusta):
       {{room.cena}}
     </p>

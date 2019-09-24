@@ -76,6 +76,13 @@ export class RegisteredUserHoteliComponent implements OnInit {
 
     this.hotelService.getAllHotels().subscribe(data => {
       this.hotels = data;
+
+      for (let hotel of this.hotels)
+      {
+        this.ocenaService.getProsecnaOcenaHotel(hotel.id).subscribe(data => {
+          hotel.ocena = data ;
+        })
+      }
     });
 
   }

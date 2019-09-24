@@ -17,33 +17,34 @@ insert into isa_project.korisnik (id, email, grad, ime, korisnicko_ime, lozinka,
 
 /**************************** HOTELI ***************************************/
 /****  HOTELI  ****/
-insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (5, "Novosadskog Sajma 35, Novi Sad", "Hotel Park", "Hotel Park je smešten na obodu velikog parka u Novom Sadu. Ovaj potpuno klimatizovan hotel u ponudi ima elegantno opremljene smeštajne jedinice sa besplatnim internetom i TV-om sa kablovskim kanalima.", 2);
-insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (6, "Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
-insert into isa_project.hotel (id, adresa, naziv, opis, administrator_id) 
-	values (7, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 2);
+insert into isa_project.hotel (id, ocena, adresa, naziv, opis, administrator_id) 
+	values (5, 1, "Novosadskog Sajma 35, Novi Sad", "Hotel Park", "Hotel Park je smešten na obodu velikog parka u Novom Sadu. Ovaj potpuno klimatizovan hotel u ponudi ima elegantno opremljene smeštajne jedinice sa besplatnim internetom i TV-om sa kablovskim kanalima.", 2);
+insert into isa_project.hotel (id, ocena, adresa, naziv, opis, administrator_id) 
+	values (6, 2,"Bulevar Nikole Tesle 3, Beograd", "Jugoslavija", "Hotel „Jugoslavija”, otvoren 1969. godine, bio je jedan od prva tri značajna objekta koji su planirani u Novom Beogradu, pored zgrade CK KPJ i zgrade Predsedništva vlade FNRJ.", 2);
+insert into isa_project.hotel (id, ocena, adresa, naziv, opis, administrator_id) 
+	values (7, 3, "Orlovićeva BB, Ruma", "Hotel Borkovac", "Na 50 km zapadno od Beograda i svega 35 km od Novog Sada, u Rumskom izletištu Borkovac nalazi se hotel u borovima udaljen 3km od centra grada Ruma.", 2);
+
 /**** SOBE ****/
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (1, 0, 4, 2, "APARTMAN", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (2, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (3, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (4, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (5, 0, 2, 3, "JEDNOKREVETNA_SOBA", 6, 0, 1);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (6, 1, 3, 5, "DVOKREVETNA_SOBA", 6, 0, 1);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (7, 1, 6, 1, "FAMILY_ROOM", 6, 0, 1);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (8, 1, 1, 5, "JEDNOKREVETNA_SOBA", 5, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (9, 1, 3, 5, "DVOKREVETNA_SOBA", 5, 0, 0);
-insert into isa_project.soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (10, 1, 6, 1, "FAMILY_ROOM", 5, 0, 1);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (1, 1, 0, 4, 2, "APARTMAN", 6, 0, 0);
+insert into isa_project.soba (id, ocena,  ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (2, 2, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (3, 3, 1, 4, 5, "DVOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (4, 4, 1, 1, 5, "JEDNOKREVETNA_SOBA", 6, 0, 0);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (5, 5, 0, 2, 3, "JEDNOKREVETNA_SOBA", 6, 0, 1);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (6, 1, 1, 3, 5, "DVOKREVETNA_SOBA", 6, 0, 1);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (7, 2, 1, 6, 1, "FAMILY_ROOM", 6, 0, 1);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (8, 3, 1, 1, 5, "JEDNOKREVETNA_SOBA", 5, 0, 0);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (9, 4, 1, 3, 5, "DVOKREVETNA_SOBA", 5, 0, 0);
+insert into isa_project.soba (id, ocena, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
+	values (10, 5, 1, 6, 1, "FAMILY_ROOM", 5, 0, 1);
 	
 /**** DODATNE USLUGE ****/
 insert into isa_project.dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
@@ -111,33 +112,33 @@ insert into isa_project.rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id
 	values (3, 34);
 	
 /**** RENT-A-CAR ****/
-insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(1, "Bulevar Kneza Milosa, Beograd", "Fast Trans", "Vrlo kvalitetno i povoljno, prijatno osoblje, uvek na usluzi.", 3);
-insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(2, "Partizanska 46, Beograd", "Savic Trans", "Vrlo skupo, novija vozila.", 3);
-insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(3, "Brace Dronjak 10, Novi Sad", "Borkovac trans", "Veoma jeftino, mali izbor vozila, niskog kvaliteta.", 3);
-insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(4, "Gogoljeva 15, Novi Sad", "Big Savic trans", "Najbolji odnos cene i kvaliteta, sirok asortiman vozila.", 3);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(1, "Bulevar Kneza Milosa, Beograd", "Fast Trans", "Vrlo kvalitetno i povoljno, prijatno osoblje, uvek na usluzi.", 3, 1);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(2, "Partizanska 46, Beograd", "Savic Trans", "Vrlo skupo, novija vozila.", 3, 2);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(3, "Brace Dronjak 10, Novi Sad", "Borkovac trans", "Veoma jeftino, mali izbor vozila, niskog kvaliteta.", 3, 3);
+insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(4, "Gogoljeva 15, Novi Sad", "Big Savic trans", "Najbolji odnos cene i kvaliteta, sirok asortiman vozila.", 3, 4);
 
 /**** VOZILA ****/	
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (1, 4, 0, 2019, "BMW", "X5", "BMW X5", false, "LIMUZINA", 1, false);
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (2, 4, 0, 2015, "Mercedes", "Jeep", "Mercedes dzip", false, "KARAVAN", 1, false);
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (3, 5, 0, 2015, "Opel", "Astra", "Opel Astra", false, "KABRIOLET", 1, false);
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (1, 1, 4, 0, 2019, "BMW", "X5", "BMW X5", false, "LIMUZINA", 1, false);
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (2, 2, 4, 0, 2015, "Mercedes", "Jeep", "Mercedes dzip", false, "KARAVAN", 1, false);
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (3, 3, 5, 0, 2015, "Opel", "Astra", "Opel Astra", false, "KABRIOLET", 1, false);
 
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (4, 4, 0, 2019, "Siroko", "P12", "Siroko P12", false, "PICKUP", 2, false);
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (5, 4, 0, 2015, "Opel", "Insignia", "Opel Insignia", false, "KARAVAN", 2, false);
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (4, 4, 4, 0, 2019, "Siroko", "P12", "Siroko P12", false, "PICKUP", 2, false);
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (5, 5, 4, 0, 2015, "Opel", "Insignia", "Opel Insignia", false, "KARAVAN", 2, false);
 
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (6, 5, 400, 2015, "Fica", "500", "Fica Fiat 5", false, "MINIVEN", 3, false);	
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (6, 1, 5, 400, 2015, "Fica", "500", "Fica Fiat 5", false, "MINIVEN", 3, false);	
 
-insert into isa_project.vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (7, 5, 400, 2015, "Opel", "Insignia", "Opel Insignia", false, "KUPE", 4, false);	
+insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (7, 2, 5, 400, 2015, "Opel", "Insignia", "Opel Insignia", false, "KUPE", 4, false);	
 	
 /**** LOKACIJA ****/	
 insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
@@ -200,5 +201,59 @@ insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja
 insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
 	values (4, '2020-08-25', '2020-09-30', 4, 4, 4, 7, 5000, 5, 0);	
 
-
+/**** OCENA HOTEL ****/
+insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+	values (1, 1, 6, 5);
+insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+	values (2, 2, 6, 6);
+insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+	values (3, 3, 6, 7);
+	
+/**** OCENA SOBA ****/
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(1, 1, 6, 1);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(2, 2, 6, 2);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(3, 3, 6, 3);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(4, 4, 6, 4);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(5, 5, 6, 5);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(6, 1, 6, 6);	
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(7, 2, 6, 7);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(8, 3, 6, 8);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(9, 4, 6, 9);
+insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+	values(10, 5, 6, 10);	
+	
+/**** OCENA RENT ****/	
+insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
+	values (1, 1, 4, 1);
+insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
+	values (2, 2, 4, 2);
+insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
+	values (3, 3, 4, 3);
+insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
+	values (4, 4, 4, 4);
+	
+/**** OCENA VOZILO ****/
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (1, 1, 6, 1);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (2, 2, 6, 2);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (3, 3, 6, 3);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (4, 4, 6, 4);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (5, 5, 6, 5);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (6, 1, 6, 6);
+insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
+	values (7, 2, 6, 7);
 

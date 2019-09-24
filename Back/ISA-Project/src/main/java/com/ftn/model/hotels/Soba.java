@@ -34,8 +34,11 @@ public class Soba {
 	
 	private boolean naPopustu = false;
 	
+	private double ocena ;
+	
 	public Soba() {
 		cena = 0;
+		ocena = 0;
 	}
 	
 	public Soba(Hotel hotel, int kapacitet, int sprat, TipSobe tipSobe, boolean imaBalkon, double cena, boolean naPopustu) {
@@ -47,6 +50,16 @@ public class Soba {
 		this.imaBalkon = imaBalkon;
 		this.cena = cena;
 		this.naPopustu = naPopustu;
+	}
+	
+	
+
+	public double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(double ocena) {
+		this.ocena = ocena;
 	}
 
 	public Long getId() {

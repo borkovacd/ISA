@@ -47,6 +47,13 @@ export class HotelAdministratorHoteliComponent implements  OnInit {
 
     this.hotelService.getHotelsByAdministrator().subscribe(data => {
       this.hotels = data;
+
+      for (let hotel of this.hotels)
+      {
+        this.ocenaService.getProsecnaOcenaHotel(hotel.id).subscribe(data => {
+          hotel.ocena = data ;
+        })
+      }
     });
 
   }

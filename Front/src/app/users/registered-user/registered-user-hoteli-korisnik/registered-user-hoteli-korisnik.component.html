@@ -11,11 +11,9 @@
       <p style="font-size: 20px">Naziv: <b> {{hotel.naziv}} </b> </p>
       <p style="font-size: 20px">Adresa: <b> {{hotel.adresa}} </b> </p>
       <p style="font-size: 20px">Opis: <b> {{hotel.opis}} </b> </p>
+      <p *ngIf = "hotel.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{hotel.ocena}}</b></p>
       <div style="margin-bottom: 20px">
-        <button
-          style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-          (click)="vratiProsecnuOcenu(hotel.id)">Ocena
-        </button>
+
       </div>
     </div>
   </div>

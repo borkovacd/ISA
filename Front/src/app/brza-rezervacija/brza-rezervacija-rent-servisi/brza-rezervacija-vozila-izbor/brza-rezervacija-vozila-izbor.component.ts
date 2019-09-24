@@ -5,6 +5,7 @@ import {AuthService} from '../../../service/auth.service';
 import {FormBuilder} from '@angular/forms';
 import {VoziloService} from "../../../service/vozilo.service";
 import {VoziloReservationService} from "../../../service/voziloReservation.service";
+import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 
 @Component({
   selector: 'app-brza-rezervacija-vozila-izbor',
@@ -21,13 +22,21 @@ export class BrzaRezervacijaVozilaIzborComponent implements OnInit {
               private authService: AuthService,
               public fb: FormBuilder,
               private voziloService: VoziloService,
-              private reservationService: VoziloReservationService) { }
+              private reservationService: VoziloReservationService,
+              private ocenaService: OcenaVoziloService) { }
 
   ngOnInit() {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;
     const idRent = this.route.snapshot.params.idRent;
     this.voziloService.getVozilaAtDiscount(idRezervacijeLeta, idRent).subscribe(data => {
       this.vozila = data;
+
+      for (let vozilo of this.vozila)
+      {
+        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
+          vozilo.ocena = data ;
+        })
+      }
     });
   }
 

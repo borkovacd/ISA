@@ -4,6 +4,7 @@
     <h1 style="margin-top: 20px">{{rent.naziv}}</h1>
     <p style="font-size: 20px">{{rent.adresa}}</p>
     <p style="font-size: 20px">{{rent.opis}}</p>
+    <p *ngIf = "rent.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{rent.ocena}}</b></p>
     <div style="margin-bottom: 20px">
       <button
         style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
@@ -19,10 +20,7 @@
         (click)="pregledFilijala(rent.rentACarId)">Filijale
       </button>
       <div>&nbsp;</div>
-      <button
-        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-        (click)="vratiProsecnuOcenu(rent.rentACarId)">Ocena
-      </button>
+
       <button
         style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
         (click)="pregledCenovnika(rent.rentACarId)">Cenovnik

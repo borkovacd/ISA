@@ -102,6 +102,14 @@ export class RegisteredUserHoteliSobeComponent implements OnInit {
 
     this.roomService.checkAvailability(checkAvailabilityModel, idHotela).subscribe(data => {
       this.rooms = data;
+
+      if (this.rooms!= null) {
+        for (let room of this.rooms) {
+          this.ocenaService.getProsecnaOcenaSoba(room.id).subscribe(data => {
+            room.ocena = data;
+          })
+        }
+      }
     });
 
   }

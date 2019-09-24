@@ -28,6 +28,7 @@
     <p style="font-size: 20px">Model:  {{vozilo.model}}</p>
     <p style="font-size: 20px">Godina proizvodnje:  {{vozilo.godinaProizvodnje}}</p>
     <p style="font-size: 20px">Broj sedista:  {{vozilo.brojSedista}}</p>
+    <p *ngIf = "vozilo.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{vozilo.ocena}}</b></p>
     <p style="font-size: 20px; text-decoration-line: line-through">Ukupna cena (bez popusta):
       {{vozilo.cena}}
     </p>

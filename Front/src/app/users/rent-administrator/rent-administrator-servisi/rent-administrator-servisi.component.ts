@@ -20,6 +20,13 @@ export class RentAdministratorServisiComponent implements OnInit {
 
     this.rentService.getRentsByAdministrator().subscribe(data => {
       this.rents = data ;
+
+      for (let rent of this.rents)
+      {
+        this.ocenaService.getProsecnaOcenaRent(rent.rentACarId).subscribe(data => {
+          rent.ocena = data ;
+        })
+      }
     });
   }
 

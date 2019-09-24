@@ -26,6 +26,13 @@ export class RegisteredUserHoteliKorisnikComponent implements OnInit {
   ngOnInit() {
     this.hotelService.vratiHoteleKorisnika().subscribe(data => {
       this.hotels = data ;
+
+      for (let hotel of this.hotels)
+      {
+        this.ocenaService.getProsecnaOcenaHotel(hotel.id).subscribe(data => {
+          hotel.ocena = data ;
+        })
+      }
     });
   }
 

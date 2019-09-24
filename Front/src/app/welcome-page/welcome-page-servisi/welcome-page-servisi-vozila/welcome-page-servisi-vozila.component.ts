@@ -69,6 +69,13 @@ export class WelcomePageServisiVozilaComponent implements OnInit {
 
     this.voziloService.getAvailableVozila(timePeriod, idRent).subscribe(data => {
       this.vozila = data;
+
+      for (let vozilo of this.vozila)
+      {
+        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
+          vozilo.ocena = data ;
+        })
+      }
     });
   }
 

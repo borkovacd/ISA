@@ -40,20 +40,17 @@ public class Vozilo
 	private RentACar rentACar;
 	
 	private boolean naPopustu = false;
+	
+	private double ocena ;
 
 	// Inspo
-	
-	/*
-	private double prosecnaOcena;
-	private double brojOcena ;
-	private double sumaOcena ;
-	*/
-	
+
 	/*@Version
     private Long version;*/
 
 	public Vozilo() {
 		cena = 0;
+		ocena = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -70,6 +67,15 @@ public class Vozilo
 	}
 
 	
+	
+
+	public double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(double ocena) {
+		this.ocena = ocena;
+	}
 
 	public boolean isNaPopustu() {
 		return naPopustu;

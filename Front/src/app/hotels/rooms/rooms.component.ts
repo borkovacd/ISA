@@ -41,6 +41,13 @@ export class RoomsComponent implements OnInit {
     })
     this.roomService.getAllRooms(idHotela).subscribe(data => {
       this.rooms = data;
+
+      for (let room of this.rooms)
+      {
+        this.ocenaService.getProsecnaOcenaSoba(room.id).subscribe(data => {
+          room.ocena = data ;
+        })
+      }
     })
 
   }

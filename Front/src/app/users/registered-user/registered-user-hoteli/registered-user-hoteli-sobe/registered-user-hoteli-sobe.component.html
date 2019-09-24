@@ -105,13 +105,11 @@
       <p style="font-size: 20px">Balkon:
         {{room.imaBalkon}}
       </p>
+      <p *ngIf = "room.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{room.ocena}}</b></p>
       <p style="font-size: 20px">Ukupna cena:
         {{room.cena}}
       </p>
-      <button
-        style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"
-        (click)="vratiProsecnuOcenu(room.id)">Ocena
-      </button>
+
       <div>&nbsp;</div>
       <button
         style="height: 45px;width: 110px;border-radius: 12px;background-color: #1a8cff;color: white; margin-bottom: 2%"

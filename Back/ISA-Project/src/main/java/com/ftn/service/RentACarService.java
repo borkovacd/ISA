@@ -55,6 +55,7 @@ public class RentACarService {
 		RentACar rentCar = new RentACar();
 		rentCar.setNaziv(rentCarDTO.getName());
 		rentCar.setAdresa(rentCarDTO.getAddress());
+		rentCar.setOcena(0);
 		
 		//Provera da li vec postoji rent sa istim nazivom i adresom
 		ArrayList<RentACar> existingServices = (ArrayList<RentACar>) rentCarRepository.findAll();
@@ -103,6 +104,7 @@ public class RentACarService {
 		RentACar rent = rentCarRepository.findOneByRentACarId(id);
 		rent.setNaziv(dto.getName());
 		rent.setAdresa(dto.getAddress());
+		rent.setOcena(0);
 		
 		ArrayList<RentACar> allRents = (ArrayList<RentACar>) rentCarRepository.findAll();
 

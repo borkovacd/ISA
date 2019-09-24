@@ -29,8 +29,11 @@ public class Hotel {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	private Korisnik administrator; //administrator hotela
+	
+	private double ocena ;
 
 	public Hotel() {
+		ocena = 0;
 		
 	}
 	
@@ -40,6 +43,16 @@ public class Hotel {
 		this.adresa = adresa;
 		this.opis = opis;
 		this.administrator = administrator;
+	}
+	
+	
+
+	public double getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(double ocena) {
+		this.ocena = ocena;
 	}
 
 	public Long getId() {

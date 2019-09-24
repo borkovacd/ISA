@@ -65,19 +65,11 @@ export class RegisteredUserServisiComponent implements OnInit {
     this.rentService.getAllRents().subscribe(data => {
       this.rents = data ;
 
-      for (let rent of data)
+      for (let rent of this.rents)
       {
         this.ocenaService.getProsecnaOcenaRent(rent.rentACarId).subscribe(data => {
-          this.rating = data ;
-          alert('Ocena je: ' + this.rating);
-          /*
-          const s = new RentCarModel(rent.naziv, rent.adresa, rent.opis, rent.administrator.toString(), this.rating);
-          this.servisi.push(s);
-          */
-
+          rent.ocena = data ;
         })
-
-
       }
     });
   }
