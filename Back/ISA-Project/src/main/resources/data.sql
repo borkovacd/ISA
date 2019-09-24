@@ -233,13 +233,13 @@ insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
 	
 /**** OCENA RENT ****/	
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (1, 1, 4, 1);
+	values (1, 1, 6, 1);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (2, 2, 4, 2);
+	values (2, 2, 6, 2);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (3, 3, 4, 3);
+	values (3, 3, 6, 3);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (4, 4, 4, 4);
+	values (4, 4, 6, 4);
 	
 /**** OCENA VOZILO ****/
 insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)

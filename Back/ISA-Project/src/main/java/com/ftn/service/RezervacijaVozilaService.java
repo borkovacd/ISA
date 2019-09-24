@@ -6,10 +6,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.dto.RezervacijaVozilaDTO;
 import com.ftn.model.Korisnik;
@@ -53,8 +53,8 @@ public class RezervacijaVozilaService
 	private RentCarRepository rentRepository ;
 	
 	// formira se rezervacija za korisnika sa prosledjenim id-jem
-	@Transactional
-	synchronized public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) 
+	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
+	public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) 
 	{
 		RezervacijaVozila rezervacija = new RezervacijaVozila();
 		
@@ -134,9 +134,8 @@ public class RezervacijaVozilaService
 		return rezervacijeKorisnik ;
 	}
 	
-	// BRZA REZERVACIJA
-	@Transactional
-	synchronized public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
+	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
+	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
 	{
 		
 		//Potrebne informacije za rezervaciju izvuci iz rezervacije leta
