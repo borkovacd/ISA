@@ -56,11 +56,14 @@ export class SystemAdministratorRentcarComponent implements  OnInit {
   }
 
   registerRentCar() {
+
+    let ocena : any = 0.0;
     const rentCar = new RentCarModel(
       this.name.value,
       this.address.value,
       this.description.value,
       this.administratorRentCar.value,
+      ocena
     );
 
     this.rentCarService.registerRentCar(rentCar).subscribe(data => {

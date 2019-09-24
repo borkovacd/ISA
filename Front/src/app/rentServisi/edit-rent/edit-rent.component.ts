@@ -63,11 +63,13 @@ export class EditRentComponent implements OnInit {
   }
 
   editRent() {
+    let ocena: any = 0;
     const rent = new RentCarModel(
       this.name.value,
       this.address.value,
       this.description.value,
-      ''
+      '',
+      ocena
     );
 
     const idRent = this.route.snapshot.params.idRent;

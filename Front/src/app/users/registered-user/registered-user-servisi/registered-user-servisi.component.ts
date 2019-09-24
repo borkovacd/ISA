@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {VoziloService} from "../../../service/vozilo.service";
-import {TimePeriodModel} from "../../../model/timePeriod.model";
-import {SearchRentsModel} from "../../../model/searchRents.model";
-import {RentCarService} from "../../../service/rentcar.service";
-import {OcenaRentService} from "../../../service/ocenaRent.service";
+import {VoziloService} from '../../../service/vozilo.service';
+import {TimePeriodModel} from '../../../model/timePeriod.model';
+import {SearchRentsModel} from '../../../model/searchRents.model';
+import {RentCarService} from '../../../service/rentcar.service';
+import {OcenaRentService} from '../../../service/ocenaRent.service';
+import {RentCarModel} from '../../../model/rentcar.model';
 
 @Component({
   selector: 'app-registered-user-servisi',
@@ -25,10 +26,12 @@ export class RegisteredUserServisiComponent implements OnInit {
   d1: any;
   d2: any;
 
-  rating : any ;
+  rating: any ;
 
   public tipSort: AbstractControl;
   nemaViseSortiranja: boolean;
+
+  servisi: RentCarModel[] ;
 
   constructor(protected router: Router,
               public fb: FormBuilder,
@@ -39,19 +42,19 @@ export class RegisteredUserServisiComponent implements OnInit {
     // pretraga rent servisa
 
     this.form = this.fb.group({
-      'startDate': ['', Validators.compose([Validators.required])],
-      'endDate': ['', Validators.compose([Validators.required])],
-      'rentName': [''],
-      'rentLocation': [''],
-      'tipSort': [''],
+      startDate: ['', Validators.compose([Validators.required])],
+      endDate: ['', Validators.compose([Validators.required])],
+      rentName: [''],
+      rentLocation: [''],
+      tipSort: [''],
 
-    })
+    });
 
-    this.startDate = this.form.controls['startDate'];
-    this.endDate = this.form.controls['endDate'];
-    this.rentName = this.form.controls['rentName'];
-    this.rentLocation = this.form.controls['rentLocation'];
-    this.tipSort = this.form.controls['tipSort'];
+    this.startDate = this.form.controls.startDate;
+    this.endDate = this.form.controls.endDate;
+    this.rentName = this.form.controls.rentName;
+    this.rentLocation = this.form.controls.rentLocation;
+    this.tipSort = this.form.controls.tipSort;
 
   }
 
@@ -61,18 +64,31 @@ export class RegisteredUserServisiComponent implements OnInit {
     this.nemaViseSortiranja = false;
     this.rentService.getAllRents().subscribe(data => {
       this.rents = data ;
-    })
+
+      for (let rent of data)
+      {
+        this.ocenaService.getProsecnaOcenaRent(rent.rentACarId).subscribe(data => {
+          this.rating = data ;
+          alert('Ocena je: ' + this.rating);
+          /*
+          const s = new RentCarModel(rent.naziv, rent.adresa, rent.opis, rent.administrator.toString(), this.rating);
+          this.servisi.push(s);
+          */
+
+        })
+
+
+      }
+    });
   }
 
   // nakon sto se izabere rent prelazi na stranicu sa vozilima tog rent-servisa
-  izaberiRent(id: any)
-  {
+  izaberiRent(id: any) {
     this.router.navigateByUrl('registeredUserPage/vozila/' + id);
   }
 
   // ukoliko nece da izabere servis iz liste, vec hoce da dodje do njega pretragom
-  pretraziRentServise()
-  {
+  pretraziRentServise() {
     this.pretraga = true ;
   }
 
@@ -101,13 +117,13 @@ export class RegisteredUserServisiComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack() {
     location.reload();
   }
 
   // sortiranje
-  sortirajRent(){
-    let sort : string = this.tipSort.value;
+  sortirajRent() {
+    const sort: string = this.tipSort.value;
     this.rentService.sortRent(sort).subscribe(
       data => {
         this.rents = data;
@@ -115,21 +131,23 @@ export class RegisteredUserServisiComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
+    );
   }
 
   vratiProsecnuOcenu(id: any) {
+    this.rentService.getRent(id).subscribe(data => {
+      this.rating = this.ocenaService.getProsecnaOcenaRent(id);
+    });
+
     this.ocenaService.getProsecnaOcenaRent(id).subscribe(data => {
       this.rating = data;
-      if (data == 0 || data == undefined)
-      {
-        alert('Za ovaj rent-a-car nije moguce prikazati prosecnu ocenu!')
-      }
-      else
-      {
+
+      if (data == 0 || data == undefined) {
+        alert('Za ovaj rent-a-car nije moguce prikazati prosecnu ocenu!');
+      } else {
         alert('Prosecna ovog rent-a-car servisa je: ' + data);
       }
-    })
+    });
   }
 
 

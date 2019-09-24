@@ -5,6 +5,7 @@ import {OcenaRentService} from "../../service/ocenaRent.service";
 import {OcenaVoziloModel} from "../../model/ocenaVozilo.model";
 import {OcenaRentModel} from "../../model/ocenaRent.model";
 import {AuthService} from "../../service/auth.service";
+import {RentCarService} from "../../service/rentcar.service";
 
 @Component({
   selector: 'app-rent-car-rating',
@@ -19,7 +20,8 @@ export class RentCarRatingComponent implements OnInit {
               public fb: FormBuilder,
               public route: ActivatedRoute,
               private ocenaService: OcenaRentService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private rentService: RentCarService) {
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })
@@ -35,6 +37,9 @@ export class RentCarRatingComponent implements OnInit {
       this.rating.value
     );
     this.ocenaService.oceniRent(object, idRent).subscribe(data => {
+      this.rentService.getRent(idRent).subscribe( data => {
+        data.ocena = this.rating.value ;
+      })
       this.router.navigateByUrl('registeredUserPage');
     })
 
