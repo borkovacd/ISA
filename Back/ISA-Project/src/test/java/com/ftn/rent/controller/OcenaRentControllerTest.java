@@ -32,7 +32,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.ftn.dto.LokacijaDTO;
 import com.ftn.dto.PretragaRentDTO;
 import com.ftn.dto.RentCarDTO;
 import com.ftn.dto.VoziloDTO;
@@ -41,9 +40,9 @@ import com.ftn.enums.TipVozila;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LokacijaControllerTest {
+public class OcenaRentControllerTest {
 	
-private static final String URL_PREFIX = "/api/filijala";
+private static final String URL_PREFIX = "/ocenaRent";
 	
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -70,69 +69,24 @@ private static final String URL_PREFIX = "/api/filijala";
 	public void tearDown() throws Exception {
 	}
 	
-	// METODA ZA DODAVANJE NOVOG RENT SERVISA
-	@Transactional
-	@Rollback(true)
-	@Test
-	public void testDodajFilijalu() throws Exception {
-		LokacijaDTO dto = new LokacijaDTO();
-		dto.setAdresa("Adresa");
-		dto.setDrzava("Srbija");
-		dto.setGrad("Novi Sad");
-		dto.setLatitude(15);
-		dto.setLongitude(25);
-		String json = com.ftn.utils.TestUtil.json(dto);
-		this.mockMvc.perform(post(URL_PREFIX + "/dodajFilijalu/10").contentType(contentType).content(json)).andExpect(status().isOk());
-	
-	}
 	
 	@Test
-	public void testVratiJednuFilijalu() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/vratiJednuFilijalu/10/10" )).andExpect(status().isOk())
-		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.id").value(10));
-	}
-	
-	
-	@Test
-	public void testGetFilijaleRentACar() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/getFilijaleRentACar/10")).andExpect(status().isOk())
-		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
-	}
-	
-	@Transactional
-	@Rollback(true)
-	@Test
-	public void testIzmeniFilijalu() throws Exception {
-		LokacijaDTO dto = new LokacijaDTO();
-		dto.setAdresa("Adresa");
-		dto.setDrzava("Srbija");
-		dto.setGrad("Novi Sad");
-		dto.setLatitude(15);
-		dto.setLongitude(25);
-		String json = com.ftn.utils.TestUtil.json(dto);
-		this.mockMvc.perform(put(URL_PREFIX + "/izmeniFilijalu/10/10").contentType(contentType).content(json)).andExpect(status().isOk());
-	}
-	
-	@Transactional
-	@Rollback(true)
-	@Test
-	public void testObrisiFilijalu() throws Exception {
-		mockMvc.perform(delete(URL_PREFIX + "/obrisiFilijalu/10/10" )).andExpect(status().isOk());
-	}
-	
-	@Test
-	public void testCheckIfReservedLokacija() throws Exception {
-		MvcResult result = mockMvc.perform(get(URL_PREFIX + "/checkIfReservedLokacija/10" )).andExpect(status().isOk()).andReturn();
+	public void testGetProsecnaOcenaRent() throws Exception {
+		MvcResult result = this.mockMvc.perform(get(URL_PREFIX + "/getProsecnaOcenaRent/10")).andExpect(status().isOk())
+		.andReturn();
 		String resultAsString = result.getResponse().getContentAsString();
-		boolean retVal = Boolean.parseBoolean(resultAsString);
+		double retVal = Double.parseDouble(resultAsString);
 		//System.out.println(retVal);
 		assertThat(retVal)
-	      .isEqualTo(true);
+	      .isEqualTo(0.00);
 	}
+	
 
+
+	
+	
+	
 	
 
 }
+

@@ -122,7 +122,7 @@ private static final String URL_PREFIX = "/api/vozilo";
 		dto.setNaziv("Naziv");
 		dto.setTip("KARAVAN");
 		String json = com.ftn.utils.TestUtil.json(dto);
-		this.mockMvc.perform(put(URL_PREFIX + "/izmeniVozilo/10/10").contentType(contentType).content(json)).andExpect(status().isOk());
+		this.mockMvc.perform(put(URL_PREFIX + "/izmeniVozilo/10/11").contentType(contentType).content(json)).andExpect(status().isOk());
 	}
 	
 	@Test
@@ -132,8 +132,7 @@ private static final String URL_PREFIX = "/api/vozilo";
 		vp.setEndDate("2019-07-10");
 		String json = com.ftn.utils.TestUtil.json(vp);
 		this.mockMvc.perform(post(URL_PREFIX + "/getAvailableVozila/10").contentType(contentType).content(json)).andExpect(status().isOk())
-		.andExpect(jsonPath("$.[*].voziloId").value(hasItem(10)))
-		.andExpect(jsonPath("$.[*].voziloId").value(hasItem(11)));
+		.andExpect(jsonPath("$.[*].voziloId").value(hasItem(10)));
 	}
 	
 	@Transactional
@@ -152,12 +151,23 @@ private static final String URL_PREFIX = "/api/vozilo";
 		assertThat(retVal)
 	      .isEqualTo(true);
 	}
-
 	
+	@Transactional
+	@Rollback(true)
+	@Test
+	public void testStaviVoziloNaPopust() throws Exception {
+		mockMvc.perform(put(URL_PREFIX + "/staviVoziloNaPopust/12" )).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.voziloId").value(12));
+	}
 	
-	
-	
-	
-	
+	@Transactional
+	@Rollback(true)
+	@Test
+	public void testSkiniVoziloSaPopusta() throws Exception {
+		mockMvc.perform(put(URL_PREFIX + "/skiniVoziloSaPopusta/11" )).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.voziloId").value(11));
+	}
 
 }

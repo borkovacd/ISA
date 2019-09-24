@@ -101,39 +101,6 @@ private static final String URL_PREFIX = "/voziloReservation";
 	}
 	
 	
-	/*
-	@Test
-	public void testVratiJednuFilijalu() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/vratiJednuFilijalu/10/10" )).andExpect(status().isOk())
-		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.id").value(10));
-	}
-	
-	
-	@Test
-	public void testGetFilijaleRentACar() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/getFilijaleRentACar/10")).andExpect(status().isOk())
-		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
-	}
-	
-	@Transactional
-	@Rollback(true)
-	@Test
-	public void testIzmeniFilijalu() throws Exception {
-		LokacijaDTO dto = new LokacijaDTO();
-		dto.setAdresa("Adresa");
-		dto.setDrzava("Srbija");
-		dto.setGrad("Novi Sad");
-		dto.setLatitude(15);
-		dto.setLongitude(25);
-		String json = com.ftn.utils.TestUtil.json(dto);
-		this.mockMvc.perform(put(URL_PREFIX + "/izmeniFilijalu/10/10").contentType(contentType).content(json)).andExpect(status().isOk());
-	}
-	
 
-
-	*/
 
 }

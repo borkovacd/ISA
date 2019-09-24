@@ -73,8 +73,7 @@ private static final String URL_PREFIX = "/ocenaVozilo";
 	public void testVratiListuOcenaVozila() throws Exception {
 		mockMvc.perform(get(URL_PREFIX + "/vratiListuOcenaVozila/10")).andExpect(status().isOk())
 		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
+		.andExpect(jsonPath("$.[*].id").value(hasItem(10)));
 	}
 	
 	@Test
@@ -85,7 +84,7 @@ private static final String URL_PREFIX = "/ocenaVozilo";
 		double retVal = Double.parseDouble(resultAsString);
 		//System.out.println(retVal);
 		assertThat(retVal)
-	      .isEqualTo(4.00);
+	      .isEqualTo(5.00);
 	}
 	
 	@Test
@@ -95,10 +94,7 @@ private static final String URL_PREFIX = "/ocenaVozilo";
 		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
 		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
 	}
-	
 
-	
-	
 	
 	
 	

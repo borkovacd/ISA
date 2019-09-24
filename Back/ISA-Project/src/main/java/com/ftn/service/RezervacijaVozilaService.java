@@ -53,7 +53,7 @@ public class RezervacijaVozilaService
 	private RentCarRepository rentRepository ;
 	
 	// formira se rezervacija za korisnika sa prosledjenim id-jem
-	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
+	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
 	public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) 
 	{
 		RezervacijaVozila rezervacija = new RezervacijaVozila();
@@ -113,6 +113,7 @@ public class RezervacijaVozilaService
 		return rezervacija;
 	}
 	
+	@Transactional(readOnly = true)
 	public ArrayList<RezervacijaVozila> listaRezervacijaKorisnik(Long idKorisnik)
 	{
 		ArrayList<RezervacijaVozila> rezervacijeKorisnik = new ArrayList<RezervacijaVozila>();
@@ -134,7 +135,7 @@ public class RezervacijaVozilaService
 		return rezervacijeKorisnik ;
 	}
 	
-	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class, readOnly = true)
+	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
 	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
 	{
 		

@@ -9,22 +9,22 @@ insert into korisnik (id, email, grad, ime, korisnicko_ime, lozinka, prezime, pr
 	values (13, 'sloba@gmail.com', 'Novi Sad', 'Sloba',  'sloba', '$2a$10$bFoT0UWjOFAIQoFRYCIicO2hwNwZy6qhWYq4eXmWqJevf7b2TWpae', 'Slobic', 0, '0657456879', 1, 'OBICAN_KORISNIK', 'ok');
 	
 /**** HOTELI ****/
-insert into hotel (id, adresa, naziv, opis, administrator_id) 
-	values (10, 'Uspenska 1, Novi Sad', 'Hotel Centar', 'Odlican hotel', 11);
-insert into hotel (id, adresa, naziv, opis, administrator_id) 
-	values (11, 'Svetog Save 9, Beograd', 'Hotel Slavija', 'Najbolji hotel u gradu', 11);
+insert into hotel (id, adresa, naziv, opis, administrator_id, ocena) 
+	values (10, 'Uspenska 1, Novi Sad', 'Hotel Centar', 'Odlican hotel', 11, 0);
+insert into hotel (id, adresa, naziv, opis, administrator_id, ocena) 
+	values (11, 'Svetog Save 9, Beograd', 'Hotel Slavija', 'Najbolji hotel u gradu', 11, 0);
 	
 /**** SOBE ****/
-insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (10, 0, 4, 2, 'APARTMAN', 10, 0, 0);
-insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (11, 1, 1, 5, 'JEDNOKREVETNA_SOBA', 10, 0, 0);
-insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (12, 1, 2, 1, 'DVOKREVETNA_SOBA', 10, 0, 0);
-insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (13, 1, 6, 3, 'FAMILY_ROOM', 10, 0, 1);
-insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu) 
-	values (14, 1, 4, 5, 'DVOKREVETNA_SOBA', 10, 0, 1);
+insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu, ocena) 
+	values (10, 0, 4, 2, 'APARTMAN', 10, 0, 0, 0);
+insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu, ocena) 
+	values (11, 1, 1, 5, 'JEDNOKREVETNA_SOBA', 10, 0, 0, 0);
+insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu, ocena) 
+	values (12, 1, 2, 1, 'DVOKREVETNA_SOBA', 10, 0, 0, 0);
+insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu, ocena) 
+	values (13, 1, 6, 3, 'FAMILY_ROOM', 10, 0, 1, 0);
+insert into soba (id, ima_balkon, kapacitet, sprat, tip_sobe, hotel_id, cena, na_popustu, ocena) 
+	values (14, 1, 4, 5, 'DVOKREVETNA_SOBA', 10, 0, 1, 0);
 	
 /**** DODATNE USLUGE ****/
 insert into dodatna_usluga (id, tip_dodatne_usluge, hotel_id, cena) 
@@ -72,22 +72,22 @@ insert into rezervacija_hotela_dodatne_usluge (rezervacija_hotela_id, dodatne_us
 	
 	
 /**** RENT-CAR SERVISI ****/
-insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(10, 'Adresa 10', 'Rent trans 1', 'Vrlo kvalitetno i povoljno.', 12);
-insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(11, 'Adresa 11', 'Rent trans 2', 'Vrlo skupo.', 12);
-insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(12, 'Adresa 16, Dobrinci', 'Rent trans 15', 'Uvek ici ovde.', 12);
-insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id) values 
-	(13, 'Zeleznicka 28', 'Very good trans', 'Najbolje.', 12);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(10, 'Beograd', 'Rent trans 1', 'Vrlo kvalitetno i povoljno.', 12, 0);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(11, 'Beograd', 'Rent trans 2', 'Vrlo skupo.', 12, 0);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(12, 'Adresa 16, Dobrinci', 'Rent trans 3', 'Uvek ici ovde.', 12, 0);
+insert into rentacar(rentacar_id, adresa, naziv, opis, administrator_id, ocena) values 
+	(13, 'Zeleznicka 28', 'Very good trans', 'Najbolje.', 12, 0);
 	
 /**** VOZILA ****/	
-insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (10, 5, 1000, 2019, 'BMW', 'X5', 'BMW X5', 0, 'LIMUZINA', 10, 0);
-insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (11, 5, 200, 2015, 'Mercedes', 'Jeep', 'Mercedes dzip', 0, 'KARAVAN', 10, 0);
-insert into vozilo(vozilo_id, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (12, 5, 400, 2015, 'Opel', 'Astra', 'Opel Astra', 0, 'KABRIOLET', 11, 0);
+insert into vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (10, 5, 5, 1000, 2019, 'BMW', 'X5', 'BMW X5', 0, 'LIMUZINA', 10, 0);
+insert into vozilo(vozilo_id, ocena,  broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (11, 3, 5, 200, 2015, 'Mercedes', 'Jeep', 'Mercedes dzip', 0, 'KARAVAN', 10, 1);
+insert into vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
+	values (12, 0, 5, 400, 2015, 'Opel', 'Astra', 'Opel Astra', 0, 'KABRIOLET', 11, 0);
 
 /**** LOKACIJA ****/	
 insert into lokacija(id, adresa, drzava, grad, latitude, longitude, rentacar_id)
@@ -115,11 +115,11 @@ insert into stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila)
 insert into rezervacija_vozila(id,  datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
 	values (10, '2019-08-25', '2019-09-25', 13, 10, 10, 10, 500, 5, 0);
 insert into rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-	values (11, '2020-08-25', '2020-09-25', 13, 10, 10, 11, 200, 5, 0);
+	values (11, '2020-08-25', '2020-09-25', 13, 10, 10, 10, 200, 5, 0);
 
 /**** OCENE ****/
 insert into ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
 	values (10, 5, 13, 10);
 insert into ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (11, 3, 13, 10);	
+	values (11, 3, 13, 11);	
 	

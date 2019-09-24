@@ -70,7 +70,6 @@ private static final String URL_PREFIX = "/api/pricelistRent";
 	public void tearDown() throws Exception {
 	}
 	
-	// METODA ZA DODAVANJE NOVOG RENT SERVISA
 	@Transactional
 	@Rollback(true)
 	@Test
@@ -96,7 +95,23 @@ private static final String URL_PREFIX = "/api/pricelistRent";
 		.andExpect(content().contentType(contentType))
 		.andExpect(jsonPath("$.id").value(11));
 	}
+	
+	@Test
+	public void testGetAllPricelistsRent() throws Exception
+	{
+		mockMvc.perform(get(URL_PREFIX + "/getAllPricelistsRent/10" )).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(10)))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(11)));
+	}
+	
 
+	@Transactional
+	@Rollback(true)
+	@Test
+	public void testObrisiCenovnik() throws Exception {
+		mockMvc.perform(delete(URL_PREFIX + "/obrisiCenovnik/10/10" )).andExpect(status().isOk());
+	}
 
 	
 	

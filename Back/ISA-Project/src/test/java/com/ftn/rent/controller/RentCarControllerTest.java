@@ -109,7 +109,7 @@ private static final String URL_PREFIX = "/rentCar";
 		p.setEndDate("2019-07-25");
 		p.setStartDate("2019-07-01");
 		p.setRentName("Rent trans 1");
-		p.setRentLocation("Adresa 10");
+		p.setRentLocation("Beograd");
 		String json = com.ftn.utils.TestUtil.json(p);
 		this.mockMvc.perform(post(URL_PREFIX + "/searchRents").contentType(contentType).content(json)).andExpect(status().isOk())
 		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(10)));
@@ -139,6 +139,42 @@ private static final String URL_PREFIX = "/rentCar";
 		assertThat(retVal)
 	      .isEqualTo(0.00);
 	}
+	
+	@Test
+	public void testCheckIfReservedRent() throws Exception {
+		MvcResult result = mockMvc.perform(get(URL_PREFIX + "/checkIfReservedRent/10" )).andExpect(status().isOk()).andReturn();
+		String resultAsString = result.getResponse().getContentAsString();
+		boolean retVal = Boolean.parseBoolean(resultAsString);
+		//System.out.println(retVal);
+		assertThat(retVal)
+	      .isEqualTo(true);
+	}
+	
+	@Test
+	public void testGetAllRentsByAddress() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/getAllRentsByAddress/10")).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(10)))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(11)));
+		
+	}
+	
+	@Test
+	public void testGetSortedRents() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/sort/NameA")).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(10)))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(11)))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(12)))
+		.andExpect(jsonPath("$.[*].rentACarId").value(hasItem(13)));
+	}
+	
+	
+	
+	
+	
+	
+	
 
 
 }
