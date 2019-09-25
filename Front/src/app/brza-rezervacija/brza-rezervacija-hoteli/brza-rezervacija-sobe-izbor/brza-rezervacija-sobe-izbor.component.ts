@@ -18,7 +18,7 @@ import {OcenaSobaService} from "../../../service/ocenaSoba.service";
       position: relative;
       display: inline-block;
       font-size: 3rem;
-      color: #d3d3d3;
+      color: darkgray;
     }
     .full {
       color: dodgerblue;
