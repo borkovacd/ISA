@@ -11,7 +11,15 @@
       <p style="font-size: 20px">Naziv: <b> {{hotel.naziv}} </b> </p>
       <p style="font-size: 20px">Adresa: <b> {{hotel.adresa}} </b> </p>
       <p style="font-size: 20px">Opis: <b> {{hotel.opis}} </b> </p>
-      <p *ngIf = "hotel.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{hotel.ocena}}</b></p>
+
+      <ng-template #t let-fill="fill">
+     <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+     </span>
+      </ng-template>
+
+      <ngb-rating [(rate)]="hotel.ocena" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+
       <div style="margin-bottom: 20px">
 
       </div>

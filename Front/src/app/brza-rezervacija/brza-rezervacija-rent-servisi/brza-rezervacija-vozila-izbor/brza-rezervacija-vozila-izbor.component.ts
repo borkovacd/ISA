@@ -10,7 +10,24 @@ import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 @Component({
   selector: 'app-brza-rezervacija-vozila-izbor',
   templateUrl: './brza-rezervacija-vozila-izbor.component.html',
-  styleUrls: ['./brza-rezervacija-vozila-izbor.component.css']
+  styleUrls: ['./brza-rezervacija-vozila-izbor.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class BrzaRezervacijaVozilaIzborComponent implements OnInit {
 

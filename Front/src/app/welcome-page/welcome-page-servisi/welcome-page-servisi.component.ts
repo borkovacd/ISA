@@ -10,7 +10,24 @@ import {OcenaRentService} from "../../service/ocenaRent.service";
 @Component({
   selector: 'app-welcome-page-servisi',
   templateUrl: './welcome-page-servisi.component.html',
-  styleUrls: ['./welcome-page-servisi.component.css']
+  styleUrls: ['./welcome-page-servisi.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class WelcomePageServisiComponent implements OnInit {
 

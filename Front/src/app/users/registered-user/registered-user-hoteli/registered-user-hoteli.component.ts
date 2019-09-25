@@ -10,7 +10,24 @@ import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 @Component({
   selector: 'app-registered-user-hoteli',
   templateUrl: './registered-user-hoteli.component.html',
-  styleUrls: ['./registered-user-hoteli.component.css']
+  styleUrls: ['./registered-user-hoteli.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class RegisteredUserHoteliComponent implements OnInit {
 

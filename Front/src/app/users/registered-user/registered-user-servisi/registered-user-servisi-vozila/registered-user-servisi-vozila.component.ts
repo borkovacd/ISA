@@ -18,7 +18,24 @@ import {OcenaVoziloService} from "../../../../service/ocenaVozilo.service";
 @Component({
   selector: 'app-registered-user-servisi-vozila',
   templateUrl: './registered-user-servisi-vozila.component.html',
-  styleUrls: ['./registered-user-servisi-vozila.component.css']
+  styleUrls: ['./registered-user-servisi-vozila.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class RegisteredUserServisiVozilaComponent implements OnInit {
 

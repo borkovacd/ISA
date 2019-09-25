@@ -6,10 +6,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.dto.ProveriDostupnostRentDTO;
 import com.ftn.dto.VoziloDTO;
@@ -58,6 +58,7 @@ public class VoziloService
 	
 	
 	// Dodavanje vozila
+	@Transactional( rollbackFor = Exception.class)
 	public Vozilo dodajVozilo(VoziloDTO dto, Long idRentACar)  
 	{
 		
@@ -110,7 +111,7 @@ public class VoziloService
 	}
 	
 	// Izmena vozila
-	@Transactional
+	@Transactional( rollbackFor = Exception.class)
 	public Vozilo izmeniVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
 	{
 		Vozilo v = voziloRepository.findOneByVoziloId(idVozila);
@@ -169,7 +170,7 @@ public class VoziloService
 	}
 
 	// metoda za brisanje vozila
-	@Transactional
+	@Transactional( rollbackFor = Exception.class)
 	public boolean obrisiVozilo(Long idRentACar, Long idVozila)
 	{
 		List<StavkaCenovnikaRent> stavke = stavkaRentRepository.findAll();
@@ -552,7 +553,7 @@ public class VoziloService
 	
 	
 	// BRZA REZERVACIJA
-	
+	@Transactional( rollbackFor = Exception.class)
 	public Vozilo staviVoziloNaPopust(Long idVozila) 
 	{
 		Vozilo v = voziloRepository.getOne(idVozila);
@@ -561,6 +562,7 @@ public class VoziloService
 		return v;
 	}
 	
+	@Transactional( rollbackFor = Exception.class)
 	public Vozilo skiniVoziloSaPopusta(Long idVozila)
 	{
 		Vozilo v = voziloRepository.getOne(idVozila);

@@ -7,7 +7,15 @@
       Prikazi na mapi
     </button>
     <p style="font-size: 20px">{{hotel.opis}}</p>
-    <p *ngIf = "hotel.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{hotel.ocena}}</b></p>
+
+    <ng-template #t let-fill="fill">
+     <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+     </span>
+    </ng-template>
+
+    <ngb-rating [(rate)]="hotel.ocena" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+
     <div style="margin-bottom: 20px">
       <button
         style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"

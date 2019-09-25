@@ -9,7 +9,24 @@ import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 @Component({
   selector: 'app-welcome-page-servisi-vozila',
   templateUrl: './welcome-page-servisi-vozila.component.html',
-  styleUrls: ['./welcome-page-servisi-vozila.component.css']
+  styleUrls: ['./welcome-page-servisi-vozila.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class WelcomePageServisiVozilaComponent implements OnInit {
 

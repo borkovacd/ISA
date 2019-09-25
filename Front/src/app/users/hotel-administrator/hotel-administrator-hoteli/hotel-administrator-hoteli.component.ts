@@ -8,7 +8,24 @@ import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 @Component({
   selector : 'hotel-administrator-hoteli',
   templateUrl : './hotel-administrator-hoteli.component.html',
-  styleUrls   : ['./hotel-administrator-hoteli.component.scss']
+  styleUrls   : ['./hotel-administrator-hoteli.component.scss'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class HotelAdministratorHoteliComponent implements  OnInit {
 

@@ -8,7 +8,24 @@ import {AuthService} from "../../service/auth.service";
 @Component({
   selector: 'app-vozila',
   templateUrl: './vozila.component.html',
-  styleUrls: ['./vozila.component.css']
+  styleUrls: ['./vozila.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 
 export class VozilaComponent implements OnInit {

@@ -6,7 +6,24 @@ import {OcenaVoziloService} from "../../../service/ocenaVozilo.service";
 @Component({
   selector: 'app-registered-user-vozila-korisnik',
   templateUrl: './registered-user-vozila-korisnik.component.html',
-  styleUrls: ['./registered-user-vozila-korisnik.component.css']
+  styleUrls: ['./registered-user-vozila-korisnik.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class RegisteredUserVozilaKorisnikComponent implements OnInit {
 

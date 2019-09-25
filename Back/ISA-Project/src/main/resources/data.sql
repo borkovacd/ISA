@@ -125,14 +125,14 @@ insert into isa_project.rentacar(rentacar_id, adresa, naziv, opis, administrator
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
 	values (1, 1, 4, 0, 2019, "BMW", "X5", "BMW X5", false, "LIMUZINA", 1, false);
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (2, 2, 4, 0, 2015, "Mercedes", "Jeep", "Mercedes dzip", false, "KARAVAN", 1, false);
+	values (2, 2, 4, 0, 2015, "Mercedes", "Jeep", "Mercedes dzip", false, "KARAVAN", 1, true);
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
 	values (3, 3, 5, 0, 2015, "Opel", "Astra", "Opel Astra", false, "KABRIOLET", 1, false);
 
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
 	values (4, 4, 4, 0, 2019, "Siroko", "P12", "Siroko P12", false, "PICKUP", 2, false);
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
-	values (5, 5, 4, 0, 2015, "Opel", "Insignia", "Opel Insignia", false, "KARAVAN", 2, false);
+	values (5, 5, 4, 0, 2015, "Opel", "Insignia", "Opel Insignia", false, "KARAVAN", 2, true);
 
 insert into isa_project.vozilo(vozilo_id, ocena, broj_sedista, cena, godina_proizvodnje, marka, model, naziv, rezervisano, tip, rentacar_id, na_popustu)
 	values (6, 1, 5, 400, 2015, "Fica", "500", "Fica Fiat 5", false, "MINIVEN", 3, false);	

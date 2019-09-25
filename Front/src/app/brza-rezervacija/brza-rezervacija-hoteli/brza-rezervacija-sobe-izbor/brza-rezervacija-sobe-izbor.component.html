@@ -29,7 +29,15 @@
     <p style="font-size: 20px">Balkon:
       {{room.imaBalkon}}
     </p>
-    <p *ngIf = "room.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{room.ocena}}</b></p>
+
+    <ng-template #t let-fill="fill">
+     <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+     </span>
+    </ng-template>
+
+    <ngb-rating [(rate)]="room.ocena" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+
     <p style="font-size: 20px; text-decoration-line: line-through">Ukupna cena (bez popusta):
       {{room.cena}}
     </p>

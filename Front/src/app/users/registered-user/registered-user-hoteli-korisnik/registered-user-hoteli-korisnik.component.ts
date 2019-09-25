@@ -8,7 +8,24 @@ import {OcenaHotelService} from '../../../service/ocenaHotel.service';
 @Component({
   selector: 'app-registered-user-hoteli-korisnik',
   templateUrl: './registered-user-hoteli-korisnik.component.html',
-  styleUrls: ['./registered-user-hoteli-korisnik.component.css']
+  styleUrls: ['./registered-user-hoteli-korisnik.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class RegisteredUserHoteliKorisnikComponent implements OnInit {
 

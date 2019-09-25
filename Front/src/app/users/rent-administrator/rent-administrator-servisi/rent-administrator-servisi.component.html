@@ -4,7 +4,14 @@
     <h1 style="margin-top: 20px">{{rent.naziv}}</h1>
     <p style="font-size: 20px">{{rent.adresa}}</p>
     <p style="font-size: 20px">{{rent.opis}}</p>
-    <p *ngIf = "rent.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{rent.ocena}}</b></p>
+
+    <ng-template #t let-fill="fill">
+     <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+     </span>
+    </ng-template>
+
+    <ngb-rating [(rate)]="rent.ocena" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
     <div style="margin-bottom: 20px">
       <button
         style="border-radius: 12px;background-color: #1a8cff;color: white;height: 45px;width: 110px;font-size: 20px;margin-right: 20px"

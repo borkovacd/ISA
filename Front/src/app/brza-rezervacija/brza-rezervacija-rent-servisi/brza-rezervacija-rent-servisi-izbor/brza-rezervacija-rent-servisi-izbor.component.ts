@@ -9,7 +9,24 @@ import {OcenaRentService} from "../../../service/ocenaRent.service";
 @Component({
   selector: 'app-brza-rezervacija-rent-servisi-izbor',
   templateUrl: './brza-rezervacija-rent-servisi-izbor.component.html',
-  styleUrls: ['./brza-rezervacija-rent-servisi-izbor.component.css']
+  styleUrls: ['./brza-rezervacija-rent-servisi-izbor.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class BrzaRezervacijaRentServisiIzborComponent implements OnInit {
 

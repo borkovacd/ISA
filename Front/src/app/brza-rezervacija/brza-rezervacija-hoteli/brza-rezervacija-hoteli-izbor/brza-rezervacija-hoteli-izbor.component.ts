@@ -10,7 +10,24 @@ import {OcenaHotelService} from "../../../service/ocenaHotel.service";
 @Component({
   selector: 'app-brza-rezervacija-hoteli-izbor',
   templateUrl: './brza-rezervacija-hoteli-izbor.component.html',
-  styleUrls: ['./brza-rezervacija-hoteli-izbor.component.css']
+  styleUrls: ['./brza-rezervacija-hoteli-izbor.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class BrzaRezervacijaHoteliIzborComponent implements OnInit {
 

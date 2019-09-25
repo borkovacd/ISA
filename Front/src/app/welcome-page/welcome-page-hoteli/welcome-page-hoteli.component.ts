@@ -9,7 +9,24 @@ import {OcenaHotelService} from "../../service/ocenaHotel.service";
 @Component({
   selector: 'app-welcome-page-hoteli',
   templateUrl: './welcome-page-hoteli.component.html',
-  styleUrls: ['./welcome-page-hoteli.component.css']
+  styleUrls: ['./welcome-page-hoteli.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class WelcomePageHoteliComponent implements OnInit {
 

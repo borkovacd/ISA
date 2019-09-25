@@ -68,7 +68,6 @@ export class PrijavaComponent implements OnInit {
 
 
                 else {
-                  alert('Vasa uloga je: ' + data.uloga);
 
 
                   localStorage.setItem("ROLE", data.uloga);

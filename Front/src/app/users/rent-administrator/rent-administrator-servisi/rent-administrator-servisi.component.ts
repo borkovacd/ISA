@@ -7,7 +7,24 @@ import {OcenaRentService} from "../../../service/ocenaRent.service";
 @Component({
   selector: 'app-rent-administrator-servisi',
   templateUrl: './rent-administrator-servisi.component.html',
-  styleUrls: ['./rent-administrator-servisi.component.css']
+  styleUrls: ['./rent-administrator-servisi.component.css'],
+  styles: [`
+    .star {
+      position: relative;
+      display: inline-block;
+      font-size: 3rem;
+      color: #d3d3d3;
+    }
+    .full {
+      color: dodgerblue;
+    }
+    .half {
+      position: absolute;
+      display: inline-block;
+      overflow: hidden;
+      color: dodgerblue;
+    }
+  `]
 })
 export class RentAdministratorServisiComponent implements OnInit {
 

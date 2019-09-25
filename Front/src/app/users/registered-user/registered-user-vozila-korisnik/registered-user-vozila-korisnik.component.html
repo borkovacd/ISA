@@ -14,7 +14,15 @@
       <p style="font-size: 20px">Model: <b> {{vozilo.model}} </b> </p>
       <p style="font-size: 20px">Godina proizvodnje: <b> {{vozilo.godinaProizvodnje}} </b> </p>
       <p style="font-size: 20px">Broj sedista: <b> {{vozilo.brojSedista}} </b> </p>
-      <p *ngIf = "vozilo.ocena != 0" style="font-size: 20px"><b>Prosecna ocena: {{vozilo.ocena}}</b></p>
+
+      <ng-template #t let-fill="fill">
+     <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+     </span>
+      </ng-template>
+
+      <ngb-rating [(rate)]="vozilo.ocena" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
+
       <div style="margin-bottom: 20px">
 
       </div>
