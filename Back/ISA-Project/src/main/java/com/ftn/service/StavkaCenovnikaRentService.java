@@ -3,6 +3,7 @@ package com.ftn.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,7 +95,7 @@ public class StavkaCenovnikaRentService
 		stavkaCenovnika.setCenovnik(cenovnik);
 		
 		//Provera da li u cenovniku vec postoji cena za unetu stavku
-		ArrayList<StavkaCenovnikaRent> sveStavkeCenovnika = (ArrayList<StavkaCenovnikaRent>) stavkaRentRepository.findAll();
+		List<StavkaCenovnikaRent> sveStavkeCenovnika = stavkaRentRepository.findAll();
 		ArrayList<StavkaCenovnikaRent> stavkeCenovnika = new ArrayList<StavkaCenovnikaRent>();
 		
 		for(StavkaCenovnikaRent stavka : sveStavkeCenovnika) 

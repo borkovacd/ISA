@@ -166,7 +166,7 @@ public class VoziloServiceTest {
 		
 	}
 	
-	// pronalazi servisi na osnovu naziva
+	// pronalazi servis na osnovu naziva
 	@Test
 	public void testFindByNaziv() {
 		

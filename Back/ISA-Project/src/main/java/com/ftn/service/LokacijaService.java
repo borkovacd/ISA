@@ -46,6 +46,26 @@ public class LokacijaService
 			
 		}
 		
+		// TEST
+		public Lokacija dodajLokaciju(LokacijaDTO dto, Long idRentACar) 
+		{
+			
+			RentACar rentACar = rentRepository.findOneByRentACarId(idRentACar);
+			Lokacija lokacija = new Lokacija();
+			
+			lokacija.setAdresa(dto.getAdresa());
+			lokacija.setDrzava(dto.getDrzava());
+			lokacija.setGrad(dto.getGrad());
+			lokacija.setLatitude(dto.getLatitude());
+			lokacija.setLongitude(dto.getLongitude());
+			lokacija.setRentACar(rentACar);
+			
+			lokRepository.save(lokacija);
+			
+			return lokacija ;
+			
+		}
+		
 		// Izmena filijale
 		public Lokacija izmeniFilijalu(Long idRentACar, Long idFilijala, LokacijaDTO dto) 
 		{	
@@ -119,6 +139,12 @@ public class LokacijaService
 				}
 			}
 			return (ArrayList<Lokacija>) lokacije;
+		}
+		
+		// TEST
+		public List<Lokacija> getFilijaleRentACarTest(Long idRentACar) throws Exception 
+		{
+			return lokRepository.findByRentACarRentACarId(idRentACar);
 		}
 		
 

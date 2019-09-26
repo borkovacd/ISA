@@ -21,4 +21,9 @@ public interface LokacijaRepository extends JpaRepository<Lokacija, Long>
 	// vraca jednu lokaciju na osnovu id-ja / adrese
 	Lokacija findOneById(Long id);
 	Lokacija findOneByAdresa(String adresa) ;
+	
+	List<Lokacija> findByRentACarRentACarId(Long id); // sve filijale tog servisa
+
+	
+	
 }
