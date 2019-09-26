@@ -38,7 +38,7 @@ public class RezervacijaVozilaController
 	// ZA TESTIRANJE
 	@PostMapping("/voziloReservation/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<RezervacijaVozila> voziloReservation(@RequestBody RezervacijaVozilaDTO rezervacijaDTO, @PathVariable Long id) 
+	public ResponseEntity<RezervacijaVozila> voziloReservation(@RequestBody RezervacijaVozilaDTO rezervacijaDTO, @PathVariable Long id) throws Exception 
 	{
 		RezervacijaVozila rezervacija = rezVozService.createReservationRent(rezervacijaDTO, id);
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class RezervacijaVozilaController
 	// PRAVA REZERVACIJA
 	@PostMapping("/rezervisiVozilo")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<RezervacijaVozila> rezervisiVozilo(@RequestBody RezervacijaVozilaDTO rezervacijaDTO) 
+	public ResponseEntity<RezervacijaVozila> rezervisiVozilo(@RequestBody RezervacijaVozilaDTO rezervacijaDTO) throws Exception 
 	{
 		RezervacijaVozila rezervacija = rezVozService.createReservationRent(rezervacijaDTO, userService.getCurrentUser().getId());
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
@@ -88,7 +88,7 @@ public class RezervacijaVozilaController
 	
 	@PostMapping("/createFastResRent/{idRezervacijeLeta}/{idRent}/{idVozila}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<RezervacijaVozila> createFastResRent(@PathVariable Long idRezervacijeLeta, @PathVariable Long idRent, @PathVariable Long idVozila) 
+	public ResponseEntity<RezervacijaVozila> createFastResRent(@PathVariable Long idRezervacijeLeta, @PathVariable Long idRent, @PathVariable Long idVozila) throws Exception 
 	{
 		Long id = userService.getCurrentUser().getId();
 		RezervacijaVozila rezervacija = rezVozService.createOrChangeFastVoziloReservation(id, idRezervacijeLeta, idRent, idVozila);

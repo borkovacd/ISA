@@ -47,6 +47,12 @@ export class VoziloService {
     return this.http.get(`${this.BASE_URL}/checkIfReservedVozilo/${id}`, {headers});
   }
 
+  // provera da li je vozilo rezervisano
+  checkIfReservedVoziloPopust(id: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/checkIfReservedVoziloPopust/${id}`, {headers});
+  }
+
   // obrisi vozilo
   obrisiVozilo(idRent: any, idVozilo: any): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});

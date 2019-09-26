@@ -124,7 +124,7 @@ export class VozilaComponent implements OnInit {
 
   staviNaPopust(id: any) {
     const idRent = this.route.snapshot.params.idRent;
-    this.voziloService.checkIfReservedVozilo(id).subscribe(data => {
+    this.voziloService.checkIfReservedVoziloPopust(id).subscribe(data => {
       if (data == false) {
         this.voziloService.staviVoziloNaPopust(id).subscribe(data => {
           location.reload();
@@ -137,7 +137,7 @@ export class VozilaComponent implements OnInit {
 
   skiniSaPopusta(id: any) {
     const idRent = this.route.snapshot.params.idRent;
-    this.voziloService.checkIfReservedVozilo(id).subscribe(data => {
+    this.voziloService.checkIfReservedVoziloPopust(id).subscribe(data => {
       if (data == false) {
         this.voziloService.skiniVoziloSaPopusta(id).subscribe(data => {
           location.reload();

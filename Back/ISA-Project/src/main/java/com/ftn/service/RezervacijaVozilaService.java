@@ -54,7 +54,7 @@ public class RezervacijaVozilaService
 	
 	// formira se rezervacija za korisnika sa prosledjenim id-jem
 	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
-	public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) 
+	public RezervacijaVozila createReservationRent(RezervacijaVozilaDTO rezervacijaDTO, Long id) throws Exception 
 	{
 		RezervacijaVozila rezervacija = new RezervacijaVozila();
 		
@@ -81,7 +81,42 @@ public class RezervacijaVozilaService
 		rezervacija.setBrojPutnika(brojPutnika);
 		
 		Long idVozila = Long.parseLong(rezervacijaDTO.getVozilo()) ; // u bazu je u toj koloni upisan id vozila
-		Vozilo v = voziloRepository.getOne(idVozila);
+		//Vozilo v = voziloRepository.getOne(idVozila);
+		Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+		
+		/***** KONKURENTNOST *****/
+		if (v.isNaPopustu() == true) throw new Exception(); 
+		boolean slobodno = true ;
+		
+		List<RezervacijaVozila> sveRezervacije = rezVozRepository.findAll();
+		for (RezervacijaVozila rez: sveRezervacije)
+		{
+			if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
+			{
+				if(d1.isBefore(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumPreuzimanja())) {
+					if(d2.isAfter(rez.getDatumPreuzimanja()) || d2.equals(rez.getDatumPreuzimanja())) {
+						slobodno = false;
+					}
+				} else if(d1.isAfter(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumVracanja())) {
+					if(d1.isBefore(rez.getDatumVracanja()) || d1.equals(rez.getDatumVracanja())) {
+						slobodno = false;
+					}
+				}
+				else if (d1.isEqual(rez.getDatumPreuzimanja())) {
+					if(d2.isEqual(rez.getDatumVracanja())) {
+						slobodno = false;
+					}
+				}
+			}
+		}
+		
+		if (slobodno == false) throw new Exception();
+		
+		List<CenovnikRentACar> sviCenovnici = cenRentRepository.findAll();	
+		/***** ****/
+		
+		
+		
 		rezervacija.setVozilo(v);
 		
 		String mestoP = rezervacijaDTO.getMestoPreuzimanja();
@@ -112,6 +147,73 @@ public class RezervacijaVozilaService
 	
 		return rezervacija;
 	}
+
+	
+	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
+	public RezervacijaVozila createReservationRentTest(RezervacijaVozilaDTO rezervacijaDTO, Long id) throws Exception 
+	{
+		RezervacijaVozila rezervacija = new RezervacijaVozila();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(rezervacijaDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(rezervacijaDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		int brojDana =  (int) d1.until(d2, ChronoUnit.DAYS);
+		
+		
+		rezervacija.setDatumPreuzimanja(d1);
+		rezervacija.setDatumVracanja(d2);
+		
+		Korisnik korisnik = userRepository.getOne(id);
+		rezervacija.setKorisnik(korisnik);
+		
+		int brojPutnika = Integer.parseInt(rezervacijaDTO.getNumberOfGuests());
+		rezervacija.setBrojPutnika(brojPutnika);
+		
+		Long idVozila = Long.parseLong(rezervacijaDTO.getVozilo()) ; // u bazu je u toj koloni upisan id vozila
+		Vozilo v = voziloRepository.getOne(idVozila);
+		//Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+		
+		/***** KONKURENTNOST *****/
+		/***** ****/
+		
+		rezervacija.setVozilo(v);
+		
+		String mestoP = rezervacijaDTO.getMestoPreuzimanja();
+		Lokacija mestoPreuzimanja = lokRepository.findOneByAdresa(mestoP);
+		rezervacija.setMestoPreuzimanja(mestoPreuzimanja);
+		
+		String mestoV = rezervacijaDTO.getMestoVracanja();
+		Lokacija mestoVracanja = lokRepository.findOneByAdresa(mestoV);
+		rezervacija.setMestoVracanja(mestoVracanja);
+
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+		
+		Double cenaRezervacije = (double) 0;
+	
+		Vozilo voziloFor = rezervacija.getVozilo();
+		for(CenovnikRentACar cenovnik : cenovnici) 
+			if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+				if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja()))
+					if (cenovnik.getRentACar().getRentACarId() == voziloFor.getRentACar().getRentACarId())
+						for (StavkaCenovnikaRent stavkaCenovnika: stavkeCenovnika)
+							if (stavkaCenovnika.getCenovnik().getId() == cenovnik.getId())
+								if (stavkaCenovnika.getTipVozila() == voziloFor.getTip())
+									cenaRezervacije += stavkaCenovnika.getCena() * brojDana ;
+		
+		rezervacija.setCena(cenaRezervacije);
+		rezVozRepository.save(rezervacija);
+	
+		return rezervacija;
+	}
+
 	
 	@Transactional(readOnly = true)
 	public ArrayList<RezervacijaVozila> listaRezervacijaKorisnik(Long idKorisnik)
@@ -144,7 +246,7 @@ public class RezervacijaVozilaService
 	
 	
 	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
-	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
+	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) throws Exception 
 	{
 		
 		//Potrebne informacije za rezervaciju izvuci iz rezervacije leta
@@ -173,7 +275,42 @@ public class RezervacijaVozilaService
 			novaRezervacija.setDatumPreuzimanja(d1);
 			novaRezervacija.setDatumVracanja(d2);
 			novaRezervacija.setTipRezervacije(1); //1 oznacava brzu rezervaciju
-			Vozilo v = voziloRepository.getOne(idVozila);
+			
+			
+			//Vozilo v = voziloRepository.getOne(idVozila);
+			Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+			
+			/***** KONKURENTNOST *****/
+			if (v.isNaPopustu() == false) throw new Exception(); 
+			boolean slobodno = true ;
+			
+			List<RezervacijaVozila> sveRezervacije = rezVozRepository.findAll();
+			for (RezervacijaVozila rez: sveRezervacije)
+			{
+				if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
+				{
+					if(d1.isBefore(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumPreuzimanja())) {
+						if(d2.isAfter(rez.getDatumPreuzimanja()) || d2.equals(rez.getDatumPreuzimanja())) {
+							slobodno = false;
+						}
+					} else if(d1.isAfter(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumVracanja())) {
+						if(d1.isBefore(rez.getDatumVracanja()) || d1.equals(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+					else if (d1.isEqual(rez.getDatumPreuzimanja())) {
+						if(d2.isEqual(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+				}
+			}
+			
+			if (slobodno == false) throw new Exception();
+			
+			List<CenovnikRentACar> sviCenovnici = cenRentRepository.findAll();
+			/***** ****/
+			
 			novaRezervacija.setVozilo(v);
 			
 			RentACar rent = rentRepository.getOne(idRent);

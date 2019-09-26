@@ -2,7 +2,11 @@ package com.ftn.repository;
 
 import java.util.List;
 
+import javax.persistence.LockModeType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ftn.model.rentacar.RentACar;
@@ -24,6 +28,13 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Long>
 	Vozilo findOneByVoziloId(Long id);
 	Vozilo findOneByNaziv(String naziv) ;
 	
+	Vozilo getOne(Long voziloId);
+
+	@Query("select vozilo from Vozilo vozilo where vozilo.voziloId = ?1")
+	@Lock(LockModeType.PESSIMISTIC_READ)
+	public Vozilo vratiVoziloPoId(long id);
+	 
+		
 	// test
 	public List<Vozilo> findByRentACarRentACarId(Long id); // sva vozila tog servisa
 

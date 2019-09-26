@@ -35,8 +35,8 @@ export class AddEditFilijalaComponent implements OnInit {
       'adresa': ['', Validators.compose([Validators.required])],
       'drzava': ['', Validators.compose([Validators.required])],
       'grad': ['', Validators.compose([Validators.required])],
-      'longitude': ['', Validators.compose([Validators.required])],
-      'latitude': ['', Validators.compose([Validators.required])],
+      'longitude': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,10}$')])],
+      'latitude': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,10}$')])],
 
     })
     this.adresa = this.form.controls['adresa'];

@@ -53,7 +53,7 @@ export class RentAdministratorServisiComponent implements OnInit {
       if (data == false){
         this.router.navigateByUrl('rentAdminPage/editRent/' + id);
       } else {
-        alert('Vozilo u tom smestaju je rezervisano, pa se ne moze menjati!');
+        alert('Vozilo u tom servisu je rezervisano, pa se ne moze menjati!');
       }
     })
 

@@ -28,7 +28,7 @@ export class RentAdministratorProfilEditComponent implements OnInit {
       'ime': ['', Validators.compose([Validators.required])],
       'prezime': ['', Validators.compose([Validators.required])],
       'grad': ['', Validators.compose([Validators.required])],
-      'telefon': ['', Validators.compose([Validators.required])],
+      'telefon': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,10}$')])],
       'lozinka': ['', Validators.compose([Validators.required])],
       'ponovljenaLozinka': ['', Validators.compose([Validators.required])],
     })

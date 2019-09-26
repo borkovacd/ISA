@@ -103,7 +103,7 @@ public class RezervacijaVozilaServiceTest {
 	@Test
 	@Transactional
     @Rollback(true)
-	public void testCreateReservationRent() {
+	public void testCreateReservationRent() throws Exception {
 		RezervacijaVozilaDTO r = new RezervacijaVozilaDTO();
 		RentACar rent = new RentACar();
 		rent.setRentACarId((long)1);
@@ -113,6 +113,7 @@ public class RezervacijaVozilaServiceTest {
 		vozilo.setNaziv("1");
 		vozilo.setRentACar(rent);
 		vozilo.setTip(TipVozila.LIMUZINA);
+		vozilo.setNaPopustu(false);
 		
 		Lokacija lokacija = new Lokacija();
 		lokacija.setAdresa("Adresa");
@@ -154,7 +155,7 @@ public class RezervacijaVozilaServiceTest {
 		when(cenovnikRepository.findAll()).thenReturn(Arrays.asList(cenovnik));
 		when(stavkaRepository.findAll()).thenReturn(Arrays.asList(stavka));
 
-		RezervacijaVozila rezervacijaV = rezervacijaService.createReservationRent(r, (long) 1);
+		RezervacijaVozila rezervacijaV = rezervacijaService.createReservationRentTest(r, (long) 1);
 		
 		assertEquals(rezervacijaV.getBrojPutnika(), rezervacija.getBrojPutnika());
 		verify(repozitorijumMock, times(1)).save(rezervacijaV);
