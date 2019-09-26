@@ -172,4 +172,48 @@ public class OcenaSobaService
 			}
 			
 		}
+		
+		// vraca prosecnu ocenu vozila
+		public double getProsecnaOcenaSobaTest(Long idSoba)
+		{
+			double average = 0;
+			double ukupno = 0;
+			int brojac = 0;
+			
+			List<OcenaSoba> ratingsRent = new ArrayList<OcenaSoba>();
+			List<OcenaSoba> allRatings = ocenaRepository.findAll();
+			
+			if (allRatings.size() == 0)
+			{
+				return average ;
+			}
+			
+			for (OcenaSoba r: allRatings)
+			{
+				if(r.getSoba().getId() == idSoba)
+				{
+					ratingsRent.add(r);
+				}
+			}
+			
+			if (ratingsRent.size() == 0)
+			{
+				System.out.println("RATINGS JE NULL");
+				return average;
+			}
+			else
+			{
+				for (OcenaSoba r : ratingsRent)
+				{
+					brojac += 1 ;
+					ukupno += r.getOcena();
+				}
+				
+				average = ukupno / brojac ;
+				
+				return average ;
+			}
+			
+		}
+
 }

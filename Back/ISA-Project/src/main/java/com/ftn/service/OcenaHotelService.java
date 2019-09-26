@@ -180,5 +180,50 @@ public class OcenaHotelService
 			}
 			
 		}
+		
+		
+		// vraca prosecnu ocenu vozila
+		public double getProsecnaOcenaHotelTest(Long idHotel)
+		{
+			double average = 0;
+			double ukupno = 0;
+			int brojac = 0;
+			
+			List<OcenaHotel> ratingsRent = new ArrayList<OcenaHotel>();
+			List<OcenaHotel> allRatings = ocenaRepository.findAll();
+			
+			if (allRatings.size() == 0)
+			{
+				return average ;
+			}
+			
+			for (OcenaHotel r: allRatings)
+			{
+				if(r.getHotel().getId() == idHotel)
+				{
+					ratingsRent.add(r);
+				}
+			}
+			
+			if (ratingsRent.size() == 0)
+			{
+				System.out.println("RATINGS JE NULL");
+				return average;
+			}
+			else
+			{
+				for (OcenaHotel r : ratingsRent)
+				{
+					brojac += 1 ;
+					ukupno += r.getOcena();
+				}
+				
+				average = ukupno / brojac ;
+				
+				return average ;
+			}
+			
+		}
+
 
 }

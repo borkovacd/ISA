@@ -15,6 +15,7 @@ import com.ftn.repository.UserRepository;
 import com.ftn.model.Korisnik;
 import com.ftn.dto.OcenaVoziloDTO;
 import com.ftn.model.rentacar.Vozilo;
+import com.ftn.model.rentacar.OcenaRentACar;
 import com.ftn.model.rentacar.OcenaVozilo;
 import com.ftn.model.rentacar.RezervacijaVozila;
 
@@ -112,6 +113,25 @@ public class OcenaVoziloService
 			
 		}
 		
+		// TEST
+		public OcenaVozilo oceniVoziloTest(OcenaVoziloDTO ratingDTO, Korisnik user, Long idVozila)
+		{
+			
+			Vozilo v = voziloRepository.findOneByVoziloId(idVozila);
+			
+			OcenaVozilo rating = new OcenaVozilo();
+			
+			int ratingMark = Integer.parseInt(ratingDTO.getOcena());
+
+			rating.setOcena(ratingMark);
+			rating.setUser(user);
+			rating.setVozilo(v);
+			
+			ocenaRepository.save(rating);
+			return rating ;
+			
+		}
+		
 		// vraca prosecnu ocenu vozila
 		public double getProsecnaOcenaVozila(Long idVozila)
 		{
@@ -141,6 +161,50 @@ public class OcenaVoziloService
 			}
 			
 		}
+		
+		// vraca prosecnu ocenu vozila
+		public double getProsecnaOcenaVozilaTest(Long idVozila)
+		{
+			double average = 0;
+			double ukupno = 0;
+			int brojac = 0;
+			
+			List<OcenaVozilo> ratingsRent = new ArrayList<OcenaVozilo>();
+			List<OcenaVozilo> allRatings = ocenaRepository.findAll();
+			
+			if (allRatings.size() == 0)
+			{
+				return average ;
+			}
+			
+			for (OcenaVozilo r: allRatings)
+			{
+				if(r.getVozilo().getVoziloId() == idVozila)
+				{
+					ratingsRent.add(r);
+				}
+			}
+			
+			if (ratingsRent.size() == 0)
+			{
+				System.out.println("RATINGS JE NULL");
+				return average;
+			}
+			else
+			{
+				for (OcenaVozilo r : ratingsRent)
+				{
+					brojac += 1 ;
+					ukupno += r.getOcena();
+				}
+				
+				average = ukupno / brojac ;
+				
+				return average ;
+			}
+			
+		}
+
 		
 		// vraca listu ocena tog vozila
 		public List<OcenaVozilo> vratiListuOcenaVozila(Long idVozilo)

@@ -132,6 +132,26 @@ public class OcenaRentService
 			
 		}
 		
+		// TEST
+		public OcenaRentACar oceniRentTest(OcenaRentDTO ratingDTO, Korisnik user, Long idRent)
+		{
+						
+			RentACar rent = rentRepository.getOne(idRent);
+			
+			OcenaRentACar rating = new OcenaRentACar();
+			
+			int ratingMark = Integer.parseInt(ratingDTO.getOcena());
+
+			rating.setOcena(ratingMark);
+			rating.setUser(user);
+			rating.setRent(rent);
+			
+			ocenaRepository.save(rating);
+			
+			return rating;
+			
+		}
+		
 		// vraca prosecnu ocenu vozila
 		public double getProsecnaOcenaRent(Long idRent)
 		{
