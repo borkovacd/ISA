@@ -90,9 +90,20 @@ public class RezervacijaVozila
 		this.brojPutnika = brojPutnika;
 		this.tipRezervacije = tipRezervacije;
 	}
+	
+	
 
 	
 	
+	public RezervacijaVozila(Vozilo vozilo, Korisnik korisnik, double cena, int brojPutnika, int tipRezervacije) {
+		super();
+		this.vozilo = vozilo;
+		this.korisnik = korisnik;
+		this.cena = cena;
+		this.brojPutnika = brojPutnika;
+		this.tipRezervacije = tipRezervacije;
+	}
+
 	public int getBrojPutnika() {
 		return brojPutnika;
 	}

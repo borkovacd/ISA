@@ -282,70 +282,7 @@ public class UserService {
 	
 	// ne treba metoda za logovanje ako koristim Spring Security 
 	
-	/*
-	// logovanje
-	public String logIn(KorisnikDTO korisnik) 
-	{
-		Korisnik k1 = userRepository.findOneByEmail(korisnik.getEmail());
-		
-		if(k1 != null) // znaci registrovan postoji sa tim mejlom
-		{
-			String tempPassword = "";
-			try 
-			{
-				tempPassword = encriptPassword(korisnik.getLozinka());
-				
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			// ukoliko uneta lozinka nije ispravna, odnosno nije ista kao i pocetna
-			if(!tempPassword.equals(k1.getLozinka())) 
-			{
-				return "greska";
-			} else 
-			{
-				if(!k1.isVerifikovan()) // ukoliko je registrovan, ali nije potvrdio registraciju
-				{
-					return "greska1";
-				} 
-				
-				else 
-				{
-					if(k1.getUloga().equals(UlogaKorisnika.OBICAN_KORISNIK))
-						return "obican";
-					
-					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE) && !k1.isPrvoLogovanje())
-						return "prvo"; // mora promeniti pass pre prvog logovanja
-					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_AVIOKOMPANIJE))
-						return "avio";
-					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_HOTELA))
-						return "hotel";
-					else if(k1.getUloga().equals(UlogaKorisnika.ADMINISTRATOR_RENT_A_CAR))
-						return "rent";
-					else
-						return "sistem";
-				}
-			}
-		} 
-		else 
-		{
-			return "greska";
-		}
-		
-	}
-	
-	*/
-	
-	// vraca korisnika na osnovu email-a
-	/*
-	public Korisnik returnKorisnikByEmail(KorisnikDTO k) 
-	{
-		Korisnik k1 = userRepository.findKorisnikByEmail(k.getEmail());
-		return k1;
-	}
-	*/
+
 	
 	public Korisnik returnKorisnikByEmail(String email) 
 	{

@@ -10,5 +10,5 @@ import com.ftn.model.rentacar.RezervacijaVozila;
 @Repository
 public interface RezervacijaVozilaRepository extends JpaRepository<RezervacijaVozila, Long> 
 {
-	
+	List<RezervacijaVozila> findByKorisnikId(Long idKorisnik);
 }

@@ -135,6 +135,14 @@ public class RezervacijaVozilaService
 		return rezervacijeKorisnik ;
 	}
 	
+	// TEST
+	public List<RezervacijaVozila> listaRezervacijaKorisnikTest(Long idKorisnik)
+	{
+
+		return rezVozRepository.findByKorisnikId(idKorisnik) ;
+	}
+	
+	
 	@Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
 	public RezervacijaVozila createOrChangeFastVoziloReservation(Long id, Long idRezervacijeLeta, Long idRent, Long idVozila) 
 	{
