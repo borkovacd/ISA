@@ -28,8 +28,6 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Long>
 	Vozilo findOneByVoziloId(Long id);
 	Vozilo findOneByNaziv(String naziv) ;
 	
-	Vozilo getOne(Long voziloId);
-
 	@Query("select vozilo from Vozilo vozilo where vozilo.voziloId = ?1")
 	@Lock(LockModeType.PESSIMISTIC_READ)
 	public Vozilo vratiVoziloPoId(long id);

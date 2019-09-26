@@ -140,7 +140,22 @@ public class VoziloController
 		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
 	}
 	
-
+	@PostMapping("/getSlobodnaVozilaPeriodNovo/{idRent}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Vozilo>> getSlobodnaVozilaPeriodNovo(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idRent) 
+	{
+		ArrayList<Vozilo> vozila = voziloService.getSlobodnaVozilaPeriodNovo(vpDTO, idRent);
+		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
+	}
+	
+	@PostMapping("/getZauzetaVozilaPeriodNovo/{idRent}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<ArrayList<Vozilo>> getZauzetaVozilaPeriodNovo(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idRent) 
+	{
+		ArrayList<Vozilo> vozila = voziloService.getZauzetaVozilaPeriodNovo(vpDTO, idRent);
+		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
+	}
+	
 	// vraca sva vozila - 2.7
 	// 2.7
 		@GetMapping("/vratiSvaVozila")

@@ -678,6 +678,182 @@ public class VoziloService
 		
 		return odgovarajucaVozila;
 	}
+	
+	
+	
+	// NOVE METODE
+	// vraca slobodna vozilaza izabran rent-a-car u datom vremenskom periodu
+	public ArrayList<Vozilo> getSlobodnaVozilaPeriodNovo(VremenskiPeriodDTO vpDTO, Long idRent)
+	{
+		ArrayList<Vozilo> slobodnaVozila = new ArrayList<Vozilo>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(vpDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(vpDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		ArrayList<Vozilo> vozilaRent = new ArrayList<Vozilo>();
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		
+		RentACar rent = rentRepository.getOne(idRent);
+		
+		// ukoliko nije prosledjen dobar rent-a-car
+		if (rent == null)
+		{
+			return null ;
+		}
+		else
+		{
+			for (Vozilo v: svaVozila)
+			{
+				if (v.getRentACar().getRentACarId() == idRent)
+				{
+					if (v.isNaPopustu() == false) { 
+						vozilaRent.add(v);
+					}
+				}
+			}
+		}
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+		
+		for (Vozilo v: vozilaRent)
+		{
+			boolean slobodno = true ;
+			for (RezervacijaVozila rez: rezervacije)
+			{
+				if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
+				{
+					if(d1.isBefore(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumPreuzimanja())) {
+						if(d2.isAfter(rez.getDatumPreuzimanja()) || d2.equals(rez.getDatumPreuzimanja())) {
+							slobodno = false;
+						}
+					} else if(d1.isAfter(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumVracanja())) {
+						if(d1.isBefore(rez.getDatumVracanja()) || d1.equals(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+					else if (d1.isEqual(rez.getDatumPreuzimanja())) {
+						if(d2.isEqual(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+				}
+			}
+			
+			if (slobodno == true)
+			{
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == idRent)  //ako je cenovnik hotela u kojem je slobodna soba
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) {
+											slobodnaVozila.add(v);
+											
+										
+										}
+			}
+			
+		}
+		
+		return slobodnaVozila ;
+	}
+	
+	
+	// vraca slobodna vozilaza izabran rent-a-car u datom vremenskom periodu
+	public ArrayList<Vozilo> getZauzetaVozilaPeriodNovo(VremenskiPeriodDTO vpDTO, Long idRent)
+	{
+		ArrayList<Vozilo> zauzetaVozila = new ArrayList<Vozilo>();
+		
+		String europeanDatePattern = "yyyy-MM-dd";
+		DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
+		LocalDate d1 = LocalDate.parse(vpDTO.getStartDate(), europeanDateFormatter);
+		LocalDate d2 = LocalDate.parse(vpDTO.getEndDate(), europeanDateFormatter);
+		
+		//Provera datuma
+		if(d1.isAfter(d2)) { //da li je pocetni datum posle krajnjeg datuma
+			return null;
+		}
+		
+		ArrayList<Vozilo> vozilaRent = new ArrayList<Vozilo>();
+		ArrayList<Vozilo> svaVozila = (ArrayList<Vozilo>) voziloRepository.findAll();
+		
+		RentACar rent = rentRepository.getOne(idRent);
+		
+		// ukoliko nije prosledjen dobar rent-a-car
+		if (rent == null)
+		{
+			return null ;
+		}
+		else
+		{
+			for (Vozilo v: svaVozila)
+			{
+				if (v.getRentACar().getRentACarId() == idRent)
+				{
+					if (v.isNaPopustu() == false) { 
+						vozilaRent.add(v);
+					}
+				}
+			}
+		}
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+		List<CenovnikRentACar> cenovnici = cenRentRepository.findAll();
+		List<StavkaCenovnikaRent> stavkeCenovnika = stavkaRentRepository.findAll();
+		
+		for (Vozilo v: vozilaRent)
+		{
+			boolean slobodno = true ;
+			for (RezervacijaVozila rez: rezervacije)
+			{
+				if (rez.getVozilo().getVoziloId() == v.getVoziloId()) // da li se radi o istom vozilu
+				{
+					if(d1.isBefore(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumPreuzimanja())) {
+						if(d2.isAfter(rez.getDatumPreuzimanja()) || d2.equals(rez.getDatumPreuzimanja())) {
+							slobodno = false;
+						}
+					} else if(d1.isAfter(rez.getDatumPreuzimanja()) || d1.equals(rez.getDatumVracanja())) {
+						if(d1.isBefore(rez.getDatumVracanja()) || d1.equals(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+					else if (d1.isEqual(rez.getDatumPreuzimanja())) {
+						if(d2.isEqual(rez.getDatumVracanja())) {
+							slobodno = false;
+						}
+					}
+				}
+			}
+			
+			if (slobodno == false)
+			{
+				for(CenovnikRentACar cenovnik : cenovnici) 
+					if(d1.isAfter(cenovnik.getPocetakVazenja()) || d1.isEqual(cenovnik.getPocetakVazenja())) 
+						if(d2.isBefore(cenovnik.getPrestanakVazenja()) || d2.isEqual(cenovnik.getPrestanakVazenja())) 
+							if(cenovnik.getRentACar().getRentACarId() == idRent)  //ako je cenovnik hotela u kojem je slobodna soba
+								for(StavkaCenovnikaRent stavkaCenovnika : stavkeCenovnika) 
+									if(stavkaCenovnika.getCenovnik().getId() == cenovnik.getId()) 
+										if(stavkaCenovnika.getTipVozila() == v.getTip()) {
+											zauzetaVozila.add(v);
+											
+										
+										}
+			}
+			
+		}
+		
+		return zauzetaVozila ;
+	}
 
 
 }
