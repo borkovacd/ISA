@@ -33,6 +33,12 @@ public class CenovnikRentACar
 		this.pocetakVazenja = pocetakVazenja;
 		this.prestanakVazenja = prestanakVazenja;
 	}
+	
+	// test
+	public CenovnikRentACar(RentACar rentACar) {
+		super();
+		this.rentACar = rentACar;
+	}
 
 	public Long getId() {
 		return id;

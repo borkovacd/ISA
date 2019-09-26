@@ -29,5 +29,8 @@ public interface RentCarRepository extends JpaRepository<RentACar, Long>
 	RentACar findOneByRentACarId(Long id);
 	RentACar findOneByNaziv(String naziv) ;
 	
+	// Test
+	RentACar findOneByAdministratorId(Long id);
+	
 }
 

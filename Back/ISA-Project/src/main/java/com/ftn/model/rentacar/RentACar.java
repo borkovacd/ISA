@@ -45,6 +45,16 @@ public class RentACar
 		this.opis = opis;
 		this.administrator = administrator;
 	}
+	
+	
+
+	public RentACar(String naziv, String adresa, String opis, double ocena) {
+		super();
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.opis = opis;
+		this.ocena = ocena;
+	}
 
 	public Korisnik getAdministrator() {
 		return administrator;

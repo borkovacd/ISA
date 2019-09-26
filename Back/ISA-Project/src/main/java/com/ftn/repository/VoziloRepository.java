@@ -23,4 +23,8 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Long>
 	// vraca jedno vozilo na osnovu id-ja / naziva
 	Vozilo findOneByVoziloId(Long id);
 	Vozilo findOneByNaziv(String naziv) ;
+	
+	// test
+	public List<Vozilo> findByRentACarRentACarId(Long id); // sva vozila tog servisa
+
 }

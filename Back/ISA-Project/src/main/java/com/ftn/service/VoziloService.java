@@ -62,7 +62,7 @@ public class VoziloService
 	public Vozilo dodajVozilo(VoziloDTO dto, Long idRentACar)  
 	{
 		
-		String nazivRent = rentRepository.getOne(idRentACar).getNaziv();
+		//String nazivRent = rentRepository.getOne(idRentACar).getNaziv();
 		RentACar rentACar = rentRepository.findOneByRentACarId(idRentACar);
 		Vozilo v = new Vozilo();
 		
@@ -221,6 +221,11 @@ public class VoziloService
 		return (ArrayList<Vozilo>) vozila;
 	}
 	
+	public List<Vozilo> getVozilaRentACarTest(Long idRentACar) throws Exception 
+	{	
+		return voziloRepository.findByRentACarRentACarId(idRentACar);
+	}
+
 
 	
 	// vraca vozilo na osnovu imena

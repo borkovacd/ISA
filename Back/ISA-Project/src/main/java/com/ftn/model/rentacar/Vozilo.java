@@ -53,6 +53,15 @@ public class Vozilo
 		ocena = 0;
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	// test
+	public Vozilo(String naziv) {
+		super();
+		this.naziv = naziv;
+	}
+
+
 
 	public Vozilo(double cena, String naziv, String marka, String model, int godinaProizvodnje,
 			int brojSedista, TipVozila tip) {

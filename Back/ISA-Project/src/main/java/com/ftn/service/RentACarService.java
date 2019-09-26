@@ -86,6 +86,18 @@ public class RentACarService {
 		return (ArrayList<RentACar>) rentCarRepository.findAll();
 	}
 	
+	// isto kao i vratiSveServise, samo je povratna vrednost List, a ne ArrayList
+	// TEST
+	public List<RentACar> vratiSve()
+	{
+		return rentCarRepository.findAll();
+	}
+	
+	// TEST
+	public RentACar nadjiRentPoKorisniku(Korisnik k) {
+		RentACar a1 = rentCarRepository.findOneByAdministratorId(k.getId());
+		return a1;
+	}
 	// vraca vozilo na osnovu imena
 	public RentACar findByNaziv(String naziv)
 	{
@@ -96,6 +108,10 @@ public class RentACarService {
 	public RentACar findByRentACarId(Long id)
 	{
 		return rentCarRepository.findOneByRentACarId(id);
+	}
+	
+	public void sacuvajRentACar(RentACar a) {
+		rentCarRepository.save(a);
 	}
 	
 	// izmena servisa

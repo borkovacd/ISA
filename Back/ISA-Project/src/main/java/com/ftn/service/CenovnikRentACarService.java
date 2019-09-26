@@ -62,6 +62,30 @@ public class CenovnikRentACarService
 		return cenovnici;
 	}
 	
+	public List<CenovnikRentACar> getAllPricelistsTest(Long idRent) 
+	{
+		List<CenovnikRentACar> cenovnici = new ArrayList<CenovnikRentACar>();
+		List<CenovnikRentACar> sviCenovnici = cenRentRepository.findAll();
+		
+		RentACar rent = rentRepository.getOne(idRent);
+		if(rent == null) 
+		{
+			return cenovnici;
+		} 
+		else 
+		{
+			// ukoliko je to cenovnik tog rent-a-car-a
+			for(CenovnikRentACar cenovnik : sviCenovnici) 
+			{
+				if(cenovnik.getRentACar().getRentACarId() == idRent) 
+				{
+					cenovnici.add(cenovnik);
+				}
+			}
+		}
+		return cenovnici;
+	}
+	
 	// kreira novi cenovnik za rent a car
 	public CenovnikRentACar createPricelist(CenovnikRentDTO cenovnikRentDTO, Long idRent) 
 	{
@@ -77,7 +101,7 @@ public class CenovnikRentACarService
 			return null;
 		}
 		
-		ArrayList<CenovnikRentACar> sviCenovnici = (ArrayList<CenovnikRentACar>) cenRentRepository.findAll();
+		List<CenovnikRentACar> sviCenovnici =  cenRentRepository.findAll();
 		ArrayList<CenovnikRentACar> cenovniciRent = new ArrayList<CenovnikRentACar>();
 		
 		// ukoliko je to cenovnik tog rent a car
@@ -168,7 +192,7 @@ public class CenovnikRentACarService
 	// vraca trenutno aktivan cenovnik
 	public CenovnikRentACar getActivePricelist(Long idRent) 
 	{
-		ArrayList<CenovnikRentACar> sviCenovnici = (ArrayList<CenovnikRentACar>) cenRentRepository.findAll();
+		List<CenovnikRentACar> sviCenovnici = cenRentRepository.findAll();
 		ArrayList<CenovnikRentACar> cenovniciRent = new ArrayList<CenovnikRentACar>();
 		
 		// ukoliko je cenovnik iz tog rent-a-car-a
