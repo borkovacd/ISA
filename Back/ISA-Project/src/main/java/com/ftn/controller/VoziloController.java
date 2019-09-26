@@ -119,6 +119,18 @@ public class VoziloController
 		return taken;
 	}
 	
+	// provera da li je vozilo rezervisano
+	@GetMapping("/checkIfReservedVoziloPopust/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkIfReservedVoziloPopust(@PathVariable Long id) 
+	{
+		//Ako vozilo nije rezervisano, taken je FALSE
+		//u suprotnom taken ima vrednost TRUE
+		
+		boolean taken = voziloService.checkIfVoziloIsReservedPopust(id);
+		return taken;
+	}
+	
 	// vraca slobodna vozila jednog servisa
 	@PostMapping("/getAvailableVozila/{idRent}")
 	@CrossOrigin(origins = "http://localhost:4200")

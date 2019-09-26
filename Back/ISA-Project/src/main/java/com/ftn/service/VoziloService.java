@@ -259,6 +259,31 @@ public class VoziloService
 		return taken;
 	}
 	
+	// provera da li je neko vozilo rezervisano
+	public boolean checkIfVoziloIsReservedPopust(Long idVozila) 
+	{	
+		boolean taken = false;
+		
+		LocalDate currentDate = LocalDate.now();
+		System.out.println(" ------ Danasnji datum: " + currentDate + " ----- ");
+		
+		List<RezervacijaVozila> rezervacije = rezVoziloRepository.findAll();
+
+		// prolazi kroz sve rezervacije i gleda da li se to vozilo nalazi u rezervacijama
+		for (RezervacijaVozila rez : rezervacije)
+		{
+			if (rez.getVozilo().getVoziloId() == idVozila)
+			{
+				if ((rez.getDatumPreuzimanja().isBefore(currentDate) || rez.getDatumPreuzimanja().isEqual(currentDate)) && (rez.getDatumVracanja().isAfter(currentDate) || rez.getDatumVracanja().isEqual(currentDate)))
+						{
+							taken = true ;
+						}
+						
+			}
+		}			
+		return taken;
+	}
+	
 	// vraca slobodna vozilaza izabran rent-a-car u datom vremenskom periodu
 	public ArrayList<Vozilo> getSlobodnaVozilaPeriod(VremenskiPeriodDTO vpDTO, Long idRent)
 	{
