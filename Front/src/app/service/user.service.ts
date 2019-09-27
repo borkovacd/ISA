@@ -107,6 +107,10 @@ export class UserService {
     return this.http.get<any>('api/user/trenutniKorisnik');
   }
 
+  vratiTrenutnogKorisnikaAutor() {
+    return this.http.get<any>('api/user/trenutniKorisnikAutor');
+  }
+
   changePassword(k : KorisnikModel){
     return this.http.post<KorisnikModel>('http://localhost:8080/api/user/promenaLozinke', k);
   }

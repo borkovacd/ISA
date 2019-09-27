@@ -175,7 +175,22 @@ public class UserController {
 	// DODER 
 	@RequestMapping(value="/trenutniKorisnik",method = RequestMethod.GET)
 	public Korisnik trenutniKorisnik(@Context HttpServletRequest request){
+		
 		return userService.getCurrentUser();
+	}
+	
+	@RequestMapping(value="/trenutniKorisnikAutor",method = RequestMethod.GET)
+	public ResponseEntity<Korisnik> trenutniKorisnikAutor(@Context HttpServletRequest request){
+		
+		Korisnik korisnik = userService.getCurrentUser();
+		if (korisnik != null)
+		{
+			return new ResponseEntity<>(korisnik, HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	// vrsi verifikaciju 

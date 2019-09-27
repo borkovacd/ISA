@@ -152,15 +152,15 @@ insert into isa_project.lokacija(id, adresa, drzava, grad, latitude, longitude, 
 	
 /**** CENOVNICI ****/	
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (1, '2019-01-01', '2019-12-01', 1);
+	values (1, DATE'2019-01-01', DATE'2019-12-12', 1);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (2, '2020-01-01', '2020-05-31', 1);
+	values (2, DATE'2020-01-01', DATE'2020-12-12', 1);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (3, '2019-01-01', '2019-12-12', 2);
+	values (3, DATE'2019-01-01', DATE'2020-12-12', 2);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (4, '2019-01-01', '2020-12-12', 3);
+	values (4, DATE'2019-01-01', DATE'2020-12-12', 3);
 insert into isa_project.cenovnik_rentacar(id, pocetak_vazenja, prestanak_vazenja, rentacar_rentacar_id)
-	values (5, '2019-06-01', '2019-12-01', 4);
+	values (5, DATE'2019-01-01', DATE'2020-12-12', 4);
 
 /**** STAVKE CENOVNIKA ****/
 insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila) 
@@ -189,71 +189,77 @@ insert into isa_project.stavka_cenovnika_rent (id, cena, cenovnik_id, tip_vozila
 	values (10, 1000, 5,'KUPE');
 
 /**** REZERVACIJE VOZILA ****/
+/**** VOZILA 1 - limuzina, 4 - pickup, 6 - miniven, 7 MASA ****/
 insert into isa_project.rezervacija_vozila(id,  datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-	values (1, '2019-05-05', '2019-05-10', 4, 1, 1, 1, 3000, 4, 0);
+	values (1, DATE'2019-09-25', DATE'2019-09-30', 4, 1, 1, 1, 3000, 4, 0);
 
 insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-	values (2, '2020-08-25', '2020-09-30', 4, 2, 2, 4, 4000, 4, 0);
+	values (2, DATE'2020-08-25', DATE'2020-08-30', 4, 2, 2, 4, 4800, 4, 0);
 	
 insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-	values (3, '2020-08-25', '2020-09-30', 4, 3, 3, 6, 1000, 5, 0);	
+	values (3, DATE'2019-08-25', DATE'2019-08-30', 4, 3, 3, 6, 1200, 4, 0);	
 
 insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
-	values (4, '2020-08-25', '2020-09-30', 4, 4, 4, 7, 5000, 5, 0);	
+	values (4, DATE'2019-07-25', DATE'2019-07-30', 4, 4, 4, 7, 6000, 5, 0);	
+
+/**** VOZILA 1 - limuzina, 4, 6, 7 ANA****/	
+insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+	values (5, '2019-01-01', '2019-01-05', 7, 1, 1, 1, 2500, 4, 0);	
+insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+	values (6, '2019-03-01', '2019-03-07', 7, 2, 2, 4, 5600, 4, 0);	
+insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+	values (7, '2019-02-01', '2019-02-05', 7, 3, 3, 6, 1000, 4, 0);		
+insert into isa_project.rezervacija_vozila(id, datum_preuzimanja, datum_vracanja, korisnik_id, mesto_preuzimanja_id, mesto_vracanja_id, vozilo_vozilo_id, cena, broj_putnika, tip_rezervacije)
+	values (8, '2019-01-10', '2019-01-15', 7, 4, 4, 7, 6000, 5, 0);	
 
 /**** OCENA HOTEL ****/
-insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
-	values (1, 1, 6, 5);
-insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
-	values (2, 2, 6, 6);
-insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
-	values (3, 3, 6, 7);
+--insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+--	values (1, 1, 6, 5);
+--insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+--	values (2, 2, 6, 6);
+--insert into isa_project.ocena_hotel(id, ocena, user_id, hotel_id)
+--	values (3, 3, 6, 7);
 	
 /**** OCENA SOBA ****/
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(1, 1, 6, 1);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(2, 2, 6, 2);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(3, 3, 6, 3);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(4, 4, 6, 4);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(5, 5, 6, 5);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(6, 1, 6, 6);	
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(7, 2, 6, 7);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(8, 3, 6, 8);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(9, 4, 6, 9);
-insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
-	values(10, 5, 6, 10);	
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(1, 1, 6, 1);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(2, 2, 6, 2);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(3, 3, 6, 3);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(4, 4, 6, 4);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(5, 5, 6, 5);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(6, 1, 6, 6);	
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(7, 2, 6, 7);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(8, 3, 6, 8);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(9, 4, 6, 9);
+--insert into isa_project.ocena_soba(id, ocena, user_id, soba_id)
+--	values(10, 5, 6, 10);	
 	
 /**** OCENA RENT ****/	
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (1, 1, 6, 1);
+	values (1, 1, 7, 1);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (2, 2, 6, 2);
+	values (2, 2, 7, 2);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (3, 3, 6, 3);
+	values (3, 3, 7, 3);
 insert into isa_project.ocena_rentacar(id, ocena, user_id, rent_rentacar_id)
-	values (4, 4, 6, 4);
+	values (4, 4, 7, 4);
 	
 /**** OCENA VOZILO ****/
 insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (1, 1, 6, 1);
+	values (1, 1, 7, 1);
 insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (2, 2, 6, 2);
+	values (2, 2, 7, 4);
 insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (3, 3, 6, 3);
+	values (3, 3, 7, 6);
 insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (4, 4, 6, 4);
-insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (5, 5, 6, 5);
-insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (6, 1, 6, 6);
-insert into isa_project.ocena_vozilo(id, ocena, user_id, vozilo_vozilo_id)
-	values (7, 2, 6, 7);
+	values (4, 4, 7, 7);
+
 
