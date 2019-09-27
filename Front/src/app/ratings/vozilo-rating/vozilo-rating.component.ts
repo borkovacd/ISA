@@ -4,6 +4,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {OcenaVoziloService} from "../../service/ocenaVozilo.service";
 import {OcenaVoziloModel} from "../../model/ocenaVozilo.model";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-vozilo-rating',
@@ -19,7 +20,29 @@ export class VoziloRatingComponent implements OnInit {
               public fb: FormBuilder,
               public route: ActivatedRoute,
               private ocenaService: OcenaVoziloService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "ADMINISTRATOR_RENT_A_CAR"){
+          this.router.navigate(["rentAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })

@@ -5,6 +5,7 @@ import {PricelistRentService} from "../../service/pricelistRent.service";
 import {PricelistRentModel} from "../../model/pricelistRent.model";
 import {PricelistModel} from "../../model/pricelist.model";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-add-edit-pricelist-rent',
@@ -28,7 +29,29 @@ export class AddEditPricelistRentComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private pricelistRentService: PricelistRentService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'startDate': ['', Validators.compose([Validators.required])],
       'endDate': ['', Validators.compose([Validators.required])],

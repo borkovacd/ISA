@@ -5,6 +5,7 @@ import {LokacijaService} from "../../service/lokacija.service";
 import {LokacijaModel} from "../../model/lokacija.model";
 import {RoomModel} from "../../model/room.model";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-add-edit-filijala',
@@ -29,7 +30,28 @@ export class AddEditFilijalaComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private lokacijaService: LokacijaService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
 
     this.form = this.fb.group({
       'adresa': ['', Validators.compose([Validators.required])],

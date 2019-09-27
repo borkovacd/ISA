@@ -38,7 +38,27 @@ export class BrzaRezervacijaRentServisiIzborComponent implements OnInit {
               private authService: AuthService,
               public fb: FormBuilder,
               private rentService: RentCarService,
-              private ocenaService: OcenaRentService) { }
+              private ocenaService: OcenaRentService) {
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "ADMINISTRATOR_RENT_A_CAR"){
+          this.router.navigate(["rentAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+  }
 
   ngOnInit() {
     const idRezervacijeLeta = this.route.snapshot.params.idRezervacijeLeta;

@@ -6,6 +6,7 @@ import {OcenaVoziloModel} from "../../model/ocenaVozilo.model";
 import {OcenaRentModel} from "../../model/ocenaRent.model";
 import {AuthService} from "../../service/auth.service";
 import {RentCarService} from "../../service/rentcar.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-rent-car-rating',
@@ -21,7 +22,29 @@ export class RentCarRatingComponent implements OnInit {
               public route: ActivatedRoute,
               private ocenaService: OcenaRentService,
               private authService: AuthService,
-              private rentService: RentCarService) {
+              private rentService: RentCarService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "ADMINISTRATOR_RENT_A_CAR"){
+          this.router.navigate(["rentAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'rating': ['', Validators.compose([Validators.required])],
     })

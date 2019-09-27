@@ -8,6 +8,7 @@ import {VoziloModel} from "../../model/vozilo.model";
 import{PriceRentModel} from "../../model/priceRent.model";
 import {PriceModel} from "../../model/price.model";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-add-edit-price-rent',
@@ -36,7 +37,29 @@ export class AddEditPriceRentComponent implements OnInit {
               private route: ActivatedRoute,
               private priceRentService: PriceRentService,
               private pricelistRentService: PricelistRentService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
 
     this.form = this.fb.group({
       'tipStavke': ['', Validators.compose([Validators.required])],

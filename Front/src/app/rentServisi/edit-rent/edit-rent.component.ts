@@ -26,6 +26,27 @@ export class EditRentComponent implements OnInit {
               public userService: UserService,
               private authService: AuthService) {
 
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'name': ['', Validators.compose([Validators.required])],
       'address': ['', Validators.compose([Validators.required])],

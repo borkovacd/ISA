@@ -28,6 +28,26 @@ export class EditHotelComponent implements OnInit {
               public hotelService: HotelService,
               private  userService: UserService,
               private authService: AuthService) {
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "ADMINISTRATOR_RENT_A_CAR"){
+          this.router.navigate(["rentAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'name': ['', Validators.compose([Validators.required])],
       'address': ['', Validators.compose([Validators.required])],

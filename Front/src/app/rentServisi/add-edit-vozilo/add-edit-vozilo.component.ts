@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {VoziloService} from "../../service/vozilo.service";
 import {VoziloModel} from "../../model/vozilo.model";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-add-edit-vozilo',
@@ -28,7 +29,28 @@ export class AddEditVoziloComponent implements OnInit {
               public fb: FormBuilder,
               private route: ActivatedRoute,
               private voziloService: VoziloService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
 
     this.form = this.fb.group({
       'brojSedista': ['', Validators.compose([Validators.required, Validators.pattern('^-?[0-9]{1,3}$')])],

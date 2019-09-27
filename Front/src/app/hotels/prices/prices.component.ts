@@ -23,7 +23,27 @@ export class PricesComponent implements OnInit {
               private hotelService: HotelService,
               private priceService: PriceService,
               private  userService: UserService,
-              private authService: AuthService) {}
+              private authService: AuthService) {
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "ADMINISTRATOR_RENT_A_CAR"){
+          this.router.navigate(["rentAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+  }
 
   ngOnInit() {
 

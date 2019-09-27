@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {RentCarService} from "../../service/rentcar.service";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-attendance-graphs-rent',
@@ -29,7 +30,29 @@ export class AttendanceGraphsRentComponent implements OnInit {
               private route: ActivatedRoute,
               public fb: FormBuilder,
               private rentService: RentCarService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+
+    this.userService.vratiTrenutnogKorisnikaAutor().subscribe(
+      data => {
+
+        if(data.uloga == "OBICAN_KORISNIK"){
+          this.router.navigate(["registeredUserPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_AVIOKOMPANIJE"){
+          this.router.navigate([""]);
+        } else if(data.uloga == "ADMINISTRATOR_SISTEMA"){
+          this.router.navigate(["systemAdminPage"]);
+        } else if(data.uloga == "ADMINISTRATOR_HOTELA"){
+          this.router.navigate(["hotelAdminPage"]);
+        }
+
+      },
+
+      error => {
+        this.router.navigate(["prijava"]);
+      }
+    )
+
     this.form = this.fb.group({
       'year3': ['', Validators.compose([Validators.pattern('(19[789]\\d|20[01]\\d)')])],
       'month3': ['', Validators.compose([Validators.pattern('^(1[012]|[1-9])$')])],
