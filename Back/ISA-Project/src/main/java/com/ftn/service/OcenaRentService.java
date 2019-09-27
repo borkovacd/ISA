@@ -194,5 +194,21 @@ public class OcenaRentService
 			}
 			
 		}
+		
+		public List<OcenaRentACar> vratiListuOcenaRent(Long idRent)
+		{
+			List<OcenaRentACar> allRatings = ocenaRepository.findAll();
+			List<OcenaRentACar> myRatings = new ArrayList<OcenaRentACar>();
+			
+			for (OcenaRentACar ocena: allRatings)
+			{
+				if (ocena.getRent().getRentACarId() == idRent)
+				{
+					myRatings.add(ocena);
+				}
+			}
+			return myRatings ;
+			
+		}
 
 }

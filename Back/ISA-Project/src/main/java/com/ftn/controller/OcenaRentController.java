@@ -24,6 +24,7 @@ import com.ftn.model.Korisnik;
 import com.ftn.dto.OcenaRentDTO;
 import com.ftn.dto.OcenaVoziloDTO;
 import com.ftn.model.rentacar.Vozilo;
+import com.ftn.model.rentacar.OcenaRentACar;
 import com.ftn.model.rentacar.OcenaVozilo;
 import com.ftn.model.rentacar.RezervacijaVozila;
 
@@ -75,6 +76,26 @@ public class OcenaRentController {
 			double rezultat = ocenaService.getProsecnaOcenaRent(idRent);
 			return rezultat ;
 		}
+		
+		// getListOfRating(Lista svih rejtinga, komentara i ocena)
+				// getListOfRating(idRoom)
+				// (`${this.BASE_URL}/getListOfRating/${idRoom}`
+				@GetMapping("/vratiListuOcenaRent/{idRent}")
+				public ResponseEntity<List<OcenaRentACar>> vratiListuOcenaRent (@PathVariable Long idRent)
+				{
+					List<OcenaRentACar> ratings = new ArrayList<OcenaRentACar>();
+					ratings = ocenaService.vratiListuOcenaRent(idRent);
+					
+					if (ratings == null)
+					{
+						return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+					}
+					else
+					{
+						return new ResponseEntity<List<OcenaRentACar>>(ratings, HttpStatus.OK);
+					}
+					
+				}
 		
 
 }
