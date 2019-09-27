@@ -224,10 +224,26 @@ export class RegisteredUserServisiVozilaComponent implements OnInit {
     );
 
     const idRent = this.route.snapshot.params.idRent;
-    this.voziloReservationService.voziloReservation(voziloReservationM).subscribe(data => {
-      const idRezervacije = data.id ;
-      this.router.navigateByUrl('registeredUserPage');
+    /*
+     this.voziloReservationService.voziloReservation(voziloReservationM).subscribe(data => {
+       const idRezervacije = data.id ;
+       this.router.navigateByUrl('registeredUserPage');
     });
+     */
+
+
+    this.voziloReservationService.createReservationRentNova(voziloReservationM).subscribe(data => {
+      // const idRezervacije = data.id ;
+      this.router.navigateByUrl('registeredUserPage');
+    },
+
+      error => {
+      alert('Vozilo koje ste izabrali je u medjuvremenu rezervisano!');
+      this.router.navigateByUrl('registeredUserPage');
+      })
+
+
+
   }
 
   vratiProsecnuOcenu(id: any) {

@@ -44,6 +44,15 @@ public class RezervacijaVozilaController
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
 	}
 	
+	// ZA TESTIRANJE PART 2
+		@PostMapping("/voziloReservationNewTest/{id}")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<RezervacijaVozila> voziloReservationNewTest(@RequestBody RezervacijaVozilaDTO rezervacijaDTO, @PathVariable Long id) throws Exception 
+		{
+			RezervacijaVozila rezervacija = rezVozService.createReservationRentTest(rezervacijaDTO, id);
+			return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
+		}
+	
 	// PRAVA REZERVACIJA
 	@PostMapping("/rezervisiVozilo")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -52,6 +61,30 @@ public class RezervacijaVozilaController
 		RezervacijaVozila rezervacija = rezVozService.createReservationRent(rezervacijaDTO, userService.getCurrentUser().getId());
 		return new ResponseEntity<RezervacijaVozila>(rezervacija, HttpStatus.CREATED);
 	}
+	
+	// PRAVA REZERVACIJA NOVA
+		@PostMapping("/createReservationRentNova")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public ResponseEntity<RezervacijaVozila> createReservationRentNova(@RequestBody RezervacijaVozilaDTO rezervacijaDTO) throws Exception 
+		{
+			String povratnaVrednost = rezVozService.createReservationRentNova(rezervacijaDTO, userService.getCurrentUser().getId());
+			
+			
+			if (povratnaVrednost.equals("greska"))
+			{
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			
+			if (povratnaVrednost.equals("ok"))
+			{	
+				return new ResponseEntity<>(HttpStatus.CREATED);
+			}
+			else
+			{
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		}
+	
 	
 	// otkazivanje rezervacije vozila
 

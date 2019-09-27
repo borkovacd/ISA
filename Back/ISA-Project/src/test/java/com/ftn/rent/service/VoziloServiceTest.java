@@ -109,7 +109,7 @@ public class VoziloServiceTest {
 	@Test
 	@Transactional
     @Rollback(true)
-	public void testStaviVoziloNaPopust() {
+	public void testStaviVoziloNaPopustTest() {
 		
 		Vozilo vozilo = new Vozilo();
 		vozilo.setNaziv("Naziv");
@@ -123,7 +123,7 @@ public class VoziloServiceTest {
 
 		when(repozitorijumMock.getOne((long) 1)).thenReturn(vozilo);
 
-		Vozilo voziloV = voziloService.staviVoziloNaPopust((long) 1);
+		Vozilo voziloV = voziloService.staviVoziloNaPopustTest((long) 1);
 		
 		assertEquals(voziloV.getVoziloId(), vozilo.getVoziloId());
 		verify(repozitorijumMock, times(1)).save(voziloV);
@@ -133,7 +133,7 @@ public class VoziloServiceTest {
 	@Test
 	@Transactional
     @Rollback(true)
-	public void testSkiniVoziloSaPopusta() {
+	public void testSkiniVoziloSaPopustaTest() {
 		
 		Vozilo vozilo = new Vozilo();
 		vozilo.setNaziv("Naziv");
@@ -147,7 +147,7 @@ public class VoziloServiceTest {
 
 		when(repozitorijumMock.getOne((long) 1)).thenReturn(vozilo);
 
-		Vozilo voziloV = voziloService.skiniVoziloSaPopusta((long) 1);
+		Vozilo voziloV = voziloService.skiniVoziloSaPopustaTest((long) 1);
 		
 		assertEquals(voziloV.getVoziloId(), vozilo.getVoziloId());
 		verify(repozitorijumMock, times(1)).save(voziloV);

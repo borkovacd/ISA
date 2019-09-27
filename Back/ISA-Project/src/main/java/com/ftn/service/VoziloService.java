@@ -586,7 +586,8 @@ public class VoziloService
 	@Transactional( rollbackFor = Exception.class)
 	public Vozilo staviVoziloNaPopust(Long idVozila) 
 	{
-		Vozilo v = voziloRepository.getOne(idVozila);
+		//Vozilo v = voziloRepository.getOne(idVozila);
+		Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
 		v.setNaPopustu(true);
 		voziloRepository.save(v);
 		return v;
@@ -595,7 +596,8 @@ public class VoziloService
 	@Transactional( rollbackFor = Exception.class)
 	public Vozilo skiniVoziloSaPopusta(Long idVozila)
 	{
-		Vozilo v = voziloRepository.getOne(idVozila);
+		//Vozilo v = voziloRepository.getOne(idVozila);
+		Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
 		v.setNaPopustu(false);
 		voziloRepository.save(v);
 		return v;
@@ -852,6 +854,30 @@ public class VoziloService
 		
 		return zauzetaVozila ;
 	}
+	
+	// TEST
+		@Transactional( rollbackFor = Exception.class)
+		public Vozilo staviVoziloNaPopustTest(Long idVozila) 
+		{
+			Vozilo v = voziloRepository.getOne(idVozila);
+			//Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+			v.setNaPopustu(true);
+			voziloRepository.save(v);
+			return v;
+		}
+		
+		
+		// TEST
+		@Transactional( rollbackFor = Exception.class)
+		public Vozilo skiniVoziloSaPopustaTest(Long idVozila)
+		{
+			Vozilo v = voziloRepository.getOne(idVozila);
+			//Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+			v.setNaPopustu(false);
+			voziloRepository.save(v);
+			return v;
+		}
+		
 
 
 }

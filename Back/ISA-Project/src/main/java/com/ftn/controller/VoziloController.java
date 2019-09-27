@@ -148,6 +148,25 @@ public class VoziloController
 		return new ResponseEntity<ArrayList<Vozilo>>(vozila, HttpStatus.OK);
 	}
 	
+	@PutMapping("/staviVoziloNaPopustTest/{idVozila}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Vozilo> staviVoziloNaPopustTest(@PathVariable Long idVozila) 
+	{
+		Vozilo v = voziloService.staviVoziloNaPopustTest(idVozila);
+		return new ResponseEntity<>(v, HttpStatus.OK);
+
+	}
+	
+	@PutMapping("/skiniVoziloSaPopustaTest/{idVozila}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Vozilo> skiniVoziloSaPopustaTest(@PathVariable Long idVozila) 
+	{
+		Vozilo v = voziloService.skiniVoziloSaPopustaTest(idVozila);
+		return new ResponseEntity<>(v, HttpStatus.OK);
+
+	}
+
+	
 	@PostMapping("/getZauzetaVozilaPeriodNovo/{idRent}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<ArrayList<Vozilo>> getZauzetaVozilaPeriodNovo(@RequestBody VremenskiPeriodDTO vpDTO, @PathVariable Long idRent) 

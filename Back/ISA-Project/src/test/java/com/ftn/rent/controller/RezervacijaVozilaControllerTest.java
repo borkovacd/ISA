@@ -84,7 +84,7 @@ private static final String URL_PREFIX = "/voziloReservation";
 		dto.setMestoVracanja("Novi Sad");
 		dto.setNumberOfGuests("5");
 		String json = com.ftn.utils.TestUtil.json(dto);
-		this.mockMvc.perform(post(URL_PREFIX + "/voziloReservation/13").contentType(contentType).content(json)).andExpect(status().isCreated());
+		this.mockMvc.perform(post(URL_PREFIX + "/voziloReservationNewTest/13").contentType(contentType).content(json)).andExpect(status().isCreated());
 	
 	}
 	
