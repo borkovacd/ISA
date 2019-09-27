@@ -25,4 +25,9 @@ export  class OcenaRentService {
     return this.http.get(`${this.BASE_URL}/getProsecnaOcenaRent/${idRent}`, {headers});
   }
 
+  vratiListuOcenaRent(idRent: any): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get(`${this.BASE_URL}/vratiListuOcenaRent/${idRent}`, {headers});
+  }
+
 }

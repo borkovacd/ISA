@@ -83,6 +83,11 @@ export class RentAdministratorServisiComponent implements OnInit {
     this.router.navigateByUrl('rentAdminPage/revenuesRent/' + idRent);
   }
 
+  pregledOcenaRent(idRent : any)
+  {
+    this.router.navigateByUrl('rentAdminPage/pregledOcenaRent/' + idRent);
+  }
+
   vratiProsecnuOcenu(id: any)
   {
     this.ocenaService.getProsecnaOcenaRent(id).subscribe(data => {

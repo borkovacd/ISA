@@ -104,6 +104,12 @@ export class VozilaComponent implements OnInit {
       }
     })
   }
+  
+  pregledOcenaVozilo(idVozilo : any)
+  {
+    const idRent = this.route.snapshot.params.idRent ;
+    this.router.navigateByUrl('rentAdminPage/pregledOcenaVozilo/' + idRent + '/' + idVozilo);
+  }
 
   deleteVozilo(id: any) {
     const idRent = this.route.snapshot.params.idRent ;

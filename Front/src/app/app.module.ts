@@ -117,6 +117,8 @@ import {OcenaSobaService} from "./service/ocenaSoba.service";
 import {OcenaHotelService} from "./service/ocenaHotel.service";
 import {AuthGuard} from "./guards/AuthGuard";
 import {RandomGuard} from "./guards/RandomGuard";
+import { PregledOcenaRentComponent } from './rentServisi/pregled-ocena-rent/pregled-ocena-rent.component';
+import { PregledOcenaVoziloComponent } from './rentServisi/pregled-ocena-vozilo/pregled-ocena-vozilo.component';
 
 @NgModule({
   declarations: [
@@ -209,7 +211,9 @@ import {RandomGuard} from "./guards/RandomGuard";
     VoziloRatingComponent,
     RentCarRatingComponent,
     RoomRatingComponent,
-    HotelRatingComponent
+    HotelRatingComponent,
+    PregledOcenaRentComponent,
+    PregledOcenaVoziloComponent
   ],
   imports: [
     BrowserModule,

@@ -53,6 +53,8 @@ import {VoziloRatingComponent} from "./ratings/vozilo-rating/vozilo-rating.compo
 import {RentCarRatingComponent} from "./ratings/rent-car-rating/rent-car-rating.component";
 import {RoomRatingComponent} from "./ratings/room-rating/room-rating.component";
 import {HotelRatingComponent} from "./ratings/hotel-rating/hotel-rating.component";
+import {PregledOcenaRentComponent} from "./rentServisi/pregled-ocena-rent/pregled-ocena-rent.component";
+import {PregledOcenaVoziloComponent} from "./rentServisi/pregled-ocena-vozilo/pregled-ocena-vozilo.component";
 
 
 const routes: Routes = [
@@ -117,8 +119,9 @@ const routes: Routes = [
   {path: 'rentAdminPage/pricelistRent/:idRent/:mode/:idPriceList', component: AddEditPricelistRentComponent },
   {path: 'rentAdminPage/priceRent/:idRent/:idPriceList/:mode/:idPrice', component: AddEditPriceRentComponent},
   {path: 'rentAdminPage/attendanceGraphsRent/:idRent', component: AttendanceGraphsRentComponent},
-  {path: 'rentAdminPage/revenuesRent/:idRent', component: RevenuesRentComponent}
-
+  {path: 'rentAdminPage/revenuesRent/:idRent', component: RevenuesRentComponent},
+  {path: 'rentAdminPage/pregledOcenaRent/:idRent', component: PregledOcenaRentComponent},
+  {path: 'rentAdminPage/pregledOcenaVozilo/:idRent/:idVozilo', component: PregledOcenaVoziloComponent}
 
 ];
 
