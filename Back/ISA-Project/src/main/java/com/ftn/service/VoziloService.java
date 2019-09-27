@@ -603,6 +603,67 @@ public class VoziloService
 		return v;
 	}
 	
+	// Izmena vozila
+		@Transactional( rollbackFor = Exception.class)
+		public Vozilo izmeniiVozilo(Long idRentACar, Long idVozila, VoziloDTO dto) 
+		{
+			//Vozilo v = voziloRepository.findOneByVoziloId(idVozila);
+			Vozilo v = voziloRepository.vratiVoziloPoId(idVozila);
+			
+			// ukoliko nije pronasao vozilo sa tim id-jem
+			if (v == null)
+			{
+				return v ;
+			}
+			
+			RentACar rentACar = rentRepository.findOneByRentACarId(idRentACar);
+			v.setRentACar(rentACar);
+			
+			v.setBrojSedista(dto.getBrojSedista());
+			v.setCena(0);
+			v.setGodinaProizvodnje(dto.getGodinaProizvodnje());
+			v.setMarka(dto.getMarka());
+			v.setModel(dto.getModel());
+			v.setNaziv(dto.getNaziv());
+			v.setRezervisano(false);
+			v.setOcena(0);
+			
+			if (dto.getTip().equals("LIMUZINA"))
+			{
+				v.setTip(TipVozila.LIMUZINA);
+			}
+			else if(dto.getTip().equals("KARAVAN")) 
+			{
+				v.setTip(TipVozila.KARAVAN);
+			}
+			else if(dto.getTip().equals("KUPE")) 
+			{
+				v.setTip(TipVozila.KUPE);
+			}
+			else if(dto.getTip().equals("KABRIOLET")) 
+			{
+				v.setTip(TipVozila.KABRIOLET);
+			}
+			else if(dto.getTip().equals("MINIVEN")) 
+			{
+				v.setTip(TipVozila.MINIVEN);
+			}
+			else if(dto.getTip().equals("DZIP")) 
+			{
+				v.setTip(TipVozila.DZIP);
+			}
+			else if(dto.getTip().equals("PICKUP")) 
+			{
+				v.setTip(TipVozila.PICKUP);
+			}
+			
+			
+			voziloRepository.save(v);
+			
+			return v ;
+		}
+
+	
 	public ArrayList<Vozilo> vratiVozilaNaPopustu(Long idRezervacijeLeta, Long idRent) 
 	{
 		ArrayList<Vozilo> odgovarajucaVozila = new ArrayList<Vozilo>();
