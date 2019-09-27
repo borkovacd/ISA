@@ -79,6 +79,18 @@ export class VoziloService {
     return this.http.post(`${this.BASE_URL}/getAvailableVozila/${idRent}`, body, {headers});
   }
 
+  getSlobodnaVozilaPeriodNovo(object: TimePeriodModel, idRent: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/getSlobodnaVozilaPeriodNovo/${idRent}`, body, {headers});
+  }
+
+  getZauzetaVozilaPeriodNovo(object: TimePeriodModel, idRent: any): Observable<any> {
+    const body = JSON.stringify(object);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(`${this.BASE_URL}/getZauzetaVozilaPeriodNovo/${idRent}`, body, {headers});
+  }
+
   // proveri dostupnost
   checkAvailabilityVozilo(object: CheckAvailabilityRentModel, idRent: any): Observable<any> {
     const body = JSON.stringify(object);

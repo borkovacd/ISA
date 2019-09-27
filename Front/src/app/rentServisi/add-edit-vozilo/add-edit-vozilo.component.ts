@@ -97,7 +97,7 @@ export class AddEditVoziloComponent implements OnInit {
       this.tip.value);
 
     this.voziloService.dodajVozilo(vozilo, idRent).subscribe(data => {
-      this.router.navigateByUrl('rentAdminPage/vozila/' + idRent);
+      this.router.navigateByUrl('rentAdminPage');
     })
   }
 
@@ -113,7 +113,7 @@ export class AddEditVoziloComponent implements OnInit {
 
     this.voziloService.izmeniVozilo(vozilo, idRent, idVozilo).subscribe(data =>
     {
-      this.router.navigateByUrl('rentAdminPage/vozila/' + idRent);
+      this.router.navigateByUrl('rentAdminPage');
     })
   }
 

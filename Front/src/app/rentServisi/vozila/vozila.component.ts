@@ -4,6 +4,8 @@ import {VoziloService} from '../../service/vozilo.service';
 import {RentCarService} from '../../service/rentcar.service';
 import {OcenaVoziloService} from "../../service/ocenaVozilo.service";
 import {AuthService} from "../../service/auth.service";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {TimePeriodModel} from "../../model/timePeriod.model";
 
 @Component({
   selector: 'app-vozila',
@@ -36,30 +38,38 @@ export class VozilaComponent implements OnInit {
 
   rating : any ;
 
+  public form: FormGroup;
+  public startDate: AbstractControl;
+  public endDate: AbstractControl;
+  d1: any;
+  d2: any;
+
+  timePeriodConfirmedSlobodna: boolean;
+  timePeriodConfirmedZauzeta: boolean;
+
   constructor(protected  router: Router,
+              public fb: FormBuilder,
               private route: ActivatedRoute,
               private voziloService: VoziloService,
               private rentService: RentCarService,
               private ocenaService: OcenaVoziloService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+    this.form = this.fb.group({
+      'startDate': ['', Validators.compose([Validators.required])],
+      'endDate': ['', Validators.compose([Validators.required])],
+    })
+    this.startDate = this.form.controls['startDate'];
+    this.endDate = this.form.controls['endDate'];
+  }
 
   ngOnInit() {
+    this.timePeriodConfirmedSlobodna = false;
+    this.timePeriodConfirmedZauzeta = false;
 
     const idRent = this.route.snapshot.params.idRent ;
 
     this.rentService.getRent(idRent).subscribe(data => {
       this.nazivRent = data.naziv ;
-    });
-
-    this.voziloService.getVozilaRentACar(idRent).subscribe(data => {
-      this.vozila = data;
-
-      for (let vozilo of this.vozila)
-      {
-        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
-          vozilo.ocena = data ;
-        })
-      }
     });
 
   }
@@ -104,7 +114,7 @@ export class VozilaComponent implements OnInit {
       }
     })
   }
-  
+
   pregledOcenaVozilo(idVozilo : any)
   {
     const idRent = this.route.snapshot.params.idRent ;
@@ -156,6 +166,56 @@ export class VozilaComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('rentAdminPage' );
+  }
+
+  confirmClickSlobodna() {
+
+    this.timePeriodConfirmedSlobodna = true;
+    const idRent = this.route.snapshot.params.idRent;
+
+    this.d1 = this.startDate.value;
+    this.d2 = this.endDate.value;
+
+    const timePeriod = new TimePeriodModel (
+      this.d1,
+      this.d2
+    );
+
+    this.voziloService.getSlobodnaVozilaPeriodNovo(timePeriod, idRent).subscribe(data => {
+      this.vozila = data;
+
+      for (let vozilo of this.vozila)
+      {
+        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
+          vozilo.ocena = data ;
+        })
+      }
+    });
+  }
+
+  confirmClickZauzeta() {
+
+    this.timePeriodConfirmedZauzeta = true;
+    const idRent = this.route.snapshot.params.idRent;
+
+    this.d1 = this.startDate.value;
+    this.d2 = this.endDate.value;
+
+    const timePeriod = new TimePeriodModel (
+      this.d1,
+      this.d2
+    );
+
+    this.voziloService.getZauzetaVozilaPeriodNovo(timePeriod, idRent).subscribe(data => {
+      this.vozila = data;
+
+      for (let vozilo of this.vozila)
+      {
+        this.ocenaService.getProsecnaOcenaVozila(vozilo.voziloId).subscribe(data => {
+          vozilo.ocena = data ;
+        })
+      }
+    });
   }
 
 

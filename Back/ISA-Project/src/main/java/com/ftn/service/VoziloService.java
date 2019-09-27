@@ -713,9 +713,8 @@ public class VoziloService
 			{
 				if (v.getRentACar().getRentACarId() == idRent)
 				{
-					if (v.isNaPopustu() == false) { 
 						vozilaRent.add(v);
-					}
+					
 				}
 			}
 		}
@@ -800,9 +799,8 @@ public class VoziloService
 			{
 				if (v.getRentACar().getRentACarId() == idRent)
 				{
-					if (v.isNaPopustu() == false) { 
 						vozilaRent.add(v);
-					}
+					
 				}
 			}
 		}
